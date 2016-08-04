@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "literalascension",
+    "name": "Literal Ascension",
+    "description": "More mobility!",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["JamiesWhiteShirt"],
+    "credits": "LLibrary",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
