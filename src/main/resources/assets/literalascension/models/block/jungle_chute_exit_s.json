@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/chute_exit_s",
+  "textures": {
+    "ends": "literalascension:blocks/chute_jungle_ends",
+    "inside": "literalascension:blocks/chute_jungle_inside",
+    "outside": "literalascension:blocks/chute_jungle_outside"
+  }
+}

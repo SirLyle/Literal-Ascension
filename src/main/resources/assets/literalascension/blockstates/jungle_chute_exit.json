@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "literalascension:jungle_chute_exit_n" },
+    "facing=south": { "model": "literalascension:jungle_chute_exit_s" },
+    "facing=west":  { "model": "literalascension:jungle_chute_exit_w" },
+    "facing=east":  { "model": "literalascension:jungle_chute_exit_e" }
+  }
+}

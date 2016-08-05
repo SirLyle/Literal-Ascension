@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "literalascension:dark_oak_chute_exit_n" },
+    "facing=south": { "model": "literalascension:dark_oak_chute_exit_s" },
+    "facing=west":  { "model": "literalascension:dark_oak_chute_exit_w" },
+    "facing=east":  { "model": "literalascension:dark_oak_chute_exit_e" }
+  }
+}

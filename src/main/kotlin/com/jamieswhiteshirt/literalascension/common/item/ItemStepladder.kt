@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 class ItemStepladder(val block: () -> BlockStepladder) : Item() {
-    override fun onItemUse(stack: ItemStack, player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult? {
+    override fun onItemUse(stack: ItemStack, player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (facing == EnumFacing.UP) {
             val blockState = world.getBlockState(pos)
 
@@ -33,6 +33,6 @@ class ItemStepladder(val block: () -> BlockStepladder) : Item() {
             }
         }
 
-        return EnumActionResult.FAIL;
+        return EnumActionResult.FAIL
     }
 }

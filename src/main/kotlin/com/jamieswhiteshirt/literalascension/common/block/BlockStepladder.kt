@@ -67,14 +67,14 @@ class BlockStepladder(val item: () -> ItemStepladder) : Block(Material.CIRCUITS)
         defaultState = blockState.baseState.withProperty(FACING, EnumFacing.NORTH).withProperty(SEGMENT, 0)
     }
 
-    override fun addCollisionBoxToList(state: IBlockState, world: World, pos: BlockPos, entityBox: AxisAlignedBB, collidingBoxes: MutableList<AxisAlignedBB>, entity: Entity?) {
+    override fun addCollisionBoxToList(state: IBlockState, world: World, pos: BlockPos, entityBox: AxisAlignedBB, collisionBoxes: MutableList<AxisAlignedBB>, entity: Entity?) {
         val array = when (state.getValue(FACING).axis) {
             EnumFacing.Axis.X -> collisionBoxesX[state.getValue(SEGMENT)]
             EnumFacing.Axis.Z -> collisionBoxesZ[state.getValue(SEGMENT)]
             else -> emptyArray()
         }
         for (box in array) {
-            Block.addCollisionBoxToList(pos, entityBox, collidingBoxes, box)
+            Block.addCollisionBoxToList(pos, entityBox, collisionBoxes, box)
         }
     }
 

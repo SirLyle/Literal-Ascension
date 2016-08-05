@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "literalascension:stone_chute_exit_n" },
+    "facing=south": { "model": "literalascension:stone_chute_exit_s" },
+    "facing=west":  { "model": "literalascension:stone_chute_exit_w" },
+    "facing=east":  { "model": "literalascension:stone_chute_exit_e" }
+  }
+}

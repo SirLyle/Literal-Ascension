@@ -4,6 +4,7 @@ import com.jamieswhiteshirt.literalascension.common.CommonProxy
 import com.jamieswhiteshirt.literalascension.common.init.LABlocks
 import com.jamieswhiteshirt.literalascension.common.init.LAItems
 import com.jamieswhiteshirt.literalascension.common.init.LARecipes
+import net.minecraft.creativetab.CreativeTabs
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.SidedProxy
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
