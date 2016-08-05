@@ -163,3 +163,14 @@ task generateItemModel(type: CopyJsonTemplate) {
         return args['itemName']
     }
 }
+
+task generateStepladderModel(type: CopyJsonTemplate) {
+    template 'stepladder'
+    arguments {
+        def material = requireArgument('material', 'material')
+        return ['material':material]
+    }
+    jsonRename { String prevName ->
+        return args['material'] + '_' + prevName
+    }
+}
