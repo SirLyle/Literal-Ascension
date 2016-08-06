@@ -1,10 +1,10 @@
 package com.jamieswhiteshirt.literalascension.client
 
 import com.jamieswhiteshirt.literalascension.common.CommonProxy
-import com.jamieswhiteshirt.literalascension.common.block.BlockChuteBase
+import com.jamieswhiteshirt.literalascension.common.block.BlockChute
 import com.jamieswhiteshirt.literalascension.common.init.LABlocks
 import com.jamieswhiteshirt.literalascension.common.init.LAItems
-import com.jamieswhiteshirt.literalascension.common.item.ItemChuteCarver
+import com.jamieswhiteshirt.literalascension.common.item.ItemCarvingTool
 import com.jamieswhiteshirt.literalascension.common.item.ItemStepladder
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.ItemModelMesher
@@ -23,34 +23,33 @@ class ClientProxy : CommonProxy() {
         registerStepladderModel(itemModelMesher, LAItems.DARK_OAK_STEPLADDER, "dark_oak")
         registerStepladderModel(itemModelMesher, LAItems.IRON_STEPLADDER, "iron")
 
-        registerChuteModel(itemModelMesher, LABlocks.OAK_CHUTE, LABlocks.OAK_CHUTE_EXIT, "oak")
-        registerChuteModel(itemModelMesher, LABlocks.SPRUCE_CHUTE, LABlocks.SPRUCE_CHUTE_EXIT, "spruce")
-        registerChuteModel(itemModelMesher, LABlocks.BIRCH_CHUTE, LABlocks.BIRCH_CHUTE_EXIT, "birch")
-        registerChuteModel(itemModelMesher, LABlocks.JUNGLE_CHUTE, LABlocks.JUNGLE_CHUTE_EXIT, "jungle")
-        registerChuteModel(itemModelMesher, LABlocks.ACACIA_CHUTE, LABlocks.ACACIA_CHUTE_EXIT, "acacia")
-        registerChuteModel(itemModelMesher, LABlocks.DARK_OAK_CHUTE, LABlocks.DARK_OAK_CHUTE_EXIT, "dark_oak")
-        registerChuteModel(itemModelMesher, LABlocks.STONE_CHUTE, LABlocks.STONE_CHUTE_EXIT, "stone")
-        registerChuteModel(itemModelMesher, LABlocks.GRANITE_CHUTE, LABlocks.GRANITE_CHUTE_EXIT, "granite")
-        registerChuteModel(itemModelMesher, LABlocks.DIORITE_CHUTE, LABlocks.DIORITE_CHUTE_EXIT, "diorite")
-        registerChuteModel(itemModelMesher, LABlocks.ANDESITE_CHUTE, LABlocks.ANDESITE_CHUTE_EXIT, "andesite")
+        registerChuteModel(itemModelMesher, LABlocks.OAK_CHUTE)
+        registerChuteModel(itemModelMesher, LABlocks.SPRUCE_CHUTE)
+        registerChuteModel(itemModelMesher, LABlocks.BIRCH_CHUTE)
+        registerChuteModel(itemModelMesher, LABlocks.JUNGLE_CHUTE)
+        registerChuteModel(itemModelMesher, LABlocks.ACACIA_CHUTE)
+        registerChuteModel(itemModelMesher, LABlocks.DARK_OAK_CHUTE)
+        registerChuteModel(itemModelMesher, LABlocks.STONE_CHUTE)
+        registerChuteModel(itemModelMesher, LABlocks.GRANITE_CHUTE)
+        registerChuteModel(itemModelMesher, LABlocks.DIORITE_CHUTE)
+        registerChuteModel(itemModelMesher, LABlocks.ANDESITE_CHUTE)
 
-        registerChuteCarverModel(itemModelMesher, LAItems.WOOD_CHUTE_CARVER, "wood")
-        registerChuteCarverModel(itemModelMesher, LAItems.STONE_CHUTE_CARVER, "stone")
-        registerChuteCarverModel(itemModelMesher, LAItems.IRON_CHUTE_CARVER, "iron")
-        registerChuteCarverModel(itemModelMesher, LAItems.DIAMOND_CHUTE_CARVER, "diamond")
-        registerChuteCarverModel(itemModelMesher, LAItems.GOLD_CHUTE_CARVER, "gold")
+        registerCarvingToolModel(itemModelMesher, LAItems.WOOD_CARVING_TOOL, "wood")
+        registerCarvingToolModel(itemModelMesher, LAItems.STONE_CARVING_TOOL, "stone")
+        registerCarvingToolModel(itemModelMesher, LAItems.IRON_CARVING_TOOL, "iron")
+        registerCarvingToolModel(itemModelMesher, LAItems.DIAMOND_CARVING_TOOL, "diamond")
+        registerCarvingToolModel(itemModelMesher, LAItems.GOLD_CARVING_TOOL, "gold")
     }
 
     private fun registerStepladderModel(itemModelMesher: ItemModelMesher, stepladder: ItemStepladder, type: String) {
         itemModelMesher.register(stepladder, 0, ModelResourceLocation("literalascension:${type}_stepladder", "inventory"))
     }
 
-    private fun registerChuteModel(itemModelMesher: ItemModelMesher, chute: BlockChuteBase, chuteExit: BlockChuteBase, type: String) {
-        itemModelMesher.register(Item.getItemFromBlock(chute), 0, ModelResourceLocation("literalascension:${type}_chute", "inventory"))
-        itemModelMesher.register(Item.getItemFromBlock(chuteExit), 0, ModelResourceLocation("literalascension:${type}_chute_exit", "inventory"))
+    private fun registerChuteModel(itemModelMesher: ItemModelMesher, chute: BlockChute) {
+        itemModelMesher.register(Item.getItemFromBlock(chute), 0, ModelResourceLocation("literalascension:${chute.type.typeName}_chute_swne", "inventory"))
     }
 
-    private fun registerChuteCarverModel(itemModelMesher: ItemModelMesher, chuteCarver: ItemChuteCarver, type: String) {
-        itemModelMesher.register(chuteCarver, 0, ModelResourceLocation("literalascension:${type}_chute_carver", "inventory"))
+    private fun registerCarvingToolModel(itemModelMesher: ItemModelMesher, carvingTool: ItemCarvingTool, type: String) {
+        itemModelMesher.register(carvingTool, 0, ModelResourceLocation("literalascension:${type}_carving_tool", "inventory"))
     }
 }

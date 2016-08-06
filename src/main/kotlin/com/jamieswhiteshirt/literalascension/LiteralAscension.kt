@@ -43,6 +43,7 @@ class LiteralAscension {
     @Mod.EventHandler
     fun init(event: FMLInitializationEvent) {
         proxy.registerRenderers()
+        proxy.registerEventHandlers()
 
         LARecipes.register()
     }

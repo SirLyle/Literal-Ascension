@@ -1,6 +1,6 @@
 package com.jamieswhiteshirt.literalascension.common.init
 
-import com.jamieswhiteshirt.literalascension.common.item.ItemChuteCarver
+import com.jamieswhiteshirt.literalascension.common.item.ItemCarvingTool
 import com.jamieswhiteshirt.literalascension.common.item.ItemStepladder
 import net.minecraft.block.BlockPlanks
 import net.minecraft.init.Blocks
@@ -19,9 +19,9 @@ object LARecipes {
         )
     }
 
-    private fun registerChuteCarverRecipe(chuteCarverItem: ItemChuteCarver, materialItem: ItemStack) {
+    private fun registerCarvingToolRecipe(carving_toolItem: ItemCarvingTool, materialItem: ItemStack) {
         CraftingManager.getInstance().addRecipe(
-                ItemStack(chuteCarverItem),
+                ItemStack(carving_toolItem),
                 "  M",
                 " M ",
                 "S  ",
@@ -38,10 +38,10 @@ object LARecipes {
         registerStepladderRecipe(LAItems.DARK_OAK_STEPLADDER, ItemStack(Blocks.LOG2, 1, BlockPlanks.EnumType.DARK_OAK.metadata - 4))
         registerStepladderRecipe(LAItems.IRON_STEPLADDER, ItemStack(Items.IRON_INGOT))
 
-        registerChuteCarverRecipe(LAItems.WOOD_CHUTE_CARVER, ItemStack(Blocks.PLANKS))
-        registerChuteCarverRecipe(LAItems.STONE_CHUTE_CARVER, ItemStack(Blocks.COBBLESTONE))
-        registerChuteCarverRecipe(LAItems.IRON_CHUTE_CARVER, ItemStack(Items.IRON_INGOT))
-        registerChuteCarverRecipe(LAItems.DIAMOND_CHUTE_CARVER, ItemStack(Items.DIAMOND))
-        registerChuteCarverRecipe(LAItems.GOLD_CHUTE_CARVER, ItemStack(Items.GOLD_INGOT))
+        registerCarvingToolRecipe(LAItems.WOOD_CARVING_TOOL, ItemStack(Blocks.PLANKS))
+        registerCarvingToolRecipe(LAItems.STONE_CARVING_TOOL, ItemStack(Blocks.COBBLESTONE))
+        registerCarvingToolRecipe(LAItems.IRON_CARVING_TOOL, ItemStack(Items.IRON_INGOT))
+        registerCarvingToolRecipe(LAItems.DIAMOND_CARVING_TOOL, ItemStack(Items.DIAMOND))
+        registerCarvingToolRecipe(LAItems.GOLD_CARVING_TOOL, ItemStack(Items.GOLD_INGOT))
     }
 }

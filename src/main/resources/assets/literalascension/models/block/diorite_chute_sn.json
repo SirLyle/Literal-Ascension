@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/chute_sn",
+  "textures": {
+    "top": "literalascension:blocks/chute_diorite_top",
+    "inside": "literalascension:blocks/chute_diorite_inside",
+    "outside": "literalascension:blocks/chute_diorite_outside"
+  }
+}

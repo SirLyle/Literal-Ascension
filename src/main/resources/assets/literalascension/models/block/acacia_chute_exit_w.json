@@ -1,8 +1,0 @@
-{
-  "parent": "literalascension:block/chute_exit_w",
-  "textures": {
-    "ends": "literalascension:blocks/chute_acacia_ends",
-    "inside": "literalascension:blocks/chute_acacia_inside",
-    "outside": "literalascension:blocks/chute_acacia_outside"
-  }
-}
