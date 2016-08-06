@@ -2,7 +2,7 @@ package com.jamieswhiteshirt.literalascension.common.item
 
 import com.google.common.collect.Multimap
 import com.jamieswhiteshirt.literalascension.api.ICarvableBlock
-import com.jamieswhiteshirt.literalascension.common.CarvedBlockType
+import com.jamieswhiteshirt.literalascension.common.EnumCarvedBlockType
 import net.minecraft.block.*
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.EntityLivingBase
@@ -79,11 +79,11 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
             is ICarvableBlock -> block
             is BlockOldLog -> object : ICarvableBlock {
                 override fun carveSide(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, toolLevel: Int): Boolean {
-                    if (toolLevel >= CarvedBlockType.CarvedBlockMaterial.WOOD.toolLevel) {
+                    if (toolLevel >= EnumCarvedBlockType.CarvedBlockMaterial.WOOD.toolLevel) {
                         if (facing.axis == EnumFacing.Axis.Y) {
-                            val carvedBlockType = CarvedBlockType.fromPlankType[state.getValue(BlockOldLog.VARIANT)]
+                            val carvedBlockType = EnumCarvedBlockType.fromPlankType[state.getValue(BlockOldLog.VARIANT)]
                             if (carvedBlockType != null) {
-                                world.setBlockState(pos, carvedBlockType.chuteBlock.defaultState)
+                                world.setBlockState(pos, carvedBlockType.chuteBlock().defaultState)
                                 return true
                             }
                         }
@@ -94,12 +94,12 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
             }
             is BlockNewLog -> object : ICarvableBlock {
                 override fun carveSide(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, toolLevel: Int): Boolean {
-                    if (toolLevel >= CarvedBlockType.CarvedBlockMaterial.WOOD.toolLevel) {
+                    if (toolLevel >= EnumCarvedBlockType.CarvedBlockMaterial.WOOD.toolLevel) {
                         if (facing.axis == EnumFacing.Axis.Y) {
-                            val carvedBlockType = CarvedBlockType.fromPlankType[state.getValue(BlockNewLog.VARIANT)]
+                            val carvedBlockType = EnumCarvedBlockType.fromPlankType[state.getValue(BlockNewLog.VARIANT)]
                             if (carvedBlockType != null) {
                                 if (!world.isRemote) {
-                                    world.setBlockState(pos, carvedBlockType.chuteBlock.defaultState)
+                                    world.setBlockState(pos, carvedBlockType.chuteBlock().defaultState)
                                 }
                                 return true
                             }
@@ -111,12 +111,12 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
             }
             is BlockStone -> object : ICarvableBlock {
                 override fun carveSide(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, toolLevel: Int): Boolean {
-                    if (toolLevel >= CarvedBlockType.CarvedBlockMaterial.STONE.toolLevel) {
+                    if (toolLevel >= EnumCarvedBlockType.CarvedBlockMaterial.STONE.toolLevel) {
                         if (facing.axis == EnumFacing.Axis.Y) {
-                            val carvedBlockType = CarvedBlockType.fromStoneType[state.getValue(BlockStone.VARIANT)]
+                            val carvedBlockType = EnumCarvedBlockType.fromStoneType[state.getValue(BlockStone.VARIANT)]
                             if (carvedBlockType != null) {
                                 if (!world.isRemote) {
-                                    world.setBlockState(pos, carvedBlockType.chuteBlock.defaultState)
+                                    world.setBlockState(pos, carvedBlockType.chuteBlock().defaultState)
                                 }
                                 return true
                             }

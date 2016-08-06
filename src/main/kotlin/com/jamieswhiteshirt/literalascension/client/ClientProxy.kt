@@ -46,7 +46,7 @@ class ClientProxy : CommonProxy() {
     }
 
     private fun registerChuteModel(itemModelMesher: ItemModelMesher, chute: BlockChute) {
-        itemModelMesher.register(Item.getItemFromBlock(chute), 0, ModelResourceLocation("literalascension:${chute.type.typeName}_chute_swne", "inventory"))
+        itemModelMesher.register(Item.getItemFromBlock(chute), 0, ModelResourceLocation("literalascension:${chute.type.getName()}_chute_swne", "inventory"))
     }
 
     private fun registerCarvingToolModel(itemModelMesher: ItemModelMesher, carvingTool: ItemCarvingTool, type: String) {

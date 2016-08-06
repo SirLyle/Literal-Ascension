@@ -1,7 +1,7 @@
 package com.jamieswhiteshirt.literalascension.common.block
 
 import com.jamieswhiteshirt.literalascension.api.ICarvableBlock
-import com.jamieswhiteshirt.literalascension.common.CarvedBlockType
+import com.jamieswhiteshirt.literalascension.common.EnumCarvedBlockType
 import net.minecraft.block.Block
 import net.minecraft.block.properties.PropertyBool
 import net.minecraft.block.state.BlockStateContainer
@@ -18,7 +18,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import java.util.*
 
-class BlockChute(val type: CarvedBlockType) : Block(type.material.blockMaterial), ICarvableBlock {
+class BlockChute(val type: EnumCarvedBlockType) : BlockDelegate(type.modelState, type.material.hardness), ICarvableBlock {
     companion object {
         private val collisionBoxesSides = arrayOf(
                 AxisAlignedBB(0.0, 0.0, 14.0 / 16.0, 1.0, 1.0, 16.0 / 16.0),
@@ -36,9 +36,9 @@ class BlockChute(val type: CarvedBlockType) : Block(type.material.blockMaterial)
     }
 
     init {
-        defaultState = blockState.baseState.withProperty(SOUTH, true).withProperty(WEST, true).withProperty(NORTH, true).withProperty(EAST, true)
-        setHardness(type.material.hardness)
-        soundType = type.material.soundType
+        defaultState = PROPERTIES.fold(blockState.baseState, { state, property ->
+            state.withProperty(property, true)
+        })
     }
 
     override fun carveSide(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, toolLevel: Int): Boolean {
@@ -135,11 +135,11 @@ class BlockChute(val type: CarvedBlockType) : Block(type.material.blockMaterial)
     }
 
     override fun getItemDropped(state: IBlockState, rand: Random, fortune: Int): Item? {
-        return Item.getItemFromBlock(type.sourceBlock)
+        return type.modelBlock.getItemDropped(type.modelState, rand, fortune)
     }
 
-    override fun damageDropped(state: IBlockState?): Int {
-        return type.metadata
+    override fun damageDropped(state: IBlockState): Int {
+        return type.modelBlock.damageDropped(type.modelState)
     }
 
     fun getCollisionBoxList(state: IBlockState, source: IBlockAccess, pos: BlockPos): List<AxisAlignedBB> {
