@@ -23,17 +23,6 @@ class ClientProxy : CommonProxy() {
         registerStepladderModel(itemModelMesher, LAItems.DARK_OAK_STEPLADDER, "dark_oak")
         registerStepladderModel(itemModelMesher, LAItems.IRON_STEPLADDER, "iron")
 
-        registerChuteModel(itemModelMesher, LABlocks.OAK_CHUTE)
-        registerChuteModel(itemModelMesher, LABlocks.SPRUCE_CHUTE)
-        registerChuteModel(itemModelMesher, LABlocks.BIRCH_CHUTE)
-        registerChuteModel(itemModelMesher, LABlocks.JUNGLE_CHUTE)
-        registerChuteModel(itemModelMesher, LABlocks.ACACIA_CHUTE)
-        registerChuteModel(itemModelMesher, LABlocks.DARK_OAK_CHUTE)
-        registerChuteModel(itemModelMesher, LABlocks.STONE_CHUTE)
-        registerChuteModel(itemModelMesher, LABlocks.GRANITE_CHUTE)
-        registerChuteModel(itemModelMesher, LABlocks.DIORITE_CHUTE)
-        registerChuteModel(itemModelMesher, LABlocks.ANDESITE_CHUTE)
-
         registerCarvingToolModel(itemModelMesher, LAItems.WOOD_CARVING_TOOL, "wood")
         registerCarvingToolModel(itemModelMesher, LAItems.STONE_CARVING_TOOL, "stone")
         registerCarvingToolModel(itemModelMesher, LAItems.IRON_CARVING_TOOL, "iron")
@@ -43,10 +32,6 @@ class ClientProxy : CommonProxy() {
 
     private fun registerStepladderModel(itemModelMesher: ItemModelMesher, stepladder: ItemStepladder, type: String) {
         itemModelMesher.register(stepladder, 0, ModelResourceLocation("literalascension:${type}_stepladder", "inventory"))
-    }
-
-    private fun registerChuteModel(itemModelMesher: ItemModelMesher, chute: BlockChute) {
-        itemModelMesher.register(Item.getItemFromBlock(chute), 0, ModelResourceLocation("literalascension:${chute.type.getName()}_chute_swne", "inventory"))
     }
 
     private fun registerCarvingToolModel(itemModelMesher: ItemModelMesher, carvingTool: ItemCarvingTool, type: String) {
