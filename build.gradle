@@ -51,9 +51,15 @@ repositories {
     }
 }
 
+configurations {
+    required
+    compile.extendsFrom(required)
+}
+
 dependencies {
     compile "net.ilexiconn:llibrary:1.5.1-1.10.2:dev"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    required "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
 sourceSets {
@@ -89,6 +95,11 @@ jar {
     manifest {
         attributes "FMLCorePlugin": corePlugin
         attributes "FMLCorePluginContainsFMLMod": "true"
+    }
+    from {
+        configurations.required.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
     }
 }
 

@@ -41,8 +41,8 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
                     stack.damageItem(1, player)
                 }
 
-                val soundType = state.block.soundType
-                world.playSound(pos.x.toDouble() + 0.5, pos.y.toDouble() + 0.5, pos.z.toDouble() + 0.5, soundType.breakSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F, false)
+                //val soundType = state.block.soundType
+                //world.playSound(pos.x.toDouble() + 0.5, pos.y.toDouble() + 0.5, pos.z.toDouble() + 0.5, soundType.breakSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F, false)
 
                 return EnumActionResult.SUCCESS
             }

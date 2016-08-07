@@ -116,7 +116,7 @@ class BlockClimbingRope : Block(Material.WEB), ILadderBlock {
     override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (heldItem != null && heldItem.item == Item.getItemFromBlock(this)) {
             if (tryExtend(state, world, pos)) {
-                world.playSound(player, pos, soundType.placeSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F)
+                //world.playSound(player, pos, soundType.placeSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F)
                 if (!world.isRemote && !player.capabilities.isCreativeMode) {
                     --heldItem.stackSize
                 }
