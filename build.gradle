@@ -1,5 +1,6 @@
 buildscript {
     ext.kotlin_version = '1.0.3'
+    ext.corePlugin = 'com.jamieswhiteshirt.literalascension.core.LiteralAscensionPlugin'
     repositories {
         jcenter()
         maven {
@@ -31,6 +32,9 @@ archivesBaseName = "literalascension"
 minecraft {
     version = "1.10.2-12.18.1.2011"
     runDir = "run"
+
+    clientJvmArgs = ["-Dfml.coreMods.load=$corePlugin"]
+    serverJvmArgs = ["-Dfml.coreMods.load=$corePlugin"]
     
     // the mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   snapshot are built nightly.
@@ -78,6 +82,13 @@ processResources {
         
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
+    }
+}
+
+jar {
+    manifest {
+        attributes "FMLCorePlugin": corePlugin
+        attributes "FMLCorePluginContainsFMLMod": "true"
     }
 }
 

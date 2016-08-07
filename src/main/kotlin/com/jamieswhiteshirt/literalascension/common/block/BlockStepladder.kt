@@ -1,5 +1,6 @@
 package com.jamieswhiteshirt.literalascension.common.block
 
+import com.jamieswhiteshirt.literalascension.api.ILadderBlock
 import com.jamieswhiteshirt.literalascension.common.item.ItemStepladder
 import net.minecraft.block.Block
 import net.minecraft.block.BlockHorizontal
@@ -18,7 +19,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import java.util.*
 
-class BlockStepladder(val item: () -> ItemStepladder) : Block(Material.CIRCUITS) {
+class BlockStepladder(val item: () -> ItemStepladder) : Block(Material.CIRCUITS), ILadderBlock {
     companion object {
         val FACING: PropertyDirection = BlockHorizontal.FACING
         val SEGMENT: PropertyInteger = PropertyInteger.create("segment", 0, 2)
@@ -135,7 +136,13 @@ class BlockStepladder(val item: () -> ItemStepladder) : Block(Material.CIRCUITS)
     }
 
     override fun isLadder(state: IBlockState, world: IBlockAccess, pos: BlockPos, entity: EntityLivingBase): Boolean {
-        return true
+        val facing = state.getValue(FACING)
+        for (i in -1..1) {
+            if (isLadderIntersectingDefault(pos.offset(facing, i), entity)) {
+                return true
+            }
+        }
+        return false
     }
 
     fun checkAndDropBlock(world: World, pos: BlockPos, state: IBlockState) {

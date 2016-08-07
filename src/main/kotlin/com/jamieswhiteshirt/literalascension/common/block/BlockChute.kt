@@ -130,7 +130,7 @@ class BlockChute(type: EnumCarvedBlockType) : BlockCarvedBase(type), ICarvableBl
         return bestResult
     }
 
-    override fun isLadder(state: IBlockState?, world: IBlockAccess?, pos: BlockPos?, entity: EntityLivingBase?): Boolean {
+    override fun isLadder(state: IBlockState, world: IBlockAccess, pos: BlockPos, entity: EntityLivingBase): Boolean {
         return true
     }
 

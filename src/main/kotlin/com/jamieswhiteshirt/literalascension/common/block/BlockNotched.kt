@@ -1,17 +1,22 @@
 package com.jamieswhiteshirt.literalascension.common.block
 
 import com.jamieswhiteshirt.literalascension.api.ICarvableBlock
+import com.jamieswhiteshirt.literalascension.api.ILadderBlock
 import com.jamieswhiteshirt.literalascension.common.EnumCarvedBlockType
 import net.minecraft.block.properties.PropertyBool
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
+import net.minecraft.entity.EntityLivingBase
 import net.minecraft.item.Item
 import net.minecraft.util.EnumFacing
+import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.MathHelper
+import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import java.util.*
 
-class BlockNotched(type: EnumCarvedBlockType) : BlockCarvedBase(type), ICarvableBlock {
+class BlockNotched(type: EnumCarvedBlockType) : BlockCarvedBase(type), ICarvableBlock, ILadderBlock {
     companion object {
         val SOUTH: PropertyBool = PropertyBool.create("south")
         val WEST: PropertyBool = PropertyBool.create("west")
@@ -77,5 +82,16 @@ class BlockNotched(type: EnumCarvedBlockType) : BlockCarvedBase(type), ICarvable
 
     override fun damageDropped(state: IBlockState): Int {
         return modelBlock.damageDropped(type.modelState)
+    }
+
+    override fun isLadder(state: IBlockState, world: IBlockAccess, pos: BlockPos, entity: EntityLivingBase): Boolean {
+        for (i in PROPERTIES.indices) {
+            if (state.getValue(PROPERTIES[i])) {
+                if (isLadderIntersectingDefault(pos.offset(EnumFacing.getHorizontal(i)), entity)) {
+                    return true
+                }
+            }
+        }
+        return false
     }
 }
