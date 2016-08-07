@@ -28,5 +28,15 @@ tile.literalascension.chuteStone.name=Stone Chute
 tile.literalascension.chuteGranite.name=Granite Chute
 tile.literalascension.chuteDiorite.name=Diorite Chute
 tile.literalascension.chuteAndesite.name=Andesite Chute
+tile.literalascension.notchedOak.name=Notched Oak Wood
+tile.literalascension.notchedSpruce.name=Notched Spruce Wood
+tile.literalascension.notchedBirch.name=Notched Birch Wood
+tile.literalascension.notchedJungle.name=Notched Jungle Wood
+tile.literalascension.notchedAcacia.name=Notched Acacia Wood
+tile.literalascension.notchedDarkOak.name=Notched Dark Oak Wood
+tile.literalascension.notchedStone.name=Notched Stone
+tile.literalascension.notchedGranite.name=Notched Granite
+tile.literalascension.notchedDiorite.name=Notched Diorite
+tile.literalascension.notchedAndesite.name=Notched Andesite
 
 itemGroup.literalascension.tab=Literal Ascension

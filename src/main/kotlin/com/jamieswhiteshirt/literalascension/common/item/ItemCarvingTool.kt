@@ -77,56 +77,44 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
         val block = state.block
         return when (block) {
             is ICarvableBlock -> block
-            is BlockOldLog -> object : ICarvableBlock {
-                override fun carveSide(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, toolLevel: Int): Boolean {
-                    if (toolLevel >= EnumCarvedBlockType.CarvedBlockMaterial.WOOD.toolLevel) {
-                        if (facing.axis == EnumFacing.Axis.Y) {
-                            val carvedBlockType = EnumCarvedBlockType.fromPlankType[state.getValue(BlockOldLog.VARIANT)]
-                            if (carvedBlockType != null) {
-                                world.setBlockState(pos, carvedBlockType.chuteBlock().defaultState)
-                                return true
-                            }
-                        }
-                    }
-
-                    return false
+            is BlockOldLog -> object : CarvableBlockDelegate() {
+                override fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType? {
+                    return EnumCarvedBlockType.fromOldLogType[state.getValue(BlockOldLog.VARIANT)]
                 }
             }
-            is BlockNewLog -> object : ICarvableBlock {
-                override fun carveSide(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, toolLevel: Int): Boolean {
-                    if (toolLevel >= EnumCarvedBlockType.CarvedBlockMaterial.WOOD.toolLevel) {
-                        if (facing.axis == EnumFacing.Axis.Y) {
-                            val carvedBlockType = EnumCarvedBlockType.fromPlankType[state.getValue(BlockNewLog.VARIANT)]
-                            if (carvedBlockType != null) {
-                                if (!world.isRemote) {
-                                    world.setBlockState(pos, carvedBlockType.chuteBlock().defaultState)
-                                }
-                                return true
-                            }
-                        }
-                    }
-
-                    return false
+            is BlockNewLog -> object : CarvableBlockDelegate() {
+                override fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType? {
+                    return EnumCarvedBlockType.fromNewLogType[state.getValue(BlockNewLog.VARIANT)]
                 }
             }
-            is BlockStone -> object : ICarvableBlock {
-                override fun carveSide(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, toolLevel: Int): Boolean {
-                    if (toolLevel >= EnumCarvedBlockType.CarvedBlockMaterial.STONE.toolLevel) {
-                        if (facing.axis == EnumFacing.Axis.Y) {
-                            val carvedBlockType = EnumCarvedBlockType.fromStoneType[state.getValue(BlockStone.VARIANT)]
-                            if (carvedBlockType != null) {
-                                if (!world.isRemote) {
-                                    world.setBlockState(pos, carvedBlockType.chuteBlock().defaultState)
-                                }
-                                return true
-                            }
-                        }
-                    }
-
-                    return false
+            is BlockStone -> object : CarvableBlockDelegate() {
+                override fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType? {
+                    return EnumCarvedBlockType.fromStoneType[state.getValue(BlockStone.VARIANT)]
                 }
             }
             else -> null
         }
+    }
+
+    private abstract class CarvableBlockDelegate : ICarvableBlock {
+        override fun carveSide(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, toolLevel: Int): Boolean {
+            val carvedBlockType = getCarvedBlockType(state)
+            if (carvedBlockType != null && toolLevel >= carvedBlockType.material.toolLevel) {
+                if (!world.isRemote) {
+                    if (facing.axis == EnumFacing.Axis.Y) {
+                        world.setBlockState(pos, carvedBlockType.chuteBlock().defaultState)
+                    }
+                    else {
+                        val notchedBlock = carvedBlockType.notchedBlock()
+                        notchedBlock.carveSide(notchedBlock.defaultState, world, pos, facing, toolLevel)
+                    }
+                }
+                return true
+            }
+
+            return false
+        }
+
+        abstract fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType?
     }
 }

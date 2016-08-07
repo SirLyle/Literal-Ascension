@@ -1,0 +1,9 @@
+{
+  "parent": "literalascension:block/notched",
+  "textures": {
+    "north": "#side",
+    "east":  "#notched",
+    "south": "#notched",
+    "west":  "#side"
+  }
+}

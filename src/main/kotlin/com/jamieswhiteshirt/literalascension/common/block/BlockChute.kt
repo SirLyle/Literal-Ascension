@@ -18,7 +18,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import java.util.*
 
-class BlockChute(val type: EnumCarvedBlockType) : BlockDelegate(type.modelState, type.material.hardness), ICarvableBlock {
+class BlockChute(type: EnumCarvedBlockType) : BlockCarvedBase(type), ICarvableBlock {
     companion object {
         private val collisionBoxesSides = arrayOf(
                 AxisAlignedBB(0.0, 0.0, 14.0 / 16.0, 1.0, 1.0, 16.0 / 16.0),
@@ -135,11 +135,11 @@ class BlockChute(val type: EnumCarvedBlockType) : BlockDelegate(type.modelState,
     }
 
     override fun getItemDropped(state: IBlockState, rand: Random, fortune: Int): Item? {
-        return type.modelBlock.getItemDropped(type.modelState, rand, fortune)
+        return modelBlock.getItemDropped(type.modelState, rand, fortune)
     }
 
     override fun damageDropped(state: IBlockState): Int {
-        return type.modelBlock.damageDropped(type.modelState)
+        return modelBlock.damageDropped(type.modelState)
     }
 
     fun getCollisionBoxList(state: IBlockState, source: IBlockAccess, pos: BlockPos): List<AxisAlignedBB> {

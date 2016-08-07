@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/notched_n",
+  "textures": {
+    "top": "literalascension:blocks/notched_stone_top",
+    "side": "literalascension:blocks/notched_stone_side",
+    "notched": "literalascension:blocks/notched_stone"
+  }
+}
