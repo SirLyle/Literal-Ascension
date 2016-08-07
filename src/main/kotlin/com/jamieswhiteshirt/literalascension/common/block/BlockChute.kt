@@ -9,6 +9,7 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
@@ -132,14 +133,6 @@ class BlockChute(type: EnumCarvedBlockType) : BlockCarvedBase(type), ICarvableBl
 
     override fun isLadder(state: IBlockState, world: IBlockAccess, pos: BlockPos, entity: EntityLivingBase): Boolean {
         return true
-    }
-
-    override fun getItemDropped(state: IBlockState, rand: Random, fortune: Int): Item? {
-        return modelBlock.getItemDropped(type.modelState, rand, fortune)
-    }
-
-    override fun damageDropped(state: IBlockState): Int {
-        return modelBlock.damageDropped(type.modelState)
     }
 
     fun getCollisionBoxList(state: IBlockState, source: IBlockAccess, pos: BlockPos): List<AxisAlignedBB> {

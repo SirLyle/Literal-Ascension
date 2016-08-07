@@ -6,11 +6,13 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
+import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.BlockRenderLayer
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.RayTraceResult
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.Explosion
 import net.minecraft.world.IBlockAccess
@@ -100,5 +102,27 @@ abstract class BlockDelegate(val modelState: IBlockState, hardness: Float) : Blo
 
     override fun getMapColor(state: IBlockState?): MapColor {
         return modelBlock.getMapColor(modelState)
+    }
+
+    override fun getItemDropped(state: IBlockState, rand: Random, fortune: Int): Item? {
+        return modelBlock.getItemDropped(modelState, rand, fortune)
+    }
+
+    override fun damageDropped(state: IBlockState): Int {
+        return modelBlock.damageDropped(modelState)
+    }
+
+    override fun createStackedBlock(state: IBlockState): ItemStack? {
+        val item = Item.getItemFromBlock(modelBlock)
+        if (item == null) {
+            return null
+        }
+        else {
+            return ItemStack(item, 1, if (item.hasSubtypes) modelBlock.getMetaFromState(modelState) else 0)
+        }
+    }
+
+    override fun getPickBlock(state: IBlockState, target: RayTraceResult, world: World, pos: BlockPos, player: EntityPlayer): ItemStack {
+        return modelBlock.getPickBlock(modelState, target, world, pos, player)
     }
 }

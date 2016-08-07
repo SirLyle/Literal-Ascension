@@ -76,14 +76,6 @@ class BlockNotched(type: EnumCarvedBlockType) : BlockCarvedBase(type), ICarvable
         return BlockStateContainer(this, *PROPERTIES)
     }
 
-    override fun getItemDropped(state: IBlockState, rand: Random, fortune: Int): Item? {
-        return modelBlock.getItemDropped(type.modelState, rand, fortune)
-    }
-
-    override fun damageDropped(state: IBlockState): Int {
-        return modelBlock.damageDropped(type.modelState)
-    }
-
     override fun isLadder(state: IBlockState, world: IBlockAccess, pos: BlockPos, entity: EntityLivingBase): Boolean {
         for (i in PROPERTIES.indices) {
             if (state.getValue(PROPERTIES[i])) {
