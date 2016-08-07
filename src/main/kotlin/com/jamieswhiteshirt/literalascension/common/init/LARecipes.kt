@@ -43,5 +43,13 @@ object LARecipes {
         registerCarvingToolRecipe(LAItems.IRON_CARVING_TOOL, ItemStack(Items.IRON_INGOT))
         registerCarvingToolRecipe(LAItems.DIAMOND_CARVING_TOOL, ItemStack(Items.DIAMOND))
         registerCarvingToolRecipe(LAItems.GOLD_CARVING_TOOL, ItemStack(Items.GOLD_INGOT))
+
+        CraftingManager.getInstance().addRecipe(
+                ItemStack(LABlocks.CLIMBING_ROPE, 8),
+                "  S",
+                " S ",
+                "S  ",
+                'S', Items.STRING
+        )
     }
 }
