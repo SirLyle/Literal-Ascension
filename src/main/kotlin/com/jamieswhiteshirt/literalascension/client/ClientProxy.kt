@@ -28,6 +28,8 @@ class ClientProxy : CommonProxy() {
         registerCarvingToolModel(itemModelMesher, LAItems.IRON_CARVING_TOOL, "iron")
         registerCarvingToolModel(itemModelMesher, LAItems.DIAMOND_CARVING_TOOL, "diamond")
         registerCarvingToolModel(itemModelMesher, LAItems.GOLD_CARVING_TOOL, "gold")
+
+        itemModelMesher.register(Item.getItemFromBlock(LABlocks.CLIMBING_ROPE), 0, ModelResourceLocation("literalascension:climbing_rope", "inventory"))
     }
 
     private fun registerStepladderModel(itemModelMesher: ItemModelMesher, stepladder: ItemStepladder, type: String) {

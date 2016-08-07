@@ -10,6 +10,7 @@ item.literalascension.carvingToolStone.name=Stone Carving Tool
 item.literalascension.carvingToolIron.name=Iron Carving Tool
 item.literalascension.carvingToolDiamond.name=Diamond Carving Tool
 item.literalascension.carvingToolGold.name=Gold Carving Tool
+item.literalascension.climbingRope.name=Climbing Rope
 
 tile.literalascension.stepladderOak.name=Oak Wood Stepladder
 tile.literalascension.stepladderSpruce.name=Spruce Wood Stepladder
@@ -38,5 +39,6 @@ tile.literalascension.notchedStone.name=Notched Stone
 tile.literalascension.notchedGranite.name=Notched Granite
 tile.literalascension.notchedDiorite.name=Notched Diorite
 tile.literalascension.notchedAndesite.name=Notched Andesite
+tile.literalascension.climbingRope.name=Climbing Rope
 
 itemGroup.literalascension.tab=Literal Ascension
