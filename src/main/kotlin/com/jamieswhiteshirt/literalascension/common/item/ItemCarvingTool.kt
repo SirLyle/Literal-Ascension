@@ -77,17 +77,17 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
         val block = state.block
         return when (block) {
             is ICarvableBlock -> block
-            is BlockOldLog -> object : CarvableBlockDelegate() {
+            is BlockOldLog -> object : CarvableBlockShim() {
                 override fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType? {
                     return EnumCarvedBlockType.fromOldLogType[state.getValue(BlockOldLog.VARIANT)]
                 }
             }
-            is BlockNewLog -> object : CarvableBlockDelegate() {
+            is BlockNewLog -> object : CarvableBlockShim() {
                 override fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType? {
                     return EnumCarvedBlockType.fromNewLogType[state.getValue(BlockNewLog.VARIANT)]
                 }
             }
-            is BlockStone -> object : CarvableBlockDelegate() {
+            is BlockStone -> object : CarvableBlockShim() {
                 override fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType? {
                     return EnumCarvedBlockType.fromStoneType[state.getValue(BlockStone.VARIANT)]
                 }
@@ -96,7 +96,7 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
         }
     }
 
-    private abstract class CarvableBlockDelegate : ICarvableBlock {
+    private abstract class CarvableBlockShim : ICarvableBlock {
         override fun carveSide(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, toolLevel: Int): Boolean {
             val carvedBlockType = getCarvedBlockType(state)
             if (carvedBlockType != null && toolLevel >= carvedBlockType.material.toolLevel) {
