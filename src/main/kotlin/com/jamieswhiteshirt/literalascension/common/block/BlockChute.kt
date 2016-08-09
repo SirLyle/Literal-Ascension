@@ -64,7 +64,7 @@ class BlockChute(type: EnumCarvedBlockType) : BlockCarvedBase(type), ICarvableBl
     override fun getStateFromMeta(meta: Int): IBlockState {
         var state = defaultState
         for (i in PROPERTIES.indices) {
-            state.withProperty(PROPERTIES[i], ((meta shr i) and 1) == 1)
+            state = state.withProperty(PROPERTIES[i], ((meta shr i) and 1) == 1)
         }
         return state
     }
