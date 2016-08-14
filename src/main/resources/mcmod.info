@@ -2,15 +2,15 @@
   {
     "modid": "literalascension",
     "name": "Literal Ascension",
-    "description": "More mobility!",
+    "description": "Literal Ascension adds intuitive solutions for vertical mobility.",
+    "url": "https://bitbucket.org/jamieswhiteshirt/literal-ascension",
     "version": "${version}",
     "mcversion": "${mcversion}",
-    "url": "",
-    "updateUrl": "",
-    "authorList": ["JamiesWhiteShirt"],
-    "credits": "LLibrary",
-    "logoFile": "",
-    "screenshots": [],
-    "dependencies": []
+    "authorList": [
+      "JamiesWhiteShirt"
+    ],
+    "credits": "LLibrary, Trentv4",
+    "logoFile": "assets/literalascension/logo.png",
+    "requiredMods": ["llibrary"]
   }
 ]
