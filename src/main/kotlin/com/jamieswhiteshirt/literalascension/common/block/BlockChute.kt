@@ -33,7 +33,7 @@ class BlockChute(type: EnumCarvedBlockType) : BlockCarvedBase(type), ICarvableBl
         val NORTH: PropertyBool = PropertyBool.create("north")
         val EAST: PropertyBool = PropertyBool.create("east")
 
-        var PROPERTIES = arrayOf(SOUTH, WEST, NORTH, EAST)
+        val PROPERTIES = arrayOf(SOUTH, WEST, NORTH, EAST)
     }
 
     init {
@@ -42,10 +42,12 @@ class BlockChute(type: EnumCarvedBlockType) : BlockCarvedBase(type), ICarvableBl
         })
     }
 
-    override fun carveSide(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, toolLevel: Int): Boolean {
+    override fun carve(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, toolLevel: Int): Boolean {
         if (toolLevel >= type.material.toolLevel) {
-            if (facing.axis != EnumFacing.Axis.Y) {
-                val property = PROPERTIES[facing.horizontalIndex]
+            val carvingFacing = EnumFacing.getFacingFromVector(hitX - 0.5F, 0.0F, hitZ - 0.5F)
+            // The following should never be false, but why not.
+            if (carvingFacing.axis != EnumFacing.Axis.Y) {
+                val property = PROPERTIES[carvingFacing.horizontalIndex]
                 if (state.getValue(property)) {
                     val newState = state.withProperty(property, false)
                     if (PROPERTIES.any { newState.getValue(it) }) {
@@ -136,7 +138,7 @@ class BlockChute(type: EnumCarvedBlockType) : BlockCarvedBase(type), ICarvableBl
     }
 
     fun getCollisionBoxList(state: IBlockState, source: IBlockAccess, pos: BlockPos): List<AxisAlignedBB> {
-        return EnumFacing.VALUES.filter {
+        return EnumFacing.HORIZONTALS.filter {
             isSideSolid(state, source, pos, it)
         }.map {
             collisionBoxesSides[it.horizontalIndex]

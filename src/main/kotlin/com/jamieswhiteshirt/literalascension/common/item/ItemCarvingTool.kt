@@ -36,7 +36,7 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
         else {
             val state = world.getBlockState(pos)
             val carvableBlock = getCarvableBlock(state)
-            if (carvableBlock != null && carvableBlock.carveSide(state, world, pos, facing, toolMaterial.harvestLevel)) {
+            if (carvableBlock != null && carvableBlock.carve(state, world, pos, facing, hitX, hitY, hitZ, toolMaterial.harvestLevel)) {
                 if (!world.isRemote) {
                     stack.damageItem(1, player)
                 }
@@ -97,7 +97,7 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
     }
 
     private abstract class CarvableBlockShim : ICarvableBlock {
-        override fun carveSide(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, toolLevel: Int): Boolean {
+        override fun carve(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, toolLevel: Int): Boolean {
             val carvedBlockType = getCarvedBlockType(state)
             if (carvedBlockType != null && toolLevel >= carvedBlockType.material.toolLevel) {
                 if (!world.isRemote) {
@@ -106,7 +106,7 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
                     }
                     else {
                         val notchedBlock = carvedBlockType.notchedBlock()
-                        notchedBlock.carveSide(notchedBlock.defaultState, world, pos, facing, toolLevel)
+                        notchedBlock.carve(notchedBlock.defaultState, world, pos, facing, hitX, hitY, hitZ, toolLevel)
                     }
                 }
                 return true

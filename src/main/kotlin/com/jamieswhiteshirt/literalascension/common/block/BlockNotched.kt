@@ -23,7 +23,7 @@ class BlockNotched(type: EnumCarvedBlockType) : BlockCarvedBase(type), ICarvable
         val NORTH: PropertyBool = PropertyBool.create("north")
         val EAST: PropertyBool = PropertyBool.create("east")
 
-        var PROPERTIES = arrayOf(SOUTH, WEST, NORTH, EAST)
+        val PROPERTIES = arrayOf(SOUTH, WEST, NORTH, EAST)
     }
 
     init {
@@ -32,7 +32,7 @@ class BlockNotched(type: EnumCarvedBlockType) : BlockCarvedBase(type), ICarvable
         })
     }
 
-    override fun carveSide(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, toolLevel: Int): Boolean {
+    override fun carve(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, toolLevel: Int): Boolean {
         if (toolLevel >= type.material.toolLevel) {
             if (facing.axis != EnumFacing.Axis.Y) {
                 val property = PROPERTIES[facing.horizontalIndex]
