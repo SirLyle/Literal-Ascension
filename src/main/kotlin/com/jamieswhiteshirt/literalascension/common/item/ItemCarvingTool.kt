@@ -90,12 +90,22 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
             is ICarvableBlock -> block
             is BlockOldLog -> object : CarvableBlockShim() {
                 override fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType? {
-                    return EnumCarvedBlockType.fromOldLogType[state.getValue(BlockOldLog.VARIANT)]
+                    if (state.getValue(BlockOldLog.LOG_AXIS) == BlockLog.EnumAxis.Y) {
+                        return EnumCarvedBlockType.fromOldLogType[state.getValue(BlockOldLog.VARIANT)]
+                    }
+                    else {
+                        return null
+                    }
                 }
             }
             is BlockNewLog -> object : CarvableBlockShim() {
                 override fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType? {
-                    return EnumCarvedBlockType.fromNewLogType[state.getValue(BlockNewLog.VARIANT)]
+                    if (state.getValue(BlockNewLog.LOG_AXIS) == BlockLog.EnumAxis.Y) {
+                        return EnumCarvedBlockType.fromNewLogType[state.getValue(BlockNewLog.VARIANT)]
+                    }
+                    else {
+                        return null
+                    }
                 }
             }
             is BlockStone -> object : CarvableBlockShim() {
