@@ -146,9 +146,11 @@ class BlockStepladder(val item: () -> ItemStepladder) : Block(Material.CIRCUITS)
 
     override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         val activatedSegment = state.getValue(SEGMENT)
-        for (drop in getDrops(world, pos, state, 0)) {
-            if (!player.inventory.addItemStackToInventory(drop) && drop.stackSize > 0) {
-                spawnAsEntity(world, pos, drop)
+        if (!player.isCreative) {
+            for (drop in getDrops(world, pos, state, 0)) {
+                if (!player.inventory.addItemStackToInventory(drop) && drop.stackSize > 0) {
+                    spawnAsEntity(world, pos, drop)
+                }
             }
         }
 
