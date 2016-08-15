@@ -20,6 +20,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
+import net.minecraftforge.oredict.OreDictionary
 
 class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
     private val speed = toolMaterial.damageVsEntity + 1.0F
@@ -59,6 +60,16 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
     @SideOnly(Side.CLIENT)
     override fun isFull3D(): Boolean {
         return true
+    }
+
+    override fun getIsRepairable(toRepair: ItemStack, repair: ItemStack): Boolean {
+        val requiredItem = this.toolMaterial.repairItemStack
+        if (requiredItem != null) {
+            return OreDictionary.itemMatches(requiredItem, repair, false)
+        }
+        else {
+            return super.getIsRepairable(toRepair, repair)
+        }
     }
 
     override fun getAttributeModifiers(slot: EntityEquipmentSlot, stack: ItemStack): Multimap<String, AttributeModifier> {
