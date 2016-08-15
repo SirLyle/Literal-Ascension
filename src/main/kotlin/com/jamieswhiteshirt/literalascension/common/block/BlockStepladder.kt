@@ -137,7 +137,9 @@ class BlockStepladder(val item: () -> ItemStepladder) : Block(Material.CIRCUITS)
 
     override fun neighborChanged(state: IBlockState, world: World, pos: BlockPos, block: Block) {
         super.neighborChanged(state, world, pos, block)
-        checkAndDropBlock(world, pos, state)
+        if (!world.isRemote) {
+            checkAndDropBlock(world, pos, state)
+        }
     }
 
     override fun getPickBlock(state: IBlockState, target: RayTraceResult, world: World, pos: BlockPos, player: EntityPlayer): ItemStack {
@@ -145,20 +147,22 @@ class BlockStepladder(val item: () -> ItemStepladder) : Block(Material.CIRCUITS)
     }
 
     override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        val activatedSegment = state.getValue(SEGMENT)
-        if (!player.isCreative) {
-            for (drop in getDrops(world, pos, state, 0)) {
-                if (!player.inventory.addItemStackToInventory(drop) && drop.stackSize > 0) {
-                    spawnAsEntity(world, pos, drop)
+        if (!world.isRemote) {
+            val activatedSegment = state.getValue(SEGMENT)
+            if (!player.isCreative) {
+                for (drop in getDrops(world, pos, state, 0)) {
+                    if (!player.inventory.addItemStackToInventory(drop) && drop.stackSize > 0) {
+                        spawnAsEntity(world, pos, drop)
+                    }
                 }
             }
-        }
 
-        for (segment in 0..2) {
-            val otherPos = pos.up(segment - activatedSegment)
-            val otherState = world.getBlockState(otherPos)
-            if (otherState.block == this && otherState.getValue(SEGMENT) == segment) {
-                world.setBlockToAir(pos)
+            for (segment in 0..2) {
+                val otherPos = pos.up(segment - activatedSegment)
+                val otherState = world.getBlockState(otherPos)
+                if (otherState.block == this && otherState.getValue(SEGMENT) == segment) {
+                    world.setBlockToAir(pos)
+                }
             }
         }
 
