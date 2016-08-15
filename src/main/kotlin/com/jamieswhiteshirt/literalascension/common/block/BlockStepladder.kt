@@ -14,7 +14,9 @@ import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumFacing
+import net.minecraft.util.EnumHand
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.RayTraceResult
@@ -91,7 +93,7 @@ class BlockStepladder(val item: () -> ItemStepladder) : Block(Material.CIRCUITS)
     }
 
     override fun getItemDropped(state: IBlockState, rand: Random, fortune: Int): Item? {
-        return if (state.getValue(SEGMENT) == 1) item() else null
+        return item()
     }
 
     override fun canPlaceBlockAt(world: World, pos: BlockPos): Boolean {
@@ -138,6 +140,29 @@ class BlockStepladder(val item: () -> ItemStepladder) : Block(Material.CIRCUITS)
         checkAndDropBlock(world, pos, state)
     }
 
+    override fun getPickBlock(state: IBlockState, target: RayTraceResult, world: World, pos: BlockPos, player: EntityPlayer): ItemStack {
+        return ItemStack(item())
+    }
+
+    override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+        val activatedSegment = state.getValue(SEGMENT)
+        for (drop in getDrops(world, pos, state, 0)) {
+            if (!player.inventory.addItemStackToInventory(drop) && drop.stackSize > 0) {
+                spawnAsEntity(world, pos, drop)
+            }
+        }
+
+        for (segment in 0..2) {
+            val otherPos = pos.up(segment - activatedSegment)
+            val otherState = world.getBlockState(otherPos)
+            if (otherState.block == this && otherState.getValue(SEGMENT) == segment) {
+                world.setBlockToAir(pos)
+            }
+        }
+
+        return true
+    }
+
     override fun isLadder(state: IBlockState, world: IBlockAccess, pos: BlockPos, entity: EntityLivingBase): Boolean {
         val facing = state.getValue(FACING)
         for (i in -1..1) {
@@ -150,7 +175,6 @@ class BlockStepladder(val item: () -> ItemStepladder) : Block(Material.CIRCUITS)
 
     fun checkAndDropBlock(world: World, pos: BlockPos, state: IBlockState) {
         if (!canBlockStay(world, pos, state)) {
-            dropBlockAsItem(world, pos, state, 0)
             world.setBlockToAir(pos)
         }
     }
@@ -183,9 +207,5 @@ class BlockStepladder(val item: () -> ItemStepladder) : Block(Material.CIRCUITS)
             return true
         }
         return false
-    }
-
-    override fun getPickBlock(state: IBlockState, target: RayTraceResult, world: World, pos: BlockPos, player: EntityPlayer): ItemStack {
-        return ItemStack(item())
     }
 }
