@@ -218,3 +218,14 @@ task generateNotchedModel(type: CopyJsonTemplate) {
         return args['material'] + '_' + prevName
     }
 }
+
+task generateNotchedVariantsModel(type: CopyJsonTemplate) {
+    template 'notched_variants'
+    arguments {
+        def material = requireArgument('material', 'material')
+        return ['material':material]
+    }
+    jsonRename { String prevName ->
+        return args['material'] + '_' + prevName
+    }
+}

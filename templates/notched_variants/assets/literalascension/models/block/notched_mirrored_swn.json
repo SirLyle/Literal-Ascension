@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/notched_mirrored_swn",
+  "textures": {
+    "top": "literalascension:blocks/notched_${material}_top",
+    "side": "literalascension:blocks/notched_${material}_side",
+    "notched": "literalascension:blocks/notched_${material}"
+  }
+}
