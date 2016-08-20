@@ -1,9 +1,0 @@
-{
-  "parent": "literalascension:block/stepladder_bottom",
-  "textures": {
-    "particle": "literalascension:blocks/stepladder_${material}_ends",
-    "ends": "literalascension:blocks/stepladder_${material}_ends",
-    "front": "literalascension:blocks/stepladder_${material}_front",
-    "side": "literalascension:blocks/stepladder_${material}_side_bottom"
-  }
-}

@@ -1,9 +1,7 @@
 {
   "parent": "literalascension:block/stepladder_bottom",
   "textures": {
-    "particle": "literalascension:blocks/stepladder_jungle_ends",
-    "ends": "literalascension:blocks/stepladder_jungle_ends",
-    "front": "literalascension:blocks/stepladder_jungle_front",
-    "side": "literalascension:blocks/stepladder_jungle_side_bottom"
+    "feet": "minecraft:blocks/log_jungle",
+    "steps": "minecraft:blocks/planks_jungle"
   }
 }

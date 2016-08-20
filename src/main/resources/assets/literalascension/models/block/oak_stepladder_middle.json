@@ -1,9 +1,7 @@
 {
   "parent": "literalascension:block/stepladder_middle",
   "textures": {
-    "particle": "literalascension:blocks/stepladder_oak_ends",
-    "ends": "literalascension:blocks/stepladder_oak_ends",
-    "front": "literalascension:blocks/stepladder_oak_front",
-    "side": "literalascension:blocks/stepladder_oak_side_middle"
+    "feet": "minecraft:blocks/log_oak",
+    "steps": "minecraft:blocks/planks_oak"
   }
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "literalascension:block/stepladder_bottom",
+  "textures": {
+    "feet": "${domain}:blocks/${feet}",
+    "steps": "${domain}:blocks/${steps}"
+  }
+}

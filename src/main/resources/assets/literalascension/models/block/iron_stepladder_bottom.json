@@ -1,9 +1,7 @@
 {
   "parent": "literalascension:block/stepladder_bottom",
   "textures": {
-    "particle": "literalascension:blocks/stepladder_iron_ends",
-    "ends": "literalascension:blocks/stepladder_iron_ends",
-    "front": "literalascension:blocks/stepladder_iron_front",
-    "side": "literalascension:blocks/stepladder_iron_side_bottom"
+    "feet": "minecraft:blocks/iron_block",
+    "steps": "minecraft:blocks/iron_block"
   }
 }

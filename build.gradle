@@ -190,10 +190,13 @@ task generateStepladderModel(type: CopyJsonTemplate) {
     template 'stepladder'
     arguments {
         def material = requireArgument('material', 'material')
-        return ['material':material]
+        def domain = requireArgument('domain', 'domain')
+        def feet = requireArgument('feet', 'feet')
+        def steps = requireArgument('steps', 'steps')
+        return ['material':material, 'domain':domain, 'feet':feet, 'steps':steps]
     }
     jsonRename { String prevName ->
-        return args['material'] + '_' + prevName
+        return args['material'] + prevName
     }
 }
 
