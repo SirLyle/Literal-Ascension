@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/chute_mirrored_ne",
+  "textures": {
+    "top": "literalascension:blocks/chute_${material}_top",
+    "inside": "literalascension:blocks/chute_${material}_inside",
+    "outside": "literalascension:blocks/chute_${material}_outside"
+  }
+}

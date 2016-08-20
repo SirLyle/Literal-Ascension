@@ -1,0 +1,100 @@
+{
+  "variants": {
+    "east=false,north=false,south=false,west=false": [
+      { "model": "literalascension:${material}_chute_swne" },
+      { "model": "literalascension:${material}_chute_mirrored_swne" },
+      { "model": "literalascension:${material}_chute_swne", "y": 180 },
+      { "model": "literalascension:${material}_chute_mirrored_swne", "y": 180 }
+    ],
+    "east=false,north=false,south=true,west=false": [
+      { "model": "literalascension:${material}_chute_s" },
+      { "model": "literalascension:${material}_chute_mirrored_s" },
+      { "model": "literalascension:${material}_chute_n", "y": 180 },
+      { "model": "literalascension:${material}_chute_mirrored_n", "y": 180 }
+    ],
+    "east=false,north=false,south=false,west=true": [
+      { "model": "literalascension:${material}_chute_w" },
+      { "model": "literalascension:${material}_chute_mirrored_w" },
+      { "model": "literalascension:${material}_chute_e", "y": 180 },
+      { "model": "literalascension:${material}_chute_mirrored_e", "y": 180 }
+    ],
+    "east=false,north=false,south=true,west=true": [
+      { "model": "literalascension:${material}_chute_sw" },
+      { "model": "literalascension:${material}_chute_mirrored_sw" },
+      { "model": "literalascension:${material}_chute_ne", "y": 180 },
+      { "model": "literalascension:${material}_chute_mirrored_ne", "y": 180 }
+    ],
+    "east=false,north=true,south=false,west=false": [
+      { "model": "literalascension:${material}_chute_n" },
+      { "model": "literalascension:${material}_chute_mirrored_n" },
+      { "model": "literalascension:${material}_chute_s", "y": 180 },
+      { "model": "literalascension:${material}_chute_mirrored_s", "y": 180 }
+    ],
+    "east=false,north=true,south=true,west=false": [
+      { "model": "literalascension:${material}_chute_sn" },
+      { "model": "literalascension:${material}_chute_mirrored_sn" },
+      { "model": "literalascension:${material}_chute_sn", "y": 180 },
+      { "model": "literalascension:${material}_chute_mirrored_sn", "y": 180 }
+    ],
+    "east=false,north=true,south=false,west=true": [
+      { "model": "literalascension:${material}_chute_wn" },
+      { "model": "literalascension:${material}_chute_mirrored_wn" },
+      { "model": "literalascension:${material}_chute_se", "y": 180 },
+      { "model": "literalascension:${material}_chute_mirrored_se", "y": 180 }
+    ],
+    "east=false,north=true,south=true,west=true": [
+      { "model": "literalascension:${material}_chute_swn" },
+      { "model": "literalascension:${material}_chute_mirrored_swn" },
+      { "model": "literalascension:${material}_chute_sne", "y": 180 },
+      { "model": "literalascension:${material}_chute_mirrored_sne", "y": 180 }
+    ],
+    "east=true,north=false,south=false,west=false": [
+      { "model": "literalascension:${material}_chute_e" },
+      { "model": "literalascension:${material}_chute_mirrored_e" },
+      { "model": "literalascension:${material}_chute_w", "y": 180 },
+      { "model": "literalascension:${material}_chute_mirrored_w", "y": 180 }
+    ],
+    "east=true,north=false,south=true,west=false": [
+      { "model": "literalascension:${material}_chute_se" },
+      { "model": "literalascension:${material}_chute_mirrored_se" },
+      { "model": "literalascension:${material}_chute_wn", "y": 180 },
+      { "model": "literalascension:${material}_chute_mirrored_wn", "y": 180 }
+    ],
+    "east=true,north=false,south=false,west=true": [
+      { "model": "literalascension:${material}_chute_we" },
+      { "model": "literalascension:${material}_chute_mirrored_we" },
+      { "model": "literalascension:${material}_chute_we", "y": 180 },
+      { "model": "literalascension:${material}_chute_mirrored_we", "y": 180 }
+    ],
+    "east=true,north=false,south=true,west=true": [
+      { "model": "literalascension:${material}_chute_swe" },
+      { "model": "literalascension:${material}_chute_mirrored_swe" },
+      { "model": "literalascension:${material}_chute_wne", "y": 180 },
+      { "model": "literalascension:${material}_chute_mirrored_wne", "y": 180 }
+    ],
+    "east=true,north=true,south=false,west=false": [
+      { "model": "literalascension:${material}_chute_ne" },
+      { "model": "literalascension:${material}_chute_mirrored_ne" },
+      { "model": "literalascension:${material}_chute_sw", "y": 180 },
+      { "model": "literalascension:${material}_chute_mirrored_sw", "y": 180 }
+    ],
+    "east=true,north=true,south=true,west=false": [
+      { "model": "literalascension:${material}_chute_sne" },
+      { "model": "literalascension:${material}_chute_mirrored_sne" },
+      { "model": "literalascension:${material}_chute_swn", "y": 180 },
+      { "model": "literalascension:${material}_chute_mirrored_swn", "y": 180 }
+    ],
+    "east=true,north=true,south=false,west=true": [
+      { "model": "literalascension:${material}_chute_wne" },
+      { "model": "literalascension:${material}_chute_mirrored_wne" },
+      { "model": "literalascension:${material}_chute_swe", "y": 180 },
+      { "model": "literalascension:${material}_chute_mirrored_swe", "y": 180 }
+    ],
+    "east=true,north=true,south=true,west=true": [
+      { "model": "literalascension:${material}_chute_swne" },
+      { "model": "literalascension:${material}_chute_mirrored_swne" },
+      { "model": "literalascension:${material}_chute_swne", "y": 180 },
+      { "model": "literalascension:${material}_chute_mirrored_swne", "y": 180 }
+    ]
+  }
+}
