@@ -1,10 +1,12 @@
 package com.jamieswhiteshirt.literalascension
 
 import com.jamieswhiteshirt.literalascension.common.CommonProxy
+import com.jamieswhiteshirt.literalascension.common.config.LiteralAscensionConfig
 import com.jamieswhiteshirt.literalascension.common.init.LABlocks
 import com.jamieswhiteshirt.literalascension.common.init.LAItems
 import com.jamieswhiteshirt.literalascension.common.init.LARecipes
-import net.minecraft.creativetab.CreativeTabs
+import net.ilexiconn.llibrary.server.config.Config
+import net.ilexiconn.llibrary.server.config.ConfigHandler
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.SidedProxy
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
@@ -32,6 +34,9 @@ class LiteralAscension {
                 modId = MODID
         )
         lateinit var proxy: CommonProxy
+
+        @Config
+        lateinit var config: LiteralAscensionConfig
     }
 
     @Mod.EventHandler

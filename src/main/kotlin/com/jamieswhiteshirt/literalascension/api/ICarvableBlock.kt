@@ -6,5 +6,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 interface ICarvableBlock {
-    fun carve(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, toolLevel: Int): Boolean
+    fun tryCarve(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean
+
+    fun getCarveMaterial(state: IBlockState, world: World, pos: BlockPos): ICarveMaterial
 }

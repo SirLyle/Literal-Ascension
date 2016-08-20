@@ -1,6 +1,7 @@
 package com.jamieswhiteshirt.literalascension.common.block
 
 import com.jamieswhiteshirt.literalascension.api.ICarvableBlock
+import com.jamieswhiteshirt.literalascension.api.ICarveMaterial
 import com.jamieswhiteshirt.literalascension.common.EnumCarvedBlockType
 import net.minecraft.block.Block
 import net.minecraft.block.properties.PropertyBool
@@ -42,25 +43,27 @@ class BlockChute(type: EnumCarvedBlockType) : BlockCarvedBase(type), ICarvableBl
         })
     }
 
-    override fun carve(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, toolLevel: Int): Boolean {
-        if (toolLevel >= type.material.toolLevel) {
-            val carvingFacing = EnumFacing.getFacingFromVector(hitX - 0.5F, 0.0F, hitZ - 0.5F)
-            // The following should never be false, but why not.
-            if (carvingFacing.axis != EnumFacing.Axis.Y) {
-                val property = PROPERTIES[carvingFacing.horizontalIndex]
-                if (state.getValue(property)) {
-                    val newState = state.withProperty(property, false)
-                    if (PROPERTIES.any { newState.getValue(it) }) {
-                        if (!world.isRemote) {
-                            world.setBlockState(pos, newState)
-                        }
-                        return true
+    override fun tryCarve(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+        val carvingFacing = EnumFacing.getFacingFromVector(hitX - 0.5F, 0.0F, hitZ - 0.5F)
+        // The following should never be false, but why not.
+        if (carvingFacing.axis != EnumFacing.Axis.Y) {
+            val property = PROPERTIES[carvingFacing.horizontalIndex]
+            if (state.getValue(property)) {
+                val newState = state.withProperty(property, false)
+                if (PROPERTIES.any { newState.getValue(it) }) {
+                    if (!world.isRemote) {
+                        world.setBlockState(pos, newState)
                     }
+                    return true
                 }
             }
         }
 
         return false
+    }
+
+    override fun getCarveMaterial(state: IBlockState, world: World, pos: BlockPos): ICarveMaterial {
+        return type.material
     }
 
     override fun getStateFromMeta(meta: Int): IBlockState {

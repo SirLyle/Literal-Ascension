@@ -2,6 +2,7 @@ package com.jamieswhiteshirt.literalascension.common.item
 
 import com.google.common.collect.Multimap
 import com.jamieswhiteshirt.literalascension.api.ICarvableBlock
+import com.jamieswhiteshirt.literalascension.api.ICarveMaterial
 import com.jamieswhiteshirt.literalascension.common.EnumCarvedBlockType
 import net.minecraft.block.*
 import net.minecraft.block.state.IBlockState
@@ -37,15 +38,25 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
         else {
             val state = world.getBlockState(pos)
             val carvableBlock = getCarvableBlock(state)
-            if (carvableBlock != null && carvableBlock.carve(state, world, pos, facing, hitX, hitY, hitZ, toolMaterial.harvestLevel)) {
-                if (!world.isRemote) {
-                    stack.damageItem(1, player)
+            if (carvableBlock != null) {
+                var carvedBlockType = carvableBlock.getCarveMaterial(state, world, pos)
+                if (carvedBlockType.requiredCarvingToolLevel <= toolMaterial.harvestLevel) {
+                    if (carvableBlock.tryCarve(state, world, pos, facing, hitX, hitY, hitZ)) {
+                        if (!world.isRemote) {
+                            if (toolMaterial.harvestLevel < carvedBlockType.viableCarvingToolLevel) {
+                                stack.damageItem(carvedBlockType.unviableToolDamageMultiplier, player)
+                            }
+                            else {
+                                stack.damageItem(1, player)
+                            }
+                        }
+
+                        //val soundType = state.block.soundType
+                        //world.playSound(pos.x.toDouble() + 0.5, pos.y.toDouble() + 0.5, pos.z.toDouble() + 0.5, soundType.breakSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F, false)
+
+                        return EnumActionResult.SUCCESS
+                    }
                 }
-
-                //val soundType = state.block.soundType
-                //world.playSound(pos.x.toDouble() + 0.5, pos.y.toDouble() + 0.5, pos.z.toDouble() + 0.5, soundType.breakSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F, false)
-
-                return EnumActionResult.SUCCESS
             }
 
             return EnumActionResult.PASS
@@ -89,28 +100,29 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
         return when (block) {
             is ICarvableBlock -> block
             is BlockOldLog -> object : CarvableBlockShim() {
-                override fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType? {
-                    if (state.getValue(BlockOldLog.LOG_AXIS) == BlockLog.EnumAxis.Y) {
-                        return EnumCarvedBlockType.fromOldLogType[state.getValue(BlockOldLog.VARIANT)]
-                    }
-                    else {
-                        return null
-                    }
+                override fun canCarve(state: IBlockState): Boolean {
+                    return state.getValue(BlockOldLog.LOG_AXIS) == BlockLog.EnumAxis.Y
+                }
+                override fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType {
+                    return EnumCarvedBlockType.fromOldLogType[state.getValue(BlockOldLog.VARIANT)]!!
                 }
             }
             is BlockNewLog -> object : CarvableBlockShim() {
-                override fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType? {
-                    if (state.getValue(BlockNewLog.LOG_AXIS) == BlockLog.EnumAxis.Y) {
-                        return EnumCarvedBlockType.fromNewLogType[state.getValue(BlockNewLog.VARIANT)]
-                    }
-                    else {
-                        return null
-                    }
+                override fun canCarve(state: IBlockState): Boolean {
+                    return state.getValue(BlockNewLog.LOG_AXIS) == BlockLog.EnumAxis.Y
+                }
+
+                override fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType {
+                    return EnumCarvedBlockType.fromNewLogType[state.getValue(BlockNewLog.VARIANT)]!!
                 }
             }
             is BlockStone -> object : CarvableBlockShim() {
-                override fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType? {
-                    return EnumCarvedBlockType.fromStoneType[state.getValue(BlockStone.VARIANT)]
+                override fun canCarve(state: IBlockState): Boolean {
+                    return true
+                }
+
+                override fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType {
+                    return EnumCarvedBlockType.fromStoneType[state.getValue(BlockStone.VARIANT)]!!
                 }
             }
             else -> null
@@ -118,16 +130,16 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
     }
 
     private abstract class CarvableBlockShim : ICarvableBlock {
-        override fun carve(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, toolLevel: Int): Boolean {
-            val carvedBlockType = getCarvedBlockType(state)
-            if (carvedBlockType != null && toolLevel >= carvedBlockType.material.toolLevel) {
+        override fun tryCarve(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+            if (canCarve(state)) {
+                val carvedBlockType = this.getCarvedBlockType(state)
                 if (!world.isRemote) {
                     if (facing.axis == EnumFacing.Axis.Y) {
                         world.setBlockState(pos, carvedBlockType.chuteBlock().defaultState)
                     }
                     else {
                         val notchedBlock = carvedBlockType.notchedBlock()
-                        notchedBlock.carve(notchedBlock.defaultState, world, pos, facing, hitX, hitY, hitZ, toolLevel)
+                        notchedBlock.tryCarve(notchedBlock.defaultState, world, pos, facing, hitX, hitY, hitZ)
                     }
                 }
                 return true
@@ -136,6 +148,12 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
             return false
         }
 
-        abstract fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType?
+        override fun getCarveMaterial(state: IBlockState, world: World, pos: BlockPos): ICarveMaterial {
+            return getCarvedBlockType(state).material
+        }
+
+        abstract fun canCarve(state: IBlockState): Boolean
+
+        abstract fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType
     }
 }
