@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "east=false,north=false,south=false,west=false": { "model": "literalascension:log_dark_oak_chute_swne" },
+    "east=false,north=false,south=true,west=false": { "model": "literalascension:log_dark_oak_chute_s" },
+    "east=false,north=false,south=false,west=true": { "model": "literalascension:log_dark_oak_chute_w" },
+    "east=false,north=false,south=true,west=true": { "model": "literalascension:log_dark_oak_chute_sw" },
+    "east=false,north=true,south=false,west=false": { "model": "literalascension:log_dark_oak_chute_n" },
+    "east=false,north=true,south=true,west=false": { "model": "literalascension:log_dark_oak_chute_sn" },
+    "east=false,north=true,south=false,west=true": { "model": "literalascension:log_dark_oak_chute_wn" },
+    "east=false,north=true,south=true,west=true": { "model": "literalascension:log_dark_oak_chute_swn" },
+    "east=true,north=false,south=false,west=false": { "model": "literalascension:log_dark_oak_chute_e" },
+    "east=true,north=false,south=true,west=false": { "model": "literalascension:log_dark_oak_chute_se" },
+    "east=true,north=false,south=false,west=true": { "model": "literalascension:log_dark_oak_chute_we" },
+    "east=true,north=false,south=true,west=true": { "model": "literalascension:log_dark_oak_chute_swe" },
+    "east=true,north=true,south=false,west=false": { "model": "literalascension:log_dark_oak_chute_ne" },
+    "east=true,north=true,south=true,west=false": { "model": "literalascension:log_dark_oak_chute_sne" },
+    "east=true,north=true,south=false,west=true": { "model": "literalascension:log_dark_oak_chute_wne" },
+    "east=true,north=true,south=true,west=true": { "model": "literalascension:log_dark_oak_chute_swne" }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/chute_n",
+  "textures": {
+    "end": "minecraft:blocks/log_acacia_top",
+    "side": "minecraft:blocks/log_acacia",
+    "inside": "literalascension:blocks/log_acacia_inside_chute"
+  }
+}

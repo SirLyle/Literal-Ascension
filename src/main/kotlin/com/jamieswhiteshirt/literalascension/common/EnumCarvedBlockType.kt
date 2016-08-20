@@ -16,12 +16,12 @@ enum class EnumCarvedBlockType(
         val chuteBlock: () -> BlockChute,
         val notchedBlock: () -> BlockNotched
 ) : IStringSerializable {
-    OAK(Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK), EnumMaterial.LOG, {LABlocks.OAK_CHUTE}, {LABlocks.OAK_NOTCHED}),
-    SPRUCE(Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE), EnumMaterial.LOG, {LABlocks.SPRUCE_CHUTE}, {LABlocks.SPRUCE_NOTCHED}),
-    BIRCH(Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH), EnumMaterial.LOG, {LABlocks.BIRCH_CHUTE}, {LABlocks.BIRCH_NOTCHED}),
-    JUNGLE(Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE), EnumMaterial.LOG, {LABlocks.JUNGLE_CHUTE}, {LABlocks.JUNGLE_NOTCHED}),
-    ACACIA(Blocks.LOG2.defaultState.withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.ACACIA), EnumMaterial.LOG, {LABlocks.ACACIA_CHUTE}, {LABlocks.ACACIA_NOTCHED}),
-    DARK_OAK(Blocks.LOG2.defaultState.withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.DARK_OAK), EnumMaterial.LOG, {LABlocks.DARK_OAK_CHUTE}, {LABlocks.DARK_OAK_NOTCHED}),
+    LOG_OAK(Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK), EnumMaterial.LOG, {LABlocks.LOG_OAK_CHUTE}, {LABlocks.LOG_OAK_NOTCHED}),
+    LOG_SPRUCE(Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE), EnumMaterial.LOG, {LABlocks.LOG_SPRUCE_CHUTE}, {LABlocks.LOG_SPRUCE_NOTCHED}),
+    LOG_BIRCH(Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH), EnumMaterial.LOG, {LABlocks.LOG_BIRCH_CHUTE}, {LABlocks.LOG_BIRCH_NOTCHED}),
+    LOG_JUNGLE(Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE), EnumMaterial.LOG, {LABlocks.LOG_JUNGLE_CHUTE}, {LABlocks.LOG_JUNGLE_NOTCHED}),
+    LOG_ACACIA(Blocks.LOG2.defaultState.withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.ACACIA), EnumMaterial.LOG, {LABlocks.LOG_ACACIA_CHUTE}, {LABlocks.LOG_ACACIA_NOTCHED}),
+    LOG_DARK_OAK(Blocks.LOG2.defaultState.withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.DARK_OAK), EnumMaterial.LOG, {LABlocks.LOG_DARK_OAK_CHUTE}, {LABlocks.LOG_DARK_OAK_NOTCHED}),
     STONE(Blocks.STONE.defaultState.withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE), EnumMaterial.STONE, {LABlocks.STONE_CHUTE}, {LABlocks.STONE_NOTCHED}),
     GRANITE(Blocks.STONE.defaultState.withProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE), EnumMaterial.STONE, {LABlocks.GRANITE_CHUTE}, {LABlocks.GRANITE_NOTCHED}),
     DIORITE(Blocks.STONE.defaultState.withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE), EnumMaterial.STONE, {LABlocks.DIORITE_CHUTE}, {LABlocks.DIORITE_NOTCHED}),
@@ -33,15 +33,15 @@ enum class EnumCarvedBlockType(
 
     companion object {
         val fromOldLogType = mapOf(
-                BlockPlanks.EnumType.OAK to OAK,
-                BlockPlanks.EnumType.SPRUCE to SPRUCE,
-                BlockPlanks.EnumType.BIRCH to BIRCH,
-                BlockPlanks.EnumType.JUNGLE to JUNGLE
+                BlockPlanks.EnumType.OAK to LOG_OAK,
+                BlockPlanks.EnumType.SPRUCE to LOG_SPRUCE,
+                BlockPlanks.EnumType.BIRCH to LOG_BIRCH,
+                BlockPlanks.EnumType.JUNGLE to LOG_JUNGLE
         )
 
         val fromNewLogType = mapOf(
-                BlockPlanks.EnumType.ACACIA to ACACIA,
-                BlockPlanks.EnumType.DARK_OAK to DARK_OAK
+                BlockPlanks.EnumType.ACACIA to LOG_ACACIA,
+                BlockPlanks.EnumType.DARK_OAK to LOG_DARK_OAK
         )
 
         val fromStoneType = mapOf(

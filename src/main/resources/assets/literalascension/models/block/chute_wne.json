@@ -1,17 +1,14 @@
 {
-  "parent": "block/block",
-  "textures": {
-    "particle": "#inside"
-  },
+  "parent": "literalascension:block/chute",
   "elements": [
     {
       "from": [0, 0, 0],
       "to": [2, 16, 16],
       "faces": {
-        "down":  { "texture": "#top", "cullface": "down" },
-        "up":    { "texture": "#top", "cullface": "up" },
-        "south": { "texture": "#outside" },
-        "west":  { "texture": "#outside", "cullface": "west" },
+        "down":  { "texture": "#end", "cullface": "down" },
+        "up":    { "texture": "#end", "cullface": "up" },
+        "south": { "texture": "#side" },
+        "west":  { "texture": "#side", "cullface": "west" },
         "east":  { "texture": "#inside" }
       }
     },
@@ -19,9 +16,9 @@
       "from": [0, 0, 0],
       "to": [16, 16, 2],
       "faces": {
-        "down":  { "texture": "#top", "cullface": "down" },
-        "up":    { "texture": "#top", "cullface": "up" },
-        "north": { "texture": "#outside", "cullface": "north" },
+        "down":  { "texture": "#end", "cullface": "down" },
+        "up":    { "texture": "#end", "cullface": "up" },
+        "north": { "texture": "#side", "cullface": "north" },
         "south": { "texture": "#inside" }
       }
     },
@@ -29,11 +26,11 @@
       "from": [14, 0, 0],
       "to": [16, 16, 16],
       "faces": {
-        "down":  { "texture": "#top", "cullface": "down" },
-        "up":    { "texture": "#top", "cullface": "up" },
-        "south": { "texture": "#outside" },
+        "down":  { "texture": "#end", "cullface": "down" },
+        "up":    { "texture": "#end", "cullface": "up" },
+        "south": { "texture": "#side" },
         "west":  { "texture": "#inside" },
-        "east":  { "texture": "#outside", "cullface": "east" }
+        "east":  { "texture": "#side", "cullface": "east" }
       }
     }
   ]

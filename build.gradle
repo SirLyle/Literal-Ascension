@@ -200,14 +200,27 @@ task generateStepladderModel(type: CopyJsonTemplate) {
     }
 }
 
-task generateChuteModel(type: CopyJsonTemplate) {
-    template 'chute'
+task generateChuteStoneModel(type: CopyJsonTemplate) {
+    template 'chute_stone'
     arguments {
         def material = requireArgument('material', 'material')
-        return ['material':material]
+        def domain = requireArgument('domain', 'domain')
+        return ['material':material, 'domain':domain]
     }
     jsonRename { String prevName ->
-        return args['material'] + '_' + prevName
+        return args['material'] + prevName
+    }
+}
+
+task generateChuteLogModel(type: CopyJsonTemplate) {
+    template 'chute_log'
+    arguments {
+        def material = requireArgument('material', 'material')
+        def domain = requireArgument('domain', 'domain')
+        return ['material':material, 'domain':domain]
+    }
+    jsonRename { String prevName ->
+        return args['material'] + prevName
     }
 }
 
@@ -215,10 +228,11 @@ task generateChuteVariantsModel(type: CopyJsonTemplate) {
     template 'chute_variants'
     arguments {
         def material = requireArgument('material', 'material')
-        return ['material':material]
+        def domain = requireArgument('domain', 'domain')
+        return ['material':material, 'domain':domain]
     }
     jsonRename { String prevName ->
-        return args['material'] + '_' + prevName
+        return args['material'] + prevName
     }
 }
 

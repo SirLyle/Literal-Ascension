@@ -18,23 +18,23 @@ object LABlocks {
     val DARK_OAK_STEPLADDER = BlockStepladder({ LAItems.DARK_OAK_STEPLADDER }).setUnlocalizedName("literalascension.stepladderDarkOak") as BlockStepladder
     val IRON_STEPLADDER = BlockStepladder({ LAItems.IRON_STEPLADDER }).setUnlocalizedName("literalascension.stepladderIron") as BlockStepladder
 
-    val OAK_CHUTE = BlockChute(EnumCarvedBlockType.OAK).setUnlocalizedName("literalascension.chuteOak") as BlockChute
-    val SPRUCE_CHUTE = BlockChute(EnumCarvedBlockType.SPRUCE).setUnlocalizedName("literalascension.chuteSpruce") as BlockChute
-    val BIRCH_CHUTE = BlockChute(EnumCarvedBlockType.BIRCH).setUnlocalizedName("literalascension.chuteBirch") as BlockChute
-    val JUNGLE_CHUTE = BlockChute(EnumCarvedBlockType.JUNGLE).setUnlocalizedName("literalascension.chuteJungle") as BlockChute
-    val ACACIA_CHUTE = BlockChute(EnumCarvedBlockType.ACACIA).setUnlocalizedName("literalascension.chuteAcacia") as BlockChute
-    val DARK_OAK_CHUTE = BlockChute(EnumCarvedBlockType.DARK_OAK).setUnlocalizedName("literalascension.chuteDarkOak") as BlockChute
+    val LOG_OAK_CHUTE = BlockChute(EnumCarvedBlockType.LOG_OAK).setUnlocalizedName("literalascension.chuteOak") as BlockChute
+    val LOG_SPRUCE_CHUTE = BlockChute(EnumCarvedBlockType.LOG_SPRUCE).setUnlocalizedName("literalascension.chuteSpruce") as BlockChute
+    val LOG_BIRCH_CHUTE = BlockChute(EnumCarvedBlockType.LOG_BIRCH).setUnlocalizedName("literalascension.chuteBirch") as BlockChute
+    val LOG_JUNGLE_CHUTE = BlockChute(EnumCarvedBlockType.LOG_JUNGLE).setUnlocalizedName("literalascension.chuteJungle") as BlockChute
+    val LOG_ACACIA_CHUTE = BlockChute(EnumCarvedBlockType.LOG_ACACIA).setUnlocalizedName("literalascension.chuteAcacia") as BlockChute
+    val LOG_DARK_OAK_CHUTE = BlockChute(EnumCarvedBlockType.LOG_DARK_OAK).setUnlocalizedName("literalascension.chuteDarkOak") as BlockChute
     val STONE_CHUTE = BlockChute(EnumCarvedBlockType.STONE).setUnlocalizedName("literalascension.chuteStone") as BlockChute
     val GRANITE_CHUTE = BlockChute(EnumCarvedBlockType.GRANITE).setUnlocalizedName("literalascension.chuteGranite") as BlockChute
     val DIORITE_CHUTE = BlockChute(EnumCarvedBlockType.DIORITE).setUnlocalizedName("literalascension.chuteDiorite") as BlockChute
     val ANDESITE_CHUTE = BlockChute(EnumCarvedBlockType.ANDESITE).setUnlocalizedName("literalascension.chuteAndesite") as BlockChute
 
-    val OAK_NOTCHED = BlockNotched(EnumCarvedBlockType.OAK).setUnlocalizedName("literalascension.notchedOak") as BlockNotched
-    val SPRUCE_NOTCHED = BlockNotched(EnumCarvedBlockType.SPRUCE).setUnlocalizedName("literalascension.notchedSpruce") as BlockNotched
-    val BIRCH_NOTCHED = BlockNotched(EnumCarvedBlockType.BIRCH).setUnlocalizedName("literalascension.notchedBirch") as BlockNotched
-    val JUNGLE_NOTCHED = BlockNotched(EnumCarvedBlockType.JUNGLE).setUnlocalizedName("literalascension.notchedJungle") as BlockNotched
-    val ACACIA_NOTCHED = BlockNotched(EnumCarvedBlockType.ACACIA).setUnlocalizedName("literalascension.notchedAcacia") as BlockNotched
-    val DARK_OAK_NOTCHED = BlockNotched(EnumCarvedBlockType.DARK_OAK).setUnlocalizedName("literalascension.notchedDarkOak") as BlockNotched
+    val LOG_OAK_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_OAK).setUnlocalizedName("literalascension.notchedOak") as BlockNotched
+    val LOG_SPRUCE_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_SPRUCE).setUnlocalizedName("literalascension.notchedSpruce") as BlockNotched
+    val LOG_BIRCH_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_BIRCH).setUnlocalizedName("literalascension.notchedBirch") as BlockNotched
+    val LOG_JUNGLE_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_JUNGLE).setUnlocalizedName("literalascension.notchedJungle") as BlockNotched
+    val LOG_ACACIA_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_ACACIA).setUnlocalizedName("literalascension.notchedAcacia") as BlockNotched
+    val LOG_DARK_OAK_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_DARK_OAK).setUnlocalizedName("literalascension.notchedDarkOak") as BlockNotched
     val STONE_NOTCHED = BlockNotched(EnumCarvedBlockType.STONE).setUnlocalizedName("literalascension.notchedStone") as BlockNotched
     val GRANITE_NOTCHED = BlockNotched(EnumCarvedBlockType.GRANITE).setUnlocalizedName("literalascension.notchedGranite") as BlockNotched
     val DIORITE_NOTCHED = BlockNotched(EnumCarvedBlockType.DIORITE).setUnlocalizedName("literalascension.notchedDiorite") as BlockNotched
@@ -51,23 +51,23 @@ object LABlocks {
         registerStepladder(DARK_OAK_STEPLADDER, "dark_oak")
         registerStepladder(IRON_STEPLADDER, "iron")
 
-        registerChute(OAK_CHUTE)
-        registerChute(SPRUCE_CHUTE)
-        registerChute(BIRCH_CHUTE)
-        registerChute(JUNGLE_CHUTE)
-        registerChute(ACACIA_CHUTE)
-        registerChute(DARK_OAK_CHUTE)
+        registerChute(LOG_OAK_CHUTE)
+        registerChute(LOG_SPRUCE_CHUTE)
+        registerChute(LOG_BIRCH_CHUTE)
+        registerChute(LOG_JUNGLE_CHUTE)
+        registerChute(LOG_ACACIA_CHUTE)
+        registerChute(LOG_DARK_OAK_CHUTE)
         registerChute(STONE_CHUTE)
         registerChute(GRANITE_CHUTE)
         registerChute(DIORITE_CHUTE)
         registerChute(ANDESITE_CHUTE)
 
-        registerNotched(OAK_NOTCHED)
-        registerNotched(SPRUCE_NOTCHED)
-        registerNotched(BIRCH_NOTCHED)
-        registerNotched(JUNGLE_NOTCHED)
-        registerNotched(ACACIA_NOTCHED)
-        registerNotched(DARK_OAK_NOTCHED)
+        registerNotched(LOG_OAK_NOTCHED)
+        registerNotched(LOG_SPRUCE_NOTCHED)
+        registerNotched(LOG_BIRCH_NOTCHED)
+        registerNotched(LOG_JUNGLE_NOTCHED)
+        registerNotched(LOG_ACACIA_NOTCHED)
+        registerNotched(LOG_DARK_OAK_NOTCHED)
         registerNotched(STONE_NOTCHED)
         registerNotched(GRANITE_NOTCHED)
         registerNotched(DIORITE_NOTCHED)

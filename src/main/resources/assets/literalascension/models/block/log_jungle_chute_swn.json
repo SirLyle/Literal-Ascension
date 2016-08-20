@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/chute_swn",
+  "textures": {
+    "end": "minecraft:blocks/log_jungle_top",
+    "side": "minecraft:blocks/log_jungle",
+    "inside": "literalascension:blocks/log_jungle_inside_chute"
+  }
+}
