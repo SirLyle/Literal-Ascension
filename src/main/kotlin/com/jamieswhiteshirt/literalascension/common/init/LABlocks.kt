@@ -10,35 +10,35 @@ import net.minecraft.item.ItemBlock
 import net.minecraftforge.fml.common.registry.GameRegistry
 
 object LABlocks {
-    val OAK_STEPLADDER = BlockStepladder({ LAItems.OAK_STEPLADDER }).setUnlocalizedName("literalascension.stepladderOak") as BlockStepladder
-    val SPRUCE_STEPLADDER = BlockStepladder({ LAItems.SPRUCE_STEPLADDER }).setUnlocalizedName("literalascension.stepladderSpruce") as BlockStepladder
-    val BIRCH_STEPLADDER = BlockStepladder({ LAItems.BIRCH_STEPLADDER }).setUnlocalizedName("literalascension.stepladderBirch") as BlockStepladder
-    val JUNGLE_STEPLADDER = BlockStepladder({ LAItems.JUNGLE_STEPLADDER }).setUnlocalizedName("literalascension.stepladderJungle") as BlockStepladder
-    val ACACIA_STEPLADDER = BlockStepladder({ LAItems.ACACIA_STEPLADDER }).setUnlocalizedName("literalascension.stepladderAcacia") as BlockStepladder
-    val DARK_OAK_STEPLADDER = BlockStepladder({ LAItems.DARK_OAK_STEPLADDER }).setUnlocalizedName("literalascension.stepladderDarkOak") as BlockStepladder
-    val IRON_STEPLADDER = BlockStepladder({ LAItems.IRON_STEPLADDER }).setUnlocalizedName("literalascension.stepladderIron") as BlockStepladder
+    val OAK_STEPLADDER = BlockStepladder({ LAItems.OAK_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.oak") as BlockStepladder
+    val SPRUCE_STEPLADDER = BlockStepladder({ LAItems.SPRUCE_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.spruce") as BlockStepladder
+    val BIRCH_STEPLADDER = BlockStepladder({ LAItems.BIRCH_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.birch") as BlockStepladder
+    val JUNGLE_STEPLADDER = BlockStepladder({ LAItems.JUNGLE_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.jungle") as BlockStepladder
+    val ACACIA_STEPLADDER = BlockStepladder({ LAItems.ACACIA_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.acacia") as BlockStepladder
+    val DARK_OAK_STEPLADDER = BlockStepladder({ LAItems.DARK_OAK_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.big_oak") as BlockStepladder
+    val IRON_STEPLADDER = BlockStepladder({ LAItems.IRON_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.iron") as BlockStepladder
 
-    val LOG_OAK_CHUTE = BlockChute(EnumCarvedBlockType.LOG_OAK).setUnlocalizedName("literalascension.chuteOak") as BlockChute
-    val LOG_SPRUCE_CHUTE = BlockChute(EnumCarvedBlockType.LOG_SPRUCE).setUnlocalizedName("literalascension.chuteSpruce") as BlockChute
-    val LOG_BIRCH_CHUTE = BlockChute(EnumCarvedBlockType.LOG_BIRCH).setUnlocalizedName("literalascension.chuteBirch") as BlockChute
-    val LOG_JUNGLE_CHUTE = BlockChute(EnumCarvedBlockType.LOG_JUNGLE).setUnlocalizedName("literalascension.chuteJungle") as BlockChute
-    val LOG_ACACIA_CHUTE = BlockChute(EnumCarvedBlockType.LOG_ACACIA).setUnlocalizedName("literalascension.chuteAcacia") as BlockChute
-    val LOG_DARK_OAK_CHUTE = BlockChute(EnumCarvedBlockType.LOG_DARK_OAK).setUnlocalizedName("literalascension.chuteDarkOak") as BlockChute
-    val STONE_CHUTE = BlockChute(EnumCarvedBlockType.STONE).setUnlocalizedName("literalascension.chuteStone") as BlockChute
-    val GRANITE_CHUTE = BlockChute(EnumCarvedBlockType.GRANITE).setUnlocalizedName("literalascension.chuteGranite") as BlockChute
-    val DIORITE_CHUTE = BlockChute(EnumCarvedBlockType.DIORITE).setUnlocalizedName("literalascension.chuteDiorite") as BlockChute
-    val ANDESITE_CHUTE = BlockChute(EnumCarvedBlockType.ANDESITE).setUnlocalizedName("literalascension.chuteAndesite") as BlockChute
+    val LOG_OAK_CHUTE = BlockChute(EnumCarvedBlockType.LOG_OAK)
+    val LOG_SPRUCE_CHUTE = BlockChute(EnumCarvedBlockType.LOG_SPRUCE)
+    val LOG_BIRCH_CHUTE = BlockChute(EnumCarvedBlockType.LOG_BIRCH)
+    val LOG_JUNGLE_CHUTE = BlockChute(EnumCarvedBlockType.LOG_JUNGLE)
+    val LOG_ACACIA_CHUTE = BlockChute(EnumCarvedBlockType.LOG_ACACIA)
+    val LOG_DARK_OAK_CHUTE = BlockChute(EnumCarvedBlockType.LOG_DARK_OAK)
+    val STONE_CHUTE = BlockChute(EnumCarvedBlockType.STONE)
+    val GRANITE_CHUTE = BlockChute(EnumCarvedBlockType.GRANITE)
+    val DIORITE_CHUTE = BlockChute(EnumCarvedBlockType.DIORITE)
+    val ANDESITE_CHUTE = BlockChute(EnumCarvedBlockType.ANDESITE)
 
-    val LOG_OAK_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_OAK).setUnlocalizedName("literalascension.notchedOak") as BlockNotched
-    val LOG_SPRUCE_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_SPRUCE).setUnlocalizedName("literalascension.notchedSpruce") as BlockNotched
-    val LOG_BIRCH_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_BIRCH).setUnlocalizedName("literalascension.notchedBirch") as BlockNotched
-    val LOG_JUNGLE_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_JUNGLE).setUnlocalizedName("literalascension.notchedJungle") as BlockNotched
-    val LOG_ACACIA_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_ACACIA).setUnlocalizedName("literalascension.notchedAcacia") as BlockNotched
-    val LOG_DARK_OAK_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_DARK_OAK).setUnlocalizedName("literalascension.notchedDarkOak") as BlockNotched
-    val STONE_NOTCHED = BlockNotched(EnumCarvedBlockType.STONE).setUnlocalizedName("literalascension.notchedStone") as BlockNotched
-    val GRANITE_NOTCHED = BlockNotched(EnumCarvedBlockType.GRANITE).setUnlocalizedName("literalascension.notchedGranite") as BlockNotched
-    val DIORITE_NOTCHED = BlockNotched(EnumCarvedBlockType.DIORITE).setUnlocalizedName("literalascension.notchedDiorite") as BlockNotched
-    val ANDESITE_NOTCHED = BlockNotched(EnumCarvedBlockType.ANDESITE).setUnlocalizedName("literalascension.notchedAndesite") as BlockNotched
+    val LOG_OAK_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_OAK)
+    val LOG_SPRUCE_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_SPRUCE)
+    val LOG_BIRCH_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_BIRCH)
+    val LOG_JUNGLE_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_JUNGLE)
+    val LOG_ACACIA_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_ACACIA)
+    val LOG_DARK_OAK_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_DARK_OAK)
+    val STONE_NOTCHED = BlockNotched(EnumCarvedBlockType.STONE)
+    val GRANITE_NOTCHED = BlockNotched(EnumCarvedBlockType.GRANITE)
+    val DIORITE_NOTCHED = BlockNotched(EnumCarvedBlockType.DIORITE)
+    val ANDESITE_NOTCHED = BlockNotched(EnumCarvedBlockType.ANDESITE)
 
     val CLIMBING_ROPE = BlockClimbingRope().setUnlocalizedName("literalascension.climbingRope").setCreativeTab(CreativeTab) as BlockClimbingRope
 

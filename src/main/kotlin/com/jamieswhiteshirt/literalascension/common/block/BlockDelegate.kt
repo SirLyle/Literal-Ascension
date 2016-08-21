@@ -125,4 +125,8 @@ abstract class BlockDelegate(val modelState: IBlockState, hardness: Float) : Blo
     override fun getPickBlock(state: IBlockState, target: RayTraceResult, world: World, pos: BlockPos, player: EntityPlayer): ItemStack {
         return modelBlock.getPickBlock(modelState, target, world, pos, player)
     }
+
+    override fun getUnlocalizedName(): String {
+        return modelBlock.unlocalizedName
+    }
 }

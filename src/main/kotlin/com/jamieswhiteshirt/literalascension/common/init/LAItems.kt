@@ -7,13 +7,13 @@ import net.minecraft.item.Item
 import net.minecraftforge.fml.common.registry.GameRegistry
 
 object LAItems {
-    val OAK_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.OAK_STEPLADDER }).setUnlocalizedName("literalascension.stepladderOak") as ItemStepladder
-    val SPRUCE_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.SPRUCE_STEPLADDER }).setUnlocalizedName("literalascension.stepladderSpruce") as ItemStepladder
-    val BIRCH_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.BIRCH_STEPLADDER }).setUnlocalizedName("literalascension.stepladderBirch") as ItemStepladder
-    val JUNGLE_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.JUNGLE_STEPLADDER }).setUnlocalizedName("literalascension.stepladderJungle") as ItemStepladder
-    val ACACIA_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.ACACIA_STEPLADDER }).setUnlocalizedName("literalascension.stepladderAcacia") as ItemStepladder
-    val DARK_OAK_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.DARK_OAK_STEPLADDER }).setUnlocalizedName("literalascension.stepladderDarkOak") as ItemStepladder
-    val IRON_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.IRON_STEPLADDER }).setUnlocalizedName("literalascension.stepladderIron") as ItemStepladder
+    val OAK_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.OAK_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.oak") as ItemStepladder
+    val SPRUCE_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.SPRUCE_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.spruce") as ItemStepladder
+    val BIRCH_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.BIRCH_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.birch") as ItemStepladder
+    val JUNGLE_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.JUNGLE_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.jungle") as ItemStepladder
+    val ACACIA_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.ACACIA_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.acacia") as ItemStepladder
+    val DARK_OAK_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.DARK_OAK_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.big_oak") as ItemStepladder
+    val IRON_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.IRON_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.iron") as ItemStepladder
 
     val WOOD_CARVING_TOOL: ItemCarvingTool = ItemCarvingTool(Item.ToolMaterial.WOOD).setUnlocalizedName("literalascension.carvingToolWood") as ItemCarvingTool
     val STONE_CARVING_TOOL: ItemCarvingTool = ItemCarvingTool(Item.ToolMaterial.STONE).setUnlocalizedName("literalascension.carvingToolStone") as ItemCarvingTool
