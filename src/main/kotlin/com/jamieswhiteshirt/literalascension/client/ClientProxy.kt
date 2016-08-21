@@ -1,15 +1,18 @@
 package com.jamieswhiteshirt.literalascension.client
 
+import com.jamieswhiteshirt.literalascension.LiteralAscension
+import com.jamieswhiteshirt.literalascension.client.network.message.MessageBlockCarvedHandler
 import com.jamieswhiteshirt.literalascension.common.CommonProxy
-import com.jamieswhiteshirt.literalascension.common.block.BlockChute
 import com.jamieswhiteshirt.literalascension.common.init.LABlocks
 import com.jamieswhiteshirt.literalascension.common.init.LAItems
 import com.jamieswhiteshirt.literalascension.common.item.ItemCarvingTool
 import com.jamieswhiteshirt.literalascension.common.item.ItemStepladder
+import com.jamieswhiteshirt.literalascension.common.network.message.MessageBlockCarved
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.ItemModelMesher
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.item.Item
+import net.minecraftforge.fml.relauncher.Side
 
 class ClientProxy : CommonProxy() {
     override fun registerRenderers() {
@@ -38,5 +41,10 @@ class ClientProxy : CommonProxy() {
 
     private fun registerCarvingToolModel(itemModelMesher: ItemModelMesher, carvingTool: ItemCarvingTool, type: String) {
         itemModelMesher.register(carvingTool, 0, ModelResourceLocation("literalascension:${type}_carving_tool", "inventory"))
+    }
+
+    override fun registerMessages() {
+        super.registerMessages()
+        LiteralAscension.packetHandler.registerMessage(MessageBlockCarvedHandler(), MessageBlockCarved::class.java, MessageBlockCarved.DISCRIMINATOR, Side.CLIENT)
     }
 }

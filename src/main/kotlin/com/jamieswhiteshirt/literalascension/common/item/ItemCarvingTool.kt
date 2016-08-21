@@ -1,9 +1,11 @@
 package com.jamieswhiteshirt.literalascension.common.item
 
 import com.google.common.collect.Multimap
+import com.jamieswhiteshirt.literalascension.LiteralAscension
 import com.jamieswhiteshirt.literalascension.api.ICarvableBlock
 import com.jamieswhiteshirt.literalascension.api.ICarveMaterial
 import com.jamieswhiteshirt.literalascension.common.EnumCarvedBlockType
+import com.jamieswhiteshirt.literalascension.common.network.message.MessageBlockCarved
 import net.minecraft.block.*
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.EntityLivingBase
@@ -19,6 +21,7 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.SoundCategory
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
+import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
@@ -49,10 +52,10 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
                             else {
                                 stack.damageItem(1, player)
                             }
-                        }
 
-                        //val soundType = state.block.soundType
-                        //world.playSound(pos.x.toDouble() + 0.5, pos.y.toDouble() + 0.5, pos.z.toDouble() + 0.5, soundType.breakSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F, false)
+                            val targetPoint = NetworkRegistry.TargetPoint(world.provider.dimension, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), 64.0)
+                            LiteralAscension.packetHandler.sendToAllAround(MessageBlockCarved(pos), targetPoint)
+                        }
 
                         return EnumActionResult.SUCCESS
                     }
