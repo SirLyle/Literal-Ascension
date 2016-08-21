@@ -236,14 +236,15 @@ task generateChuteVariantsModel(type: CopyJsonTemplate) {
     }
 }
 
-task generateNotchedModel(type: CopyJsonTemplate) {
-    template 'notched'
+task generateNotchedLogModel(type: CopyJsonTemplate) {
+    template 'notched_log'
     arguments {
         def material = requireArgument('material', 'material')
-        return ['material':material]
+        def domain = requireArgument('domain', 'domain')
+        return ['material':material, 'domain':domain]
     }
     jsonRename { String prevName ->
-        return args['material'] + '_' + prevName
+        return args['material'] + prevName
     }
 }
 
@@ -251,9 +252,22 @@ task generateNotchedVariantsModel(type: CopyJsonTemplate) {
     template 'notched_variants'
     arguments {
         def material = requireArgument('material', 'material')
-        return ['material':material]
+        def domain = requireArgument('domain', 'domain')
+        return ['material':material, 'domain':domain]
     }
     jsonRename { String prevName ->
-        return args['material'] + '_' + prevName
+        return args['material'] + prevName
+    }
+}
+
+task generateNotchedStoneModel(type: CopyJsonTemplate) {
+    template 'notched_stone'
+    arguments {
+        def material = requireArgument('material', 'material')
+        def domain = requireArgument('domain', 'domain')
+        return ['material':material, 'domain':domain]
+    }
+    jsonRename { String prevName ->
+        return args['material'] + prevName
     }
 }

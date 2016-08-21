@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "east=false,north=false,south=false,west=false": { "model": "literalascension:${material}_notched_swne" },
+    "east=false,north=false,south=true,west=false": { "model": "literalascension:${material}_notched_s" },
+    "east=false,north=false,south=false,west=true": { "model": "literalascension:${material}_notched_w" },
+    "east=false,north=false,south=true,west=true": { "model": "literalascension:${material}_notched_sw" },
+    "east=false,north=true,south=false,west=false": { "model": "literalascension:${material}_notched_n" },
+    "east=false,north=true,south=true,west=false": { "model": "literalascension:${material}_notched_sn" },
+    "east=false,north=true,south=false,west=true": { "model": "literalascension:${material}_notched_wn" },
+    "east=false,north=true,south=true,west=true": { "model": "literalascension:${material}_notched_swn" },
+    "east=true,north=false,south=false,west=false": { "model": "literalascension:${material}_notched_e" },
+    "east=true,north=false,south=true,west=false": { "model": "literalascension:${material}_notched_se" },
+    "east=true,north=false,south=false,west=true": { "model": "literalascension:${material}_notched_we" },
+    "east=true,north=false,south=true,west=true": { "model": "literalascension:${material}_notched_swe" },
+    "east=true,north=true,south=false,west=false": { "model": "literalascension:${material}_notched_ne" },
+    "east=true,north=true,south=true,west=false": { "model": "literalascension:${material}_notched_sne" },
+    "east=true,north=true,south=false,west=true": { "model": "literalascension:${material}_notched_wne" },
+    "east=true,north=true,south=true,west=true": { "model": "literalascension:${material}_notched_swne" }
+  }
+}

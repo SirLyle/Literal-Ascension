@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/notched_e",
+  "textures": {
+    "end": "minecraft:blocks/log_jungle_top",
+    "side": "minecraft:blocks/log_jungle",
+    "notched": "literalascension:blocks/log_jungle_notched"
+  }
+}

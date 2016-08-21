@@ -1,8 +1,0 @@
-{
-  "parent": "literalascension:block/notched_ne",
-  "textures": {
-    "top": "literalascension:blocks/notched_spruce_top",
-    "side": "literalascension:blocks/notched_spruce_side",
-    "notched": "literalascension:blocks/notched_spruce"
-  }
-}

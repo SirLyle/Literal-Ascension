@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/notched_we",
+  "textures": {
+    "end": "${domain}:blocks/${material}_top",
+    "side": "${domain}:blocks/${material}",
+    "notched": "literalascension:blocks/${material}_notched"
+  }
+}

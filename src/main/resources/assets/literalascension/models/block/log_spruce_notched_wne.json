@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/notched_wne",
+  "textures": {
+    "end": "minecraft:blocks/log_spruce_top",
+    "side": "minecraft:blocks/log_spruce",
+    "notched": "literalascension:blocks/log_spruce_notched"
+  }
+}

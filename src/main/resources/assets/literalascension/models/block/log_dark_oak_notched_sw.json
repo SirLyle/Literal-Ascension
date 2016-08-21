@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/notched_sw",
+  "textures": {
+    "end": "minecraft:blocks/log_big_oak_top",
+    "side": "minecraft:blocks/log_big_oak",
+    "notched": "literalascension:blocks/log_big_oak_notched"
+  }
+}

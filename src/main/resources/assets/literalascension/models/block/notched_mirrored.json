@@ -2,7 +2,7 @@
   "parent": "block/cube_mirrored",
   "textures": {
     "particle": "#side",
-    "down": "#top",
-    "up": "#top"
+    "down": "#end",
+    "up": "#end"
   }
 }
