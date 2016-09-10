@@ -47,6 +47,7 @@ minecraft {
 
 repositories {
     maven {
+		name 'ilexiconn'
         url 'http://maven.ilexiconn.net'
     }
 }
@@ -57,7 +58,7 @@ configurations {
 }
 
 dependencies {
-    compile "net.ilexiconn:llibrary:1.5.1-1.10.2:dev"
+    compile "net.ilexiconn:llibrary:1.6.0-1.10.2:dev"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     required "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
