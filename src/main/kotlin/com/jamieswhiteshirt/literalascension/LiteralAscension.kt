@@ -19,7 +19,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper
         name = LiteralAscension.NAME,
         version = LiteralAscension.VERSION,
         dependencies = LiteralAscension.DEPENDENCIES,
-        acceptedMinecraftVersions = LiteralAscension.ACCEPTED_MINECRAFT_VERSIONS
+        acceptedMinecraftVersions = LiteralAscension.ACCEPTED_MINECRAFT_VERSIONS,
+        guiFactory = LiteralAscension.GUI_FACTORY
 )
 class LiteralAscension {
     companion object {
@@ -29,8 +30,13 @@ class LiteralAscension {
         const val DEPENDENCIES = "required-after:llibrary@[1.5.1,)"
         const val ACCEPTED_MINECRAFT_VERSIONS = "[1.10,1.10.2]"
 
+        const val GUI_FACTORY = "com.jamieswhiteshirt.literalascension.client.gui.LiteralAscensionGUIFactory"
         const val CLIENT_PROXY = "com.jamieswhiteshirt.literalascension.client.ClientProxy"
         const val SERVER_PROXY = "com.jamieswhiteshirt.literalascension.server.ServerProxy"
+
+        @JvmStatic
+        @Mod.Instance
+        lateinit var INSTANCE: LiteralAscension
 
         @SidedProxy(
                 clientSide = CLIENT_PROXY,
@@ -39,6 +45,7 @@ class LiteralAscension {
         )
         lateinit var proxy: CommonProxy
 
+        @JvmStatic
         @Config
         lateinit var config: LiteralAscensionConfig
 
