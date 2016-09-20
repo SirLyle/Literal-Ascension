@@ -1,4 +1,4 @@
-package com.jamieswhiteshirt.literalascension.core
+package com.jamieswhiteshirt.literalascension.core.plugin
 
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin
 
@@ -8,7 +8,7 @@ import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin
 class LiteralAscensionPlugin : IFMLLoadingPlugin {
     override fun getModContainerClass(): String? = null
 
-    override fun getASMTransformerClass(): Array<out String> = arrayOf("com.jamieswhiteshirt.literalascension.core.LiteralAscensionRuntimePatcher")
+    override fun getASMTransformerClass(): Array<out String> = arrayOf("com.jamieswhiteshirt.literalascension.core.patcher.LiteralAscensionRuntimePatcher")
 
     override fun getSetupClass(): String? = null
 

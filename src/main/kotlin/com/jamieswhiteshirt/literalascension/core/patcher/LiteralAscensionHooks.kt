@@ -1,4 +1,4 @@
-package com.jamieswhiteshirt.literalascension.core
+package com.jamieswhiteshirt.literalascension.core.patcher
 
 import com.jamieswhiteshirt.literalascension.api.ILadderBlock
 import net.minecraft.block.state.IBlockState

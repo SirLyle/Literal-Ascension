@@ -1,4 +1,4 @@
-package com.jamieswhiteshirt.literalascension.core
+package com.jamieswhiteshirt.literalascension.core.patcher
 
 import net.ilexiconn.llibrary.server.asm.RuntimePatcher
 import net.minecraft.block.state.IBlockState
