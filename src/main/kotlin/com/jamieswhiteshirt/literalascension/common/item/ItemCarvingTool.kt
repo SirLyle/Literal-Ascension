@@ -4,9 +4,13 @@ import com.google.common.collect.Multimap
 import com.jamieswhiteshirt.literalascension.LiteralAscension
 import com.jamieswhiteshirt.literalascension.api.ICarvableBlock
 import com.jamieswhiteshirt.literalascension.api.ICarveMaterial
-import com.jamieswhiteshirt.literalascension.common.init.EnumCarvedBlocks
+import com.jamieswhiteshirt.literalascension.common.carvedblock.CarvedBlock
+import com.jamieswhiteshirt.literalascension.common.init.CarvedBlocks
 import com.jamieswhiteshirt.literalascension.common.network.message.MessageBlockCarved
-import net.minecraft.block.*
+import net.minecraft.block.BlockLog
+import net.minecraft.block.BlockNewLog
+import net.minecraft.block.BlockOldLog
+import net.minecraft.block.BlockStone
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.SharedMonsterAttributes
@@ -18,7 +22,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
-import net.minecraft.util.SoundCategory
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.fml.common.network.NetworkRegistry
@@ -37,8 +40,7 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
     override fun onItemUse(stack: ItemStack, player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (!player.canPlayerEdit(pos.offset(facing), facing, stack)) {
             return EnumActionResult.FAIL
-        }
-        else {
+        } else {
             val state = world.getBlockState(pos)
             val carvableBlock = getCarvableBlock(state)
             if (carvableBlock != null) {
@@ -48,8 +50,7 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
                         if (!world.isRemote) {
                             if (toolMaterial.harvestLevel < carvedBlockType.suitableCarvingToolLevel) {
                                 stack.damageItem(carvedBlockType.unsuitableToolDamageMultiplier, player)
-                            }
-                            else {
+                            } else {
                                 stack.damageItem(1, player)
                             }
 
@@ -80,8 +81,7 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
         val requiredItem = this.toolMaterial.repairItemStack
         if (requiredItem != null) {
             return OreDictionary.itemMatches(requiredItem, repair, false)
-        }
-        else {
+        } else {
             return super.getIsRepairable(toRepair, repair)
         }
     }
@@ -89,8 +89,7 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
     override fun getAttributeModifiers(slot: EntityEquipmentSlot, stack: ItemStack): Multimap<String, AttributeModifier> {
         val multimap = super.getAttributeModifiers(slot, stack)
 
-        if (slot == EntityEquipmentSlot.MAINHAND)
-        {
+        if (slot == EntityEquipmentSlot.MAINHAND) {
             multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.attributeUnlocalizedName, AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0.0, 0))
             multimap.put(SharedMonsterAttributes.ATTACK_SPEED.attributeUnlocalizedName, AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", speed - 4.0, 0))
         }
@@ -106,8 +105,9 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
                 override fun canCarve(state: IBlockState): Boolean {
                     return state.getValue(BlockOldLog.LOG_AXIS) == BlockLog.EnumAxis.Y
                 }
-                override fun getCarvedBlocks(state: IBlockState): EnumCarvedBlocks {
-                    return EnumCarvedBlocks.fromOldLogType[state.getValue(BlockOldLog.VARIANT)]!!
+
+                override fun getCarvedBlock(state: IBlockState): CarvedBlock {
+                    return CarvedBlocks.fromOldLogType[state.getValue(BlockOldLog.VARIANT)]!!
                 }
             }
             is BlockNewLog -> object : CarvableBlockShim() {
@@ -115,8 +115,8 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
                     return state.getValue(BlockNewLog.LOG_AXIS) == BlockLog.EnumAxis.Y
                 }
 
-                override fun getCarvedBlocks(state: IBlockState): EnumCarvedBlocks {
-                    return EnumCarvedBlocks.fromNewLogType[state.getValue(BlockNewLog.VARIANT)]!!
+                override fun getCarvedBlock(state: IBlockState): CarvedBlock {
+                    return CarvedBlocks.fromNewLogType[state.getValue(BlockNewLog.VARIANT)]!!
                 }
             }
             is BlockStone -> object : CarvableBlockShim() {
@@ -124,8 +124,8 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
                     return true
                 }
 
-                override fun getCarvedBlocks(state: IBlockState): EnumCarvedBlocks {
-                    return EnumCarvedBlocks.fromStoneType[state.getValue(BlockStone.VARIANT)]!!
+                override fun getCarvedBlock(state: IBlockState): CarvedBlock {
+                    return CarvedBlocks.fromStoneType[state.getValue(BlockStone.VARIANT)]!!
                 }
             }
             else -> null
@@ -135,12 +135,11 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
     private abstract class CarvableBlockShim : ICarvableBlock {
         override fun tryCarve(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
             if (canCarve(state)) {
-                val carvedBlocks = this.getCarvedBlocks(state)
+                val carvedBlocks = this.getCarvedBlock(state)
                 if (!world.isRemote) {
                     if (facing.axis == EnumFacing.Axis.Y) {
                         world.setBlockState(pos, carvedBlocks.chute.defaultState)
-                    }
-                    else {
+                    } else {
                         val notchedBlock = carvedBlocks.notched
                         notchedBlock.tryCarve(notchedBlock.defaultState, world, pos, facing, hitX, hitY, hitZ)
                     }
@@ -152,11 +151,11 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
         }
 
         override fun getCarveMaterial(state: IBlockState, world: World, pos: BlockPos): ICarveMaterial {
-            return getCarvedBlocks(state).material
+            return getCarvedBlock(state).material
         }
 
         abstract fun canCarve(state: IBlockState): Boolean
 
-        abstract fun getCarvedBlocks(state: IBlockState): EnumCarvedBlocks
+        abstract fun getCarvedBlock(state: IBlockState): CarvedBlock
     }
 }

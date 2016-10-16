@@ -107,8 +107,7 @@ class BlockStepladder(val type: Stepladder) : Block(type.material), ILadderBlock
             }
 
             return true
-        }
-        else {
+        } else {
             return false
         }
     }

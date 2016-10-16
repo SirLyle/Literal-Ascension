@@ -13,8 +13,7 @@ class MessageBlockCarvedHandler : IMessageHandler<MessageBlockCarved, IMessage> 
         val thread = FMLCommonHandler.instance().getWorldThread(ctx.netHandler)
         if (thread.isCallingFromMinecraftThread) {
             process(message)
-        }
-        else {
+        } else {
             thread.addScheduledTask {
                 process(message)
             }

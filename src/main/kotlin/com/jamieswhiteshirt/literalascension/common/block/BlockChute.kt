@@ -2,15 +2,13 @@ package com.jamieswhiteshirt.literalascension.common.block
 
 import com.jamieswhiteshirt.literalascension.api.ICarvableBlock
 import com.jamieswhiteshirt.literalascension.api.ICarveMaterial
-import com.jamieswhiteshirt.literalascension.common.init.EnumCarvedBlocks
+import com.jamieswhiteshirt.literalascension.common.carvedblock.CarvedBlock
 import net.minecraft.block.Block
 import net.minecraft.block.properties.PropertyBool
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
-import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
@@ -18,9 +16,8 @@ import net.minecraft.util.math.RayTraceResult
 import net.minecraft.util.math.Vec3d
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import java.util.*
 
-class BlockChute(type: EnumCarvedBlocks) : BlockCarvedBase(type), ICarvableBlock {
+class BlockChute(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock {
     companion object {
         private val collisionBoxesSides = arrayOf(
                 AxisAlignedBB(0.0, 0.0, 14.0 / 16.0, 1.0, 1.0, 16.0 / 16.0),
@@ -100,8 +97,7 @@ class BlockChute(type: EnumCarvedBlocks) : BlockCarvedBase(type), ICarvableBlock
             return list.reduce({ a, b ->
                 a.union(b)
             })
-        }
-        else {
+        } else {
             return super.getBoundingBox(state, source, pos)
         }
     }
@@ -118,8 +114,7 @@ class BlockChute(type: EnumCarvedBlocks) : BlockCarvedBase(type), ICarvableBlock
         return side.axis != EnumFacing.Axis.Y && state.getActualState(world, pos).getValue(PROPERTIES[side.horizontalIndex])
     }
 
-    override fun collisionRayTrace(state: IBlockState, world: World, pos: BlockPos, start: Vec3d, end: Vec3d): RayTraceResult?
-    {
+    override fun collisionRayTrace(state: IBlockState, world: World, pos: BlockPos, start: Vec3d, end: Vec3d): RayTraceResult? {
         var bestResult: RayTraceResult? = null
         var d1 = 0.0
 

@@ -7,7 +7,8 @@ import com.jamieswhiteshirt.literalascension.server.network.message.DummyMessage
 import net.minecraftforge.fml.relauncher.Side
 
 class ServerProxy : CommonProxy() {
-    override fun registerRenderers() { }
+    override fun registerRenderers() {
+    }
 
     override fun registerMessages() {
         super.registerMessages()

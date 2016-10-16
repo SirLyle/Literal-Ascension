@@ -41,8 +41,7 @@ class LiteralAscensionHooks {
                                 is ILadderBlock -> block
                                 else -> ladderShim
                             }
-                            if (ladderImpl.isLadder(state, world, ladderPos, entity))
-                            {
+                            if (ladderImpl.isLadder(state, world, ladderPos, entity)) {
                                 return true
                             }
                         }

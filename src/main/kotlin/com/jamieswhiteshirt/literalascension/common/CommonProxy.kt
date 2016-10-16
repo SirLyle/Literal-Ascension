@@ -10,5 +10,6 @@ abstract class CommonProxy {
         MinecraftForge.EVENT_BUS.register(HarvestCheckEvenHandler)
     }
 
-    open fun registerMessages() { }
+    open fun registerMessages() {
+    }
 }

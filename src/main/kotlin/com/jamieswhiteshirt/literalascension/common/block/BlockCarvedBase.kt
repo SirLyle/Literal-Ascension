@@ -1,5 +1,5 @@
 package com.jamieswhiteshirt.literalascension.common.block
 
-import com.jamieswhiteshirt.literalascension.common.init.EnumCarvedBlocks
+import com.jamieswhiteshirt.literalascension.common.carvedblock.CarvedBlock
 
-abstract class BlockCarvedBase(val type: EnumCarvedBlocks) : BlockDelegate(type.modelState, type.material.hardness)
+abstract class BlockCarvedBase(val type: CarvedBlock) : BlockDelegate(type.modelState, type.material.hardness)

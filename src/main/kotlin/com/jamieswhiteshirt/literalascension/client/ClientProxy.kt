@@ -3,10 +3,10 @@ package com.jamieswhiteshirt.literalascension.client
 import com.jamieswhiteshirt.literalascension.LiteralAscension
 import com.jamieswhiteshirt.literalascension.client.network.message.MessageBlockCarvedHandler
 import com.jamieswhiteshirt.literalascension.common.CommonProxy
+import com.jamieswhiteshirt.literalascension.common.carvingtool.CarvingTool
+import com.jamieswhiteshirt.literalascension.common.init.CarvingTools
 import com.jamieswhiteshirt.literalascension.common.init.LABlocks
-import com.jamieswhiteshirt.literalascension.common.init.LAItems
 import com.jamieswhiteshirt.literalascension.common.init.Stepladders
-import com.jamieswhiteshirt.literalascension.common.item.ItemCarvingTool
 import com.jamieswhiteshirt.literalascension.common.network.message.MessageBlockCarved
 import com.jamieswhiteshirt.literalascension.common.stepladder.Stepladder
 import net.minecraft.client.Minecraft
@@ -23,11 +23,9 @@ class ClientProxy : CommonProxy() {
             registerStepladderModel(itemModelMesher, stepladder)
         }
 
-        registerCarvingToolModel(itemModelMesher, LAItems.WOOD_CARVING_TOOL, "wood")
-        registerCarvingToolModel(itemModelMesher, LAItems.STONE_CARVING_TOOL, "stone")
-        registerCarvingToolModel(itemModelMesher, LAItems.IRON_CARVING_TOOL, "iron")
-        registerCarvingToolModel(itemModelMesher, LAItems.DIAMOND_CARVING_TOOL, "diamond")
-        registerCarvingToolModel(itemModelMesher, LAItems.GOLD_CARVING_TOOL, "gold")
+        for (carvingTool in CarvingTools.getRegisteredCarvingTools()) {
+            registerCarvingToolModel(itemModelMesher, carvingTool)
+        }
 
         itemModelMesher.register(Item.getItemFromBlock(LABlocks.CLIMBING_ROPE), 0, ModelResourceLocation("literalascension:climbing_rope", "inventory"))
         itemModelMesher.register(Item.getItemFromBlock(LABlocks.CLIMBING_ROPE), 1, ModelResourceLocation("literalascension:climbing_rope", "inventory"))
@@ -39,8 +37,8 @@ class ClientProxy : CommonProxy() {
         itemModelMesher.register(stepladder.item, 0, ModelResourceLocation("literalascension:${stepladder.name}_stepladder", "inventory"))
     }
 
-    private fun registerCarvingToolModel(itemModelMesher: ItemModelMesher, carvingTool: ItemCarvingTool, type: String) {
-        itemModelMesher.register(carvingTool, 0, ModelResourceLocation("literalascension:${type}_carving_tool", "inventory"))
+    private fun registerCarvingToolModel(itemModelMesher: ItemModelMesher, carvingTool: CarvingTool) {
+        itemModelMesher.register(carvingTool.item, 0, ModelResourceLocation("literalascension:${carvingTool.name}_carving_tool", "inventory"))
     }
 
     override fun registerMessages() {

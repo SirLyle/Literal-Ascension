@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack
 import net.minecraftforge.fml.common.registry.GameRegistry
 import java.util.*
 
-object Stepladders {
+object Stepladders : Module {
     val OAK = StepladderOldWood(BlockPlanks.EnumType.OAK)
     val SPRUCE = StepladderOldWood(BlockPlanks.EnumType.SPRUCE)
     val BIRCH = StepladderOldWood(BlockPlanks.EnumType.BIRCH)
@@ -25,7 +25,9 @@ object Stepladders {
 
     private val registeredStepladders = ArrayList<Stepladder>()
 
-    fun register() {
+    fun getRegisteredStepladders(): List<Stepladder> = registeredStepladders
+
+    override fun register() {
         if (LiteralAscension.config.stepladderOakEnabled) registerStepladder(OAK)
         if (LiteralAscension.config.stepladderSpruceEnabled) registerStepladder(SPRUCE)
         if (LiteralAscension.config.stepladderBirchEnabled) registerStepladder(BIRCH)
@@ -48,5 +50,9 @@ object Stepladders {
         registeredStepladders.add(stepladder)
     }
 
-    fun getRegisteredStepladders() : List<Stepladder> = registeredStepladders
+    override fun registerRecipes() {
+        for (stepladder in registeredStepladders) {
+            stepladder.registerRecipes()
+        }
+    }
 }

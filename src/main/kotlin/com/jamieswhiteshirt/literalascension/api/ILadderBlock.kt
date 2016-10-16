@@ -18,7 +18,7 @@ interface ILadderBlock {
     fun isLadderIntersectingVanilla(pos: BlockPos, entity: EntityLivingBase): Boolean {
         if (pos.x == MathHelper.floor_double(entity.posX)) {
             if (pos.y == MathHelper.floor_double(entity.entityBoundingBox.minY)) {
-                if(pos.z == MathHelper.floor_double(entity.posZ)) {
+                if (pos.z == MathHelper.floor_double(entity.posZ)) {
                     return true
                 }
             }
@@ -29,8 +29,7 @@ interface ILadderBlock {
     fun isLadderIntersectingDefault(pos: BlockPos, entity: EntityLivingBase): Boolean {
         if (ForgeModContainer.fullBoundingBoxLadders) {
             return isLadderIntersectingForgeFullBoundingBox(pos, entity)
-        }
-        else {
+        } else {
             return isLadderIntersectingVanilla(pos, entity)
         }
     }

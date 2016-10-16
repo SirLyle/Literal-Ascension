@@ -36,6 +36,26 @@ class LiteralAscensionConfig {
     var stoneUnsuitableToolDamageMultiplier = 10
 
     @JvmField
+    @ConfigEntry(category = "carving.tools", comment = "Enable Wooden Carving Tool")
+    var carvingToolWoodEnabled = true
+
+    @JvmField
+    @ConfigEntry(category = "carving.tools", comment = "Enable Stone Carving Tool")
+    var carvingToolStoneEnabled = true
+
+    @JvmField
+    @ConfigEntry(category = "carving.tools", comment = "Enable Iron Carving Tool")
+    var carvingToolIronEnabled = true
+
+    @JvmField
+    @ConfigEntry(category = "carving.tools", comment = "Enable Diamond Carving Tool")
+    var carvingToolDiamondEnabled = true
+
+    @JvmField
+    @ConfigEntry(category = "carving.tools", comment = "Enable Gold Carving Tool")
+    var carvingToolGoldEnabled = true
+
+    @JvmField
     @ConfigEntry(category = "stepladder.materials", comment = "Enable Oak Wood Stepladder")
     var stepladderOakEnabled = true
 

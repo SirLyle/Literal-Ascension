@@ -27,24 +27,24 @@ class BlockClimbingRope : Block(Material.WEB), ILadderBlock {
         val FACING: PropertyDirection = BlockHorizontal.FACING
 
         private val boundingBoxes = arrayOf(
-                AxisAlignedBB( 6.0 / 16.0, 0.0, 12.0 / 16.0, 10.0 / 16.0, 1.0, 16.0 / 16.0),
-                AxisAlignedBB( 0.0 / 16.0, 0.0,  6.0 / 16.0,  4.0 / 16.0, 1.0, 10.0 / 16.0),
-                AxisAlignedBB( 6.0 / 16.0, 0.0,  0.0 / 16.0, 10.0 / 16.0, 1.0,  4.0 / 16.0),
-                AxisAlignedBB(12.0 / 16.0, 0.0,  6.0 / 16.0, 16.0 / 16.0, 1.0, 10.0 / 16.0)
+                AxisAlignedBB(6.0 / 16.0, 0.0, 12.0 / 16.0, 10.0 / 16.0, 1.0, 16.0 / 16.0),
+                AxisAlignedBB(0.0 / 16.0, 0.0, 6.0 / 16.0, 4.0 / 16.0, 1.0, 10.0 / 16.0),
+                AxisAlignedBB(6.0 / 16.0, 0.0, 0.0 / 16.0, 10.0 / 16.0, 1.0, 4.0 / 16.0),
+                AxisAlignedBB(12.0 / 16.0, 0.0, 6.0 / 16.0, 16.0 / 16.0, 1.0, 10.0 / 16.0)
         )
 
         private val collisionBoxes = arrayOf(
-                AxisAlignedBB( 8.0 / 16.0, 0.0, 14.0 / 16.0,  8.0 / 16.0, 1.0, 14.0 / 16.0),
-                AxisAlignedBB( 2.0 / 16.0, 0.0,  8.0 / 16.0,  2.0 / 16.0, 1.0,  8.0 / 16.0),
-                AxisAlignedBB( 8.0 / 16.0, 0.0,  2.0 / 16.0, 10.0 / 16.0, 1.0,  2.0 / 16.0),
-                AxisAlignedBB(14.0 / 16.0, 0.0,  8.0 / 16.0, 14.0 / 16.0, 1.0,  8.0 / 16.0)
+                AxisAlignedBB(8.0 / 16.0, 0.0, 14.0 / 16.0, 8.0 / 16.0, 1.0, 14.0 / 16.0),
+                AxisAlignedBB(2.0 / 16.0, 0.0, 8.0 / 16.0, 2.0 / 16.0, 1.0, 8.0 / 16.0),
+                AxisAlignedBB(8.0 / 16.0, 0.0, 2.0 / 16.0, 10.0 / 16.0, 1.0, 2.0 / 16.0),
+                AxisAlignedBB(14.0 / 16.0, 0.0, 8.0 / 16.0, 14.0 / 16.0, 1.0, 8.0 / 16.0)
         )
 
         private val ladderCollisionBoxes = arrayOf(
-                AxisAlignedBB( 0.0 / 16.0, 0.0,  6.0 / 16.0, 16.0 / 16.0, 1.0, 22.0 / 16.0),
-                AxisAlignedBB(-6.0 / 16.0, 0.0,  0.0 / 16.0, 10.0 / 16.0, 1.0, 16.0 / 16.0),
-                AxisAlignedBB( 0.0 / 16.0, 0.0, -6.0 / 16.0, 18.0 / 16.0, 1.0, 10.0 / 16.0),
-                AxisAlignedBB( 6.0 / 16.0, 0.0,  0.0 / 16.0, 22.0 / 16.0, 1.0, 16.0 / 16.0)
+                AxisAlignedBB(0.0 / 16.0, 0.0, 6.0 / 16.0, 16.0 / 16.0, 1.0, 22.0 / 16.0),
+                AxisAlignedBB(-6.0 / 16.0, 0.0, 0.0 / 16.0, 10.0 / 16.0, 1.0, 16.0 / 16.0),
+                AxisAlignedBB(0.0 / 16.0, 0.0, -6.0 / 16.0, 18.0 / 16.0, 1.0, 10.0 / 16.0),
+                AxisAlignedBB(6.0 / 16.0, 0.0, 0.0 / 16.0, 22.0 / 16.0, 1.0, 16.0 / 16.0)
         )
     }
 
@@ -102,8 +102,7 @@ class BlockClimbingRope : Block(Material.WEB), ILadderBlock {
     override fun onBlockPlaced(worldIn: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, meta: Int, placer: EntityLivingBase): IBlockState {
         if (facing.axis != EnumFacing.Axis.Y) {
             return super.onBlockPlaced(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(FACING, facing.opposite)
-        }
-        else {
+        } else {
             return super.onBlockPlaced(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer)
         }
     }
@@ -136,8 +135,7 @@ class BlockClimbingRope : Block(Material.WEB), ILadderBlock {
     fun canBlockStay(state: IBlockState, world: World, pos: BlockPos): Boolean {
         if (world.getBlockState(pos.up()).block == this) {
             return true
-        }
-        else {
+        } else {
             val facing = state.getValue(FACING)
             val sidePos = pos.offset(facing)
             val sideState = world.getBlockState(sidePos)
@@ -157,8 +155,7 @@ class BlockClimbingRope : Block(Material.WEB), ILadderBlock {
             if (state.getValue(FACING) == belowState.getValue(FACING)) {
                 return tryExtend(belowState, world, belowPos)
             }
-        }
-        else if(belowBlock.isReplaceable(world, belowPos)) {
+        } else if (belowBlock.isReplaceable(world, belowPos)) {
             if (!world.isRemote) {
                 world.setBlockState(belowPos, state)
             }

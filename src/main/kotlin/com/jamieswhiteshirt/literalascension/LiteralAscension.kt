@@ -2,10 +2,7 @@ package com.jamieswhiteshirt.literalascension
 
 import com.jamieswhiteshirt.literalascension.common.CommonProxy
 import com.jamieswhiteshirt.literalascension.common.config.LiteralAscensionConfig
-import com.jamieswhiteshirt.literalascension.common.init.LABlocks
-import com.jamieswhiteshirt.literalascension.common.init.LAItems
-import com.jamieswhiteshirt.literalascension.common.init.LARecipes
-import com.jamieswhiteshirt.literalascension.common.init.Stepladders
+import com.jamieswhiteshirt.literalascension.common.init.*
 import net.ilexiconn.llibrary.server.config.Config
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.SidedProxy
@@ -56,6 +53,8 @@ class LiteralAscension {
     @Mod.EventHandler
     fun preInit(event: FMLPreInitializationEvent) {
         Stepladders.register()
+        CarvingTools.register()
+        CarvedBlocks.register()
         LABlocks.register()
         LAItems.register()
 
@@ -67,7 +66,11 @@ class LiteralAscension {
         proxy.registerRenderers()
         proxy.registerEventHandlers()
 
-        LARecipes.register()
+        Stepladders.registerRecipes()
+        CarvingTools.registerRecipes()
+        CarvedBlocks.registerRecipes()
+        LABlocks.registerRecipes()
+        LAItems.registerRecipes()
     }
 
     @Mod.EventHandler

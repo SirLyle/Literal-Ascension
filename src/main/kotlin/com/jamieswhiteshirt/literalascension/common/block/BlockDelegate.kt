@@ -116,8 +116,7 @@ abstract class BlockDelegate(val modelState: IBlockState, hardness: Float) : Blo
         val item = Item.getItemFromBlock(modelBlock)
         if (item == null) {
             return null
-        }
-        else {
+        } else {
             return ItemStack(item, 1, if (item.hasSubtypes) modelBlock.getMetaFromState(modelState) else 0)
         }
     }
