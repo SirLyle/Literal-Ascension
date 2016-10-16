@@ -129,4 +129,12 @@ abstract class BlockDelegate(val modelState: IBlockState, hardness: Float) : Blo
     override fun getUnlocalizedName(): String {
         return modelBlock.unlocalizedName
     }
+
+    override fun getFlammability(world: IBlockAccess, pos: BlockPos, face: EnumFacing): Int {
+        return modelBlock.getFlammability(world, pos, face)
+    }
+
+    override fun getFireSpreadSpeed(world: IBlockAccess, pos: BlockPos, face: EnumFacing): Int {
+        return modelBlock.getFlammability(world, pos, face)
+    }
 }
