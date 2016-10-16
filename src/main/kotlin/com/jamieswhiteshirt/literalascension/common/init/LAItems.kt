@@ -1,7 +1,6 @@
 package com.jamieswhiteshirt.literalascension.common.init
 
 import com.jamieswhiteshirt.literalascension.common.CreativeTab
-import com.jamieswhiteshirt.literalascension.common.init.EnumStepladder
 import com.jamieswhiteshirt.literalascension.common.item.ItemCarvingTool
 import com.jamieswhiteshirt.literalascension.common.item.ItemStepladder
 import net.minecraft.item.Item
@@ -15,21 +14,11 @@ object LAItems {
     val GOLD_CARVING_TOOL: ItemCarvingTool = ItemCarvingTool(Item.ToolMaterial.GOLD).setUnlocalizedName("literalascension.carvingToolGold") as ItemCarvingTool
 
     fun register() {
-        for (stepladder in EnumStepladder.values()) {
-            registerStepladder(stepladder.item)
-        }
-
         registerCarvingTool(WOOD_CARVING_TOOL, "wood")
         registerCarvingTool(STONE_CARVING_TOOL, "stone")
         registerCarvingTool(IRON_CARVING_TOOL, "iron")
         registerCarvingTool(DIAMOND_CARVING_TOOL, "diamond")
         registerCarvingTool(GOLD_CARVING_TOOL, "gold")
-    }
-
-    fun registerStepladder(stepladder: ItemStepladder) {
-        stepladder.creativeTab = CreativeTab
-
-        GameRegistry.register(stepladder.setRegistryName("literalascension", "${stepladder.type}_stepladder"))
     }
 
     fun registerCarvingTool(carvingTool: ItemCarvingTool, type: String) {

@@ -1,7 +1,7 @@
 package com.jamieswhiteshirt.literalascension.common.block
 
 import com.jamieswhiteshirt.literalascension.api.ILadderBlock
-import com.jamieswhiteshirt.literalascension.common.init.EnumStepladder
+import com.jamieswhiteshirt.literalascension.common.stepladder.Stepladder
 import net.minecraft.block.Block
 import net.minecraft.block.BlockHorizontal
 import net.minecraft.block.properties.PropertyDirection
@@ -22,7 +22,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import java.util.*
 
-class BlockStepladder(val type: EnumStepladder) : Block(type.material), ILadderBlock {
+class BlockStepladder(val type: Stepladder) : Block(type.material), ILadderBlock {
     companion object {
         val FACING: PropertyDirection = BlockHorizontal.FACING
         val SEGMENT: PropertyInteger = PropertyInteger.create("segment", 0, 2)

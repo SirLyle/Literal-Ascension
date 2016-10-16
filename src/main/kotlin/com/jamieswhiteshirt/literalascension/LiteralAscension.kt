@@ -5,6 +5,7 @@ import com.jamieswhiteshirt.literalascension.common.config.LiteralAscensionConfi
 import com.jamieswhiteshirt.literalascension.common.init.LABlocks
 import com.jamieswhiteshirt.literalascension.common.init.LAItems
 import com.jamieswhiteshirt.literalascension.common.init.LARecipes
+import com.jamieswhiteshirt.literalascension.common.init.Stepladders
 import net.ilexiconn.llibrary.server.config.Config
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.SidedProxy
@@ -54,6 +55,7 @@ class LiteralAscension {
 
     @Mod.EventHandler
     fun preInit(event: FMLPreInitializationEvent) {
+        Stepladders.register()
         LABlocks.register()
         LAItems.register()
 

@@ -3,12 +3,12 @@ package com.jamieswhiteshirt.literalascension.client
 import com.jamieswhiteshirt.literalascension.LiteralAscension
 import com.jamieswhiteshirt.literalascension.client.network.message.MessageBlockCarvedHandler
 import com.jamieswhiteshirt.literalascension.common.CommonProxy
-import com.jamieswhiteshirt.literalascension.common.init.EnumStepladder
 import com.jamieswhiteshirt.literalascension.common.init.LABlocks
 import com.jamieswhiteshirt.literalascension.common.init.LAItems
+import com.jamieswhiteshirt.literalascension.common.init.Stepladders
 import com.jamieswhiteshirt.literalascension.common.item.ItemCarvingTool
-import com.jamieswhiteshirt.literalascension.common.item.ItemStepladder
 import com.jamieswhiteshirt.literalascension.common.network.message.MessageBlockCarved
+import com.jamieswhiteshirt.literalascension.common.stepladder.Stepladder
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.ItemModelMesher
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
@@ -19,7 +19,7 @@ class ClientProxy : CommonProxy() {
     override fun registerRenderers() {
         val itemModelMesher = Minecraft.getMinecraft().renderItem.itemModelMesher
 
-        for (stepladder in EnumStepladder.values()) {
+        for (stepladder in Stepladders.getRegisteredStepladders()) {
             registerStepladderModel(itemModelMesher, stepladder)
         }
 
@@ -35,8 +35,8 @@ class ClientProxy : CommonProxy() {
         itemModelMesher.register(Item.getItemFromBlock(LABlocks.CLIMBING_ROPE), 3, ModelResourceLocation("literalascension:climbing_rope", "inventory"))
     }
 
-    private fun registerStepladderModel(itemModelMesher: ItemModelMesher, stepladder: EnumStepladder) {
-        itemModelMesher.register(stepladder.item, 0, ModelResourceLocation("literalascension:${stepladder}_stepladder", "inventory"))
+    private fun registerStepladderModel(itemModelMesher: ItemModelMesher, stepladder: Stepladder) {
+        itemModelMesher.register(stepladder.item, 0, ModelResourceLocation("literalascension:${stepladder.name}_stepladder", "inventory"))
     }
 
     private fun registerCarvingToolModel(itemModelMesher: ItemModelMesher, carvingTool: ItemCarvingTool, type: String) {

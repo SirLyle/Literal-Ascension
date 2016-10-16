@@ -7,16 +7,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager
 
 object LARecipes {
-    private fun registerStepladderRecipe(stepladder: EnumStepladder) {
-        CraftingManager.getInstance().addRecipe(
-                ItemStack(stepladder.item),
-                "F F",
-                "FSF",
-                "F F",
-                'F', stepladder.feetItem, 'S', stepladder.stepsItem
-        )
-    }
-
     private fun registerCarvingToolRecipe(carving_toolItem: ItemCarvingTool, materialItem: Any) {
         CraftingManager.getInstance().addRecipe(
                 ItemStack(carving_toolItem),
@@ -28,8 +18,8 @@ object LARecipes {
     }
 
     fun register() {
-        for (stepladder in EnumStepladder.values()) {
-            registerStepladderRecipe(stepladder)
+        for (stepladder in Stepladders.getRegisteredStepladders()) {
+            stepladder.registerRecipes()
         }
 
         registerCarvingToolRecipe(LAItems.WOOD_CARVING_TOOL, ItemStack(Blocks.PLANKS))

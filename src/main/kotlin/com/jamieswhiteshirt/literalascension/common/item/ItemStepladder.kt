@@ -1,6 +1,6 @@
 package com.jamieswhiteshirt.literalascension.common.item
 
-import com.jamieswhiteshirt.literalascension.common.init.EnumStepladder
+import com.jamieswhiteshirt.literalascension.common.stepladder.Stepladder
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -11,7 +11,7 @@ import net.minecraft.util.SoundCategory
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-class ItemStepladder(val type: EnumStepladder) : Item() {
+class ItemStepladder(val type: Stepladder) : Item() {
     override fun onItemUse(stack: ItemStack, player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (facing == EnumFacing.UP) {
             val blockState = world.getBlockState(pos)
