@@ -21,6 +21,9 @@ object Stepladders {
     val ACACIA = StepladderNewWood(BlockPlanks.EnumType.ACACIA)
     val DARK_OAK = StepladderNewWood(BlockPlanks.EnumType.DARK_OAK)
     val IRON = StepladderSimple(Material.IRON, "iron", ItemStack(Items.IRON_INGOT))
+    val GOLD = StepladderSimple(Material.IRON, "gold", ItemStack(Items.GOLD_INGOT))
+    val DIAMOND = StepladderSimple(Material.IRON, "diamond", ItemStack(Items.DIAMOND))
+    val EMERALD = StepladderSimple(Material.IRON, "emerald", ItemStack(Items.EMERALD))
 
     private val registeredStepladders = ArrayList<Stepladder>()
 
@@ -32,6 +35,9 @@ object Stepladders {
         if (LiteralAscension.config.stepladderAcaciaEnabled) registerStepladder(ACACIA)
         if (LiteralAscension.config.stepladderDarkOakEnabled) registerStepladder(DARK_OAK)
         if (LiteralAscension.config.stepladderIronEnabled) registerStepladder(IRON)
+        if (LiteralAscension.config.stepladderGoldEnabled) registerStepladder(GOLD)
+        if (LiteralAscension.config.stepladderDiamondEnabled) registerStepladder(DIAMOND)
+        if (LiteralAscension.config.stepladderEmeraldEnabled) registerStepladder(EMERALD)
     }
 
     private fun registerStepladder(stepladder: Stepladder) {

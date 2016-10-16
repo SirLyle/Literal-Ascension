@@ -1,0 +1,7 @@
+{
+  "parent": "literalascension:block/stepladder_bottom",
+  "textures": {
+    "feet": "minecraft:blocks/emerald_block",
+    "steps": "minecraft:blocks/emerald_block"
+  }
+}

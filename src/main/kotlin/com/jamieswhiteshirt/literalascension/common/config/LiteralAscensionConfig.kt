@@ -62,4 +62,16 @@ class LiteralAscensionConfig {
     @JvmField
     @ConfigEntry(category = "stepladder.materials", comment = "Enable Iron Stepladder")
     var stepladderIronEnabled = true
+
+    @JvmField
+    @ConfigEntry(category = "stepladder.materials", comment = "Enable Gold Stepladder")
+    var stepladderGoldEnabled = false
+
+    @JvmField
+    @ConfigEntry(category = "stepladder.materials", comment = "Enable Diamond Stepladder")
+    var stepladderDiamondEnabled = false
+
+    @JvmField
+    @ConfigEntry(category = "stepladder.materials", comment = "Enable Emerald Stepladder")
+    var stepladderEmeraldEnabled = false
 }
