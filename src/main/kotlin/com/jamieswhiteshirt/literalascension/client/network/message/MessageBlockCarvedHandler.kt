@@ -23,10 +23,15 @@ class MessageBlockCarvedHandler : IMessageHandler<MessageBlockCarved, IMessage> 
 
     private fun process(message: MessageBlockCarved) {
         val world = Minecraft.getMinecraft().thePlayer.worldObj
+        val effectRenderer = Minecraft.getMinecraft().effectRenderer
         val pos = message.pos
-        if (pos != null) {
+        val face = message.facing
+        if (pos != null && face != null) {
             val state = world.getBlockState(pos)
             val soundType = state.block.soundType
+            for (i in 0..15) {
+                effectRenderer.addBlockHitEffects(pos, face)
+            }
             world.playSound(pos.x.toDouble() + 0.5, pos.y.toDouble() + 0.5, pos.z.toDouble() + 0.5, soundType.breakSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F, false)
         }
     }

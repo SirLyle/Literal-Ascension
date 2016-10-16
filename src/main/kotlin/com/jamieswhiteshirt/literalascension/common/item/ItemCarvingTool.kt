@@ -55,7 +55,7 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
                             }
 
                             val targetPoint = NetworkRegistry.TargetPoint(world.provider.dimension, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), 64.0)
-                            LiteralAscension.packetHandler.sendToAllAround(MessageBlockCarved(pos), targetPoint)
+                            LiteralAscension.packetHandler.sendToAllAround(MessageBlockCarved(pos, facing), targetPoint)
                         }
 
                         return EnumActionResult.SUCCESS
