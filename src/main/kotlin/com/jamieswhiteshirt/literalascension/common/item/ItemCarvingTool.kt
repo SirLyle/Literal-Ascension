@@ -46,8 +46,8 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
                 if (carvedBlockType.requiredCarvingToolLevel <= toolMaterial.harvestLevel) {
                     if (carvableBlock.tryCarve(state, world, pos, facing, hitX, hitY, hitZ)) {
                         if (!world.isRemote) {
-                            if (toolMaterial.harvestLevel < carvedBlockType.viableCarvingToolLevel) {
-                                stack.damageItem(carvedBlockType.unviableToolDamageMultiplier, player)
+                            if (toolMaterial.harvestLevel < carvedBlockType.suitableCarvingToolLevel) {
+                                stack.damageItem(carvedBlockType.unsuitableToolDamageMultiplier, player)
                             }
                             else {
                                 stack.damageItem(1, player)

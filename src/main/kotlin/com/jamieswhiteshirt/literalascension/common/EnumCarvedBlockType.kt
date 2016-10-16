@@ -55,15 +55,15 @@ enum class EnumCarvedBlockType(
     enum class EnumMaterial(val hardness: Float) : ICarveMaterial {
         LOG(2.0F) {
             override val requiredCarvingToolLevel: Int get() = LiteralAscension.config.woodRequiredCarvingToolLevel
-            override val viableCarvingToolLevel: Int get() = LiteralAscension.config.woodViableCarvingToolLevel
-            override val viableToolDamageMultiplier: Int get() = LiteralAscension.config.woodViableToolDamageMultiplier
-            override val unviableToolDamageMultiplier: Int get() = LiteralAscension.config.woodUnviableToolDamageMultiplier
+            override val suitableCarvingToolLevel: Int get() = LiteralAscension.config.woodSuitableCarvingToolLevel
+            override val suitableToolDamageMultiplier: Int get() = LiteralAscension.config.woodSuitableToolDamageMultiplier
+            override val unsuitableToolDamageMultiplier: Int get() = LiteralAscension.config.woodUnsuitableToolDamageMultiplier
         },
         STONE(1.5F) {
             override val requiredCarvingToolLevel: Int get() = LiteralAscension.config.stoneRequiredCarvingToolLevel
-            override val viableCarvingToolLevel: Int get() = LiteralAscension.config.stoneViableCarvingToolLevel
-            override val viableToolDamageMultiplier: Int get() = LiteralAscension.config.stoneViableToolDamageMultiplier
-            override val unviableToolDamageMultiplier: Int get() = LiteralAscension.config.stoneUnviableToolDamageMultiplier
+            override val suitableCarvingToolLevel: Int get() = LiteralAscension.config.stoneSuitableCarvingToolLevel
+            override val suitableToolDamageMultiplier: Int get() = LiteralAscension.config.stoneSuitableToolDamageMultiplier
+            override val unsuitableToolDamageMultiplier: Int get() = LiteralAscension.config.stoneUnsuitableToolDamageMultiplier
         };
     }
 }
