@@ -8,6 +8,7 @@ item.literalascension.stepladder.iron.name=Iron Stepladder
 item.literalascension.stepladder.gold.name=Gold Stepladder
 item.literalascension.stepladder.diamond.name=Diamond Stepladder
 item.literalascension.stepladder.emerald.name=Emerald Stepladder
+item.literalascension.stepladder.wood.name=Wood Stepladder
 item.literalascension.carvingToolWood.name=Wooden Carving Tool
 item.literalascension.carvingToolStone.name=Stone Carving Tool
 item.literalascension.carvingToolIron.name=Iron Carving Tool
@@ -24,6 +25,7 @@ tile.literalascension.stepladder.iron.name=Iron Stepladder
 tile.literalascension.stepladder.gold.name=Gold Stepladder
 tile.literalascension.stepladder.diamond.name=Diamond Stepladder
 tile.literalascension.stepladder.emerald.name=Emerald Stepladder
+tile.literalascension.stepladder.wood.name=Wood Stepladder
 tile.literalascension.climbingRope.name=Climbing Rope
 
 itemGroup.literalascension.tab=Literal Ascension

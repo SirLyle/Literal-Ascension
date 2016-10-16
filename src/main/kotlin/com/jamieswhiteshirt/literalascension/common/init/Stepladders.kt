@@ -2,10 +2,7 @@ package com.jamieswhiteshirt.literalascension.common.init
 
 import com.jamieswhiteshirt.literalascension.LiteralAscension
 import com.jamieswhiteshirt.literalascension.common.CreativeTab
-import com.jamieswhiteshirt.literalascension.common.stepladder.Stepladder
-import com.jamieswhiteshirt.literalascension.common.stepladder.StepladderNewWood
-import com.jamieswhiteshirt.literalascension.common.stepladder.StepladderOldWood
-import com.jamieswhiteshirt.literalascension.common.stepladder.StepladderSimple
+import com.jamieswhiteshirt.literalascension.common.stepladder.*
 import net.minecraft.block.BlockPlanks
 import net.minecraft.block.material.Material
 import net.minecraft.init.Items
@@ -24,6 +21,7 @@ object Stepladders {
     val GOLD = StepladderSimple(Material.IRON, "gold", ItemStack(Items.GOLD_INGOT))
     val DIAMOND = StepladderSimple(Material.IRON, "diamond", ItemStack(Items.DIAMOND))
     val EMERALD = StepladderSimple(Material.IRON, "emerald", ItemStack(Items.EMERALD))
+    val GENERIC_WOOD = StepladderGenericWood()
 
     private val registeredStepladders = ArrayList<Stepladder>()
 
@@ -38,6 +36,7 @@ object Stepladders {
         if (LiteralAscension.config.stepladderGoldEnabled) registerStepladder(GOLD)
         if (LiteralAscension.config.stepladderDiamondEnabled) registerStepladder(DIAMOND)
         if (LiteralAscension.config.stepladderEmeraldEnabled) registerStepladder(EMERALD)
+        if (LiteralAscension.config.stepladderGenericWoodEnabled) registerStepladder(GENERIC_WOOD)
     }
 
     private fun registerStepladder(stepladder: Stepladder) {

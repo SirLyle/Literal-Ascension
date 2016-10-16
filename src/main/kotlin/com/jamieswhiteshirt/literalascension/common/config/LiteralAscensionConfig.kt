@@ -74,4 +74,8 @@ class LiteralAscensionConfig {
     @JvmField
     @ConfigEntry(category = "stepladder.materials", comment = "Enable Emerald Stepladder")
     var stepladderEmeraldEnabled = false
+
+    @JvmField
+    @ConfigEntry(category = "stepladder.materials", comment = "Enable Wood Stepladder (made of any wooden material)")
+    var stepladderGenericWoodEnabled = false
 }

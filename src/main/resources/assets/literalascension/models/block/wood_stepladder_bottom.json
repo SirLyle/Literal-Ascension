@@ -1,0 +1,7 @@
+{
+  "parent": "literalascension:block/stepladder_bottom",
+  "textures": {
+    "feet": "minecraft:blocks/log_oak",
+    "steps": "minecraft:blocks/planks_oak"
+  }
+}
