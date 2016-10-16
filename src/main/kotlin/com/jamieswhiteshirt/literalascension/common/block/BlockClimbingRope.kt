@@ -1,6 +1,6 @@
 package com.jamieswhiteshirt.literalascension.common.block
 
-import com.jamieswhiteshirt.literalascension.api.ILadderBlock
+import com.jamieswhiteshirt.literalascension.api.ISpecialLadderBlock
 import net.minecraft.block.Block
 import net.minecraft.block.BlockHorizontal
 import net.minecraft.block.material.Material
@@ -22,7 +22,7 @@ import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-class BlockClimbingRope : Block(Material.WEB), ILadderBlock {
+class BlockClimbingRope : Block(Material.WEB), ISpecialLadderBlock {
     companion object {
         val FACING: PropertyDirection = BlockHorizontal.FACING
 
@@ -68,7 +68,7 @@ class BlockClimbingRope : Block(Material.WEB), ILadderBlock {
         return false
     }
 
-    override fun isLadder(state: IBlockState, world: IBlockAccess, pos: BlockPos, entity: EntityLivingBase): Boolean {
+    override fun canClimb(state: IBlockState, world: IBlockAccess, pos: BlockPos, entity: EntityLivingBase): Boolean {
         return ladderCollisionBoxes[state.getValue(FACING).horizontalIndex].offset(pos).intersectsWith(entity.entityBoundingBox)
     }
 

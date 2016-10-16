@@ -1,6 +1,6 @@
 package com.jamieswhiteshirt.literalascension.core.patcher
 
-import com.jamieswhiteshirt.literalascension.api.ILadderBlock
+import com.jamieswhiteshirt.literalascension.api.ISpecialLadderBlock
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
@@ -11,10 +11,10 @@ import net.minecraft.world.World
 
 class LiteralAscensionHooks {
     companion object {
-        private val ladderShim = object : ILadderBlock {
-            override fun isLadder(state: IBlockState, world: IBlockAccess, pos: BlockPos, entity: EntityLivingBase): Boolean {
+        private val ladderShim = object : ISpecialLadderBlock {
+            override fun canClimb(state: IBlockState, world: IBlockAccess, pos: BlockPos, entity: EntityLivingBase): Boolean {
                 if (state.block.isLadder(state, world, pos, entity)) {
-                    return isLadderIntersectingDefault(pos, entity)
+                    return isIntersectingDefault(pos, entity)
                 } else {
                     return false
                 }
@@ -38,10 +38,10 @@ class LiteralAscensionHooks {
                             val state = world.getBlockState(ladderPos)
                             val block = state.block
                             val ladderImpl = when (block) {
-                                is ILadderBlock -> block
+                                is ISpecialLadderBlock -> block
                                 else -> ladderShim
                             }
-                            if (ladderImpl.isLadder(state, world, ladderPos, entity)) {
+                            if (ladderImpl.canClimb(state, world, ladderPos, entity)) {
                                 return true
                             }
                         }

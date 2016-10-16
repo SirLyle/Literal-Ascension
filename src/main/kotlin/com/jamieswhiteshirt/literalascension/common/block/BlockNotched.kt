@@ -2,7 +2,7 @@ package com.jamieswhiteshirt.literalascension.common.block
 
 import com.jamieswhiteshirt.literalascension.api.ICarvableBlock
 import com.jamieswhiteshirt.literalascension.api.ICarveMaterial
-import com.jamieswhiteshirt.literalascension.api.ILadderBlock
+import com.jamieswhiteshirt.literalascension.api.ISpecialLadderBlock
 import com.jamieswhiteshirt.literalascension.common.carvedblock.CarvedBlock
 import net.minecraft.block.properties.PropertyBool
 import net.minecraft.block.state.BlockStateContainer
@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 
-class BlockNotched(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock, ILadderBlock {
+class BlockNotched(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock, ISpecialLadderBlock {
     companion object {
         val SOUTH: PropertyBool = PropertyBool.create("south")
         val WEST: PropertyBool = PropertyBool.create("west")
@@ -74,10 +74,10 @@ class BlockNotched(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock, I
         return BlockStateContainer(this, *PROPERTIES)
     }
 
-    override fun isLadder(state: IBlockState, world: IBlockAccess, pos: BlockPos, entity: EntityLivingBase): Boolean {
+    override fun canClimb(state: IBlockState, world: IBlockAccess, pos: BlockPos, entity: EntityLivingBase): Boolean {
         for (i in PROPERTIES.indices) {
             if (state.getValue(PROPERTIES[i])) {
-                if (isLadderIntersectingDefault(pos.offset(EnumFacing.getHorizontal(i)), entity)) {
+                if (isIntersectingDefault(pos.offset(EnumFacing.getHorizontal(i)), entity)) {
                     return true
                 }
             }
