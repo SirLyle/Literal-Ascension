@@ -41,9 +41,21 @@ class BlockChute(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock {
     }
 
     override fun tryCarve(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        val carvingFacing = EnumFacing.getFacingFromVector(hitX - 0.5F, 0.0F, hitZ - 0.5F)
-        // The following should never be false, but why not.
-        if (carvingFacing.axis != EnumFacing.Axis.Y) {
+        var carvingFacing: EnumFacing? = null
+        var nearestDot = Float.MIN_VALUE
+
+        for (i in PROPERTIES.indices) {
+            if (state.getValue(PROPERTIES[i])) {
+                val facingCandidate = EnumFacing.getHorizontal(i)
+                val dot = (hitX - 0.5F) * facingCandidate.frontOffsetX + (hitZ - 0.5F) * facingCandidate.frontOffsetZ
+                if (dot > nearestDot) {
+                    carvingFacing = facingCandidate
+                    nearestDot = dot
+                }
+            }
+        }
+
+        if (carvingFacing != null) {
             val property = PROPERTIES[carvingFacing.horizontalIndex]
             if (state.getValue(property)) {
                 val newState = state.withProperty(property, false)
