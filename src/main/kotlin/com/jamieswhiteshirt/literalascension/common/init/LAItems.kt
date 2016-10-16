@@ -1,19 +1,20 @@
 package com.jamieswhiteshirt.literalascension.common.init
 
 import com.jamieswhiteshirt.literalascension.common.CreativeTab
+import com.jamieswhiteshirt.literalascension.common.EnumStepladderType
 import com.jamieswhiteshirt.literalascension.common.item.ItemCarvingTool
 import com.jamieswhiteshirt.literalascension.common.item.ItemStepladder
 import net.minecraft.item.Item
 import net.minecraftforge.fml.common.registry.GameRegistry
 
 object LAItems {
-    val OAK_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.OAK_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.oak") as ItemStepladder
-    val SPRUCE_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.SPRUCE_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.spruce") as ItemStepladder
-    val BIRCH_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.BIRCH_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.birch") as ItemStepladder
-    val JUNGLE_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.JUNGLE_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.jungle") as ItemStepladder
-    val ACACIA_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.ACACIA_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.acacia") as ItemStepladder
-    val DARK_OAK_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.DARK_OAK_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.big_oak") as ItemStepladder
-    val IRON_STEPLADDER: ItemStepladder = ItemStepladder({ LABlocks.IRON_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.iron") as ItemStepladder
+    val OAK_STEPLADDER: ItemStepladder = ItemStepladder(EnumStepladderType.OAK).setUnlocalizedName("literalascension.stepladder.oak") as ItemStepladder
+    val SPRUCE_STEPLADDER: ItemStepladder = ItemStepladder(EnumStepladderType.SPRUCE).setUnlocalizedName("literalascension.stepladder.spruce") as ItemStepladder
+    val BIRCH_STEPLADDER: ItemStepladder = ItemStepladder(EnumStepladderType.BIRCH).setUnlocalizedName("literalascension.stepladder.birch") as ItemStepladder
+    val JUNGLE_STEPLADDER: ItemStepladder = ItemStepladder(EnumStepladderType.JUNGLE).setUnlocalizedName("literalascension.stepladder.jungle") as ItemStepladder
+    val ACACIA_STEPLADDER: ItemStepladder = ItemStepladder(EnumStepladderType.ACACIA).setUnlocalizedName("literalascension.stepladder.acacia") as ItemStepladder
+    val DARK_OAK_STEPLADDER: ItemStepladder = ItemStepladder(EnumStepladderType.DARK_OAK).setUnlocalizedName("literalascension.stepladder.big_oak") as ItemStepladder
+    val IRON_STEPLADDER: ItemStepladder = ItemStepladder(EnumStepladderType.IRON).setUnlocalizedName("literalascension.stepladder.iron") as ItemStepladder
 
     val WOOD_CARVING_TOOL: ItemCarvingTool = ItemCarvingTool(Item.ToolMaterial.WOOD).setUnlocalizedName("literalascension.carvingToolWood") as ItemCarvingTool
     val STONE_CARVING_TOOL: ItemCarvingTool = ItemCarvingTool(Item.ToolMaterial.STONE).setUnlocalizedName("literalascension.carvingToolStone") as ItemCarvingTool
@@ -22,13 +23,13 @@ object LAItems {
     val GOLD_CARVING_TOOL: ItemCarvingTool = ItemCarvingTool(Item.ToolMaterial.GOLD).setUnlocalizedName("literalascension.carvingToolGold") as ItemCarvingTool
 
     fun register() {
-        registerStepladder(OAK_STEPLADDER, "oak")
-        registerStepladder(SPRUCE_STEPLADDER, "spruce")
-        registerStepladder(BIRCH_STEPLADDER, "birch")
-        registerStepladder(JUNGLE_STEPLADDER, "jungle")
-        registerStepladder(ACACIA_STEPLADDER, "acacia")
-        registerStepladder(DARK_OAK_STEPLADDER, "dark_oak")
-        registerStepladder(IRON_STEPLADDER, "iron")
+        registerStepladder(OAK_STEPLADDER)
+        registerStepladder(SPRUCE_STEPLADDER)
+        registerStepladder(BIRCH_STEPLADDER)
+        registerStepladder(JUNGLE_STEPLADDER)
+        registerStepladder(ACACIA_STEPLADDER)
+        registerStepladder(DARK_OAK_STEPLADDER)
+        registerStepladder(IRON_STEPLADDER)
 
         registerCarvingTool(WOOD_CARVING_TOOL, "wood")
         registerCarvingTool(STONE_CARVING_TOOL, "stone")
@@ -37,10 +38,10 @@ object LAItems {
         registerCarvingTool(GOLD_CARVING_TOOL, "gold")
     }
 
-    fun registerStepladder(stepladder: ItemStepladder, type: String) {
+    fun registerStepladder(stepladder: ItemStepladder) {
         stepladder.creativeTab = CreativeTab
 
-        GameRegistry.register(stepladder.setRegistryName("literalascension", "${type}_stepladder"))
+        GameRegistry.register(stepladder.setRegistryName("literalascension", "${stepladder.type.getName()}_stepladder"))
     }
 
     fun registerCarvingTool(carvingTool: ItemCarvingTool, type: String) {

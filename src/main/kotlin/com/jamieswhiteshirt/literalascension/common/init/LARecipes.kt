@@ -2,20 +2,19 @@ package com.jamieswhiteshirt.literalascension.common.init
 
 import com.jamieswhiteshirt.literalascension.common.item.ItemCarvingTool
 import com.jamieswhiteshirt.literalascension.common.item.ItemStepladder
-import net.minecraft.block.BlockPlanks
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager
 
 object LARecipes {
-    private fun registerStepladderRecipe(ladderItem: ItemStepladder, feetItem: Any, stepsItem: Any) {
+    private fun registerStepladderRecipe(item: ItemStepladder) {
         CraftingManager.getInstance().addRecipe(
-                ItemStack(ladderItem),
+                ItemStack(item.type.item()),
                 "F F",
-                "FPF",
+                "FSF",
                 "F F",
-                'F', feetItem, 'P', stepsItem
+                'F', item.type.feetMaterial, 'S', item.type.stepsMaterial
         )
     }
 
@@ -30,13 +29,13 @@ object LARecipes {
     }
 
     fun register() {
-        registerStepladderRecipe(LAItems.OAK_STEPLADDER, ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.OAK.metadata), ItemStack(Blocks.PLANKS, 1, BlockPlanks.EnumType.OAK.metadata))
-        registerStepladderRecipe(LAItems.SPRUCE_STEPLADDER, ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.SPRUCE.metadata), ItemStack(Blocks.PLANKS, 1, BlockPlanks.EnumType.SPRUCE.metadata))
-        registerStepladderRecipe(LAItems.BIRCH_STEPLADDER, ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.BIRCH.metadata), ItemStack(Blocks.PLANKS, 1, BlockPlanks.EnumType.BIRCH.metadata))
-        registerStepladderRecipe(LAItems.JUNGLE_STEPLADDER, ItemStack(Blocks.LOG, 1, BlockPlanks.EnumType.JUNGLE.metadata), ItemStack(Blocks.PLANKS, 1, BlockPlanks.EnumType.JUNGLE.metadata))
-        registerStepladderRecipe(LAItems.ACACIA_STEPLADDER, ItemStack(Blocks.LOG2, 1, BlockPlanks.EnumType.ACACIA.metadata - 4), ItemStack(Blocks.PLANKS, 1, BlockPlanks.EnumType.ACACIA.metadata))
-        registerStepladderRecipe(LAItems.DARK_OAK_STEPLADDER, ItemStack(Blocks.LOG2, 1, BlockPlanks.EnumType.DARK_OAK.metadata - 4), ItemStack(Blocks.PLANKS, 1, BlockPlanks.EnumType.DARK_OAK.metadata))
-        registerStepladderRecipe(LAItems.IRON_STEPLADDER, Items.IRON_INGOT, Items.IRON_INGOT)
+        registerStepladderRecipe(LAItems.OAK_STEPLADDER)
+        registerStepladderRecipe(LAItems.SPRUCE_STEPLADDER)
+        registerStepladderRecipe(LAItems.BIRCH_STEPLADDER)
+        registerStepladderRecipe(LAItems.JUNGLE_STEPLADDER)
+        registerStepladderRecipe(LAItems.ACACIA_STEPLADDER)
+        registerStepladderRecipe(LAItems.DARK_OAK_STEPLADDER)
+        registerStepladderRecipe(LAItems.IRON_STEPLADDER)
 
         registerCarvingToolRecipe(LAItems.WOOD_CARVING_TOOL, ItemStack(Blocks.PLANKS))
         registerCarvingToolRecipe(LAItems.STONE_CARVING_TOOL, ItemStack(Blocks.COBBLESTONE))

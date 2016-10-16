@@ -1,10 +1,9 @@
 package com.jamieswhiteshirt.literalascension.common.block
 
 import com.jamieswhiteshirt.literalascension.api.ILadderBlock
-import com.jamieswhiteshirt.literalascension.common.item.ItemStepladder
+import com.jamieswhiteshirt.literalascension.common.EnumStepladderType
 import net.minecraft.block.Block
 import net.minecraft.block.BlockHorizontal
-import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyDirection
 import net.minecraft.block.properties.PropertyInteger
 import net.minecraft.block.state.BlockStateContainer
@@ -14,7 +13,6 @@ import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.AxisAlignedBB
@@ -24,7 +22,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import java.util.*
 
-class BlockStepladder(val item: () -> ItemStepladder) : Block(Material.CIRCUITS), ILadderBlock {
+class BlockStepladder(val type: EnumStepladderType) : BlockDelegate(type.modelState, 0.5F), ILadderBlock {
     companion object {
         val FACING: PropertyDirection = BlockHorizontal.FACING
         val SEGMENT: PropertyInteger = PropertyInteger.create("segment", 0, 2)
@@ -92,9 +90,9 @@ class BlockStepladder(val item: () -> ItemStepladder) : Block(Material.CIRCUITS)
         }
     }
 
-    override fun getItemDropped(state: IBlockState, rand: Random, fortune: Int): Item? {
-        return item()
-    }
+    override fun getItemDropped(state: IBlockState, rand: Random, fortune: Int): Item = type.item()
+
+    override fun damageDropped(state: IBlockState): Int = 0
 
     override fun canPlaceBlockAt(world: World, pos: BlockPos): Boolean {
         if (super.canPlaceBlockAt(world, pos)) {
@@ -115,13 +113,9 @@ class BlockStepladder(val item: () -> ItemStepladder) : Block(Material.CIRCUITS)
         }
     }
 
-    override fun isOpaqueCube(state: IBlockState?): Boolean {
-        return false
-    }
+    override fun isOpaqueCube(state: IBlockState?): Boolean = false
 
-    override fun isFullCube(state: IBlockState?): Boolean {
-        return false
-    }
+    override fun isFullCube(state: IBlockState?): Boolean = false
 
     override fun getStateFromMeta(meta: Int): IBlockState {
         return defaultState.withProperty(FACING, EnumFacing.getHorizontal(meta and 3)).withProperty(SEGMENT, (meta and 15) shr 2)
@@ -143,7 +137,7 @@ class BlockStepladder(val item: () -> ItemStepladder) : Block(Material.CIRCUITS)
     }
 
     override fun getPickBlock(state: IBlockState, target: RayTraceResult, world: World, pos: BlockPos, player: EntityPlayer): ItemStack {
-        return ItemStack(item())
+        return ItemStack(type.item())
     }
 
     override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {

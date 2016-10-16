@@ -30,16 +30,16 @@ abstract class BlockDelegate(val modelState: IBlockState, hardness: Float) : Blo
     }
 
     @SideOnly(Side.CLIENT)
-    override fun randomDisplayTick(stateIn: IBlockState, worldIn: World, pos: BlockPos, rand: Random) {
-        modelBlock.randomDisplayTick(modelState, worldIn, pos, rand)
+    override fun randomDisplayTick(stateIn: IBlockState, world: World, pos: BlockPos, rand: Random) {
+        modelBlock.randomDisplayTick(modelState, world, pos, rand)
     }
 
-    override fun onBlockClicked(worldIn: World, pos: BlockPos, playerIn: EntityPlayer) {
-        modelBlock.onBlockClicked(worldIn, pos, playerIn)
+    override fun onBlockClicked(world: World, pos: BlockPos, player: EntityPlayer) {
+        modelBlock.onBlockClicked(world, pos, player)
     }
 
-    override fun onBlockDestroyedByPlayer(worldIn: World, pos: BlockPos, state: IBlockState) {
-        modelBlock.onBlockDestroyedByPlayer(worldIn, pos, modelState)
+    override fun onBlockDestroyedByPlayer(world: World, pos: BlockPos, state: IBlockState) {
+        modelBlock.onBlockDestroyedByPlayer(world, pos, modelState)
     }
 
     @SideOnly(Side.CLIENT)
@@ -51,12 +51,12 @@ abstract class BlockDelegate(val modelState: IBlockState, hardness: Float) : Blo
         return modelBlock.getExplosionResistance(exploder)
     }
 
-    override fun tickRate(worldIn: World): Int {
-        return modelBlock.tickRate(worldIn)
+    override fun tickRate(world: World): Int {
+        return modelBlock.tickRate(world)
     }
 
-    override fun modifyAcceleration(worldIn: World, pos: BlockPos, entityIn: Entity, motion: Vec3d): Vec3d {
-        return modelBlock.modifyAcceleration(worldIn, pos, entityIn, motion)
+    override fun modifyAcceleration(world: World, pos: BlockPos, entity: Entity, motion: Vec3d): Vec3d {
+        return modelBlock.modifyAcceleration(world, pos, entity, motion)
     }
 
     override fun getBlockLayer(): BlockRenderLayer {
@@ -71,33 +71,33 @@ abstract class BlockDelegate(val modelState: IBlockState, hardness: Float) : Blo
         return modelBlock.canCollideCheck(modelState, hitIfLiquid)
     }
 
-    override fun canPlaceBlockAt(worldIn: World, pos: BlockPos): Boolean {
-        return modelBlock.canPlaceBlockAt(worldIn, pos)
+    override fun canPlaceBlockAt(world: World, pos: BlockPos): Boolean {
+        return modelBlock.canPlaceBlockAt(world, pos)
     }
 
-    override fun onBlockAdded(worldIn: World, pos: BlockPos, state: IBlockState) {
-        modelState.neighborChanged(worldIn, pos, Blocks.AIR)
-        modelBlock.onBlockAdded(worldIn, pos, modelState)
+    override fun onBlockAdded(world: World, pos: BlockPos, state: IBlockState) {
+        modelState.neighborChanged(world, pos, Blocks.AIR)
+        modelBlock.onBlockAdded(world, pos, modelState)
     }
 
-    override fun breakBlock(worldIn: World, pos: BlockPos, state: IBlockState?) {
-        modelBlock.breakBlock(worldIn, pos, modelState)
+    override fun breakBlock(world: World, pos: BlockPos, state: IBlockState?) {
+        modelBlock.breakBlock(world, pos, modelState)
     }
 
-    override fun onEntityWalk(worldIn: World, pos: BlockPos, entityIn: Entity) {
-        modelBlock.onEntityWalk(worldIn, pos, entityIn)
+    override fun onEntityWalk(world: World, pos: BlockPos, entity: Entity) {
+        modelBlock.onEntityWalk(world, pos, entity)
     }
 
-    override fun updateTick(worldIn: World, pos: BlockPos, state: IBlockState, rand: Random) {
-        modelBlock.updateTick(worldIn, pos, modelState, rand)
+    override fun updateTick(world: World, pos: BlockPos, state: IBlockState, rand: Random) {
+        modelBlock.updateTick(world, pos, modelState, rand)
     }
 
-    override fun onBlockActivated(worldIn: World, pos: BlockPos, state: IBlockState, playerIn: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        return modelBlock.onBlockActivated(worldIn, pos, modelState, playerIn, hand, heldItem, EnumFacing.DOWN, 0.0F, 0.0F, 0.0F)
+    override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+        return modelBlock.onBlockActivated(world, pos, modelState, player, hand, heldItem, EnumFacing.DOWN, 0.0F, 0.0F, 0.0F)
     }
 
-    override fun onBlockDestroyedByExplosion(worldIn: World, pos: BlockPos, explosionIn: Explosion) {
-        modelBlock.onBlockDestroyedByExplosion(worldIn, pos, explosionIn)
+    override fun onBlockDestroyedByExplosion(world: World, pos: BlockPos, explosion: Explosion) {
+        modelBlock.onBlockDestroyedByExplosion(world, pos, explosion)
     }
 
     override fun getMapColor(state: IBlockState?): MapColor {

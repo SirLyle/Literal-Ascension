@@ -2,6 +2,7 @@ package com.jamieswhiteshirt.literalascension.common.init
 
 import com.jamieswhiteshirt.literalascension.common.CreativeTab
 import com.jamieswhiteshirt.literalascension.common.EnumCarvedBlockType
+import com.jamieswhiteshirt.literalascension.common.EnumStepladderType
 import com.jamieswhiteshirt.literalascension.common.block.BlockChute
 import com.jamieswhiteshirt.literalascension.common.block.BlockClimbingRope
 import com.jamieswhiteshirt.literalascension.common.block.BlockNotched
@@ -10,13 +11,13 @@ import net.minecraft.item.ItemBlock
 import net.minecraftforge.fml.common.registry.GameRegistry
 
 object LABlocks {
-    val OAK_STEPLADDER = BlockStepladder({ LAItems.OAK_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.oak") as BlockStepladder
-    val SPRUCE_STEPLADDER = BlockStepladder({ LAItems.SPRUCE_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.spruce") as BlockStepladder
-    val BIRCH_STEPLADDER = BlockStepladder({ LAItems.BIRCH_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.birch") as BlockStepladder
-    val JUNGLE_STEPLADDER = BlockStepladder({ LAItems.JUNGLE_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.jungle") as BlockStepladder
-    val ACACIA_STEPLADDER = BlockStepladder({ LAItems.ACACIA_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.acacia") as BlockStepladder
-    val DARK_OAK_STEPLADDER = BlockStepladder({ LAItems.DARK_OAK_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.big_oak") as BlockStepladder
-    val IRON_STEPLADDER = BlockStepladder({ LAItems.IRON_STEPLADDER }).setUnlocalizedName("literalascension.stepladder.iron") as BlockStepladder
+    val OAK_STEPLADDER = BlockStepladder(EnumStepladderType.OAK).setUnlocalizedName("literalascension.stepladder.oak") as BlockStepladder
+    val SPRUCE_STEPLADDER = BlockStepladder(EnumStepladderType.SPRUCE).setUnlocalizedName("literalascension.stepladder.spruce") as BlockStepladder
+    val BIRCH_STEPLADDER = BlockStepladder(EnumStepladderType.BIRCH).setUnlocalizedName("literalascension.stepladder.birch") as BlockStepladder
+    val JUNGLE_STEPLADDER = BlockStepladder(EnumStepladderType.JUNGLE).setUnlocalizedName("literalascension.stepladder.jungle") as BlockStepladder
+    val ACACIA_STEPLADDER = BlockStepladder(EnumStepladderType.ACACIA).setUnlocalizedName("literalascension.stepladder.acacia") as BlockStepladder
+    val DARK_OAK_STEPLADDER = BlockStepladder(EnumStepladderType.DARK_OAK).setUnlocalizedName("literalascension.stepladder.big_oak") as BlockStepladder
+    val IRON_STEPLADDER = BlockStepladder(EnumStepladderType.IRON).setUnlocalizedName("literalascension.stepladder.iron") as BlockStepladder
 
     val LOG_OAK_CHUTE = BlockChute(EnumCarvedBlockType.LOG_OAK)
     val LOG_SPRUCE_CHUTE = BlockChute(EnumCarvedBlockType.LOG_SPRUCE)
@@ -43,13 +44,13 @@ object LABlocks {
     val CLIMBING_ROPE = BlockClimbingRope().setUnlocalizedName("literalascension.climbingRope").setCreativeTab(CreativeTab) as BlockClimbingRope
 
     fun register() {
-        registerStepladder(OAK_STEPLADDER, "oak")
-        registerStepladder(SPRUCE_STEPLADDER, "spruce")
-        registerStepladder(BIRCH_STEPLADDER, "birch")
-        registerStepladder(JUNGLE_STEPLADDER, "jungle")
-        registerStepladder(ACACIA_STEPLADDER, "acacia")
-        registerStepladder(DARK_OAK_STEPLADDER, "dark_oak")
-        registerStepladder(IRON_STEPLADDER, "iron")
+        registerStepladder(OAK_STEPLADDER)
+        registerStepladder(SPRUCE_STEPLADDER)
+        registerStepladder(BIRCH_STEPLADDER)
+        registerStepladder(JUNGLE_STEPLADDER)
+        registerStepladder(ACACIA_STEPLADDER)
+        registerStepladder(DARK_OAK_STEPLADDER)
+        registerStepladder(IRON_STEPLADDER)
 
         registerChute(LOG_OAK_CHUTE)
         registerChute(LOG_SPRUCE_CHUTE)
@@ -77,8 +78,8 @@ object LABlocks {
         GameRegistry.register(ItemBlock(CLIMBING_ROPE).setRegistryName("literalascension", "climbing_rope"))
     }
 
-    private fun registerStepladder(stepladder: BlockStepladder, type: String) {
-        GameRegistry.register(stepladder.setRegistryName("literalascension", "${type}_stepladder"))
+    private fun registerStepladder(stepladder: BlockStepladder) {
+        GameRegistry.register(stepladder.setRegistryName("literalascension", "${stepladder.type.getName()}_stepladder"))
     }
 
     private fun registerChute(chute: BlockChute) {

@@ -1,6 +1,6 @@
 package com.jamieswhiteshirt.literalascension.common.item
 
-import com.jamieswhiteshirt.literalascension.common.block.BlockStepladder
+import com.jamieswhiteshirt.literalascension.common.EnumStepladderType
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -11,7 +11,7 @@ import net.minecraft.util.SoundCategory
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-class ItemStepladder(val block: () -> BlockStepladder) : Item() {
+class ItemStepladder(val type: EnumStepladderType) : Item() {
     override fun onItemUse(stack: ItemStack, player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (facing == EnumFacing.UP) {
             val blockState = world.getBlockState(pos)
@@ -23,8 +23,8 @@ class ItemStepladder(val block: () -> BlockStepladder) : Item() {
             }
 
             val horizontalFacing = EnumFacing.fromAngle(player.rotationYaw.toDouble())
-            if (player.canPlayerEdit(placePos, facing, stack) && block().tryPlaceStepladder(world, placePos, horizontalFacing)) {
-                val soundType = block().soundType
+            if (player.canPlayerEdit(placePos, facing, stack) && type.block().tryPlaceStepladder(world, placePos, horizontalFacing)) {
+                val soundType = type.block().soundType
                 world.playSound(player, placePos, soundType.placeSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F)
 
                 --stack.stackSize
