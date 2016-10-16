@@ -3,7 +3,7 @@ item.literalascension.stepladder.spruce.name=Spruce Wood Stepladder
 item.literalascension.stepladder.birch.name=Birch Wood Stepladder
 item.literalascension.stepladder.jungle.name=Jungle Wood Stepladder
 item.literalascension.stepladder.acacia.name=Acacia Wood Stepladder
-item.literalascension.stepladder.big_oak.name=Dark Oak Wood Stepladder
+item.literalascension.stepladder.dark_oak.name=Dark Oak Wood Stepladder
 item.literalascension.stepladder.iron.name=Iron Stepladder
 item.literalascension.carvingToolWood.name=Wooden Carving Tool
 item.literalascension.carvingToolStone.name=Stone Carving Tool
@@ -16,7 +16,7 @@ tile.literalascension.stepladder.spruce.name=Spruce Wood Stepladder
 tile.literalascension.stepladder.birch.name=Birch Wood Stepladder
 tile.literalascension.stepladder.jungle.name=Jungle Wood Stepladder
 tile.literalascension.stepladder.acacia.name=Acacia Wood Stepladder
-tile.literalascension.stepladder.big_oak.name=Dark Oak Wood Stepladder
+tile.literalascension.stepladder.dark_oak.name=Dark Oak Wood Stepladder
 tile.literalascension.stepladder.iron.name=Iron Stepladder
 tile.literalascension.climbingRope.name=Climbing Rope
 

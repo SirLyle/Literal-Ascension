@@ -1,20 +1,19 @@
 package com.jamieswhiteshirt.literalascension.common.init
 
 import com.jamieswhiteshirt.literalascension.common.item.ItemCarvingTool
-import com.jamieswhiteshirt.literalascension.common.item.ItemStepladder
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager
 
 object LARecipes {
-    private fun registerStepladderRecipe(item: ItemStepladder) {
+    private fun registerStepladderRecipe(stepladder: EnumStepladder) {
         CraftingManager.getInstance().addRecipe(
-                ItemStack(item.type.item()),
+                ItemStack(stepladder.item),
                 "F F",
                 "FSF",
                 "F F",
-                'F', item.type.feetMaterial, 'S', item.type.stepsMaterial
+                'F', stepladder.feetItem, 'S', stepladder.stepsItem
         )
     }
 
@@ -29,13 +28,9 @@ object LARecipes {
     }
 
     fun register() {
-        registerStepladderRecipe(LAItems.OAK_STEPLADDER)
-        registerStepladderRecipe(LAItems.SPRUCE_STEPLADDER)
-        registerStepladderRecipe(LAItems.BIRCH_STEPLADDER)
-        registerStepladderRecipe(LAItems.JUNGLE_STEPLADDER)
-        registerStepladderRecipe(LAItems.ACACIA_STEPLADDER)
-        registerStepladderRecipe(LAItems.DARK_OAK_STEPLADDER)
-        registerStepladderRecipe(LAItems.IRON_STEPLADDER)
+        for (stepladder in EnumStepladder.values()) {
+            registerStepladderRecipe(stepladder)
+        }
 
         registerCarvingToolRecipe(LAItems.WOOD_CARVING_TOOL, ItemStack(Blocks.PLANKS))
         registerCarvingToolRecipe(LAItems.STONE_CARVING_TOOL, ItemStack(Blocks.COBBLESTONE))

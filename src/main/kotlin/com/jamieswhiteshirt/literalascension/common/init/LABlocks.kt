@@ -1,8 +1,6 @@
 package com.jamieswhiteshirt.literalascension.common.init
 
 import com.jamieswhiteshirt.literalascension.common.CreativeTab
-import com.jamieswhiteshirt.literalascension.common.EnumCarvedBlockType
-import com.jamieswhiteshirt.literalascension.common.EnumStepladderType
 import com.jamieswhiteshirt.literalascension.common.block.BlockChute
 import com.jamieswhiteshirt.literalascension.common.block.BlockClimbingRope
 import com.jamieswhiteshirt.literalascension.common.block.BlockNotched
@@ -11,82 +9,31 @@ import net.minecraft.item.ItemBlock
 import net.minecraftforge.fml.common.registry.GameRegistry
 
 object LABlocks {
-    val OAK_STEPLADDER = BlockStepladder(EnumStepladderType.OAK).setUnlocalizedName("literalascension.stepladder.oak") as BlockStepladder
-    val SPRUCE_STEPLADDER = BlockStepladder(EnumStepladderType.SPRUCE).setUnlocalizedName("literalascension.stepladder.spruce") as BlockStepladder
-    val BIRCH_STEPLADDER = BlockStepladder(EnumStepladderType.BIRCH).setUnlocalizedName("literalascension.stepladder.birch") as BlockStepladder
-    val JUNGLE_STEPLADDER = BlockStepladder(EnumStepladderType.JUNGLE).setUnlocalizedName("literalascension.stepladder.jungle") as BlockStepladder
-    val ACACIA_STEPLADDER = BlockStepladder(EnumStepladderType.ACACIA).setUnlocalizedName("literalascension.stepladder.acacia") as BlockStepladder
-    val DARK_OAK_STEPLADDER = BlockStepladder(EnumStepladderType.DARK_OAK).setUnlocalizedName("literalascension.stepladder.big_oak") as BlockStepladder
-    val IRON_STEPLADDER = BlockStepladder(EnumStepladderType.IRON).setUnlocalizedName("literalascension.stepladder.iron") as BlockStepladder
-
-    val LOG_OAK_CHUTE = BlockChute(EnumCarvedBlockType.LOG_OAK)
-    val LOG_SPRUCE_CHUTE = BlockChute(EnumCarvedBlockType.LOG_SPRUCE)
-    val LOG_BIRCH_CHUTE = BlockChute(EnumCarvedBlockType.LOG_BIRCH)
-    val LOG_JUNGLE_CHUTE = BlockChute(EnumCarvedBlockType.LOG_JUNGLE)
-    val LOG_ACACIA_CHUTE = BlockChute(EnumCarvedBlockType.LOG_ACACIA)
-    val LOG_DARK_OAK_CHUTE = BlockChute(EnumCarvedBlockType.LOG_DARK_OAK)
-    val STONE_CHUTE = BlockChute(EnumCarvedBlockType.STONE)
-    val GRANITE_CHUTE = BlockChute(EnumCarvedBlockType.GRANITE)
-    val DIORITE_CHUTE = BlockChute(EnumCarvedBlockType.DIORITE)
-    val ANDESITE_CHUTE = BlockChute(EnumCarvedBlockType.ANDESITE)
-
-    val LOG_OAK_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_OAK)
-    val LOG_SPRUCE_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_SPRUCE)
-    val LOG_BIRCH_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_BIRCH)
-    val LOG_JUNGLE_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_JUNGLE)
-    val LOG_ACACIA_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_ACACIA)
-    val LOG_DARK_OAK_NOTCHED = BlockNotched(EnumCarvedBlockType.LOG_DARK_OAK)
-    val STONE_NOTCHED = BlockNotched(EnumCarvedBlockType.STONE)
-    val GRANITE_NOTCHED = BlockNotched(EnumCarvedBlockType.GRANITE)
-    val DIORITE_NOTCHED = BlockNotched(EnumCarvedBlockType.DIORITE)
-    val ANDESITE_NOTCHED = BlockNotched(EnumCarvedBlockType.ANDESITE)
-
     val CLIMBING_ROPE = BlockClimbingRope().setUnlocalizedName("literalascension.climbingRope").setCreativeTab(CreativeTab) as BlockClimbingRope
 
     fun register() {
-        registerStepladder(OAK_STEPLADDER)
-        registerStepladder(SPRUCE_STEPLADDER)
-        registerStepladder(BIRCH_STEPLADDER)
-        registerStepladder(JUNGLE_STEPLADDER)
-        registerStepladder(ACACIA_STEPLADDER)
-        registerStepladder(DARK_OAK_STEPLADDER)
-        registerStepladder(IRON_STEPLADDER)
+        for (stepladder in EnumStepladder.values()) {
+            registerStepladder(stepladder.block)
+        }
 
-        registerChute(LOG_OAK_CHUTE)
-        registerChute(LOG_SPRUCE_CHUTE)
-        registerChute(LOG_BIRCH_CHUTE)
-        registerChute(LOG_JUNGLE_CHUTE)
-        registerChute(LOG_ACACIA_CHUTE)
-        registerChute(LOG_DARK_OAK_CHUTE)
-        registerChute(STONE_CHUTE)
-        registerChute(GRANITE_CHUTE)
-        registerChute(DIORITE_CHUTE)
-        registerChute(ANDESITE_CHUTE)
-
-        registerNotched(LOG_OAK_NOTCHED)
-        registerNotched(LOG_SPRUCE_NOTCHED)
-        registerNotched(LOG_BIRCH_NOTCHED)
-        registerNotched(LOG_JUNGLE_NOTCHED)
-        registerNotched(LOG_ACACIA_NOTCHED)
-        registerNotched(LOG_DARK_OAK_NOTCHED)
-        registerNotched(STONE_NOTCHED)
-        registerNotched(GRANITE_NOTCHED)
-        registerNotched(DIORITE_NOTCHED)
-        registerNotched(ANDESITE_NOTCHED)
+        for (carvedBlocks in EnumCarvedBlocks.values()) {
+            registerChute(carvedBlocks.chute)
+            registerNotched(carvedBlocks.notched)
+        }
 
         GameRegistry.register(CLIMBING_ROPE.setRegistryName("literalascension", "climbing_rope"))
         GameRegistry.register(ItemBlock(CLIMBING_ROPE).setRegistryName("literalascension", "climbing_rope"))
     }
 
     private fun registerStepladder(stepladder: BlockStepladder) {
-        GameRegistry.register(stepladder.setRegistryName("literalascension", "${stepladder.type.getName()}_stepladder"))
+        GameRegistry.register(stepladder.setRegistryName("literalascension", "${stepladder.type}_stepladder"))
     }
 
     private fun registerChute(chute: BlockChute) {
-        GameRegistry.register(chute.setRegistryName("literalascension", "${chute.type.getName()}_chute"))
+        GameRegistry.register(chute.setRegistryName("literalascension", "${chute.type}_chute"))
     }
 
     private fun registerNotched(notched: BlockNotched) {
-        GameRegistry.register(notched.setRegistryName("literalascension", "${notched.type.getName()}_notched"))
+        GameRegistry.register(notched.setRegistryName("literalascension", "${notched.type}_notched"))
     }
 }

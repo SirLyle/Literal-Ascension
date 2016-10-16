@@ -1,4 +1,4 @@
-package com.jamieswhiteshirt.literalascension.common
+package com.jamieswhiteshirt.literalascension.common.init
 
 import com.jamieswhiteshirt.literalascension.LiteralAscension
 import com.jamieswhiteshirt.literalascension.api.ICarveMaterial
@@ -10,24 +10,23 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.init.Blocks
 import net.minecraft.util.IStringSerializable
 
-enum class EnumCarvedBlockType(
+enum class EnumCarvedBlocks(
         val modelState: IBlockState,
-        val material: EnumMaterial,
-        val chuteBlock: () -> BlockChute,
-        val notchedBlock: () -> BlockNotched
-) : IStringSerializable {
-    LOG_OAK(Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK), EnumMaterial.LOG, {LABlocks.LOG_OAK_CHUTE}, {LABlocks.LOG_OAK_NOTCHED}),
-    LOG_SPRUCE(Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE), EnumMaterial.LOG, {LABlocks.LOG_SPRUCE_CHUTE}, {LABlocks.LOG_SPRUCE_NOTCHED}),
-    LOG_BIRCH(Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH), EnumMaterial.LOG, {LABlocks.LOG_BIRCH_CHUTE}, {LABlocks.LOG_BIRCH_NOTCHED}),
-    LOG_JUNGLE(Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE), EnumMaterial.LOG, {LABlocks.LOG_JUNGLE_CHUTE}, {LABlocks.LOG_JUNGLE_NOTCHED}),
-    LOG_ACACIA(Blocks.LOG2.defaultState.withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.ACACIA), EnumMaterial.LOG, {LABlocks.LOG_ACACIA_CHUTE}, {LABlocks.LOG_ACACIA_NOTCHED}),
-    LOG_DARK_OAK(Blocks.LOG2.defaultState.withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.DARK_OAK), EnumMaterial.LOG, {LABlocks.LOG_DARK_OAK_CHUTE}, {LABlocks.LOG_DARK_OAK_NOTCHED}),
-    STONE(Blocks.STONE.defaultState.withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE), EnumMaterial.STONE, {LABlocks.STONE_CHUTE}, {LABlocks.STONE_NOTCHED}),
-    GRANITE(Blocks.STONE.defaultState.withProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE), EnumMaterial.STONE, {LABlocks.GRANITE_CHUTE}, {LABlocks.GRANITE_NOTCHED}),
-    DIORITE(Blocks.STONE.defaultState.withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE), EnumMaterial.STONE, {LABlocks.DIORITE_CHUTE}, {LABlocks.DIORITE_NOTCHED}),
-    ANDESITE(Blocks.STONE.defaultState.withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE), EnumMaterial.STONE, {LABlocks.ANDESITE_CHUTE}, {LABlocks.ANDESITE_NOTCHED});
+        val material: EnumMaterial
+) {
+    LOG_OAK(Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK), EnumMaterial.LOG),
+    LOG_SPRUCE(Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE), EnumMaterial.LOG),
+    LOG_BIRCH(Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.BIRCH), EnumMaterial.LOG),
+    LOG_JUNGLE(Blocks.LOG.defaultState.withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.JUNGLE), EnumMaterial.LOG),
+    LOG_ACACIA(Blocks.LOG2.defaultState.withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.ACACIA), EnumMaterial.LOG),
+    LOG_DARK_OAK(Blocks.LOG2.defaultState.withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.DARK_OAK), EnumMaterial.LOG),
+    STONE(Blocks.STONE.defaultState.withProperty(BlockStone.VARIANT, BlockStone.EnumType.STONE), EnumMaterial.STONE),
+    GRANITE(Blocks.STONE.defaultState.withProperty(BlockStone.VARIANT, BlockStone.EnumType.GRANITE), EnumMaterial.STONE),
+    DIORITE(Blocks.STONE.defaultState.withProperty(BlockStone.VARIANT, BlockStone.EnumType.DIORITE), EnumMaterial.STONE),
+    ANDESITE(Blocks.STONE.defaultState.withProperty(BlockStone.VARIANT, BlockStone.EnumType.ANDESITE), EnumMaterial.STONE);
 
-    override fun getName(): String = name.toLowerCase()
+    val chute = BlockChute(this)
+    val notched = BlockNotched(this)
 
     override fun toString(): String = name.toLowerCase()
 

@@ -1,7 +1,7 @@
 package com.jamieswhiteshirt.literalascension.common.block
 
 import com.jamieswhiteshirt.literalascension.api.ILadderBlock
-import com.jamieswhiteshirt.literalascension.common.EnumStepladderType
+import com.jamieswhiteshirt.literalascension.common.init.EnumStepladder
 import net.minecraft.block.Block
 import net.minecraft.block.BlockHorizontal
 import net.minecraft.block.properties.PropertyDirection
@@ -22,7 +22,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import java.util.*
 
-class BlockStepladder(val type: EnumStepladderType) : BlockDelegate(type.modelState, 0.5F), ILadderBlock {
+class BlockStepladder(val type: EnumStepladder) : Block(type.material), ILadderBlock {
     companion object {
         val FACING: PropertyDirection = BlockHorizontal.FACING
         val SEGMENT: PropertyInteger = PropertyInteger.create("segment", 0, 2)
@@ -90,7 +90,7 @@ class BlockStepladder(val type: EnumStepladderType) : BlockDelegate(type.modelSt
         }
     }
 
-    override fun getItemDropped(state: IBlockState, rand: Random, fortune: Int): Item = type.item()
+    override fun getItemDropped(state: IBlockState, rand: Random, fortune: Int): Item = type.item
 
     override fun damageDropped(state: IBlockState): Int = 0
 
@@ -137,7 +137,7 @@ class BlockStepladder(val type: EnumStepladderType) : BlockDelegate(type.modelSt
     }
 
     override fun getPickBlock(state: IBlockState, target: RayTraceResult, world: World, pos: BlockPos, player: EntityPlayer): ItemStack {
-        return ItemStack(type.item())
+        return ItemStack(type.item)
     }
 
     override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {

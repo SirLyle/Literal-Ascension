@@ -2,7 +2,7 @@ package com.jamieswhiteshirt.literalascension.common.block
 
 import com.jamieswhiteshirt.literalascension.api.ICarvableBlock
 import com.jamieswhiteshirt.literalascension.api.ICarveMaterial
-import com.jamieswhiteshirt.literalascension.common.EnumCarvedBlockType
+import com.jamieswhiteshirt.literalascension.common.init.EnumCarvedBlocks
 import net.minecraft.block.Block
 import net.minecraft.block.properties.PropertyBool
 import net.minecraft.block.state.BlockStateContainer
@@ -20,7 +20,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import java.util.*
 
-class BlockChute(type: EnumCarvedBlockType) : BlockCarvedBase(type), ICarvableBlock {
+class BlockChute(type: EnumCarvedBlocks) : BlockCarvedBase(type), ICarvableBlock {
     companion object {
         private val collisionBoxesSides = arrayOf(
                 AxisAlignedBB(0.0, 0.0, 14.0 / 16.0, 1.0, 1.0, 16.0 / 16.0),

@@ -3,7 +3,7 @@ package com.jamieswhiteshirt.literalascension.common.block
 import com.jamieswhiteshirt.literalascension.api.ICarvableBlock
 import com.jamieswhiteshirt.literalascension.api.ICarveMaterial
 import com.jamieswhiteshirt.literalascension.api.ILadderBlock
-import com.jamieswhiteshirt.literalascension.common.EnumCarvedBlockType
+import com.jamieswhiteshirt.literalascension.common.init.EnumCarvedBlocks
 import net.minecraft.block.properties.PropertyBool
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
@@ -17,7 +17,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import java.util.*
 
-class BlockNotched(type: EnumCarvedBlockType) : BlockCarvedBase(type), ICarvableBlock, ILadderBlock {
+class BlockNotched(type: EnumCarvedBlocks) : BlockCarvedBase(type), ICarvableBlock, ILadderBlock {
     companion object {
         val SOUTH: PropertyBool = PropertyBool.create("south")
         val WEST: PropertyBool = PropertyBool.create("west")
@@ -45,7 +45,7 @@ class BlockNotched(type: EnumCarvedBlockType) : BlockCarvedBase(type), ICarvable
         }
         else {
             if (!world.isRemote) {
-                world.setBlockState(pos, type.chuteBlock().defaultState)
+                world.setBlockState(pos, type.chute.defaultState)
             }
             return true
         }

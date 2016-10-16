@@ -4,7 +4,7 @@ import com.google.common.collect.Multimap
 import com.jamieswhiteshirt.literalascension.LiteralAscension
 import com.jamieswhiteshirt.literalascension.api.ICarvableBlock
 import com.jamieswhiteshirt.literalascension.api.ICarveMaterial
-import com.jamieswhiteshirt.literalascension.common.EnumCarvedBlockType
+import com.jamieswhiteshirt.literalascension.common.init.EnumCarvedBlocks
 import com.jamieswhiteshirt.literalascension.common.network.message.MessageBlockCarved
 import net.minecraft.block.*
 import net.minecraft.block.state.IBlockState
@@ -106,8 +106,8 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
                 override fun canCarve(state: IBlockState): Boolean {
                     return state.getValue(BlockOldLog.LOG_AXIS) == BlockLog.EnumAxis.Y
                 }
-                override fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType {
-                    return EnumCarvedBlockType.fromOldLogType[state.getValue(BlockOldLog.VARIANT)]!!
+                override fun getCarvedBlocks(state: IBlockState): EnumCarvedBlocks {
+                    return EnumCarvedBlocks.fromOldLogType[state.getValue(BlockOldLog.VARIANT)]!!
                 }
             }
             is BlockNewLog -> object : CarvableBlockShim() {
@@ -115,8 +115,8 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
                     return state.getValue(BlockNewLog.LOG_AXIS) == BlockLog.EnumAxis.Y
                 }
 
-                override fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType {
-                    return EnumCarvedBlockType.fromNewLogType[state.getValue(BlockNewLog.VARIANT)]!!
+                override fun getCarvedBlocks(state: IBlockState): EnumCarvedBlocks {
+                    return EnumCarvedBlocks.fromNewLogType[state.getValue(BlockNewLog.VARIANT)]!!
                 }
             }
             is BlockStone -> object : CarvableBlockShim() {
@@ -124,8 +124,8 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
                     return true
                 }
 
-                override fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType {
-                    return EnumCarvedBlockType.fromStoneType[state.getValue(BlockStone.VARIANT)]!!
+                override fun getCarvedBlocks(state: IBlockState): EnumCarvedBlocks {
+                    return EnumCarvedBlocks.fromStoneType[state.getValue(BlockStone.VARIANT)]!!
                 }
             }
             else -> null
@@ -135,13 +135,13 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
     private abstract class CarvableBlockShim : ICarvableBlock {
         override fun tryCarve(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
             if (canCarve(state)) {
-                val carvedBlockType = this.getCarvedBlockType(state)
+                val carvedBlocks = this.getCarvedBlocks(state)
                 if (!world.isRemote) {
                     if (facing.axis == EnumFacing.Axis.Y) {
-                        world.setBlockState(pos, carvedBlockType.chuteBlock().defaultState)
+                        world.setBlockState(pos, carvedBlocks.chute.defaultState)
                     }
                     else {
-                        val notchedBlock = carvedBlockType.notchedBlock()
+                        val notchedBlock = carvedBlocks.notched
                         notchedBlock.tryCarve(notchedBlock.defaultState, world, pos, facing, hitX, hitY, hitZ)
                     }
                 }
@@ -152,11 +152,11 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
         }
 
         override fun getCarveMaterial(state: IBlockState, world: World, pos: BlockPos): ICarveMaterial {
-            return getCarvedBlockType(state).material
+            return getCarvedBlocks(state).material
         }
 
         abstract fun canCarve(state: IBlockState): Boolean
 
-        abstract fun getCarvedBlockType(state: IBlockState): EnumCarvedBlockType
+        abstract fun getCarvedBlocks(state: IBlockState): EnumCarvedBlocks
     }
 }
