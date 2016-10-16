@@ -30,11 +30,11 @@ object LAItems {
         registerStepladder(DARK_OAK_STEPLADDER, "dark_oak")
         registerStepladder(IRON_STEPLADDER, "iron")
 
-        registerHollower(WOOD_CARVING_TOOL, "wood")
-        registerHollower(STONE_CARVING_TOOL, "stone")
-        registerHollower(IRON_CARVING_TOOL, "iron")
-        registerHollower(DIAMOND_CARVING_TOOL, "diamond")
-        registerHollower(GOLD_CARVING_TOOL, "gold")
+        registerCarvingTool(WOOD_CARVING_TOOL, "wood")
+        registerCarvingTool(STONE_CARVING_TOOL, "stone")
+        registerCarvingTool(IRON_CARVING_TOOL, "iron")
+        registerCarvingTool(DIAMOND_CARVING_TOOL, "diamond")
+        registerCarvingTool(GOLD_CARVING_TOOL, "gold")
     }
 
     fun registerStepladder(stepladder: ItemStepladder, type: String) {
@@ -43,7 +43,7 @@ object LAItems {
         GameRegistry.register(stepladder.setRegistryName("literalascension", "${type}_stepladder"))
     }
 
-    fun registerHollower(carvingTool: ItemCarvingTool, type: String) {
+    fun registerCarvingTool(carvingTool: ItemCarvingTool, type: String) {
         carvingTool.creativeTab = CreativeTab
 
         GameRegistry.register(carvingTool.setRegistryName("literalascension", "${type}_carving_tool"))
