@@ -5,22 +5,20 @@ import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.BlockPos
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 
-class MessageBlockCarved(var pos: BlockPos?, var facing: EnumFacing?) : IMessage {
+class MessagePlayCarveSound(var pos: BlockPos?) : IMessage {
     companion object {
         const val DISCRIMINATOR = 0
     }
 
-    constructor() : this(null, null)
+    constructor() : this(null)
 
     override fun fromBytes(buf: ByteBuf) {
         this.pos = BlockPos(buf.readInt(), buf.readInt(), buf.readInt())
-        this.facing = EnumFacing.VALUES.elementAtOrNull(buf.readUnsignedByte().toInt())
     }
 
     override fun toBytes(buf: ByteBuf) {
         buf.writeInt(pos!!.x)
         buf.writeInt(pos!!.y)
         buf.writeInt(pos!!.z)
-        buf.writeByte(facing!!.index)
     }
 }

@@ -3,6 +3,7 @@ package com.jamieswhiteshirt.literalascension.common.block
 import com.jamieswhiteshirt.literalascension.api.ICarvableBlock
 import com.jamieswhiteshirt.literalascension.api.ICarveMaterial
 import com.jamieswhiteshirt.literalascension.common.carvedblock.CarvedBlock
+import com.jamieswhiteshirt.literalascension.common.spawnCarveParticles
 import net.minecraft.block.Block
 import net.minecraft.block.properties.PropertyBool
 import net.minecraft.block.state.BlockStateContainer
@@ -57,14 +58,13 @@ class BlockChute(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock {
 
         if (carvingFacing != null) {
             val property = PROPERTIES[carvingFacing.horizontalIndex]
-            if (state.getValue(property)) {
-                val newState = state.withProperty(property, false)
-                if (PROPERTIES.any { newState.getValue(it) }) {
-                    if (!world.isRemote) {
-                        world.setBlockState(pos, newState)
-                    }
-                    return true
+            val newState = state.withProperty(property, false)
+            if (PROPERTIES.any { newState.getValue(it) }) {
+                if (!world.isRemote) {
+                    world.setBlockState(pos, newState)
+                    world.spawnCarveParticles(pos, carvingFacing)
                 }
+                return true
             }
         }
 

@@ -4,6 +4,7 @@ import com.jamieswhiteshirt.literalascension.api.ICarvableBlock
 import com.jamieswhiteshirt.literalascension.api.ICarveMaterial
 import com.jamieswhiteshirt.literalascension.api.ISpecialLadderBlock
 import com.jamieswhiteshirt.literalascension.common.carvedblock.CarvedBlock
+import com.jamieswhiteshirt.literalascension.common.spawnCarveParticles
 import net.minecraft.block.properties.PropertyBool
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
@@ -35,12 +36,14 @@ class BlockNotched(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock, I
             if (!state.getValue(property)) {
                 if (!world.isRemote) {
                     world.setBlockState(pos, state.withProperty(property, true))
+                    world.spawnCarveParticles(pos, facing)
                 }
                 return true
             }
         } else {
             if (!world.isRemote) {
                 world.setBlockState(pos, type.chute.defaultState)
+                world.spawnCarveParticles(pos, facing)
             }
             return true
         }

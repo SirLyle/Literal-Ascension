@@ -6,7 +6,9 @@ import com.jamieswhiteshirt.literalascension.api.ICarvableBlock
 import com.jamieswhiteshirt.literalascension.api.ICarveMaterial
 import com.jamieswhiteshirt.literalascension.common.carvedblock.CarvedBlock
 import com.jamieswhiteshirt.literalascension.common.init.CarvedBlocks
-import com.jamieswhiteshirt.literalascension.common.network.message.MessageBlockCarved
+import com.jamieswhiteshirt.literalascension.common.network.message.MessagePlayCarveSound
+import com.jamieswhiteshirt.literalascension.common.playCarveSound
+import com.jamieswhiteshirt.literalascension.common.spawnCarveParticles
 import net.minecraft.block.BlockLog
 import net.minecraft.block.BlockNewLog
 import net.minecraft.block.BlockOldLog
@@ -54,8 +56,7 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
                                 stack.damageItem(1, player)
                             }
 
-                            val targetPoint = NetworkRegistry.TargetPoint(world.provider.dimension, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), 64.0)
-                            LiteralAscension.packetHandler.sendToAllAround(MessageBlockCarved(pos, facing), targetPoint)
+                            world.playCarveSound(pos)
                         }
 
                         return EnumActionResult.SUCCESS
@@ -135,14 +136,15 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
     private abstract class CarvableBlockShim : ICarvableBlock {
         override fun tryCarve(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
             if (canCarve(state)) {
-                val carvedBlocks = this.getCarvedBlock(state)
                 if (!world.isRemote) {
+                    val carvedBlocks = this.getCarvedBlock(state)
                     if (facing.axis == EnumFacing.Axis.Y) {
                         world.setBlockState(pos, carvedBlocks.chute.defaultState)
                     } else {
                         val notchedBlock = carvedBlocks.notched
                         notchedBlock.tryCarve(notchedBlock.defaultState, world, pos, facing, hitX, hitY, hitZ)
                     }
+                    world.spawnCarveParticles(pos, facing)
                 }
                 return true
             }
