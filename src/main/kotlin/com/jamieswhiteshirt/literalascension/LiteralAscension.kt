@@ -18,37 +18,32 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper
         version = LiteralAscension.VERSION,
         dependencies = LiteralAscension.DEPENDENCIES,
         acceptedMinecraftVersions = LiteralAscension.ACCEPTED_MINECRAFT_VERSIONS,
-        guiFactory = LiteralAscension.GUI_FACTORY
+        guiFactory = LiteralAscension.GUI_FACTORY,
+        modLanguageAdapter = "net.shadowfacts.forgelin.KotlinAdapter"
 )
-class LiteralAscension {
-    companion object {
-        const val MODID = "literalascension"
-        const val NAME = "Literal Ascension"
-        const val VERSION = "1.0"
-        const val DEPENDENCIES = "required-after:llibrary@[1.5.1,)"
-        const val ACCEPTED_MINECRAFT_VERSIONS = "[1.10,1.10.2]"
+object LiteralAscension {
+    const val MODID = "literalascension"
+    const val NAME = "Literal Ascension"
+    const val VERSION = "1.0"
+    const val DEPENDENCIES = "required-after:llibrary@[1.5.1,)"
+    const val ACCEPTED_MINECRAFT_VERSIONS = "[1.10,1.10.2]"
 
-        const val GUI_FACTORY = "com.jamieswhiteshirt.literalascension.client.gui.LiteralAscensionGUIFactory"
-        const val CLIENT_PROXY = "com.jamieswhiteshirt.literalascension.client.ClientProxy"
-        const val SERVER_PROXY = "com.jamieswhiteshirt.literalascension.server.ServerProxy"
+    const val GUI_FACTORY = "com.jamieswhiteshirt.literalascension.client.gui.LiteralAscensionGUIFactory"
+    const val CLIENT_PROXY = "com.jamieswhiteshirt.literalascension.client.ClientProxy"
+    const val SERVER_PROXY = "com.jamieswhiteshirt.literalascension.server.ServerProxy"
 
-        @JvmStatic
-        @Mod.Instance
-        lateinit var INSTANCE: LiteralAscension
+    @SidedProxy(
+            clientSide = CLIENT_PROXY,
+            serverSide = SERVER_PROXY,
+            modId = MODID
+    )
+    lateinit var proxy: CommonProxy
 
-        @SidedProxy(
-                clientSide = CLIENT_PROXY,
-                serverSide = SERVER_PROXY,
-                modId = MODID
-        )
-        lateinit var proxy: CommonProxy
+    @JvmStatic
+    @Config
+    lateinit var config: LiteralAscensionConfig
 
-        @JvmStatic
-        @Config
-        lateinit var config: LiteralAscensionConfig
-
-        val packetHandler: SimpleNetworkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MODID)
-    }
+    val packetHandler: SimpleNetworkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MODID)
 
     @Mod.EventHandler
     fun preInit(event: FMLPreInitializationEvent) {

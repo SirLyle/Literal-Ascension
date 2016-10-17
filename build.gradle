@@ -50,17 +50,15 @@ repositories {
 		name 'ilexiconn'
         url 'http://maven.ilexiconn.net'
     }
-}
-
-configurations {
-    required
-    compile.extendsFrom(required)
+    maven {
+        name 'shadowfacts'
+        url 'http://mvn.rx14.co.uk/shadowfacts/'
+    }
 }
 
 dependencies {
     compile "net.ilexiconn:llibrary:1.7.0-1.10.2:dev"
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    required "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile group: "net.shadowfacts", name: "Forgelin", version: '1.0.5'
 }
 
 sourceSets {
@@ -96,11 +94,6 @@ jar {
     manifest {
         attributes "FMLCorePlugin": corePlugin
         attributes "FMLCorePluginContainsFMLMod": "true"
-    }
-    from {
-        configurations.required.collect {
-            it.isDirectory() ? it : zipTree(it)
-        }
     }
 }
 

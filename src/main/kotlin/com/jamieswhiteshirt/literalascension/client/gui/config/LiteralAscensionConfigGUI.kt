@@ -7,7 +7,7 @@ import net.ilexiconn.llibrary.client.gui.element.color.ColorScheme
 import net.ilexiconn.llibrary.server.config.ConfigHandler
 import net.minecraft.client.gui.GuiScreen
 
-class LiteralAscensionConfigGUI(parent: GuiScreen) : ConfigGUI(parent, LiteralAscension.INSTANCE, ConfigHandler.INSTANCE.getConfigForID("literalascension")) {
+class LiteralAscensionConfigGUI(parent: GuiScreen) : ConfigGUI(parent, LiteralAscension, ConfigHandler.INSTANCE.getConfigForID("literalascension")) {
     var RETURN = ColorScheme.create({ 0xFFFFa900.toInt() }, { 0xFFC18000.toInt() })
     var SIDEBAR = ColorScheme.create({ 0xFFFFa900.toInt() }, { 0xFFC18000.toInt() })
     var ELEMENTS = ColorScheme.create({ 0xFFFFa900.toInt() }, { 0xFFC18000.toInt() })
