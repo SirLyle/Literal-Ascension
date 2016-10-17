@@ -24,7 +24,7 @@ class ItemStepladder(val type: Stepladder) : Item() {
 
             val horizontalFacing = EnumFacing.fromAngle(player.rotationYaw.toDouble())
             if (player.canPlayerEdit(placePos, facing, stack) && type.block.tryPlaceStepladder(world, placePos, horizontalFacing)) {
-                val soundType = type.block.soundType
+                val soundType = type.block.getSoundType(type.block.defaultState, world, pos, player)
                 world.playSound(player, placePos, soundType.placeSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F)
 
                 --stack.stackSize

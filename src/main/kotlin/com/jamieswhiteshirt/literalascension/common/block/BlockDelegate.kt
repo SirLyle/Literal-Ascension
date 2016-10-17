@@ -1,6 +1,7 @@
 package com.jamieswhiteshirt.literalascension.common.block
 
 import net.minecraft.block.Block
+import net.minecraft.block.SoundType
 import net.minecraft.block.material.MapColor
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.Entity
@@ -26,7 +27,6 @@ abstract class BlockDelegate(val modelState: IBlockState, hardness: Float) : Blo
 
     init {
         setHardness(hardness)
-        soundType = modelBlock.soundType
     }
 
     @SideOnly(Side.CLIENT)
@@ -139,5 +139,9 @@ abstract class BlockDelegate(val modelState: IBlockState, hardness: Float) : Blo
 
     override fun getFireSpreadSpeed(world: IBlockAccess, pos: BlockPos, face: EnumFacing): Int {
         return modelBlock.getFlammability(world, pos, face)
+    }
+
+    override fun getSoundType(state: IBlockState, world: World, pos: BlockPos, entity: Entity?): SoundType {
+        return modelBlock.getSoundType(modelState, world, pos, entity)
     }
 }

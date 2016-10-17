@@ -1,12 +1,10 @@
 package com.jamieswhiteshirt.literalascension.common.item
 
 import com.google.common.collect.Multimap
-import com.jamieswhiteshirt.literalascension.LiteralAscension
 import com.jamieswhiteshirt.literalascension.api.ICarvableBlock
 import com.jamieswhiteshirt.literalascension.api.ICarveMaterial
 import com.jamieswhiteshirt.literalascension.common.carvedblock.CarvedBlock
 import com.jamieswhiteshirt.literalascension.common.init.CarvedBlocks
-import com.jamieswhiteshirt.literalascension.common.network.message.MessagePlayCarveSound
 import com.jamieswhiteshirt.literalascension.common.playCarveSound
 import com.jamieswhiteshirt.literalascension.common.spawnCarveParticles
 import net.minecraft.block.BlockLog
@@ -26,7 +24,6 @@ import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
@@ -56,7 +53,7 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
                                 stack.damageItem(1, player)
                             }
 
-                            world.playCarveSound(pos)
+                            world.playCarveSound(pos, player)
                         }
 
                         return EnumActionResult.SUCCESS

@@ -23,10 +23,12 @@ object MessagePlayCarveSoundHandler : IMessageHandler<MessagePlayCarveSound, IMe
 
     private fun process(message: MessagePlayCarveSound) {
         val pos = message.pos
-        if (pos != null) {
+        val entityID = message.entityID
+        if (pos != null && entityID != null) {
             val world = Minecraft.getMinecraft().thePlayer.worldObj
+            val entity = world.getEntityByID(entityID)
             val state = world.getBlockState(pos)
-            val soundType = state.block.soundType
+            val soundType = state.block.getSoundType(world.getBlockState(pos), world, pos, entity)
             world.playSound(pos.x.toDouble() + 0.5, pos.y.toDouble() + 0.5, pos.z.toDouble() + 0.5, soundType.breakSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F, false)
         }
     }
