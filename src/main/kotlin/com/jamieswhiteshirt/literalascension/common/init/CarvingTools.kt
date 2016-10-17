@@ -12,11 +12,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry
 import java.util.*
 
 object CarvingTools : Module {
-    val WOOD: CarvingTool = CarvingTool(Blocks.PLANKS, Item.ToolMaterial.WOOD, "wood")
-    val STONE: CarvingTool = CarvingTool(Blocks.COBBLESTONE, Item.ToolMaterial.STONE, "stone")
-    val IRON: CarvingTool = CarvingTool(Items.IRON_INGOT, Item.ToolMaterial.IRON, "iron")
-    val DIAMOND: CarvingTool = CarvingTool(Items.DIAMOND, Item.ToolMaterial.DIAMOND, "diamond")
-    val GOLD: CarvingTool = CarvingTool(Items.GOLD_INGOT, Item.ToolMaterial.GOLD, "gold")
+    val WOOD = CarvingTool(Blocks.PLANKS, Item.ToolMaterial.WOOD, "wood")
+    val STONE = CarvingTool(Blocks.COBBLESTONE, Item.ToolMaterial.STONE, "stone")
+    val IRON = CarvingTool(Items.IRON_INGOT, Item.ToolMaterial.IRON, "iron")
+    val DIAMOND = CarvingTool(Items.DIAMOND, Item.ToolMaterial.DIAMOND, "diamond")
+    val GOLD = CarvingTool(Items.GOLD_INGOT, Item.ToolMaterial.GOLD, "gold")
 
     private val registeredCarvingTools = ArrayList<CarvingTool>()
 
