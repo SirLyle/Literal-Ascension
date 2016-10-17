@@ -22,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.*
 
 abstract class BlockDelegate(val modelState: IBlockState, hardness: Float) : Block(modelState.material) {
-    val modelBlock = modelState.block
+    val modelBlock: Block = modelState.block
 
     init {
         setHardness(hardness)
@@ -43,7 +43,9 @@ abstract class BlockDelegate(val modelState: IBlockState, hardness: Float) : Blo
     }
 
     @SideOnly(Side.CLIENT)
+    @Suppress("OverridingDeprecatedMember")
     override fun getPackedLightmapCoords(state: IBlockState, source: IBlockAccess, pos: BlockPos): Int {
+        @Suppress("DEPRECATION")
         return modelBlock.getPackedLightmapCoords(modelState, source, pos)
     }
 
@@ -100,7 +102,9 @@ abstract class BlockDelegate(val modelState: IBlockState, hardness: Float) : Blo
         modelBlock.onBlockDestroyedByExplosion(world, pos, explosion)
     }
 
+    @Suppress("OverridingDeprecatedMember")
     override fun getMapColor(state: IBlockState?): MapColor {
+        @Suppress("DEPRECATION")
         return modelBlock.getMapColor(modelState)
     }
 

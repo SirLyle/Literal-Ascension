@@ -44,7 +44,7 @@ class ItemCarvingTool(val toolMaterial: ToolMaterial) : Item() {
             val state = world.getBlockState(pos)
             val carvableBlock = getCarvableBlock(state)
             if (carvableBlock != null) {
-                var carvedBlockType = carvableBlock.getCarveMaterial(state, world, pos)
+                val carvedBlockType = carvableBlock.getCarveMaterial(state, world, pos)
                 if (carvedBlockType.requiredCarvingToolLevel <= toolMaterial.harvestLevel) {
                     if (carvableBlock.tryCarve(state, world, pos, facing, hitX, hitY, hitZ)) {
                         if (!world.isRemote) {

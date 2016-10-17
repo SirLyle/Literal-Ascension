@@ -7,7 +7,6 @@ import net.ilexiconn.llibrary.server.config.Config
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.SidedProxy
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper
@@ -46,7 +45,7 @@ object LiteralAscension {
     val packetHandler: SimpleNetworkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MODID)
 
     @Mod.EventHandler
-    fun preInit(event: FMLPreInitializationEvent) {
+    fun preInit(@Suppress("UNUSED_PARAMETER") event: FMLPreInitializationEvent) {
         Stepladders.register()
         CarvingTools.register()
         CarvedBlocks.register()
@@ -57,7 +56,7 @@ object LiteralAscension {
     }
 
     @Mod.EventHandler
-    fun init(event: FMLInitializationEvent) {
+    fun init(@Suppress("UNUSED_PARAMETER") event: FMLInitializationEvent) {
         proxy.registerRenderers()
         proxy.registerEventHandlers()
 
@@ -66,9 +65,5 @@ object LiteralAscension {
         CarvedBlocks.registerRecipes()
         LABlocks.registerRecipes()
         LAItems.registerRecipes()
-    }
-
-    @Mod.EventHandler
-    fun postInit(event: FMLPostInitializationEvent) {
     }
 }

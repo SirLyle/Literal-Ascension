@@ -52,6 +52,7 @@ class BlockNotched(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock, I
         return type.material
     }
 
+    @Suppress("OverridingDeprecatedMember")
     override fun getStateFromMeta(meta: Int): IBlockState {
         var state = defaultState
         for (i in PROPERTIES.indices) {

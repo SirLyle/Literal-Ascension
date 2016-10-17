@@ -71,6 +71,7 @@ class BlockStepladder(val type: Stepladder) : Block(type.material), ISpecialLadd
         defaultState = blockState.baseState.withProperty(FACING, EnumFacing.NORTH).withProperty(SEGMENT, 0)
     }
 
+    @Suppress("OverridingDeprecatedMember")
     override fun addCollisionBoxToList(state: IBlockState, world: World, pos: BlockPos, entityBox: AxisAlignedBB, collisionBoxes: MutableList<AxisAlignedBB>, entity: Entity?) {
         val array = when (state.getValue(FACING).axis) {
             EnumFacing.Axis.X -> collisionBoxesX[state.getValue(SEGMENT)]
@@ -82,7 +83,9 @@ class BlockStepladder(val type: Stepladder) : Block(type.material), ISpecialLadd
         }
     }
 
+    @Suppress("OverridingDeprecatedMember")
     override fun getBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos): AxisAlignedBB {
+        @Suppress("DEPRECATION")
         return when (state.getValue(FACING).axis) {
             EnumFacing.Axis.X -> selectionBoxesX[state.getValue(SEGMENT)]
             EnumFacing.Axis.Z -> selectionBoxesZ[state.getValue(SEGMENT)]
@@ -112,10 +115,13 @@ class BlockStepladder(val type: Stepladder) : Block(type.material), ISpecialLadd
         }
     }
 
+    @Suppress("OverridingDeprecatedMember")
     override fun isOpaqueCube(state: IBlockState?): Boolean = false
 
+    @Suppress("OverridingDeprecatedMember")
     override fun isFullCube(state: IBlockState?): Boolean = false
 
+    @Suppress("OverridingDeprecatedMember")
     override fun getStateFromMeta(meta: Int): IBlockState {
         return defaultState.withProperty(FACING, EnumFacing.getHorizontal(meta and 3)).withProperty(SEGMENT, (meta and 15) shr 2)
     }
@@ -128,7 +134,9 @@ class BlockStepladder(val type: Stepladder) : Block(type.material), ISpecialLadd
         return BlockStateContainer(this, FACING, SEGMENT)
     }
 
+    @Suppress("OverridingDeprecatedMember")
     override fun neighborChanged(state: IBlockState, world: World, pos: BlockPos, block: Block) {
+        @Suppress("DEPRECATION")
         super.neighborChanged(state, world, pos, block)
         if (!world.isRemote) {
             checkAndDropBlock(world, pos, state)

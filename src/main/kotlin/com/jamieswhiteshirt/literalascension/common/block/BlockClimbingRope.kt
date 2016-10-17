@@ -52,18 +52,22 @@ class BlockClimbingRope : Block(Material.WEB), ISpecialLadderBlock {
         defaultState = blockState.baseState.withProperty(FACING, EnumFacing.NORTH)
     }
 
+    @Suppress("OverridingDeprecatedMember")
     override fun getBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos): AxisAlignedBB {
         return boundingBoxes[state.getValue(FACING).horizontalIndex]
     }
 
+    @Suppress("OverridingDeprecatedMember")
     override fun getCollisionBoundingBox(state: IBlockState, worldIn: World, pos: BlockPos): AxisAlignedBB {
         return collisionBoxes[state.getValue(FACING).horizontalIndex]
     }
 
+    @Suppress("OverridingDeprecatedMember")
     override fun isOpaqueCube(state: IBlockState?): Boolean {
         return false
     }
 
+    @Suppress("OverridingDeprecatedMember")
     override fun isFullCube(state: IBlockState?): Boolean {
         return false
     }
@@ -72,6 +76,7 @@ class BlockClimbingRope : Block(Material.WEB), ISpecialLadderBlock {
         return ladderCollisionBoxes[state.getValue(FACING).horizontalIndex].offset(pos).intersectsWith(entity.entityBoundingBox)
     }
 
+    @Suppress("OverridingDeprecatedMember")
     override fun getStateFromMeta(meta: Int): IBlockState {
         return defaultState.withProperty(FACING, EnumFacing.getHorizontal(meta))
     }
@@ -107,7 +112,9 @@ class BlockClimbingRope : Block(Material.WEB), ISpecialLadderBlock {
         }
     }
 
+    @Suppress("OverridingDeprecatedMember")
     override fun neighborChanged(state: IBlockState, world: World, pos: BlockPos, block: Block) {
+        @Suppress("DEPRECATION")
         super.neighborChanged(state, world, pos, block)
         checkAndDropBlock(world, pos, state)
     }

@@ -75,6 +75,7 @@ class BlockChute(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock {
         return type.material
     }
 
+    @Suppress("OverridingDeprecatedMember")
     override fun getStateFromMeta(meta: Int): IBlockState {
         var state = defaultState
         for (i in PROPERTIES.indices) {
@@ -97,12 +98,14 @@ class BlockChute(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock {
         return BlockStateContainer(this, *PROPERTIES)
     }
 
+    @Suppress("OverridingDeprecatedMember")
     override fun addCollisionBoxToList(state: IBlockState, world: World, pos: BlockPos, entityBox: AxisAlignedBB, collisionBoxes: MutableList<AxisAlignedBB>, entity: Entity?) {
         for (collisionBox in getCollisionBoxList(state, world, pos)) {
             Block.addCollisionBoxToList(pos, entityBox, collisionBoxes, collisionBox)
         }
     }
 
+    @Suppress("OverridingDeprecatedMember")
     override fun getBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos): AxisAlignedBB {
         val list = getCollisionBoxList(state, source, pos)
         if (list.size > 0) {
@@ -110,14 +113,17 @@ class BlockChute(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock {
                 a.union(b)
             })
         } else {
+            @Suppress("DEPRECATION")
             return super.getBoundingBox(state, source, pos)
         }
     }
 
+    @Suppress("OverridingDeprecatedMember")
     override fun isOpaqueCube(state: IBlockState?): Boolean {
         return false
     }
 
+    @Suppress("OverridingDeprecatedMember")
     override fun isFullCube(state: IBlockState?): Boolean {
         return false
     }
@@ -126,6 +132,7 @@ class BlockChute(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock {
         return side.axis != EnumFacing.Axis.Y && state.getActualState(world, pos).getValue(PROPERTIES[side.horizontalIndex])
     }
 
+    @Suppress("OverridingDeprecatedMember")
     override fun collisionRayTrace(state: IBlockState, world: World, pos: BlockPos, start: Vec3d, end: Vec3d): RayTraceResult? {
         var bestResult: RayTraceResult? = null
         var d1 = 0.0

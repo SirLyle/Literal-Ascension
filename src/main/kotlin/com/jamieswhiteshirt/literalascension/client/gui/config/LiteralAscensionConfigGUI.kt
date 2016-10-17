@@ -8,9 +8,9 @@ import net.ilexiconn.llibrary.server.config.ConfigHandler
 import net.minecraft.client.gui.GuiScreen
 
 class LiteralAscensionConfigGUI(parent: GuiScreen) : ConfigGUI(parent, LiteralAscension, ConfigHandler.INSTANCE.getConfigForID("literalascension")) {
-    var RETURN = ColorScheme.create({ 0xFFFFa900.toInt() }, { 0xFFC18000.toInt() })
-    var SIDEBAR = ColorScheme.create({ 0xFFFFa900.toInt() }, { 0xFFC18000.toInt() })
-    var ELEMENTS = ColorScheme.create({ 0xFFFFa900.toInt() }, { 0xFFC18000.toInt() })
+    var RETURN: ColorScheme = ColorScheme.create({ 0xFFFFa900.toInt() }, { 0xFFC18000.toInt() })
+    var SIDEBAR: ColorScheme = ColorScheme.create({ 0xFFFFa900.toInt() }, { 0xFFC18000.toInt() })
+    var ELEMENTS: ColorScheme = ColorScheme.create({ 0xFFFFa900.toInt() }, { 0xFFC18000.toInt() })
 
     override fun getReturnButtonColorScheme(): ColorScheme = RETURN
 
