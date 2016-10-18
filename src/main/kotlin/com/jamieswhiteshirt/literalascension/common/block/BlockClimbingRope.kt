@@ -3,7 +3,6 @@ package com.jamieswhiteshirt.literalascension.common.block
 import com.jamieswhiteshirt.literalascension.api.ISpecialLadderBlock
 import com.jamieswhiteshirt.literalascension.common.init.ClimbingRope
 import net.minecraft.block.Block
-import net.minecraft.block.BlockHorizontal
 import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyDirection
 import net.minecraft.block.state.BlockStateContainer
@@ -22,42 +21,45 @@ import java.util.*
 
 class BlockClimbingRope(val type: ClimbingRope) : Block(Material.CIRCUITS), ISpecialLadderBlock {
     companion object {
-        val FACING: PropertyDirection = BlockHorizontal.FACING
+        val FACING: PropertyDirection = PropertyDirection.create("facing", { it != EnumFacing.DOWN })
 
         private val boundingBoxes = arrayOf(
+                AxisAlignedBB(6.0 / 16.0, 0.0, 6.0 / 16.0, 10.0 / 16.0, 1.0, 10.0 / 16.0),
+                AxisAlignedBB(6.0 / 16.0, 0.0, 0.0 / 16.0, 10.0 / 16.0, 1.0, 4.0 / 16.0),
                 AxisAlignedBB(6.0 / 16.0, 0.0, 12.0 / 16.0, 10.0 / 16.0, 1.0, 16.0 / 16.0),
                 AxisAlignedBB(0.0 / 16.0, 0.0, 6.0 / 16.0, 4.0 / 16.0, 1.0, 10.0 / 16.0),
-                AxisAlignedBB(6.0 / 16.0, 0.0, 0.0 / 16.0, 10.0 / 16.0, 1.0, 4.0 / 16.0),
                 AxisAlignedBB(12.0 / 16.0, 0.0, 6.0 / 16.0, 16.0 / 16.0, 1.0, 10.0 / 16.0)
         )
 
         private val collisionBoxes = arrayOf(
+                AxisAlignedBB(8.0 / 16.0, 0.0, 8.0 / 16.0, 8.0 / 16.0, 1.0, 8.0 / 16.0),
+                AxisAlignedBB(8.0 / 16.0, 0.0, 2.0 / 16.0, 8.0 / 16.0, 1.0, 2.0 / 16.0),
                 AxisAlignedBB(8.0 / 16.0, 0.0, 14.0 / 16.0, 8.0 / 16.0, 1.0, 14.0 / 16.0),
                 AxisAlignedBB(2.0 / 16.0, 0.0, 8.0 / 16.0, 2.0 / 16.0, 1.0, 8.0 / 16.0),
-                AxisAlignedBB(8.0 / 16.0, 0.0, 2.0 / 16.0, 10.0 / 16.0, 1.0, 2.0 / 16.0),
                 AxisAlignedBB(14.0 / 16.0, 0.0, 8.0 / 16.0, 14.0 / 16.0, 1.0, 8.0 / 16.0)
         )
 
         private val ladderCollisionBoxes = arrayOf(
+                AxisAlignedBB(0.0 / 16.0, 0.0, 0.0 / 16.0, 16.0 / 16.0, 1.0, 16.0 / 16.0),
+                AxisAlignedBB(0.0 / 16.0, 0.0, -6.0 / 16.0, 18.0 / 16.0, 1.0, 10.0 / 16.0),
                 AxisAlignedBB(0.0 / 16.0, 0.0, 6.0 / 16.0, 16.0 / 16.0, 1.0, 22.0 / 16.0),
                 AxisAlignedBB(-6.0 / 16.0, 0.0, 0.0 / 16.0, 10.0 / 16.0, 1.0, 16.0 / 16.0),
-                AxisAlignedBB(0.0 / 16.0, 0.0, -6.0 / 16.0, 18.0 / 16.0, 1.0, 10.0 / 16.0),
                 AxisAlignedBB(6.0 / 16.0, 0.0, 0.0 / 16.0, 22.0 / 16.0, 1.0, 16.0 / 16.0)
         )
     }
 
     init {
-        defaultState = blockState.baseState.withProperty(FACING, EnumFacing.NORTH)
+        defaultState = blockState.baseState.withProperty(FACING, EnumFacing.UP)
     }
 
     @Suppress("OverridingDeprecatedMember")
     override fun getBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos): AxisAlignedBB {
-        return boundingBoxes[state.getValue(FACING).horizontalIndex]
+        return boundingBoxes[state.getValue(FACING).index - 1]
     }
 
     @Suppress("OverridingDeprecatedMember")
     override fun getCollisionBoundingBox(state: IBlockState, worldIn: World, pos: BlockPos): AxisAlignedBB {
-        return collisionBoxes[state.getValue(FACING).horizontalIndex]
+        return collisionBoxes[state.getValue(FACING).index - 1]
     }
 
     @Suppress("OverridingDeprecatedMember")
@@ -73,16 +75,16 @@ class BlockClimbingRope(val type: ClimbingRope) : Block(Material.CIRCUITS), ISpe
     }
 
     override fun canClimb(state: IBlockState, world: IBlockAccess, pos: BlockPos, entity: EntityLivingBase): Boolean {
-        return ladderCollisionBoxes[state.getValue(FACING).horizontalIndex].offset(pos).intersectsWith(entity.entityBoundingBox)
+        return ladderCollisionBoxes[state.getValue(FACING).index - 1].offset(pos).intersectsWith(entity.entityBoundingBox)
     }
 
     @Suppress("OverridingDeprecatedMember")
     override fun getStateFromMeta(meta: Int): IBlockState {
-        return defaultState.withProperty(FACING, EnumFacing.getHorizontal(meta))
+        return defaultState.withProperty(FACING, EnumFacing.getFront(meta + 1))
     }
 
     override fun getMetaFromState(state: IBlockState): Int {
-        return state.getValue(FACING).horizontalIndex
+        return state.getValue(FACING).index - 1
     }
 
     override fun createBlockState(): BlockStateContainer {
@@ -110,13 +112,13 @@ class BlockClimbingRope(val type: ClimbingRope) : Block(Material.CIRCUITS), ISpe
 
     fun canBlockStay(state: IBlockState, world: World, pos: BlockPos): Boolean {
         val aboveState = world.getBlockState(pos.up())
-        if (aboveState.block == this && aboveState.getValue(FACING) == state.getValue(FACING)) {
+        val facing = state.getValue(FACING)
+        if (aboveState.block == this && aboveState.getValue(FACING) == facing) {
             return true
         } else {
-            val facing = state.getValue(FACING)
-            val sidePos = pos.offset(facing)
-            val sideState = world.getBlockState(sidePos)
-            if (sideState.block.isSideSolid(sideState, world, sidePos, facing.opposite)) {
+            val attachPos = pos.offset(facing)
+            val attachState = world.getBlockState(attachPos)
+            if (attachState.block.isSideSolid(attachState, world, attachPos, facing.opposite)) {
                 return true
             }
         }

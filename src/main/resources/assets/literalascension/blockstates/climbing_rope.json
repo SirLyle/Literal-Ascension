@@ -1,8 +1,9 @@
 {
   "variants": {
-    "facing=north": { "model": "literalascension:climbing_rope", "y": 0 },
-    "facing=south": { "model": "literalascension:climbing_rope", "y": 180 },
-    "facing=west":  { "model": "literalascension:climbing_rope", "y": 270 },
-    "facing=east":  { "model": "literalascension:climbing_rope", "y": 90 }
+    "facing=up": { "model": "literalascension:climbing_rope_center" },
+    "facing=north": { "model": "literalascension:climbing_rope_side", "y": 0 },
+    "facing=south": { "model": "literalascension:climbing_rope_side", "y": 180 },
+    "facing=west":  { "model": "literalascension:climbing_rope_side", "y": 270 },
+    "facing=east":  { "model": "literalascension:climbing_rope_side", "y": 90 }
   }
 }
