@@ -1,6 +1,7 @@
 package com.jamieswhiteshirt.literalascension.common.block
 
 import com.jamieswhiteshirt.literalascension.api.ISpecialLadderBlock
+import com.jamieswhiteshirt.literalascension.common.init.ClimbingRope
 import net.minecraft.block.Block
 import net.minecraft.block.BlockHorizontal
 import net.minecraft.block.material.Material
@@ -8,21 +9,18 @@ import net.minecraft.block.properties.PropertyDirection
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.EntityLivingBase
-import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
-import net.minecraft.item.ItemStack
 import net.minecraft.util.BlockRenderLayer
 import net.minecraft.util.EnumFacing
-import net.minecraft.util.EnumHand
-import net.minecraft.util.SoundCategory
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
+import java.util.*
 
-class BlockClimbingRope : Block(Material.WEB), ISpecialLadderBlock {
+class BlockClimbingRope(val type: ClimbingRope) : Block(Material.CIRCUITS), ISpecialLadderBlock {
     companion object {
         val FACING: PropertyDirection = BlockHorizontal.FACING
 
@@ -67,6 +65,8 @@ class BlockClimbingRope : Block(Material.WEB), ISpecialLadderBlock {
         return false
     }
 
+    override fun getItemDropped(state: IBlockState, rand: Random, fortune: Int): Item = type.item
+
     @Suppress("OverridingDeprecatedMember")
     override fun isFullCube(state: IBlockState?): Boolean {
         return false
@@ -94,43 +94,11 @@ class BlockClimbingRope : Block(Material.WEB), ISpecialLadderBlock {
         return BlockRenderLayer.CUTOUT
     }
 
-    override fun canPlaceBlockOnSide(world: World, pos: BlockPos, side: EnumFacing): Boolean {
-        if (super.canPlaceBlockOnSide(world, pos, side)) {
-            if (side.axis != EnumFacing.Axis.Y) {
-                return canBlockStay(defaultState.withProperty(FACING, side.opposite), world, pos)
-            }
-        }
-
-        return false
-    }
-
-    override fun onBlockPlaced(worldIn: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float, meta: Int, placer: EntityLivingBase): IBlockState {
-        if (facing.axis != EnumFacing.Axis.Y) {
-            return super.onBlockPlaced(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer).withProperty(FACING, facing.opposite)
-        } else {
-            return super.onBlockPlaced(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer)
-        }
-    }
-
     @Suppress("OverridingDeprecatedMember")
     override fun neighborChanged(state: IBlockState, world: World, pos: BlockPos, block: Block) {
         @Suppress("DEPRECATION")
         super.neighborChanged(state, world, pos, block)
         checkAndDropBlock(world, pos, state)
-    }
-
-    override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        if (heldItem != null && heldItem.item == Item.getItemFromBlock(this)) {
-            if (tryExtend(state, world, pos)) {
-                val soundType = getSoundType(state, world, pos, player)
-                world.playSound(player, pos, soundType.placeSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F)
-                if (!world.isRemote && !player.capabilities.isCreativeMode) {
-                    --heldItem.stackSize
-                }
-                return true
-            }
-        }
-        return false
     }
 
     fun checkAndDropBlock(world: World, pos: BlockPos, state: IBlockState) {
@@ -141,7 +109,8 @@ class BlockClimbingRope : Block(Material.WEB), ISpecialLadderBlock {
     }
 
     fun canBlockStay(state: IBlockState, world: World, pos: BlockPos): Boolean {
-        if (world.getBlockState(pos.up()).block == this) {
+        val aboveState = world.getBlockState(pos.up())
+        if (aboveState.block == this && aboveState.getValue(FACING) == state.getValue(FACING)) {
             return true
         } else {
             val facing = state.getValue(FACING)
@@ -150,24 +119,6 @@ class BlockClimbingRope : Block(Material.WEB), ISpecialLadderBlock {
             if (sideState.block.isSideSolid(sideState, world, sidePos, facing.opposite)) {
                 return true
             }
-        }
-
-        return false
-    }
-
-    fun tryExtend(state: IBlockState, world: World, pos: BlockPos): Boolean {
-        val belowPos = pos.down()
-        val belowState = world.getBlockState(belowPos)
-        val belowBlock = belowState.block
-        if (belowBlock == this) {
-            if (state.getValue(FACING) == belowState.getValue(FACING)) {
-                return tryExtend(belowState, world, belowPos)
-            }
-        } else if (belowBlock.isReplaceable(world, belowPos)) {
-            if (!world.isRemote) {
-                world.setBlockState(belowPos, state)
-            }
-            return true
         }
 
         return false

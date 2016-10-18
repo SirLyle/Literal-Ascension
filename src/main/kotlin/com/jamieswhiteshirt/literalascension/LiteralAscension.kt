@@ -49,8 +49,7 @@ object LiteralAscension {
         Stepladders.register()
         CarvingTools.register()
         CarvedBlocks.register()
-        LABlocks.register()
-        LAItems.register()
+        ClimbingRope.register()
 
         proxy.registerMessages()
     }
@@ -63,7 +62,6 @@ object LiteralAscension {
         Stepladders.registerRecipes()
         CarvingTools.registerRecipes()
         CarvedBlocks.registerRecipes()
-        LABlocks.registerRecipes()
-        LAItems.registerRecipes()
+        ClimbingRope.registerRecipes()
     }
 }

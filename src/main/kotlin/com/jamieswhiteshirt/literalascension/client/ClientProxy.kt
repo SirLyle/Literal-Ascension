@@ -6,7 +6,7 @@ import com.jamieswhiteshirt.literalascension.client.network.message.MessageSpawn
 import com.jamieswhiteshirt.literalascension.common.CommonProxy
 import com.jamieswhiteshirt.literalascension.common.carvingtool.CarvingTool
 import com.jamieswhiteshirt.literalascension.common.init.CarvingTools
-import com.jamieswhiteshirt.literalascension.common.init.LABlocks
+import com.jamieswhiteshirt.literalascension.common.init.ClimbingRope
 import com.jamieswhiteshirt.literalascension.common.init.Stepladders
 import com.jamieswhiteshirt.literalascension.common.network.message.MessagePlayCarveSound
 import com.jamieswhiteshirt.literalascension.common.network.message.MessageSpawnCarveParticles
@@ -14,7 +14,6 @@ import com.jamieswhiteshirt.literalascension.common.stepladder.Stepladder
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.ItemModelMesher
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
-import net.minecraft.item.Item
 import net.minecraftforge.fml.relauncher.Side
 
 class ClientProxy : CommonProxy() {
@@ -29,10 +28,10 @@ class ClientProxy : CommonProxy() {
             registerCarvingToolModel(itemModelMesher, carvingTool)
         }
 
-        itemModelMesher.register(Item.getItemFromBlock(LABlocks.CLIMBING_ROPE), 0, ModelResourceLocation("literalascension:climbing_rope", "inventory"))
-        itemModelMesher.register(Item.getItemFromBlock(LABlocks.CLIMBING_ROPE), 1, ModelResourceLocation("literalascension:climbing_rope", "inventory"))
-        itemModelMesher.register(Item.getItemFromBlock(LABlocks.CLIMBING_ROPE), 2, ModelResourceLocation("literalascension:climbing_rope", "inventory"))
-        itemModelMesher.register(Item.getItemFromBlock(LABlocks.CLIMBING_ROPE), 3, ModelResourceLocation("literalascension:climbing_rope", "inventory"))
+        itemModelMesher.register(ClimbingRope.item, 0, ModelResourceLocation("literalascension:climbing_rope", "inventory"))
+        itemModelMesher.register(ClimbingRope.item, 1, ModelResourceLocation("literalascension:climbing_rope", "inventory"))
+        itemModelMesher.register(ClimbingRope.item, 2, ModelResourceLocation("literalascension:climbing_rope", "inventory"))
+        itemModelMesher.register(ClimbingRope.item, 3, ModelResourceLocation("literalascension:climbing_rope", "inventory"))
     }
 
     private fun registerStepladderModel(itemModelMesher: ItemModelMesher, stepladder: Stepladder) {
