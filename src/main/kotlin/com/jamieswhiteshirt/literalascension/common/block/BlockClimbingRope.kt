@@ -66,14 +66,14 @@ class BlockClimbingRope(val feature: ClimbingRope) : Block(Material.CIRCUITS), I
     }
 
     @Suppress("OverridingDeprecatedMember")
-    override fun isOpaqueCube(state: IBlockState?): Boolean {
+    override fun isOpaqueCube(state: IBlockState): Boolean {
         return false
     }
 
     override fun getItemDropped(state: IBlockState, rand: Random, fortune: Int): Item = feature.item
 
     @Suppress("OverridingDeprecatedMember")
-    override fun isFullCube(state: IBlockState?): Boolean {
+    override fun isFullCube(state: IBlockState): Boolean {
         return false
     }
 

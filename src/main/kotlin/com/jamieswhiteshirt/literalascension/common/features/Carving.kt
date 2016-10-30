@@ -10,6 +10,7 @@ import com.jamieswhiteshirt.literalascension.common.features.carving.CarvingTool
 import com.jamieswhiteshirt.literalascension.common.network.message.MessagePlayCarveSound
 import com.jamieswhiteshirt.literalascension.common.network.message.MessageSpawnCarveParticles
 import net.minecraft.block.Block
+import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.Entity
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.BlockPos
@@ -37,5 +38,13 @@ class Carving(config: Configuration, override val parent: Features) : SubFeature
     fun spawnCarveParticles(world: World, pos: BlockPos, facing: EnumFacing) {
         val targetPoint = NetworkRegistry.TargetPoint(world.provider.dimension, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), 16.0)
         LiteralAscension.packetHandler.sendToAllAround(MessageSpawnCarveParticles(pos, facing), targetPoint)
+    }
+
+    fun getCarvingBehaviour(state: IBlockState): ICarvingBehaviour? {
+        val block = state.block
+        return when (block) {
+            is ICarvingBehaviour -> block
+            else -> carvingBehaviourShims[block]
+        }
     }
 }

@@ -12,8 +12,7 @@ class LiteralAscensionPlugin : IFMLLoadingPlugin {
 
     override fun getSetupClass(): String? = null
 
-    override fun injectData(data: MutableMap<String, Any>?) {
-    }
+    override fun injectData(data: MutableMap<String, Any>) { }
 
     override fun getAccessTransformerClass(): String? = null
 }

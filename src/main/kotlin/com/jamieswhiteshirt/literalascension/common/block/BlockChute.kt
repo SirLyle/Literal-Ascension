@@ -116,14 +116,10 @@ class BlockChute(feature: CarvedBlock) : BlockCarvedBase(feature), ICarvingBehav
     }
 
     @Suppress("OverridingDeprecatedMember")
-    override fun isOpaqueCube(state: IBlockState?): Boolean {
-        return false
-    }
+    override fun isOpaqueCube(state: IBlockState): Boolean = false
 
     @Suppress("OverridingDeprecatedMember")
-    override fun isFullCube(state: IBlockState?): Boolean {
-        return false
-    }
+    override fun isFullCube(state: IBlockState): Boolean = false
 
     override fun isSideSolid(state: IBlockState, world: IBlockAccess, pos: BlockPos, side: EnumFacing): Boolean {
         return side.axis != EnumFacing.Axis.Y && state.getActualState(world, pos).getValue(PROPERTIES[side.horizontalIndex])

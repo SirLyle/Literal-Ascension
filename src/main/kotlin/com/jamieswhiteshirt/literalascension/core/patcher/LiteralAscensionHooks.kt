@@ -22,7 +22,7 @@ class LiteralAscensionHooks {
         }
 
         @JvmStatic
-        fun isLivingOnLadder(insideState: IBlockState?, world: World, pos: BlockPos, entity: EntityLivingBase): Boolean {
+        fun isLivingOnLadder(@Suppress("UNUSED_PARAMETER") insideState: IBlockState, world: World, @Suppress("UNUSED_PARAMETER") pos: BlockPos, entity: EntityLivingBase): Boolean {
             if (entity !is EntityPlayer || !entity.isSpectator) {
                 val bb = entity.entityBoundingBox
                 val minX = MathHelper.floor_double(bb.minX) - 1

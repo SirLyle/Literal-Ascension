@@ -1,9 +1,7 @@
 package com.jamieswhiteshirt.literalascension.common.item
 
 import com.google.common.collect.Multimap
-import com.jamieswhiteshirt.literalascension.api.ICarvingBehaviour
 import com.jamieswhiteshirt.literalascension.common.features.carving.carvingtools.CarvingTool
-import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.SharedMonsterAttributes
 import net.minecraft.entity.ai.attributes.AttributeModifier
@@ -33,7 +31,7 @@ class ItemCarvingTool(val feature: CarvingTool, val toolMaterial: ToolMaterial) 
             return EnumActionResult.FAIL
         } else {
             val state = world.getBlockState(pos)
-            val carvingBehaviour = getCarvingBehaviour(state)
+            val carvingBehaviour = feature.parent.parent.getCarvingBehaviour(state)
             if (carvingBehaviour != null) {
                 val carvingMaterial = carvingBehaviour.carvingMaterial
                 if (carvingMaterial.requiredCarvingToolLevel <= toolMaterial.harvestLevel) {
@@ -63,9 +61,7 @@ class ItemCarvingTool(val feature: CarvingTool, val toolMaterial: ToolMaterial) 
     }
 
     @SideOnly(Side.CLIENT)
-    override fun isFull3D(): Boolean {
-        return true
-    }
+    override fun isFull3D(): Boolean = false
 
     override fun getIsRepairable(toRepair: ItemStack, repair: ItemStack): Boolean {
         val requiredItem = this.toolMaterial.repairItemStack
@@ -85,13 +81,5 @@ class ItemCarvingTool(val feature: CarvingTool, val toolMaterial: ToolMaterial) 
         }
 
         return multimap
-    }
-
-    private fun getCarvingBehaviour(state: IBlockState): ICarvingBehaviour? {
-        val block = state.block
-        return when (block) {
-            is ICarvingBehaviour -> block
-            else -> feature.parent.parent.carvingBehaviourShims[block]
-        }
     }
 }

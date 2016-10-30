@@ -82,7 +82,7 @@ abstract class BlockDelegate(val modelState: IBlockState, hardness: Float) : Blo
         modelBlock.onBlockAdded(world, pos, modelState)
     }
 
-    override fun breakBlock(world: World, pos: BlockPos, state: IBlockState?) {
+    override fun breakBlock(world: World, pos: BlockPos, state: IBlockState) {
         modelBlock.breakBlock(world, pos, modelState)
     }
 
@@ -103,7 +103,7 @@ abstract class BlockDelegate(val modelState: IBlockState, hardness: Float) : Blo
     }
 
     @Suppress("OverridingDeprecatedMember")
-    override fun getMapColor(state: IBlockState?): MapColor {
+    override fun getMapColor(state: IBlockState): MapColor {
         @Suppress("DEPRECATION")
         return modelBlock.getMapColor(modelState)
     }

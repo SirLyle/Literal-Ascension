@@ -4,7 +4,7 @@ import com.jamieswhiteshirt.literalascension.common.block.BlockStepladder
 import net.minecraftforge.event.entity.player.PlayerEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
-object HarvestCheckEvenHandler {
+object HarvestCheckEventHandler {
     @SubscribeEvent
     fun onHarvestCheck(event: PlayerEvent.HarvestCheck) {
         val block = event.targetBlock.block
