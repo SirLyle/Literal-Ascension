@@ -4,10 +4,9 @@ import com.jamieswhiteshirt.literalascension.LiteralAscension
 import net.ilexiconn.llibrary.client.gui.config.ConfigGUI
 import net.ilexiconn.llibrary.client.gui.element.Element
 import net.ilexiconn.llibrary.client.gui.element.color.ColorScheme
-import net.ilexiconn.llibrary.server.config.ConfigHandler
 import net.minecraft.client.gui.GuiScreen
 
-class LiteralAscensionConfigGUI(parent: GuiScreen) : ConfigGUI(parent, LiteralAscension, ConfigHandler.INSTANCE.getConfigForID("literalascension")) {
+class LiteralAscensionConfigGUI(parent: GuiScreen) : ConfigGUI(parent, LiteralAscension, LiteralAscension.config) {
     var RETURN: ColorScheme = ColorScheme.create({ 0xFFFFa900.toInt() }, { 0xFFC18000.toInt() })
     var SIDEBAR: ColorScheme = ColorScheme.create({ 0xFFFFa900.toInt() }, { 0xFFC18000.toInt() })
     var ELEMENTS: ColorScheme = ColorScheme.create({ 0xFFFFa900.toInt() }, { 0xFFC18000.toInt() })

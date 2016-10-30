@@ -1,9 +1,11 @@
 package com.jamieswhiteshirt.literalascension.common.block
 
 import com.jamieswhiteshirt.literalascension.api.ISpecialLadderBlock
-import com.jamieswhiteshirt.literalascension.common.stepladder.Stepladder
+import com.jamieswhiteshirt.literalascension.common.features.stepladders.Stepladder
+import com.jamieswhiteshirt.literalascension.common.playLadderPickupSound
 import net.minecraft.block.Block
 import net.minecraft.block.BlockHorizontal
+import net.minecraft.block.SoundType
 import net.minecraft.block.properties.PropertyDirection
 import net.minecraft.block.properties.PropertyInteger
 import net.minecraft.block.state.BlockStateContainer
@@ -18,41 +20,52 @@ import net.minecraft.util.EnumHand
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.RayTraceResult
+import net.minecraft.util.math.Vec3d
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import java.util.*
 
-class BlockStepladder(val type: Stepladder) : Block(type.material), ISpecialLadderBlock {
+class BlockStepladder(val feature: Stepladder) : Block(feature.material), ISpecialLadderBlock {
     companion object {
         val FACING: PropertyDirection = BlockHorizontal.FACING
         val SEGMENT: PropertyInteger = PropertyInteger.create("segment", 0, 2)
 
         private val collisionBoxesX = arrayOf(
                 arrayOf(
-                        AxisAlignedBB(1.0 / 16.0, 0.0, 0.0, 15.0 / 16.0, 0.5, 1.0),
-                        AxisAlignedBB(2.0 / 16.0, 0.5, 0.0, 14.0 / 16.0, 1.0, 1.0)
+                        AxisAlignedBB( 0.0 / 16.0, 0.0, 0.0,  3.0 / 16.0, 0.5, 1.0),
+                        AxisAlignedBB(13.0 / 16.0, 0.0, 0.0, 16.0 / 16.0, 0.5, 1.0),
+                        AxisAlignedBB( 1.0 / 16.0, 0.5, 0.0,  4.0 / 16.0, 1.0, 1.0),
+                        AxisAlignedBB(12.0 / 16.0, 0.5, 0.0, 15.0 / 16.0, 1.0, 1.0)
                 ),
                 arrayOf(
-                        AxisAlignedBB(3.0 / 16.0, 0.0, 0.0, 13.0 / 16.0, 0.5, 1.0),
-                        AxisAlignedBB(4.0 / 16.0, 0.5, 0.0, 12.0 / 16.0, 1.0, 1.0)
+                        AxisAlignedBB( 2.0 / 16.0, 0.0, 0.0,  5.0 / 16.0, 0.5, 1.0),
+                        AxisAlignedBB(11.0 / 16.0, 0.0, 0.0, 14.0 / 16.0, 0.5, 1.0),
+                        AxisAlignedBB( 3.0 / 16.0, 0.5, 0.0,  6.0 / 16.0, 1.0, 1.0),
+                        AxisAlignedBB(10.0 / 16.0, 0.5, 0.0, 13.0 / 16.0, 1.0, 1.0)
                 ),
                 arrayOf(
-                        AxisAlignedBB(5.0 / 16.0, 0.0, 0.0, 11.0 / 16.0, 0.5, 1.0),
-                        AxisAlignedBB(6.0 / 16.0, 0.5, 0.0, 10.0 / 16.0, 1.0, 1.0)
+                        AxisAlignedBB( 4.0 / 16.0, 0.0, 0.0,  7.0 / 16.0, 0.5, 1.0),
+                        AxisAlignedBB( 9.0 / 16.0, 0.0, 0.0, 12.0 / 16.0, 0.5, 1.0),
+                        AxisAlignedBB( 5.0 / 16.0, 0.5, 0.0, 11.0 / 16.0, 1.0, 1.0)
                 )
         )
         private val collisionBoxesZ = arrayOf(
                 arrayOf(
-                        AxisAlignedBB(0.0, 0.0, 1.0 / 16.0, 1.0, 0.5, 15.0 / 16.0),
-                        AxisAlignedBB(0.0, 0.5, 2.0 / 16.0, 1.0, 1.0, 14.0 / 16.0)
+                        AxisAlignedBB(0.0, 0.0,  0.0 / 16.0, 1.0, 0.5,  3.0 / 16.0),
+                        AxisAlignedBB(0.0, 0.0, 13.0 / 16.0, 1.0, 0.5, 16.0 / 16.0),
+                        AxisAlignedBB(0.0, 0.5,  1.0 / 16.0, 1.0, 1.0,  4.0 / 16.0),
+                        AxisAlignedBB(0.0, 0.5, 12.0 / 16.0, 1.0, 1.0, 15.0 / 16.0)
                 ),
                 arrayOf(
-                        AxisAlignedBB(0.0, 0.0, 3.0 / 16.0, 1.0, 0.5, 13.0 / 16.0),
-                        AxisAlignedBB(0.0, 0.5, 4.0 / 16.0, 1.0, 1.0, 12.0 / 16.0)
+                        AxisAlignedBB(0.0, 0.0,  2.0 / 16.0, 1.0, 0.5,  5.0 / 16.0),
+                        AxisAlignedBB(0.0, 0.0, 11.0 / 16.0, 1.0, 0.5, 14.0 / 16.0),
+                        AxisAlignedBB(0.0, 0.5,  3.0 / 16.0, 1.0, 1.0,  6.0 / 16.0),
+                        AxisAlignedBB(0.0, 0.5, 10.0 / 16.0, 1.0, 1.0, 13.0 / 16.0)
                 ),
                 arrayOf(
-                        AxisAlignedBB(0.0, 0.0, 5.0 / 16.0, 1.0, 0.5, 11.0 / 16.0),
-                        AxisAlignedBB(0.0, 0.5, 6.0 / 16.0, 1.0, 1.0, 10.0 / 16.0)
+                        AxisAlignedBB(0.0, 0.0,  4.0 / 16.0, 1.0, 0.5,  7.0 / 16.0),
+                        AxisAlignedBB(0.0, 0.0,  9.0 / 16.0, 1.0, 0.5, 12.0 / 16.0),
+                        AxisAlignedBB(0.0, 0.5,  5.0 / 16.0, 1.0, 1.0, 11.0 / 16.0)
                 )
         )
         private val selectionBoxesX = arrayOf(
@@ -68,17 +81,13 @@ class BlockStepladder(val type: Stepladder) : Block(type.material), ISpecialLadd
     }
 
     init {
+        soundType = SoundType.LADDER
         defaultState = blockState.baseState.withProperty(FACING, EnumFacing.NORTH).withProperty(SEGMENT, 0)
     }
 
     @Suppress("OverridingDeprecatedMember")
     override fun addCollisionBoxToList(state: IBlockState, world: World, pos: BlockPos, entityBox: AxisAlignedBB, collisionBoxes: MutableList<AxisAlignedBB>, entity: Entity?) {
-        val array = when (state.getValue(FACING).axis) {
-            EnumFacing.Axis.X -> collisionBoxesX[state.getValue(SEGMENT)]
-            EnumFacing.Axis.Z -> collisionBoxesZ[state.getValue(SEGMENT)]
-            else -> emptyArray()
-        }
-        for (box in array) {
+        for (box in getCollisionBoxes(state)) {
             Block.addCollisionBoxToList(pos, entityBox, collisionBoxes, box)
         }
     }
@@ -93,7 +102,7 @@ class BlockStepladder(val type: Stepladder) : Block(type.material), ISpecialLadd
         }
     }
 
-    override fun getItemDropped(state: IBlockState, rand: Random, fortune: Int): Item = type.item
+    override fun getItemDropped(state: IBlockState, rand: Random, fortune: Int): Item = feature.item
 
     override fun damageDropped(state: IBlockState): Int = 0
 
@@ -116,10 +125,28 @@ class BlockStepladder(val type: Stepladder) : Block(type.material), ISpecialLadd
     }
 
     @Suppress("OverridingDeprecatedMember")
-    override fun isOpaqueCube(state: IBlockState?): Boolean = false
+    override fun isOpaqueCube(state: IBlockState): Boolean = false
 
     @Suppress("OverridingDeprecatedMember")
-    override fun isFullCube(state: IBlockState?): Boolean = false
+    override fun isFullCube(state: IBlockState): Boolean = false
+
+    @Suppress("OverridingDeprecatedMember")
+    override fun collisionRayTrace(state: IBlockState, world: World, pos: BlockPos, start: Vec3d, end: Vec3d): RayTraceResult? {
+        val results = getCollisionBoxes(state).map { rayTrace(pos, start, end, it) }.filterNotNull()
+
+        var bestResult: RayTraceResult? = null
+        var bestResultDistance = 0.0
+
+        for (result in results) {
+            val resultDistance = result.hitVec.squareDistanceTo(end)
+            if (resultDistance > bestResultDistance) {
+                bestResult = result
+                bestResultDistance = resultDistance
+            }
+        }
+
+        return bestResult
+    }
 
     @Suppress("OverridingDeprecatedMember")
     override fun getStateFromMeta(meta: Int): IBlockState {
@@ -144,7 +171,7 @@ class BlockStepladder(val type: Stepladder) : Block(type.material), ISpecialLadd
     }
 
     override fun getPickBlock(state: IBlockState, target: RayTraceResult, world: World, pos: BlockPos, player: EntityPlayer): ItemStack {
-        return ItemStack(type.item)
+        return ItemStack(feature.item)
     }
 
     override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
@@ -165,6 +192,8 @@ class BlockStepladder(val type: Stepladder) : Block(type.material), ISpecialLadd
                     world.setBlockToAir(pos)
                 }
             }
+
+            world.playLadderPickupSound(pos)
         }
 
         return true
@@ -178,6 +207,14 @@ class BlockStepladder(val type: Stepladder) : Block(type.material), ISpecialLadd
             }
         }
         return false
+    }
+
+    fun getCollisionBoxes(state: IBlockState): Array<AxisAlignedBB> {
+        return when (state.getValue(FACING).axis) {
+            EnumFacing.Axis.X -> collisionBoxesX[state.getValue(SEGMENT)]
+            EnumFacing.Axis.Z -> collisionBoxesZ[state.getValue(SEGMENT)]
+            else -> emptyArray()
+        }
     }
 
     fun checkAndDropBlock(world: World, pos: BlockPos, state: IBlockState) {

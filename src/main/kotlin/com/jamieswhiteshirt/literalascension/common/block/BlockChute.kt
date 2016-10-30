@@ -1,8 +1,8 @@
 package com.jamieswhiteshirt.literalascension.common.block
 
-import com.jamieswhiteshirt.literalascension.api.ICarvableBlock
-import com.jamieswhiteshirt.literalascension.api.ICarveMaterial
-import com.jamieswhiteshirt.literalascension.common.carvedblock.CarvedBlock
+import com.jamieswhiteshirt.literalascension.api.ICarvingBehaviour
+import com.jamieswhiteshirt.literalascension.api.ICarvingMaterial
+import com.jamieswhiteshirt.literalascension.common.features.carving.carvingmaterials.carvedblocks.CarvedBlock
 import com.jamieswhiteshirt.literalascension.common.spawnCarveParticles
 import net.minecraft.block.Block
 import net.minecraft.block.properties.PropertyBool
@@ -18,7 +18,7 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 
-class BlockChute(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock {
+class BlockChute(type: CarvedBlock) : BlockCarvedBase(type), ICarvingBehaviour {
     companion object {
         private val collisionBoxesSides = arrayOf(
                 AxisAlignedBB(0.0, 0.0, 14.0 / 16.0, 1.0, 1.0, 16.0 / 16.0),
@@ -34,6 +34,8 @@ class BlockChute(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock {
 
         val PROPERTIES = arrayOf(SOUTH, WEST, NORTH, EAST)
     }
+
+    override val carvingMaterial: ICarvingMaterial = type.material
 
     init {
         defaultState = PROPERTIES.fold(blockState.baseState, { state, property ->
@@ -69,10 +71,6 @@ class BlockChute(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock {
         }
 
         return false
-    }
-
-    override fun getCarveMaterial(state: IBlockState, world: World, pos: BlockPos): ICarveMaterial {
-        return type.material
     }
 
     @Suppress("OverridingDeprecatedMember")

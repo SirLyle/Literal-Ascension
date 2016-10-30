@@ -1,7 +1,7 @@
 package com.jamieswhiteshirt.literalascension.common.item
 
 import com.jamieswhiteshirt.literalascension.common.block.BlockClimbingRope
-import com.jamieswhiteshirt.literalascension.common.init.ClimbingRope
+import com.jamieswhiteshirt.literalascension.common.features.ClimbingRope
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -12,11 +12,11 @@ import net.minecraft.util.SoundCategory
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
-class ItemClimbingRope(val type: ClimbingRope) : Item() {
+class ItemClimbingRope(val feature: ClimbingRope) : Item() {
     override fun onItemUse(stack: ItemStack, player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (stack.stackSize > 0) {
             val state = world.getBlockState(pos)
-            if (state.block == type.block) {
+            if (state.block == feature.block) {
                 return tryPlaceBlock(stack, player, world, pos, state.getValue(BlockClimbingRope.FACING))
             }
             else if (facing.axis != EnumFacing.UP) {
@@ -29,7 +29,7 @@ class ItemClimbingRope(val type: ClimbingRope) : Item() {
 
     fun isMatchingBlock(world: World, pos: BlockPos, facing: EnumFacing): Boolean {
         val state = world.getBlockState(pos)
-        return state.block == type.block && state.getValue(BlockClimbingRope.FACING) == facing
+        return state.block == feature.block && state.getValue(BlockClimbingRope.FACING) == facing
     }
 
     fun tryPlaceBlock(stack: ItemStack, player: EntityPlayer, world: World, fromPos: BlockPos, facing: EnumFacing) : EnumActionResult {
@@ -40,9 +40,9 @@ class ItemClimbingRope(val type: ClimbingRope) : Item() {
 
         val replaceState = world.getBlockState(placePos)
         if (replaceState.block.isReplaceable(world, placePos)) {
-            val placeState = ClimbingRope.block.defaultState.withProperty(BlockClimbingRope.FACING, facing)
-            if (player.canPlayerEdit(placePos, facing, stack) && type.block.canBlockStay(placeState, world, placePos) && world.setBlockState(placePos, placeState)) {
-                val soundType = type.block.getSoundType(placeState, world, placePos, player)
+            val placeState = feature.block.defaultState.withProperty(BlockClimbingRope.FACING, facing)
+            if (player.canPlayerEdit(placePos, facing, stack) && feature.block.canBlockStay(placeState, world, placePos) && world.setBlockState(placePos, placeState)) {
+                val soundType = feature.block.getSoundType(placeState, world, placePos, player)
                 world.playSound(player, fromPos, soundType.placeSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F)
 
                 --stack.stackSize

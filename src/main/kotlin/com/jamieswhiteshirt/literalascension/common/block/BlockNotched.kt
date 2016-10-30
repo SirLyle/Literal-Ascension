@@ -1,9 +1,9 @@
 package com.jamieswhiteshirt.literalascension.common.block
 
-import com.jamieswhiteshirt.literalascension.api.ICarvableBlock
-import com.jamieswhiteshirt.literalascension.api.ICarveMaterial
+import com.jamieswhiteshirt.literalascension.api.ICarvingBehaviour
+import com.jamieswhiteshirt.literalascension.api.ICarvingMaterial
 import com.jamieswhiteshirt.literalascension.api.ISpecialLadderBlock
-import com.jamieswhiteshirt.literalascension.common.carvedblock.CarvedBlock
+import com.jamieswhiteshirt.literalascension.common.features.carving.carvingmaterials.carvedblocks.CarvedBlock
 import com.jamieswhiteshirt.literalascension.common.spawnCarveParticles
 import net.minecraft.block.properties.PropertyBool
 import net.minecraft.block.state.BlockStateContainer
@@ -14,7 +14,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 
-class BlockNotched(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock, ISpecialLadderBlock {
+class BlockNotched(feature: CarvedBlock) : BlockCarvedBase(feature), ICarvingBehaviour, ISpecialLadderBlock {
     companion object {
         val SOUTH: PropertyBool = PropertyBool.create("south")
         val WEST: PropertyBool = PropertyBool.create("west")
@@ -22,7 +22,13 @@ class BlockNotched(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock, I
         val EAST: PropertyBool = PropertyBool.create("east")
 
         val PROPERTIES = arrayOf(SOUTH, WEST, NORTH, EAST)
+
+        fun propertyOf(facing: EnumFacing): PropertyBool {
+            return PROPERTIES[facing.horizontalIndex]
+        }
     }
+
+    override val carvingMaterial: ICarvingMaterial = feature.material
 
     init {
         defaultState = PROPERTIES.fold(blockState.baseState, { state, property ->
@@ -32,7 +38,7 @@ class BlockNotched(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock, I
 
     override fun tryCarve(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (facing.axis != EnumFacing.Axis.Y) {
-            val property = PROPERTIES[facing.horizontalIndex]
+            val property = propertyOf(facing)
             if (!state.getValue(property)) {
                 if (!world.isRemote) {
                     world.setBlockState(pos, state.withProperty(property, true))
@@ -42,17 +48,13 @@ class BlockNotched(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock, I
             }
         } else {
             if (!world.isRemote) {
-                world.setBlockState(pos, type.chute.defaultState)
+                world.setBlockState(pos, feature.chute.defaultState)
                 world.spawnCarveParticles(pos, facing)
             }
             return true
         }
 
         return false
-    }
-
-    override fun getCarveMaterial(state: IBlockState, world: World, pos: BlockPos): ICarveMaterial {
-        return type.material
     }
 
     @Suppress("OverridingDeprecatedMember")
@@ -79,9 +81,9 @@ class BlockNotched(type: CarvedBlock) : BlockCarvedBase(type), ICarvableBlock, I
     }
 
     override fun canClimb(state: IBlockState, world: IBlockAccess, pos: BlockPos, entity: EntityLivingBase): Boolean {
-        for (i in PROPERTIES.indices) {
-            if (state.getValue(PROPERTIES[i])) {
-                if (isIntersectingDefault(pos.offset(EnumFacing.getHorizontal(i)), entity)) {
+        for (facing in EnumFacing.HORIZONTALS) {
+            if (state.getValue(propertyOf(facing))) {
+                if (isIntersectingDefault(pos.offset(facing), entity)) {
                     return true
                 }
             }

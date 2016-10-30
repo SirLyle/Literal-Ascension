@@ -1,9 +1,8 @@
 package com.jamieswhiteshirt.literalascension
 
 import com.jamieswhiteshirt.literalascension.common.CommonProxy
-import com.jamieswhiteshirt.literalascension.common.config.LiteralAscensionConfig
-import com.jamieswhiteshirt.literalascension.common.init.*
-import net.ilexiconn.llibrary.server.config.Config
+import com.jamieswhiteshirt.literalascension.common.Features
+import net.minecraftforge.common.config.Configuration
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.SidedProxy
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
@@ -36,32 +35,30 @@ object LiteralAscension {
             serverSide = SERVER_PROXY,
             modId = MODID
     )
-    lateinit var proxy: CommonProxy
+    lateinit var PROXY: CommonProxy
 
-    @JvmStatic
-    @Config
-    lateinit var config: LiteralAscensionConfig
+    lateinit var FEATURES: Features
+
+    lateinit var config: Configuration
 
     val packetHandler: SimpleNetworkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MODID)
 
     @Mod.EventHandler
     fun preInit(@Suppress("UNUSED_PARAMETER") event: FMLPreInitializationEvent) {
-        Stepladders.register()
-        CarvingTools.register()
-        CarvedBlocks.register()
-        ClimbingRope.register()
+        config = Configuration(event.suggestedConfigurationFile)
+        FEATURES = Features(config)
+        config.save()
 
-        proxy.registerMessages()
+        FEATURES.register()
+
+        PROXY.registerMessages()
     }
 
     @Mod.EventHandler
     fun init(@Suppress("UNUSED_PARAMETER") event: FMLInitializationEvent) {
-        proxy.registerRenderers()
-        proxy.registerEventHandlers()
+        PROXY.registerRenderers()
+        PROXY.registerEventHandlers()
 
-        Stepladders.registerRecipes()
-        CarvingTools.registerRecipes()
-        CarvedBlocks.registerRecipes()
-        ClimbingRope.registerRecipes()
+        FEATURES.registerRecipes()
     }
 }

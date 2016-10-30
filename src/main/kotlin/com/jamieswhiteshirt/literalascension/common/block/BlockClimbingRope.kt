@@ -1,25 +1,28 @@
 package com.jamieswhiteshirt.literalascension.common.block
 
 import com.jamieswhiteshirt.literalascension.api.ISpecialLadderBlock
-import com.jamieswhiteshirt.literalascension.common.init.ClimbingRope
+import com.jamieswhiteshirt.literalascension.common.features.ClimbingRope
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyDirection
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.EntityLivingBase
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
+import net.minecraft.item.ItemStack
 import net.minecraft.util.BlockRenderLayer
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.RayTraceResult
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.*
 
-class BlockClimbingRope(val type: ClimbingRope) : Block(Material.CIRCUITS), ISpecialLadderBlock {
+class BlockClimbingRope(val feature: ClimbingRope) : Block(Material.CIRCUITS), ISpecialLadderBlock {
     companion object {
         val FACING: PropertyDirection = PropertyDirection.create("facing", { it != EnumFacing.DOWN })
 
@@ -67,7 +70,7 @@ class BlockClimbingRope(val type: ClimbingRope) : Block(Material.CIRCUITS), ISpe
         return false
     }
 
-    override fun getItemDropped(state: IBlockState, rand: Random, fortune: Int): Item = type.item
+    override fun getItemDropped(state: IBlockState, rand: Random, fortune: Int): Item = feature.item
 
     @Suppress("OverridingDeprecatedMember")
     override fun isFullCube(state: IBlockState?): Boolean {
@@ -101,6 +104,10 @@ class BlockClimbingRope(val type: ClimbingRope) : Block(Material.CIRCUITS), ISpe
         @Suppress("DEPRECATION")
         super.neighborChanged(state, world, pos, block)
         checkAndDropBlock(world, pos, state)
+    }
+
+    override fun getPickBlock(state: IBlockState, target: RayTraceResult, world: World, pos: BlockPos, player: EntityPlayer): ItemStack {
+        return ItemStack(feature.item)
     }
 
     fun checkAndDropBlock(world: World, pos: BlockPos, state: IBlockState) {

@@ -6,8 +6,7 @@ import net.minecraft.client.gui.GuiScreen
 import net.minecraftforge.fml.client.IModGuiFactory
 
 class LiteralAscensionGUIFactory : IModGuiFactory {
-    override fun initialize(minecraftInstance: Minecraft?) {
-    }
+    override fun initialize(minecraftInstance: Minecraft?) { }
 
     override fun mainConfigGuiClass(): Class<out GuiScreen> = LiteralAscensionConfigGUI::class.java
 
