@@ -2,8 +2,8 @@
   {
     "modid": "literalascension",
     "name": "Literal Ascension",
-    "description": "Literal Ascension adds intuitive solutions for vertical mobility.",
-    "url": "https://bitbucket.org/jamieswhiteshirt/literal-ascension",
+    "description": "Adds intuitive solutions for vertical mobility",
+    "url": "https://minecraft.curseforge.com/projects/literal-ascension",
     "version": "${version}",
     "mcversion": "${mcversion}",
     "authorList": [
