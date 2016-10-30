@@ -3,6 +3,24 @@ package com.jamieswhiteshirt.literalascension.common
 import net.minecraftforge.common.config.Configuration
 import java.util.*
 
+interface IFeature {
+    val featureName: String
+
+    fun register()
+
+    fun registerRecipes()
+}
+
+interface ISubFeature : IFeature {
+    val subFeatureName: String
+
+    val parent: IFeature
+}
+
+abstract class SubFeature(override val subFeatureName: String, override val parent: IFeature) : ISubFeature {
+    override val featureName: String get() = "${parent.featureName}.$subFeatureName"
+}
+
 abstract class FeatureCollectionBase<T : ISubFeature> : IFeature {
     private val _subFeatures = ArrayList<T>()
 

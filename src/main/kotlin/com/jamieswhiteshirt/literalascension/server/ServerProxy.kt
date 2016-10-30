@@ -13,8 +13,14 @@ class ServerProxy : CommonProxy() {
 
     override fun registerMessages() {
         super.registerMessages()
-        LiteralAscension.packetHandler.registerMessage(DummyMessageHandler, MessagePlayCarveSound::class.java, MessagePlayCarveSound.DISCRIMINATOR, Side.CLIENT)
-        LiteralAscension.packetHandler.registerMessage(DummyMessageHandler, MessageSpawnCarveParticles::class.java, MessageSpawnCarveParticles.DISCRIMINATOR, Side.CLIENT)
-        LiteralAscension.packetHandler.registerMessage(DummyMessageHandler, MessagePlayLadderPickupSound::class.java, MessagePlayLadderPickupSound.DISCRIMINATOR, Side.CLIENT)
+        LiteralAscension.FEATURES.let {
+            it.CARVING?.let {
+                LiteralAscension.packetHandler.registerMessage(DummyMessageHandler, MessagePlayCarveSound::class.java, MessagePlayCarveSound.DISCRIMINATOR, Side.CLIENT)
+                LiteralAscension.packetHandler.registerMessage(DummyMessageHandler, MessageSpawnCarveParticles::class.java, MessageSpawnCarveParticles.DISCRIMINATOR, Side.CLIENT)
+            }
+            it.STEPLADDERS?.let {
+                LiteralAscension.packetHandler.registerMessage(DummyMessageHandler, MessagePlayLadderPickupSound::class.java, MessagePlayLadderPickupSound.DISCRIMINATOR, Side.CLIENT)
+            }
+        }
     }
 }

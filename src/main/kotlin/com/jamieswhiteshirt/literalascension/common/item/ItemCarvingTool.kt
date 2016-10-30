@@ -3,7 +3,6 @@ package com.jamieswhiteshirt.literalascension.common.item
 import com.google.common.collect.Multimap
 import com.jamieswhiteshirt.literalascension.api.ICarvingBehaviour
 import com.jamieswhiteshirt.literalascension.common.features.carving.carvingtools.CarvingTool
-import com.jamieswhiteshirt.literalascension.common.playCarveSound
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.SharedMonsterAttributes
@@ -46,7 +45,7 @@ class ItemCarvingTool(val feature: CarvingTool, val toolMaterial: ToolMaterial) 
                                 stack.damageItem(1, player)
                             }
 
-                            world.playCarveSound(pos, player)
+                            feature.parent.parent.playCarveSound(world, pos, player)
                         }
 
                         return EnumActionResult.SUCCESS

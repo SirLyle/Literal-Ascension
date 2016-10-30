@@ -2,7 +2,6 @@ package com.jamieswhiteshirt.literalascension.common.block
 
 import com.jamieswhiteshirt.literalascension.api.ISpecialLadderBlock
 import com.jamieswhiteshirt.literalascension.common.features.stepladders.Stepladder
-import com.jamieswhiteshirt.literalascension.common.playLadderPickupSound
 import net.minecraft.block.Block
 import net.minecraft.block.BlockHorizontal
 import net.minecraft.block.SoundType
@@ -193,7 +192,7 @@ class BlockStepladder(val feature: Stepladder) : Block(feature.material), ISpeci
                 }
             }
 
-            world.playLadderPickupSound(pos)
+            feature.parent.playLadderPickupSound(world, pos)
         }
 
         return true

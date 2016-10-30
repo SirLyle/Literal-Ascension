@@ -1,13 +1,18 @@
 package com.jamieswhiteshirt.literalascension.common.features
 
+import com.jamieswhiteshirt.literalascension.LiteralAscension
 import com.jamieswhiteshirt.literalascension.common.Features
 import com.jamieswhiteshirt.literalascension.common.SubFeatureCollection
 import com.jamieswhiteshirt.literalascension.common.features.stepladders.*
+import com.jamieswhiteshirt.literalascension.common.network.message.MessagePlayLadderPickupSound
 import net.minecraft.block.BlockPlanks
 import net.minecraft.block.material.Material
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
+import net.minecraft.util.math.BlockPos
+import net.minecraft.world.World
 import net.minecraftforge.common.config.Configuration
+import net.minecraftforge.fml.common.network.NetworkRegistry
 
 class Stepladders(config: Configuration, override val parent: Features) : SubFeatureCollection<Stepladder>("stepladders", parent) {
     val OAK          = optionalOn(config, StepladderOldWood(BlockPlanks.EnumType.OAK, this))
@@ -21,4 +26,9 @@ class Stepladders(config: Configuration, override val parent: Features) : SubFea
     val DIAMOND      = optionalOff(config, StepladderSimple(Material.IRON, "diamond", ItemStack(Items.DIAMOND), this))
     val EMERALD      = optionalOff(config, StepladderSimple(Material.IRON, "emerald", ItemStack(Items.EMERALD), this))
     val GENERIC_WOOD = optionalOff(config, StepladderGenericWood(this))
+
+    fun playLadderPickupSound(world: World, pos: BlockPos) {
+        val targetPoint = NetworkRegistry.TargetPoint(world.provider.dimension, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), 16.0)
+        LiteralAscension.packetHandler.sendToAllAround(MessagePlayLadderPickupSound(pos), targetPoint)
+    }
 }

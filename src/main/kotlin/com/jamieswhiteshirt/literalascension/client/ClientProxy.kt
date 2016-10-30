@@ -50,8 +50,14 @@ class ClientProxy : CommonProxy() {
 
     override fun registerMessages() {
         super.registerMessages()
-        LiteralAscension.packetHandler.registerMessage(MessagePlayCarveSoundHandler, MessagePlayCarveSound::class.java, MessagePlayCarveSound.DISCRIMINATOR, Side.CLIENT)
-        LiteralAscension.packetHandler.registerMessage(MessageSpawnCarveParticlesHandler, MessageSpawnCarveParticles::class.java, MessageSpawnCarveParticles.DISCRIMINATOR, Side.CLIENT)
-        LiteralAscension.packetHandler.registerMessage(MessagePlayLadderPickupSoundHandler, MessagePlayLadderPickupSound::class.java, MessagePlayLadderPickupSound.DISCRIMINATOR, Side.CLIENT)
+        LiteralAscension.FEATURES.let {
+            it.CARVING?.let {
+                LiteralAscension.packetHandler.registerMessage(MessagePlayCarveSoundHandler, MessagePlayCarveSound::class.java, MessagePlayCarveSound.DISCRIMINATOR, Side.CLIENT)
+                LiteralAscension.packetHandler.registerMessage(MessageSpawnCarveParticlesHandler, MessageSpawnCarveParticles::class.java, MessageSpawnCarveParticles.DISCRIMINATOR, Side.CLIENT)
+            }
+            it.STEPLADDERS?.let {
+                LiteralAscension.packetHandler.registerMessage(MessagePlayLadderPickupSoundHandler, MessagePlayLadderPickupSound::class.java, MessagePlayLadderPickupSound.DISCRIMINATOR, Side.CLIENT)
+            }
+        }
     }
 }
