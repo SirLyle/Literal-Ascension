@@ -14,6 +14,10 @@ buildscript {
     }
 }
 
+plugins {
+	id 'com.matthewprenger.cursegradle' version '1.0.7'
+}
+
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'kotlin'
 apply plugin: 'idea'
@@ -95,6 +99,38 @@ jar {
         attributes "FMLCorePlugin": corePlugin
         attributes "FMLCorePluginContainsFMLMod": "true"
     }
+}
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+    manifest {
+        attributes "FMLCorePlugin": corePlugin
+        attributes "FMLCorePluginContainsFMLMod": "true"
+    }
+}
+
+curseforge {
+	apiKey = project.curseForgeApiKey
+	project {
+		id = '253021'
+		changelogType = 'markdown'
+		changelog = file('changelog.md')
+		releaseType = 'alpha'
+		relations {
+			requiredLibrary 'shadowfacts-forgelin'
+			requiredLibrary 'llibrary'
+		}
+		mainArtifact(jar) {
+			displayName = "Literal Ascension $project.version"
+		}
+		addArtifact(sourceJar) {
+			displayName = "Literal Ascension $project.version Sources"
+		}
+		addArtifact(deobfJar) {
+			displayName = "Literal Ascension $project.version Deobfuscated"
+		}
+	}
 }
 
 // AUTOMATIC MODEL GENERATION
