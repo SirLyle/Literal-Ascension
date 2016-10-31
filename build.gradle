@@ -110,6 +110,11 @@ task deobfJar(type: Jar) {
     }
 }
 
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
 curseforge {
 	apiKey = project.curseForgeApiKey
 	project {
@@ -124,7 +129,7 @@ curseforge {
 		mainArtifact(jar) {
 			displayName = "Literal Ascension $project.version"
 		}
-		addArtifact(sourceJar) {
+		addArtifact(sourcesJar) {
 			displayName = "Literal Ascension $project.version Sources"
 		}
 		addArtifact(deobfJar) {
