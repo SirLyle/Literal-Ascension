@@ -12,7 +12,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.common.config.Configuration
 
-class CarvingMaterialStone(config: Configuration, parent: CarvingMaterials) : CarvingMaterial(Blocks.STONE, 2.0F, 3, "stone", config, parent) {
+class CarvingMaterialStone(config: Configuration, parent: CarvingMaterials) : CarvingMaterial(Blocks.STONE, 2.0F, 2, "stone", config, parent) {
     val STONE    = optionalOn(config, CarvedBlockStone(BlockStone.EnumType.STONE, this))
     val GRANITE  = optionalOn(config, CarvedBlockStone(BlockStone.EnumType.GRANITE, this))
     val DIORITE  = optionalOn(config, CarvedBlockStone(BlockStone.EnumType.DIORITE, this))
