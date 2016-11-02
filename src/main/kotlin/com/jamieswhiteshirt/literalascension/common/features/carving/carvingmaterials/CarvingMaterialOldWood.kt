@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.common.config.Configuration
 
-class CarvingMaterialOldWood(config: Configuration, parent: CarvingMaterials) : CarvingMaterial(Blocks.LOG, 2.0F, 0, "wood", config, parent) {
+class CarvingMaterialOldWood(config: Configuration, parent: CarvingMaterials) : CarvingMaterial(Blocks.LOG, 0, "wood", config, parent) {
     val LOG_OAK      = optionalOn(config, CarvedBlockOldWood(BlockPlanks.EnumType.OAK, this))
     val LOG_SPRUCE   = optionalOn(config, CarvedBlockOldWood(BlockPlanks.EnumType.SPRUCE, this))
     val LOG_BIRCH    = optionalOn(config, CarvedBlockOldWood(BlockPlanks.EnumType.BIRCH, this))

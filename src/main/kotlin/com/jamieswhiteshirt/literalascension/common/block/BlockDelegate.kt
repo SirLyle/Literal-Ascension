@@ -22,12 +22,8 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.*
 
-abstract class BlockDelegate(val modelState: IBlockState, hardness: Float) : Block(modelState.material) {
+abstract class BlockDelegate(val modelState: IBlockState) : Block(modelState.material) {
     val modelBlock: Block = modelState.block
-
-    init {
-        setHardness(hardness)
-    }
 
     @SideOnly(Side.CLIENT)
     override fun randomDisplayTick(stateIn: IBlockState, world: World, pos: BlockPos, rand: Random) {
@@ -143,5 +139,11 @@ abstract class BlockDelegate(val modelState: IBlockState, hardness: Float) : Blo
 
     override fun getSoundType(state: IBlockState, world: World, pos: BlockPos, entity: Entity?): SoundType {
         return modelBlock.getSoundType(modelState, world, pos, entity)
+    }
+
+    @Suppress("OverridingDeprecatedMember")
+    override fun getBlockHardness(blockState: IBlockState, world: World, pos: BlockPos): Float {
+        @Suppress("DEPRECATION")
+        return modelBlock.getBlockHardness(modelState, world, pos)
     }
 }
