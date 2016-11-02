@@ -112,8 +112,7 @@ class BlockClimbingRope(val feature: ClimbingRope) : Block(Material.CIRCUITS), I
 
     fun checkAndDropBlock(world: World, pos: BlockPos, state: IBlockState) {
         if (!canBlockStay(state, world, pos)) {
-            dropBlockAsItem(world, pos, state, 0)
-            world.setBlockToAir(pos)
+            world.destroyBlock(pos, true)
         }
     }
 
