@@ -19,7 +19,7 @@ class ItemClimbingRope(val feature: ClimbingRope) : Item() {
             if (state.block == feature.block) {
                 return tryPlaceBlock(stack, player, world, pos, state.getValue(BlockClimbingRope.FACING))
             }
-            else if (facing.axis != EnumFacing.UP) {
+            else if (facing != EnumFacing.UP) {
                 return tryPlaceBlock(stack, player, world, pos.offset(facing), facing.opposite)
             }
         }
