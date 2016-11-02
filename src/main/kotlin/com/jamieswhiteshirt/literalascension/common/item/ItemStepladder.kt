@@ -39,11 +39,13 @@ class ItemStepladder(val feature: Stepladder) : Item() {
 
     fun canPlaceAt(stack: ItemStack, world: World, placePos: BlockPos, facing: EnumFacing): Boolean {
         for (pos in BlockStepladder.SEGMENTS.map { placePos.up(it) }) {
-            if (!world.canBlockBePlaced(feature.block, pos, false, facing, null, stack) || !feature.block.canPlaceBlockAt(world, pos)) {
+            if (!pos.isValid || !world.canBlockBePlaced(feature.block, pos, false, facing, null, stack) || !feature.block.canPlaceBlockAt(world, pos)) {
                 return false
             }
         }
 
         return world.isSideSolid(placePos.down(), EnumFacing.UP)
     }
+
+    val BlockPos.isValid: Boolean get () = this.x >= -30000000 && this.y >= 0 && this.z >= -30000000 && this.x < 30000000 && this.y < 256 && this.z < 30000000
 }
