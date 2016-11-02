@@ -1,1 +1,1 @@
-* Fixed bug causing crashes when trying to place climbing rope on the top side of a block
+* Improve the placement behaviour and breaking behaviour of stepladders and climbing rope
