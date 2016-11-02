@@ -26,8 +26,9 @@ import java.util.*
 
 class BlockStepladder(val feature: Stepladder) : Block(feature.material), ISpecialLadderBlock {
     companion object {
+        val SEGMENTS: IntRange = 0..2
         val FACING: PropertyDirection = BlockHorizontal.FACING
-        val SEGMENT: PropertyInteger = PropertyInteger.create("segment", 0, 2)
+        val SEGMENT: PropertyInteger = PropertyInteger.create("segment", SEGMENTS.first, SEGMENTS.last)
 
         private val collisionBoxesX = arrayOf(
                 arrayOf(
@@ -105,24 +106,6 @@ class BlockStepladder(val feature: Stepladder) : Block(feature.material), ISpeci
 
     override fun damageDropped(state: IBlockState): Int = 0
 
-    override fun canPlaceBlockAt(world: World, pos: BlockPos): Boolean {
-        if (super.canPlaceBlockAt(world, pos)) {
-            if (!world.isSideSolid(pos.down(), EnumFacing.UP)) {
-                return false
-            }
-
-            for (i in 1..2) {
-                if (!world.isAirBlock(pos.up(i))) {
-                    return false
-                }
-            }
-
-            return true
-        } else {
-            return false
-        }
-    }
-
     @Suppress("OverridingDeprecatedMember")
     override fun isOpaqueCube(state: IBlockState): Boolean = false
 
@@ -184,7 +167,7 @@ class BlockStepladder(val feature: Stepladder) : Block(feature.material), ISpeci
                 }
             }
 
-            for (segment in 0..2) {
+            for (segment in SEGMENTS) {
                 val otherPos = pos.up(segment - activatedSegment)
                 val otherState = world.getBlockState(otherPos)
                 if (otherState.block == this && otherState.getValue(SEGMENT) == segment) {
@@ -231,7 +214,7 @@ class BlockStepladder(val feature: Stepladder) : Block(feature.material), ISpeci
             }
         }
 
-        for (segment in 0..2) {
+        for (segment in SEGMENTS) {
             val otherState = world.getBlockState(pos.up(segment - thisSegment))
             if (otherState.block != this || otherState.getValue(SEGMENT) != segment) {
                 return false
@@ -241,14 +224,10 @@ class BlockStepladder(val feature: Stepladder) : Block(feature.material), ISpeci
         return true
     }
 
-    fun tryPlaceStepladder(world: World, pos: BlockPos, horizontalFacing: EnumFacing): Boolean {
-        if (canPlaceBlockAt(world, pos)) {
-            val baseState = defaultState.withProperty(BlockStepladder.FACING, horizontalFacing)
-            for (i in 0..2) {
-                world.setBlockState(pos.up(i), baseState.withProperty(BlockStepladder.SEGMENT, i))
-            }
-            return true
+    fun placeStepladder(world: World, pos: BlockPos, horizontalFacing: EnumFacing) {
+        val baseState = defaultState.withProperty(BlockStepladder.FACING, horizontalFacing)
+        for (segment in SEGMENTS) {
+            world.setBlockState(pos.up(segment), baseState.withProperty(BlockStepladder.SEGMENT, segment))
         }
-        return false
     }
 }
