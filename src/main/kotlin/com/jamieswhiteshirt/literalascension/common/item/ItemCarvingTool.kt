@@ -42,10 +42,9 @@ class ItemCarvingTool(val feature: CarvingTool, val toolMaterial: ToolMaterial) 
                             } else {
                                 stack.damageItem(1, player)
                             }
-
-                            feature.parent.parent.playCarveSound(world, pos, player)
                         }
 
+                        feature.parent.parent.playCarveSound(world, pos, player)
                         return EnumActionResult.SUCCESS
                     }
                 }

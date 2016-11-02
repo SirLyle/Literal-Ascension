@@ -1,18 +1,17 @@
 package com.jamieswhiteshirt.literalascension.client
 
 import com.jamieswhiteshirt.literalascension.LiteralAscension
-import com.jamieswhiteshirt.literalascension.client.network.messagehandler.MessagePlayCarveSoundHandler
-import com.jamieswhiteshirt.literalascension.client.network.messagehandler.MessagePlayLadderPickupSoundHandler
 import com.jamieswhiteshirt.literalascension.client.network.messagehandler.MessageSpawnCarveParticlesHandler
 import com.jamieswhiteshirt.literalascension.common.CommonProxy
 import com.jamieswhiteshirt.literalascension.common.features.carving.carvingtools.CarvingTool
 import com.jamieswhiteshirt.literalascension.common.features.stepladders.Stepladder
-import com.jamieswhiteshirt.literalascension.common.network.message.MessagePlayCarveSound
-import com.jamieswhiteshirt.literalascension.common.network.message.MessagePlayLadderPickupSound
 import com.jamieswhiteshirt.literalascension.common.network.message.MessageSpawnCarveParticles
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.ItemModelMesher
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
+import net.minecraft.util.EnumFacing
+import net.minecraft.util.math.BlockPos
+import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 
 class ClientProxy : CommonProxy() {
@@ -52,11 +51,7 @@ class ClientProxy : CommonProxy() {
         super.registerMessages()
         LiteralAscension.FEATURES.let {
             it.CARVING?.let {
-                LiteralAscension.packetHandler.registerMessage(MessagePlayCarveSoundHandler, MessagePlayCarveSound::class.java, MessagePlayCarveSound.DISCRIMINATOR, Side.CLIENT)
                 LiteralAscension.packetHandler.registerMessage(MessageSpawnCarveParticlesHandler, MessageSpawnCarveParticles::class.java, MessageSpawnCarveParticles.DISCRIMINATOR, Side.CLIENT)
-            }
-            it.STEPLADDERS?.let {
-                LiteralAscension.packetHandler.registerMessage(MessagePlayLadderPickupSoundHandler, MessagePlayLadderPickupSound::class.java, MessagePlayLadderPickupSound.DISCRIMINATOR, Side.CLIENT)
             }
         }
     }

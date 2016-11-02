@@ -2,10 +2,12 @@ package com.jamieswhiteshirt.literalascension.server
 
 import com.jamieswhiteshirt.literalascension.LiteralAscension
 import com.jamieswhiteshirt.literalascension.common.CommonProxy
-import com.jamieswhiteshirt.literalascension.common.network.message.MessagePlayCarveSound
-import com.jamieswhiteshirt.literalascension.common.network.message.MessagePlayLadderPickupSound
 import com.jamieswhiteshirt.literalascension.common.network.message.MessageSpawnCarveParticles
 import com.jamieswhiteshirt.literalascension.common.network.messagehandler.DummyMessageHandler
+import net.minecraft.util.EnumFacing
+import net.minecraft.util.math.BlockPos
+import net.minecraft.world.World
+import net.minecraftforge.fml.common.network.NetworkRegistry
 import net.minecraftforge.fml.relauncher.Side
 
 class ServerProxy : CommonProxy() {
@@ -15,11 +17,7 @@ class ServerProxy : CommonProxy() {
         super.registerMessages()
         LiteralAscension.FEATURES.let {
             it.CARVING?.let {
-                LiteralAscension.packetHandler.registerMessage(DummyMessageHandler, MessagePlayCarveSound::class.java, MessagePlayCarveSound.DISCRIMINATOR, Side.CLIENT)
                 LiteralAscension.packetHandler.registerMessage(DummyMessageHandler, MessageSpawnCarveParticles::class.java, MessageSpawnCarveParticles.DISCRIMINATOR, Side.CLIENT)
-            }
-            it.STEPLADDERS?.let {
-                LiteralAscension.packetHandler.registerMessage(DummyMessageHandler, MessagePlayLadderPickupSound::class.java, MessagePlayLadderPickupSound.DISCRIMINATOR, Side.CLIENT)
             }
         }
     }

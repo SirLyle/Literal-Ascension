@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 
 class MessageSpawnCarveParticles(var pos: BlockPos?, var facing: EnumFacing?) : IMessage {
     companion object {
-        const val DISCRIMINATOR = 1
+        const val DISCRIMINATOR = 0
     }
 
     constructor() : this(null, null)

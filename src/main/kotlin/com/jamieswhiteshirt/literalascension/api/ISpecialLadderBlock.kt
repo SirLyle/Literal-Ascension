@@ -31,7 +31,7 @@ fun isIntersectingVanilla(pos: BlockPos, entity: EntityLivingBase): Boolean {
 
 interface ISpecialLadderBlock {
     /**
-     * Return true if the entity can climb this block.
+     * Return true if the player can climb this block.
      */
     fun canClimb(state: IBlockState, world: IBlockAccess, pos: BlockPos, entity: EntityLivingBase): Boolean
 

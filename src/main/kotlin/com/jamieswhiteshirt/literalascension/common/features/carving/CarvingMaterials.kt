@@ -9,7 +9,7 @@ import com.jamieswhiteshirt.literalascension.common.features.carving.carvingmate
 import net.minecraftforge.common.config.Configuration
 
 class CarvingMaterials(config: Configuration, override val parent: Carving) : SubFeatureCollection<CarvingMaterial>("materials", parent) {
-    val WOOD  = optionalOn(config, CarvingMaterialOldWood(config, this))
-    val WOOD2  = optionalOn(config, CarvingMaterialNewWood(config, this))
+    val WOOD = optionalOn(config, CarvingMaterialOldWood(config, this))
+    val WOOD2 = optionalOn(config, CarvingMaterialNewWood(config, this))
     val STONE = optionalOn(config, CarvingMaterialStone(config, this))
 }

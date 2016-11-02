@@ -168,10 +168,9 @@ class BlockStepladder(val feature: Stepladder) : Block(feature.material), ISpeci
             }
 
             removeStepladderSafely(world, pos, state)
-
-            feature.parent.playLadderPickupSound(world, pos)
         }
 
+        feature.parent.playLadderPickupSound(world, pos, player)
         return true
     }
 
