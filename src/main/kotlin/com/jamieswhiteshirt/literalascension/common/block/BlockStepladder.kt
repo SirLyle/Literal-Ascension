@@ -12,6 +12,7 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.init.Blocks
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumFacing
@@ -158,7 +159,6 @@ class BlockStepladder(val feature: Stepladder) : Block(feature.material), ISpeci
 
     override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (!world.isRemote) {
-            val activatedSegment = state.getValue(SEGMENT)
             if (!player.isCreative) {
                 for (drop in getDrops(world, pos, state, 0)) {
                     if (!player.inventory.addItemStackToInventory(drop) && drop.stackSize > 0) {
@@ -167,17 +167,16 @@ class BlockStepladder(val feature: Stepladder) : Block(feature.material), ISpeci
                 }
             }
 
-            for (segment in SEGMENTS) {
-                val otherPos = pos.up(segment - activatedSegment)
-                val otherState = world.getBlockState(otherPos)
-                if (otherState.block == this && otherState.getValue(SEGMENT) == segment) {
-                    world.setBlockToAir(pos)
-                }
-            }
+            removeStepladderSafely(world, pos, state)
 
             feature.parent.playLadderPickupSound(world, pos)
         }
 
+        return true
+    }
+
+    override fun removedByPlayer(state: IBlockState, world: World, pos: BlockPos, player: EntityPlayer, willHarvest: Boolean): Boolean {
+        removeStepladderSafely(world, pos, state)
         return true
     }
 
@@ -199,9 +198,29 @@ class BlockStepladder(val feature: Stepladder) : Block(feature.material), ISpeci
         }
     }
 
+    fun removeStepladderSafely(world: World, pos: BlockPos, state: IBlockState) {
+        val thisSegment = state.getValue(SEGMENT)
+        val segmentPositions = SEGMENTS.map { pos.up(it - thisSegment) }
+        val oldStates = segmentPositions.map { world.getBlockState(it) }
+
+        val removeSegments = SEGMENTS.filter {
+            oldStates[it].block == this && oldStates[it].getValue(SEGMENT) == it
+        }
+
+        for (segment in removeSegments) {
+            world.setBlockState(segmentPositions[segment], Blocks.AIR.defaultState, 0)
+        }
+
+        val chunk = world.getChunkFromBlockCoords(pos)
+        for (segment in removeSegments) {
+            world.markAndNotifyBlock(segmentPositions[segment], chunk, oldStates[segment], Blocks.AIR.defaultState, 3)
+        }
+    }
+
     fun checkAndDropBlock(world: World, pos: BlockPos, state: IBlockState) {
         if (!canBlockStay(world, pos, state)) {
-            world.setBlockToAir(pos)
+            dropBlockAsItem(world, pos, state, 0)
+            removeStepladderSafely(world, pos, state)
         }
     }
 
