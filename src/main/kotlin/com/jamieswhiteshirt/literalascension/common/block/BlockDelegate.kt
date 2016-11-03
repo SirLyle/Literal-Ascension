@@ -121,6 +121,10 @@ abstract class BlockDelegate(val modelState: IBlockState) : Block(modelState.mat
         }
     }
 
+    override fun canSilkHarvest(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer): Boolean {
+        return modelBlock.canSilkHarvest(world, pos, state, player)
+    }
+
     override fun getPickBlock(state: IBlockState, target: RayTraceResult, world: World, pos: BlockPos, player: EntityPlayer): ItemStack {
         return modelBlock.getPickBlock(modelState, target, world, pos, player)
     }
