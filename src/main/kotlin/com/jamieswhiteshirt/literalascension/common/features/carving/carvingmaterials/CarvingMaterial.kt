@@ -14,5 +14,5 @@ abstract class CarvingMaterial(val block: Block, toolLevel: Int, name: String, c
     override val suitableToolDamageMultiplier: Int = config.getInt("suitableCarvingToolDamageMultiplier", featureName, 0, 0, 20, "Tool damage multiplier for suitable carving of this material")
     override val unsuitableToolDamageMultiplier: Int = config.getInt("suitableCarvingToolDamageMultiplier", featureName, 10, 0, 20, "Tool damage multiplier for unsuitable carving of this material")
 
-    abstract fun getCarvingBehaviourShim(): ICarvingBehaviour
+    abstract fun registerCarvingBehaviourShims()
 }

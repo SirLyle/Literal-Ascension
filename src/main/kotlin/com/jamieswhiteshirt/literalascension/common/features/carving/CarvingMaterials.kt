@@ -12,4 +12,10 @@ class CarvingMaterials(config: Configuration, override val parent: Carving) : Su
     val WOOD = optionalOn(config, CarvingMaterialOldWood(config, this))
     val WOOD2 = optionalOn(config, CarvingMaterialNewWood(config, this))
     val STONE = optionalOn(config, CarvingMaterialStone(config, this))
+
+    init {
+        for (carvingMaterial in subFeatures) {
+            carvingMaterial.registerCarvingBehaviourShims()
+        }
+    }
 }

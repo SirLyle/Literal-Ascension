@@ -17,16 +17,10 @@ import net.minecraft.world.World
 import net.minecraftforge.common.config.Configuration
 
 class Carving(config: Configuration, override val parent: Features) : SubFeatureCollection<ISubFeature>("carving", parent) {
+    private val carvingBehaviourShims = mutableMapOf<Block, ICarvingBehaviour>()
+
     val CARVING_MATERIALS = required(CarvingMaterials(config, this))
     val CARVING_TOOLS     = required(CarvingTools(config, this))
-
-    val carvingBehaviourShims = mutableMapOf<Block, ICarvingBehaviour>()
-
-    init {
-        for (carvingMaterial in CARVING_MATERIALS.subFeatures) {
-            carvingBehaviourShims[carvingMaterial.block] = carvingMaterial.getCarvingBehaviourShim()
-        }
-    }
 
     fun playCarveSound(world: World, pos: BlockPos, player: EntityPlayer) {
         val state = world.getBlockState(pos)
@@ -44,5 +38,9 @@ class Carving(config: Configuration, override val parent: Features) : SubFeature
             is ICarvingBehaviour -> block
             else -> carvingBehaviourShims[block]
         }
+    }
+
+    fun registerCarvingBehaviour(block: Block, carvingBehaviour: ICarvingBehaviour) {
+        carvingBehaviourShims[block] = carvingBehaviour
     }
 }

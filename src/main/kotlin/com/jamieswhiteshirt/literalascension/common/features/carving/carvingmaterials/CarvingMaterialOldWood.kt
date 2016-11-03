@@ -26,13 +26,13 @@ class CarvingMaterialOldWood(config: Configuration, parent: CarvingMaterials) : 
             BlockPlanks.EnumType.JUNGLE to LOG_JUNGLE
     )
 
-    override fun getCarvingBehaviourShim(): ICarvingBehaviour {
-        return object : ICarvingBehaviour {
+    override fun registerCarvingBehaviourShims() {
+        parent.parent.registerCarvingBehaviour(block, object : ICarvingBehaviour {
             override fun tryCarve(state: IBlockState, world: World, pos: BlockPos, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
                 return fromType[state.getValue(BlockOldLog.VARIANT)]?.tryCarveModelBlock(state, world, pos, facing) ?: false
             }
 
             override val carvingMaterial: ICarvingMaterial = this@CarvingMaterialOldWood
-        }
+        })
     }
 }
