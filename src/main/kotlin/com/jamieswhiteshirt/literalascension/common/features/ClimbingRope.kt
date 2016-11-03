@@ -9,6 +9,7 @@ import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager
 import net.minecraftforge.fml.common.registry.GameRegistry
+import net.minecraftforge.oredict.ShapedOreRecipe
 
 class ClimbingRope(override val parent: Features) : SubFeature("climbing_rope", parent) {
     val block = BlockClimbingRope(this).setHardness(0.1F).setUnlocalizedName("literalascension.climbingRope") as BlockClimbingRope
@@ -20,12 +21,12 @@ class ClimbingRope(override val parent: Features) : SubFeature("climbing_rope", 
     }
 
     override fun registerRecipes() {
-        CraftingManager.getInstance().addRecipe(
+        CraftingManager.getInstance().addRecipe(ShapedOreRecipe(
                 ItemStack(item, 8),
                 "  S",
                 " S ",
                 "S  ",
-                'S', Items.STRING
-        )
+                'S', "string"
+        ))
     }
 }
