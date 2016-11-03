@@ -3,6 +3,7 @@ package com.jamieswhiteshirt.literalascension.common.block
 import com.jamieswhiteshirt.literalascension.api.ISpecialLadderBlock
 import com.jamieswhiteshirt.literalascension.common.features.ClimbingRope
 import net.minecraft.block.Block
+import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyDirection
 import net.minecraft.block.state.BlockStateContainer
@@ -22,7 +23,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.*
 
-class BlockClimbingRope(val feature: ClimbingRope) : Block(Material.CIRCUITS), ISpecialLadderBlock {
+class BlockClimbingRope(val feature: ClimbingRope) : Block(Material.CARPET), ISpecialLadderBlock {
     companion object {
         val FACING: PropertyDirection = PropertyDirection.create("facing", { it != EnumFacing.DOWN })
 
@@ -52,6 +53,7 @@ class BlockClimbingRope(val feature: ClimbingRope) : Block(Material.CIRCUITS), I
     }
 
     init {
+        soundType = SoundType.CLOTH
         defaultState = blockState.baseState.withProperty(FACING, EnumFacing.UP)
     }
 
