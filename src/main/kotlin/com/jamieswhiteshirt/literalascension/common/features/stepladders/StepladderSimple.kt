@@ -1,7 +1,6 @@
 package com.jamieswhiteshirt.literalascension.common.features.stepladders
 
 import com.jamieswhiteshirt.literalascension.common.features.Stepladders
-import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager

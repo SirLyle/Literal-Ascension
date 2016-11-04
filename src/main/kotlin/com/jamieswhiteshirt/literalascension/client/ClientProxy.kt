@@ -9,9 +9,6 @@ import com.jamieswhiteshirt.literalascension.common.network.message.MessageSpawn
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.ItemModelMesher
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
-import net.minecraft.util.EnumFacing
-import net.minecraft.util.math.BlockPos
-import net.minecraft.world.World
 import net.minecraftforge.fml.relauncher.Side
 
 class ClientProxy : CommonProxy() {

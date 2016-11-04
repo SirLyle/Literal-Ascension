@@ -5,7 +5,6 @@ import com.jamieswhiteshirt.literalascension.common.SubFeature
 import com.jamieswhiteshirt.literalascension.common.block.BlockStepladder
 import com.jamieswhiteshirt.literalascension.common.features.Stepladders
 import com.jamieswhiteshirt.literalascension.common.item.ItemStepladder
-import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraftforge.fml.common.registry.GameRegistry
 

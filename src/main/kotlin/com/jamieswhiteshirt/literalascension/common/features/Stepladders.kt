@@ -4,7 +4,6 @@ import com.jamieswhiteshirt.literalascension.common.Features
 import com.jamieswhiteshirt.literalascension.common.SubFeatureCollection
 import com.jamieswhiteshirt.literalascension.common.features.stepladders.*
 import net.minecraft.block.BlockPlanks
-import net.minecraft.block.material.Material
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items

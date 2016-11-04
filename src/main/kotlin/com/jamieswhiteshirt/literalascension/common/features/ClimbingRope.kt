@@ -5,7 +5,6 @@ import com.jamieswhiteshirt.literalascension.common.Features
 import com.jamieswhiteshirt.literalascension.common.SubFeature
 import com.jamieswhiteshirt.literalascension.common.block.BlockClimbingRope
 import com.jamieswhiteshirt.literalascension.common.item.ItemClimbingRope
-import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager
 import net.minecraftforge.fml.common.registry.GameRegistry
