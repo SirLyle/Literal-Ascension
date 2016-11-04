@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/chute_ne",
+  "textures": {
+    "end": "${domain}:blocks/${material}/extra/raw",
+    "side": "${domain}:blocks/${material}/extra/raw",
+    "inside": "literalascension:blocks/${material}_raw_inside_chute"
+  }
+}

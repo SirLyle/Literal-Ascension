@@ -4,9 +4,8 @@ import com.jamieswhiteshirt.literalascension.common.features.carving.carvingmate
 import net.minecraft.block.BlockStone
 import net.minecraft.init.Blocks
 
-class CarvedBlockStone(type: BlockStone.EnumType, parent: CarvingMaterialStone) : CarvedBlock(
+class CarvedBlockStone(type: BlockStone.EnumType, parent: CarvingMaterialStone) : CarvedBlockSimple(
         Blocks.STONE.defaultState.withProperty(BlockStone.VARIANT, type),
         type.getName(),
-        type.unlocalizedName,
         parent
 )

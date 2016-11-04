@@ -26,17 +26,19 @@ abstract class FeatureCollectionBase<T : ISubFeature> : IFeature {
 
     val subFeatures: List<T> get() = _subFeatures
 
-    protected fun <U : T> optionalOn(config: Configuration, feature: U): U? {
+    protected fun <U : T> optionalOn(config: Configuration, feature: U?): U? {
         return optional(config, feature, true)
     }
 
-    protected fun <U : T> optionalOff(config: Configuration, feature: U): U? {
+    protected fun <U : T> optionalOff(config: Configuration, feature: U?): U? {
         return optional(config, feature, false)
     }
 
-    protected fun <U: T> optional(config: Configuration, feature: U, default: Boolean): U? {
-        if (config.getBoolean("enable", feature.featureName, default, "Enable this feature")) {
-            return required(feature)
+    protected fun <U: T> optional(config: Configuration, feature: U?, default: Boolean): U? {
+        if (feature != null) {
+            if (config.getBoolean("enable", feature.featureName, default, "Enable this feature")) {
+                return required(feature)
+            }
         }
         return null
     }

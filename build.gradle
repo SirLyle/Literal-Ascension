@@ -306,3 +306,15 @@ task generateNotchedStoneModel(type: CopyJsonTemplate) {
         return args['material'] + prevName
     }
 }
+
+task generateChiselCarvableRaw(type: CopyJsonTemplate) {
+    template 'chisel_carvable_raw'
+    arguments {
+        def material = requireArgument('material', 'material')
+        def domain = requireArgument('domain', 'domain')
+        return ['material':material, 'domain':domain]
+    }
+    jsonRename { String prevName ->
+        return "${args['material']}_raw${prevName}"
+    }
+}
