@@ -2,14 +2,14 @@
   {
     "modid": "literalascension",
     "name": "Literal Ascension",
-    "description": "Adds intuitive solutions for vertical mobility",
+    "description": "Adds intuitive solutions for vertical mobility.",
     "url": "https://minecraft.curseforge.com/projects/literal-ascension",
     "version": "${version}",
     "mcversion": "${mcversion}",
     "authorList": [
       "JamiesWhiteShirt"
     ],
-    "credits": "LLibrary, Trentv4, Shadowfacts, Emberwalker",
+    "credits": "LLibrary, Trentv4, Shadowfacts, Emberwalker, MMD",
     "logoFile": "assets/literalascension/logo.png",
     "requiredMods": ["llibrary"]
   }
