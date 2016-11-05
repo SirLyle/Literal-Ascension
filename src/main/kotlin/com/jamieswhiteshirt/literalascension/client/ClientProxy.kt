@@ -28,9 +28,6 @@ class ClientProxy : CommonProxy() {
             }
             it.CLIMBING_ROPE?.let {
                 itemModelMesher.register(it.item, 0, ModelResourceLocation("literalascension:climbing_rope", "inventory"))
-                itemModelMesher.register(it.item, 1, ModelResourceLocation("literalascension:climbing_rope", "inventory"))
-                itemModelMesher.register(it.item, 2, ModelResourceLocation("literalascension:climbing_rope", "inventory"))
-                itemModelMesher.register(it.item, 3, ModelResourceLocation("literalascension:climbing_rope", "inventory"))
             }
         }
 
