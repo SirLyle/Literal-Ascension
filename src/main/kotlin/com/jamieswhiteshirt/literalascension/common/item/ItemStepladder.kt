@@ -16,22 +16,26 @@ class ItemStepladder(val feature: Stepladder) : Item() {
     override fun onItemUse(stack: ItemStack, player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         val blockState = world.getBlockState(pos)
 
-        val placePos = if (!blockState.block.isReplaceable(world, pos)) {
+        val initialPlacePos = if (!blockState.block.isReplaceable(world, pos)) {
             pos.offset(facing)
         } else {
             pos
         }
 
-        if (player.canPlayerEdit(placePos, facing, stack) && canPlaceAt(stack, world, placePos, facing)) {
-            val horizontalFacing = EnumFacing.fromAngle(player.rotationYaw.toDouble())
-            feature.block.placeStepladder(world, placePos, horizontalFacing)
+        for (segment in BlockStepladder.SEGMENTS) {
+            val placePos = initialPlacePos.down(segment)
 
-            val soundType = feature.block.getSoundType(feature.block.defaultState, world, pos, player)
-            world.playSound(player, placePos, soundType.placeSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F)
+            if (player.canPlayerEdit(placePos, facing, stack) && canPlaceAt(stack, world, placePos, facing)) {
+                val horizontalFacing = EnumFacing.fromAngle(player.rotationYaw.toDouble())
+                feature.block.placeStepladder(world, placePos, horizontalFacing)
 
-            --stack.stackSize
+                val soundType = feature.block.getSoundType(feature.block.defaultState, world, pos, player)
+                world.playSound(player, placePos, soundType.placeSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F)
 
-            return EnumActionResult.SUCCESS
+                --stack.stackSize
+
+                return EnumActionResult.SUCCESS
+            }
         }
 
         return EnumActionResult.FAIL
