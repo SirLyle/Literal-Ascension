@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/chute_swe",
+  "textures": {
+    "end": "biomesoplenty:blocks/eucalyptus_log_top",
+    "side": "biomesoplenty:blocks/eucalyptus_log",
+    "inside": "literalascension:blocks/biomesoplenty/eucalyptus_log_inside_chute"
+  }
+}

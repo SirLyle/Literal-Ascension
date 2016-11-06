@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/chute_s",
+  "textures": {
+    "end": "biomesoplenty:blocks/mangrove_log_top",
+    "side": "biomesoplenty:blocks/mangrove_log",
+    "inside": "literalascension:blocks/biomesoplenty/mangrove_log_inside_chute"
+  }
+}

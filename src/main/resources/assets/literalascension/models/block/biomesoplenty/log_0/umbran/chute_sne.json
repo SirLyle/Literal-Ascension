@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/chute_sne",
+  "textures": {
+    "end": "biomesoplenty:blocks/umbran_log_top",
+    "side": "biomesoplenty:blocks/umbran_log",
+    "inside": "literalascension:blocks/biomesoplenty/umbran_log_inside_chute"
+  }
+}

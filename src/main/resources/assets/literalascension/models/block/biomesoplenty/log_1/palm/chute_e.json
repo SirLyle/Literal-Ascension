@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/chute_e",
+  "textures": {
+    "end": "biomesoplenty:blocks/palm_log_top",
+    "side": "biomesoplenty:blocks/palm_log",
+    "inside": "literalascension:blocks/biomesoplenty/palm_log_inside_chute"
+  }
+}

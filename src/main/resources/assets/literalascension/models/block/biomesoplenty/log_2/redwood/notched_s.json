@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/notched_s",
+  "textures": {
+    "end": "biomesoplenty:blocks/redwood_log_top",
+    "side": "biomesoplenty:blocks/redwood_log",
+    "notched": "literalascension:blocks/biomesoplenty/redwood_log_notched"
+  }
+}

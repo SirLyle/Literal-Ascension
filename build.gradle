@@ -170,6 +170,9 @@ class CopyJsonTemplate extends DefaultTask {
     def template
 
     @Input
+    def destination = 'src/main/resources'
+
+    @Input
     def arguments
 
     @Input
@@ -183,7 +186,7 @@ class CopyJsonTemplate extends DefaultTask {
                 expand(args)
                 filter(FixCrLfFilter, eol: FixCrLfFilter.CrLf.newInstance('crlf'))
             }
-            into 'src/main/resources'
+            into destination
             rename { String filename ->
                 def match = filename =~ /(.*)\.json/
                 if (match) {

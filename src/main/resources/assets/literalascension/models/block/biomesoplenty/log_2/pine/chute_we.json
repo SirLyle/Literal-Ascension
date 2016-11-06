@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/chute_we",
+  "textures": {
+    "end": "biomesoplenty:blocks/pine_log_top",
+    "side": "biomesoplenty:blocks/pine_log",
+    "inside": "literalascension:blocks/biomesoplenty/pine_log_inside_chute"
+  }
+}

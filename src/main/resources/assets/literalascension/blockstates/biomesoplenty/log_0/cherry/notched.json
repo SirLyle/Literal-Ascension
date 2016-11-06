@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "east=false,north=false,south=false,west=false": { "model": "literalascension:biomesoplenty/log_0/cherry/notched_swne" },
+    "east=false,north=false,south=true,west=false": { "model": "literalascension:biomesoplenty/log_0/cherry/notched_s" },
+    "east=false,north=false,south=false,west=true": { "model": "literalascension:biomesoplenty/log_0/cherry/notched_w" },
+    "east=false,north=false,south=true,west=true": { "model": "literalascension:biomesoplenty/log_0/cherry/notched_sw" },
+    "east=false,north=true,south=false,west=false": { "model": "literalascension:biomesoplenty/log_0/cherry/notched_n" },
+    "east=false,north=true,south=true,west=false": { "model": "literalascension:biomesoplenty/log_0/cherry/notched_sn" },
+    "east=false,north=true,south=false,west=true": { "model": "literalascension:biomesoplenty/log_0/cherry/notched_wn" },
+    "east=false,north=true,south=true,west=true": { "model": "literalascension:biomesoplenty/log_0/cherry/notched_swn" },
+    "east=true,north=false,south=false,west=false": { "model": "literalascension:biomesoplenty/log_0/cherry/notched_e" },
+    "east=true,north=false,south=true,west=false": { "model": "literalascension:biomesoplenty/log_0/cherry/notched_se" },
+    "east=true,north=false,south=false,west=true": { "model": "literalascension:biomesoplenty/log_0/cherry/notched_we" },
+    "east=true,north=false,south=true,west=true": { "model": "literalascension:biomesoplenty/log_0/cherry/notched_swe" },
+    "east=true,north=true,south=false,west=false": { "model": "literalascension:biomesoplenty/log_0/cherry/notched_ne" },
+    "east=true,north=true,south=true,west=false": { "model": "literalascension:biomesoplenty/log_0/cherry/notched_sne" },
+    "east=true,north=true,south=false,west=true": { "model": "literalascension:biomesoplenty/log_0/cherry/notched_wne" },
+    "east=true,north=true,south=true,west=true": { "model": "literalascension:biomesoplenty/log_0/cherry/notched_swne" }
+  }
+}

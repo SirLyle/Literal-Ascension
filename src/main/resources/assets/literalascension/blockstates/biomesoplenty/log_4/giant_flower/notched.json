@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "east=false,north=false,south=false,west=false": { "model": "literalascension:biomesoplenty/log_4/giant_flower/notched_swne" },
+    "east=false,north=false,south=true,west=false": { "model": "literalascension:biomesoplenty/log_4/giant_flower/notched_s" },
+    "east=false,north=false,south=false,west=true": { "model": "literalascension:biomesoplenty/log_4/giant_flower/notched_w" },
+    "east=false,north=false,south=true,west=true": { "model": "literalascension:biomesoplenty/log_4/giant_flower/notched_sw" },
+    "east=false,north=true,south=false,west=false": { "model": "literalascension:biomesoplenty/log_4/giant_flower/notched_n" },
+    "east=false,north=true,south=true,west=false": { "model": "literalascension:biomesoplenty/log_4/giant_flower/notched_sn" },
+    "east=false,north=true,south=false,west=true": { "model": "literalascension:biomesoplenty/log_4/giant_flower/notched_wn" },
+    "east=false,north=true,south=true,west=true": { "model": "literalascension:biomesoplenty/log_4/giant_flower/notched_swn" },
+    "east=true,north=false,south=false,west=false": { "model": "literalascension:biomesoplenty/log_4/giant_flower/notched_e" },
+    "east=true,north=false,south=true,west=false": { "model": "literalascension:biomesoplenty/log_4/giant_flower/notched_se" },
+    "east=true,north=false,south=false,west=true": { "model": "literalascension:biomesoplenty/log_4/giant_flower/notched_we" },
+    "east=true,north=false,south=true,west=true": { "model": "literalascension:biomesoplenty/log_4/giant_flower/notched_swe" },
+    "east=true,north=true,south=false,west=false": { "model": "literalascension:biomesoplenty/log_4/giant_flower/notched_ne" },
+    "east=true,north=true,south=true,west=false": { "model": "literalascension:biomesoplenty/log_4/giant_flower/notched_sne" },
+    "east=true,north=true,south=false,west=true": { "model": "literalascension:biomesoplenty/log_4/giant_flower/notched_wne" },
+    "east=true,north=true,south=true,west=true": { "model": "literalascension:biomesoplenty/log_4/giant_flower/notched_swne" }
+  }
+}

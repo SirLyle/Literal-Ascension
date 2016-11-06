@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "east=false,north=false,south=false,west=false": { "model": "literalascension:biomesoplenty/log_2/hellbark/chute_swne" },
+    "east=false,north=false,south=true,west=false": { "model": "literalascension:biomesoplenty/log_2/hellbark/chute_s" },
+    "east=false,north=false,south=false,west=true": { "model": "literalascension:biomesoplenty/log_2/hellbark/chute_w" },
+    "east=false,north=false,south=true,west=true": { "model": "literalascension:biomesoplenty/log_2/hellbark/chute_sw" },
+    "east=false,north=true,south=false,west=false": { "model": "literalascension:biomesoplenty/log_2/hellbark/chute_n" },
+    "east=false,north=true,south=true,west=false": { "model": "literalascension:biomesoplenty/log_2/hellbark/chute_sn" },
+    "east=false,north=true,south=false,west=true": { "model": "literalascension:biomesoplenty/log_2/hellbark/chute_wn" },
+    "east=false,north=true,south=true,west=true": { "model": "literalascension:biomesoplenty/log_2/hellbark/chute_swn" },
+    "east=true,north=false,south=false,west=false": { "model": "literalascension:biomesoplenty/log_2/hellbark/chute_e" },
+    "east=true,north=false,south=true,west=false": { "model": "literalascension:biomesoplenty/log_2/hellbark/chute_se" },
+    "east=true,north=false,south=false,west=true": { "model": "literalascension:biomesoplenty/log_2/hellbark/chute_we" },
+    "east=true,north=false,south=true,west=true": { "model": "literalascension:biomesoplenty/log_2/hellbark/chute_swe" },
+    "east=true,north=true,south=false,west=false": { "model": "literalascension:biomesoplenty/log_2/hellbark/chute_ne" },
+    "east=true,north=true,south=true,west=false": { "model": "literalascension:biomesoplenty/log_2/hellbark/chute_sne" },
+    "east=true,north=true,south=false,west=true": { "model": "literalascension:biomesoplenty/log_2/hellbark/chute_wne" },
+    "east=true,north=true,south=true,west=true": { "model": "literalascension:biomesoplenty/log_2/hellbark/chute_swne" }
+  }
+}

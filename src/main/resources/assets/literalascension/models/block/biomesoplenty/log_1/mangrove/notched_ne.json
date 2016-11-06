@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/notched_ne",
+  "textures": {
+    "end": "biomesoplenty:blocks/mangrove_log_top",
+    "side": "biomesoplenty:blocks/mangrove_log",
+    "notched": "literalascension:blocks/biomesoplenty/mangrove_log_notched"
+  }
+}
