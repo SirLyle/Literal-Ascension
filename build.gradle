@@ -239,6 +239,17 @@ task generateStepladderModel(type: CopyJsonTemplate) {
     }
 }
 
+task generateBOPStepladderModel(type: CopyJsonTemplate) {
+    template 'bop_stepladder'
+    arguments {
+        def material = requireArgument('material', 'material')
+        return ['material':material]
+    }
+    jsonRename { String prevName ->
+        return args['material'] + prevName
+    }
+}
+
 task generateChuteStoneModel(type: CopyJsonTemplate) {
     template 'chute_stone'
     arguments {

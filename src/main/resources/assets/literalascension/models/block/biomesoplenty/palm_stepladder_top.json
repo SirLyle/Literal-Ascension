@@ -1,0 +1,7 @@
+{
+  "parent": "literalascension:block/stepladder_top",
+  "textures": {
+    "feet": "biomesoplenty:blocks/palm_log",
+    "steps": "biomesoplenty:blocks/palm_planks"
+  }
+}

@@ -14,8 +14,9 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.common.config.Configuration
 
-class StepladderDomains(config: Configuration, override val parent: Features) : SubFeatureCollection<StepladderDomain>("domains", parent) {
+class Stepladders(config: Configuration, override val parent: Features) : SubFeatureCollection<StepladderDomain>("stepladders", parent) {
     val MINECRAFT = optionalOn(config, StepladderDomainMinecraft(config, this))
+    val BIOMESOPLENTY = optionalOn(config, StepladderDomainBiomesOPlenty(config, this))
     val MISCELLANEOUS = optionalOn(config, StepladderDomainMiscellaneous(config, this))
 
     fun playLadderPickupSound(world: World, pos: BlockPos, player: EntityPlayer) {

@@ -1,20 +1,17 @@
 package com.jamieswhiteshirt.literalascension.common.features.stepladderdomains.stepladder
 
-import com.jamieswhiteshirt.literalascension.common.features.stepladderdomains.StepladderDomainMinecraft
-import net.minecraft.block.BlockPlanks
+import com.jamieswhiteshirt.literalascension.common.features.stepladderdomains.StepladderDomain
 import net.minecraft.block.state.IBlockState
-import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager
 
-abstract class StepladderWoodBase(logModelState: IBlockState, type: BlockPlanks.EnumType, parent: StepladderDomainMinecraft) : Stepladder(
-        Blocks.PLANKS.defaultState.withProperty(BlockPlanks.VARIANT, type),
-        type.getName(),
-        type.unlocalizedName,
+open class StepladderWood(logModelState: IBlockState, plankModelState: IBlockState, name: String, parent: StepladderDomain) : Stepladder(
+        plankModelState,
+        name,
         parent
 ) {
     val feetIngredient = ItemStack(logModelState.block, 1, logModelState.block.damageDropped(logModelState))
-    val stepsIngredient = ItemStack(Blocks.PLANKS, 1, type.metadata)
+    val stepsIngredient = ItemStack(plankModelState.block, 1, plankModelState.block.damageDropped(plankModelState))
 
     override fun registerRecipes() {
         CraftingManager.getInstance().addRecipe(

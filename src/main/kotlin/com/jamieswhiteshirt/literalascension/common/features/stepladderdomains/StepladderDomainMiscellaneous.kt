@@ -1,6 +1,6 @@
 package com.jamieswhiteshirt.literalascension.common.features.stepladderdomains
 
-import com.jamieswhiteshirt.literalascension.common.features.StepladderDomains
+import com.jamieswhiteshirt.literalascension.common.features.Stepladders
 import com.jamieswhiteshirt.literalascension.common.features.stepladderdomains.stepladder.StepladderGenericWood
 import com.jamieswhiteshirt.literalascension.common.features.stepladderdomains.stepladder.StepladderNewWood
 import com.jamieswhiteshirt.literalascension.common.features.stepladderdomains.stepladder.StepladderOldWood
@@ -11,6 +11,6 @@ import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraftforge.common.config.Configuration
 
-class StepladderDomainMiscellaneous(config: Configuration, parent: StepladderDomains) : StepladderDomain("miscellaneous", parent) {
+class StepladderDomainMiscellaneous(config: Configuration, parent: Stepladders) : StepladderDomain("miscellaneous", parent) {
     val GENERIC_WOOD = optionalOff(config, StepladderGenericWood(this))
 }
