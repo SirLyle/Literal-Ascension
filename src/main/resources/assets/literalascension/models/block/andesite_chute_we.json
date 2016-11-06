@@ -1,8 +1,0 @@
-{
-  "parent": "literalascension:block/chute_we",
-  "textures": {
-    "end": "minecraft:blocks/stone_andesite",
-    "side": "minecraft:blocks/stone_andesite",
-    "inside": "literalascension:blocks/stone_andesite_inside_chute"
-  }
-}

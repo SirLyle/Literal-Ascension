@@ -1,8 +1,0 @@
-{
-  "parent": "literalascension:block/notched_s",
-  "textures": {
-    "end": "chisel:blocks/limestone/extra/raw",
-    "side": "chisel:blocks/limestone/extra/raw",
-    "notched": "literalascension:blocks/limestone_raw_notched"
-  }
-}

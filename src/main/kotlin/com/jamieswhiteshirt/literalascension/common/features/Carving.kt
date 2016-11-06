@@ -5,7 +5,8 @@ import com.jamieswhiteshirt.literalascension.api.ICarvingBehaviour
 import com.jamieswhiteshirt.literalascension.common.Features
 import com.jamieswhiteshirt.literalascension.common.ISubFeature
 import com.jamieswhiteshirt.literalascension.common.SubFeatureCollection
-import com.jamieswhiteshirt.literalascension.common.features.carving.CarvingMaterials
+import com.jamieswhiteshirt.literalascension.common.features.carving.CarvingDomains
+import com.jamieswhiteshirt.literalascension.common.features.carving.carvingdomains.CarvingDomainMinecraft
 import com.jamieswhiteshirt.literalascension.common.features.carving.CarvingTools
 import net.minecraft.block.Block
 import net.minecraft.block.state.IBlockState
@@ -19,8 +20,8 @@ import net.minecraftforge.common.config.Configuration
 class Carving(config: Configuration, override val parent: Features) : SubFeatureCollection<ISubFeature>("carving", parent) {
     private val carvingBehaviourShims = mutableMapOf<Block, ICarvingBehaviour>()
 
-    val CARVING_MATERIALS = required(CarvingMaterials(config, this))
-    val CARVING_TOOLS     = required(CarvingTools(config, this))
+    val CARVING_DOMAINS = required(CarvingDomains(config, this))
+    val CARVING_TOOLS   = required(CarvingTools(config, this))
 
     fun playCarveSound(world: World, pos: BlockPos, player: EntityPlayer) {
         val state = world.getBlockState(pos)

@@ -1,8 +1,0 @@
-{
-  "parent": "literalascension:block/notched_sw",
-  "textures": {
-    "end": "chisel:blocks/marble/extra/raw",
-    "side": "chisel:blocks/marble/extra/raw",
-    "notched": "literalascension:blocks/marble_raw_notched"
-  }
-}

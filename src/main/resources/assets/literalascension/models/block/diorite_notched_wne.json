@@ -1,8 +1,0 @@
-{
-  "parent": "literalascension:block/notched_wne",
-  "textures": {
-    "end": "minecraft:blocks/stone_diorite",
-    "side": "minecraft:blocks/stone_diorite",
-    "notched": "literalascension:blocks/stone_diorite_notched"
-  }
-}

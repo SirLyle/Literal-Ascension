@@ -1,8 +1,0 @@
-{
-  "parent": "literalascension:block/chute_ne",
-  "textures": {
-    "end": "minecraft:blocks/log_big_oak_top",
-    "side": "minecraft:blocks/log_big_oak",
-    "inside": "literalascension:blocks/log_big_oak_inside_chute"
-  }
-}

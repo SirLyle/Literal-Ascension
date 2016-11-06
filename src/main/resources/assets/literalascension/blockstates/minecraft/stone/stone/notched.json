@@ -1,0 +1,100 @@
+{
+  "variants": {
+    "east=false,north=false,south=false,west=false": [
+      { "model": "literalascension:minecraft/stone/stone/notched_swne" },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_swne" },
+      { "model": "literalascension:minecraft/stone/stone/notched_swne", "y": 180 },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_swne", "y": 180 }
+    ],
+    "east=false,north=false,south=true,west=false": [
+      { "model": "literalascension:minecraft/stone/stone/notched_s" },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_s" },
+      { "model": "literalascension:minecraft/stone/stone/notched_n", "y": 180 },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_n", "y": 180 }
+    ],
+    "east=false,north=false,south=false,west=true": [
+      { "model": "literalascension:minecraft/stone/stone/notched_w" },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_w" },
+      { "model": "literalascension:minecraft/stone/stone/notched_e", "y": 180 },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_e", "y": 180 }
+    ],
+    "east=false,north=false,south=true,west=true": [
+      { "model": "literalascension:minecraft/stone/stone/notched_sw" },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_sw" },
+      { "model": "literalascension:minecraft/stone/stone/notched_ne", "y": 180 },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_ne", "y": 180 }
+    ],
+    "east=false,north=true,south=false,west=false": [
+      { "model": "literalascension:minecraft/stone/stone/notched_n" },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_n" },
+      { "model": "literalascension:minecraft/stone/stone/notched_s", "y": 180 },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_s", "y": 180 }
+    ],
+    "east=false,north=true,south=true,west=false": [
+      { "model": "literalascension:minecraft/stone/stone/notched_sn" },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_sn" },
+      { "model": "literalascension:minecraft/stone/stone/notched_sn", "y": 180 },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_sn", "y": 180 }
+    ],
+    "east=false,north=true,south=false,west=true": [
+      { "model": "literalascension:minecraft/stone/stone/notched_wn" },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_wn" },
+      { "model": "literalascension:minecraft/stone/stone/notched_se", "y": 180 },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_se", "y": 180 }
+    ],
+    "east=false,north=true,south=true,west=true": [
+      { "model": "literalascension:minecraft/stone/stone/notched_swn" },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_swn" },
+      { "model": "literalascension:minecraft/stone/stone/notched_sne", "y": 180 },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_sne", "y": 180 }
+    ],
+    "east=true,north=false,south=false,west=false": [
+      { "model": "literalascension:minecraft/stone/stone/notched_e" },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_e" },
+      { "model": "literalascension:minecraft/stone/stone/notched_w", "y": 180 },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_w", "y": 180 }
+    ],
+    "east=true,north=false,south=true,west=false": [
+      { "model": "literalascension:minecraft/stone/stone/notched_se" },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_se" },
+      { "model": "literalascension:minecraft/stone/stone/notched_wn", "y": 180 },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_wn", "y": 180 }
+    ],
+    "east=true,north=false,south=false,west=true": [
+      { "model": "literalascension:minecraft/stone/stone/notched_we" },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_we" },
+      { "model": "literalascension:minecraft/stone/stone/notched_we", "y": 180 },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_we", "y": 180 }
+    ],
+    "east=true,north=false,south=true,west=true": [
+      { "model": "literalascension:minecraft/stone/stone/notched_swe" },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_swe" },
+      { "model": "literalascension:minecraft/stone/stone/notched_wne", "y": 180 },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_wne", "y": 180 }
+    ],
+    "east=true,north=true,south=false,west=false": [
+      { "model": "literalascension:minecraft/stone/stone/notched_ne" },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_ne" },
+      { "model": "literalascension:minecraft/stone/stone/notched_sw", "y": 180 },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_sw", "y": 180 }
+    ],
+    "east=true,north=true,south=true,west=false": [
+      { "model": "literalascension:minecraft/stone/stone/notched_sne" },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_sne" },
+      { "model": "literalascension:minecraft/stone/stone/notched_swn", "y": 180 },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_swn", "y": 180 }
+    ],
+    "east=true,north=true,south=false,west=true": [
+      { "model": "literalascension:minecraft/stone/stone/notched_wne" },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_wne" },
+      { "model": "literalascension:minecraft/stone/stone/notched_swe", "y": 180 },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_swe", "y": 180 }
+    ],
+    "east=true,north=true,south=true,west=true": [
+      { "model": "literalascension:minecraft/stone/stone/notched_swne" },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_swne" },
+      { "model": "literalascension:minecraft/stone/stone/notched_swne", "y": 180 },
+      { "model": "literalascension:minecraft/stone/stone/notched_mirrored_swne", "y": 180 }
+    ]
+  }
+}

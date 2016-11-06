@@ -1,8 +1,0 @@
-{
-  "parent": "literalascension:block/notched_swne",
-  "textures": {
-    "end": "minecraft:blocks/log_oak_top",
-    "side": "minecraft:blocks/log_oak",
-    "notched": "literalascension:blocks/log_oak_notched"
-  }
-}

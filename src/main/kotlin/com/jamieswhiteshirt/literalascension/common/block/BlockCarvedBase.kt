@@ -1,5 +1,5 @@
 package com.jamieswhiteshirt.literalascension.common.block
 
-import com.jamieswhiteshirt.literalascension.common.features.carving.carvingmaterials.carvedblocks.CarvedBlock
+import com.jamieswhiteshirt.literalascension.common.features.carving.carvingdomains.carvableblocks.carvableblocktypes.CarvableBlockType
 
-abstract class BlockCarvedBase(val feature: CarvedBlock) : BlockDelegate(feature.modelState)
+abstract class BlockCarvedBase(val feature: CarvableBlockType) : BlockDelegate(feature.modelState)

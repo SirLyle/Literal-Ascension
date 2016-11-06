@@ -2,7 +2,7 @@ package com.jamieswhiteshirt.literalascension.common.block
 
 import com.jamieswhiteshirt.literalascension.api.ICarvingBehaviour
 import com.jamieswhiteshirt.literalascension.api.ICarvingMaterial
-import com.jamieswhiteshirt.literalascension.common.features.carving.carvingmaterials.carvedblocks.CarvedBlock
+import com.jamieswhiteshirt.literalascension.common.features.carving.carvingdomains.carvableblocks.carvableblocktypes.CarvableBlockType
 import net.minecraft.block.Block
 import net.minecraft.block.properties.PropertyBool
 import net.minecraft.block.state.BlockStateContainer
@@ -17,7 +17,7 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 
-class BlockChute(feature: CarvedBlock) : BlockCarvedBase(feature), ICarvingBehaviour {
+class BlockChute(feature: CarvableBlockType) : BlockCarvedBase(feature), ICarvingBehaviour {
     companion object {
         private val collisionBoxesSides = arrayOf(
                 AxisAlignedBB(0.0, 0.0, 14.0 / 16.0, 1.0, 1.0, 16.0 / 16.0),
@@ -63,7 +63,7 @@ class BlockChute(feature: CarvedBlock) : BlockCarvedBase(feature), ICarvingBehav
             if (PROPERTIES.any { newState.getValue(it) }) {
                 if (!world.isRemote) {
                     world.setBlockState(pos, newState)
-                    feature.parent.parent.parent.spawnCarveParticles(world, pos, carvingFacing)
+                    feature.parent.parent.parent.parent.spawnCarveParticles(world, pos, carvingFacing)
                 }
                 return true
             }

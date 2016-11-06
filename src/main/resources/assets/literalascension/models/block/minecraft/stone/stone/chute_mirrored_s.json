@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/chute_mirrored_s",
+  "textures": {
+    "end": "minecraft:blocks/stone",
+    "side": "minecraft:blocks/stone",
+    "inside": "literalascension:blocks/minecraft/stone_inside_chute"
+  }
+}

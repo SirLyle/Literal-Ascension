@@ -1,8 +1,0 @@
-{
-  "parent": "literalascension:block/chute_s",
-  "textures": {
-    "end": "chisel:blocks/marble/extra/raw",
-    "side": "chisel:blocks/marble/extra/raw",
-    "inside": "literalascension:blocks/marble_raw_inside_chute"
-  }
-}

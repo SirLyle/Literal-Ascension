@@ -3,7 +3,7 @@ package com.jamieswhiteshirt.literalascension.common.block
 import com.jamieswhiteshirt.literalascension.api.ICarvingBehaviour
 import com.jamieswhiteshirt.literalascension.api.ICarvingMaterial
 import com.jamieswhiteshirt.literalascension.api.ISpecialLadderBlock
-import com.jamieswhiteshirt.literalascension.common.features.carving.carvingmaterials.carvedblocks.CarvedBlock
+import com.jamieswhiteshirt.literalascension.common.features.carving.carvingdomains.carvableblocks.carvableblocktypes.CarvableBlockType
 import net.minecraft.block.properties.PropertyBool
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 
-class BlockNotched(feature: CarvedBlock) : BlockCarvedBase(feature), ICarvingBehaviour, ISpecialLadderBlock {
+class BlockNotched(feature: CarvableBlockType) : BlockCarvedBase(feature), ICarvingBehaviour, ISpecialLadderBlock {
     companion object {
         val SOUTH: PropertyBool = PropertyBool.create("south")
         val WEST: PropertyBool = PropertyBool.create("west")
@@ -41,14 +41,14 @@ class BlockNotched(feature: CarvedBlock) : BlockCarvedBase(feature), ICarvingBeh
             if (!state.getValue(property)) {
                 if (!world.isRemote) {
                     world.setBlockState(pos, state.withProperty(property, true))
-                    feature.parent.parent.parent.spawnCarveParticles(world, pos, facing)
+                    feature.parent.parent.parent.parent.spawnCarveParticles(world, pos, facing)
                 }
                 return true
             }
         } else {
             if (!world.isRemote) {
                 world.setBlockState(pos, feature.chute.defaultState)
-                feature.parent.parent.parent.spawnCarveParticles(world, pos, facing)
+                feature.parent.parent.parent.parent.spawnCarveParticles(world, pos, facing)
             }
             return true
         }
