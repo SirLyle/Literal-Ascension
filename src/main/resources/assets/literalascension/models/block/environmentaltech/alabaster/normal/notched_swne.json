@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/notched_swne",
+  "textures": {
+    "end": "environmentaltech:blocks/alabaster_normal",
+    "side": "environmentaltech:blocks/alabaster_normal",
+    "notched": "literalascension:blocks/environmentaltech/alabaster_normal_notched"
+  }
+}

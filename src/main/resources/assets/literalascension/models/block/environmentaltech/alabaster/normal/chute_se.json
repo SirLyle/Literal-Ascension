@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/chute_se",
+  "textures": {
+    "end": "environmentaltech:blocks/alabaster_normal",
+    "side": "environmentaltech:blocks/alabaster_normal",
+    "inside": "literalascension:blocks/environmentaltech/alabaster_normal_inside_chute"
+  }
+}

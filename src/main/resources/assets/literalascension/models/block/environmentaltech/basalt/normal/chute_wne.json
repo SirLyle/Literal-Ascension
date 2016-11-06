@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/chute_wne",
+  "textures": {
+    "end": "environmentaltech:blocks/basalt_normal",
+    "side": "environmentaltech:blocks/basalt_normal",
+    "inside": "literalascension:blocks/environmentaltech/basalt_normal_inside_chute"
+  }
+}

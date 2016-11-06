@@ -1,0 +1,8 @@
+{
+  "parent": "literalascension:block/notched_e",
+  "textures": {
+    "end": "environmentaltech:blocks/hardened_stone_normal",
+    "side": "environmentaltech:blocks/hardened_stone_normal",
+    "notched": "literalascension:blocks/environmentaltech/hardened_stone_normal_notched"
+  }
+}
