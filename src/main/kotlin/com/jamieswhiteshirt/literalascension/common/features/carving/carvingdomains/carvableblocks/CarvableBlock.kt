@@ -4,7 +4,6 @@ import com.jamieswhiteshirt.literalascension.api.ICarvingMaterial
 import com.jamieswhiteshirt.literalascension.common.SubFeatureCollection
 import com.jamieswhiteshirt.literalascension.common.features.Carving
 import com.jamieswhiteshirt.literalascension.common.features.carving.carvingdomains.CarvingDomain
-import com.jamieswhiteshirt.literalascension.common.features.carving.carvingdomains.CarvingDomainMinecraft
 import com.jamieswhiteshirt.literalascension.common.features.carving.carvingdomains.carvableblocks.carvableblocktypes.CarvableBlockType
 import net.minecraft.block.Block
 import net.minecraftforge.common.config.Configuration

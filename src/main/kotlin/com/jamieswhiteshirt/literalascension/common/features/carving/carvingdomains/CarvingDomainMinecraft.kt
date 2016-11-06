@@ -1,7 +1,9 @@
 package com.jamieswhiteshirt.literalascension.common.features.carving.carvingdomains
 
 import com.jamieswhiteshirt.literalascension.common.features.carving.CarvingDomains
-import com.jamieswhiteshirt.literalascension.common.features.carving.carvingdomains.carvableblocks.*
+import com.jamieswhiteshirt.literalascension.common.features.carving.carvingdomains.carvableblocks.CarvableBlockNewWood
+import com.jamieswhiteshirt.literalascension.common.features.carving.carvingdomains.carvableblocks.CarvableBlockOldWood
+import com.jamieswhiteshirt.literalascension.common.features.carving.carvingdomains.carvableblocks.CarvableBlockStone
 import net.minecraftforge.common.config.Configuration
 
 class CarvingDomainMinecraft(config: Configuration, parent: CarvingDomains) : CarvingDomain("minecraft", parent) {

@@ -1,7 +1,7 @@
 package com.jamieswhiteshirt.literalascension.common.features.carving.carvingdomains
 
 import com.jamieswhiteshirt.literalascension.common.features.carving.CarvingDomains
-import com.jamieswhiteshirt.literalascension.common.features.carving.carvingdomains.carvableblocks.*
+import com.jamieswhiteshirt.literalascension.common.features.carving.carvingdomains.carvableblocks.CarvableBlockChiselStoneExtra
 import net.minecraft.block.Block
 import net.minecraftforge.common.config.Configuration
 

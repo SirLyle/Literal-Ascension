@@ -6,7 +6,6 @@ import com.jamieswhiteshirt.literalascension.common.Features
 import com.jamieswhiteshirt.literalascension.common.ISubFeature
 import com.jamieswhiteshirt.literalascension.common.SubFeatureCollection
 import com.jamieswhiteshirt.literalascension.common.features.carving.CarvingDomains
-import com.jamieswhiteshirt.literalascension.common.features.carving.carvingdomains.CarvingDomainMinecraft
 import com.jamieswhiteshirt.literalascension.common.features.carving.CarvingTools
 import net.minecraft.block.Block
 import net.minecraft.block.state.IBlockState

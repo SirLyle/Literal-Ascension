@@ -2,13 +2,11 @@ package com.jamieswhiteshirt.literalascension.common.features
 
 import com.jamieswhiteshirt.literalascension.common.Features
 import com.jamieswhiteshirt.literalascension.common.SubFeatureCollection
-import com.jamieswhiteshirt.literalascension.common.features.stepladderdomains.*
-import com.jamieswhiteshirt.literalascension.common.features.stepladderdomains.stepladder.*
-import net.minecraft.block.BlockPlanks
+import com.jamieswhiteshirt.literalascension.common.features.stepladderdomains.StepladderDomain
+import com.jamieswhiteshirt.literalascension.common.features.stepladderdomains.StepladderDomainBiomesOPlenty
+import com.jamieswhiteshirt.literalascension.common.features.stepladderdomains.StepladderDomainMinecraft
+import com.jamieswhiteshirt.literalascension.common.features.stepladderdomains.StepladderDomainMiscellaneous
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.init.Blocks
-import net.minecraft.init.Items
-import net.minecraft.item.ItemStack
 import net.minecraft.util.SoundCategory
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
