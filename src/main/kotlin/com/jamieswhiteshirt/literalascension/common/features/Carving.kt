@@ -21,7 +21,7 @@ class Carving(config: Configuration, override val parent: Features) : SubFeature
     private val carvingBehaviourShims = mutableMapOf<Block, ICarvingBehaviour>()
 
     val CARVING_DOMAINS = required(CarvingDomains(config, this))
-    val CARVING_TOOLS   = required(CarvingTools(config, this))
+    val CARVING_TOOLS   = optionalOn(config, CarvingTools(config, this))
 
     fun playCarveSound(world: World, pos: BlockPos, player: EntityPlayer) {
         val state = world.getBlockState(pos)
