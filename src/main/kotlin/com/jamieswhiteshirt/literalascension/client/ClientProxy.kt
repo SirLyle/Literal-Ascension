@@ -4,7 +4,7 @@ import com.jamieswhiteshirt.literalascension.LiteralAscension
 import com.jamieswhiteshirt.literalascension.client.network.messagehandler.MessageSpawnCarveParticlesHandler
 import com.jamieswhiteshirt.literalascension.common.CommonProxy
 import com.jamieswhiteshirt.literalascension.common.features.carving.carvingtools.CarvingTool
-import com.jamieswhiteshirt.literalascension.common.features.stepladders.Stepladder
+import com.jamieswhiteshirt.literalascension.common.features.stepladderdomains.stepladder.Stepladder
 import com.jamieswhiteshirt.literalascension.common.network.message.MessageSpawnCarveParticles
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.ItemModelMesher
@@ -17,8 +17,10 @@ class ClientProxy : CommonProxy() {
 
         LiteralAscension.FEATURES.let {
             it.STEPLADDERS?.let {
-                for (stepladder in it.subFeatures) {
-                    registerStepladderModel(itemModelMesher, stepladder)
+                for (domain in it.subFeatures) {
+                    for (stepladder in domain.subFeatures) {
+                        registerStepladderModel(itemModelMesher, stepladder)
+                    }
                 }
             }
             it.CARVING?.CARVING_TOOLS?.let {
@@ -34,7 +36,7 @@ class ClientProxy : CommonProxy() {
     }
 
     private fun registerStepladderModel(itemModelMesher: ItemModelMesher, stepladder: Stepladder) {
-        itemModelMesher.register(stepladder.item, 0, ModelResourceLocation("literalascension:${stepladder.name}_stepladder", "inventory"))
+        itemModelMesher.register(stepladder.item, 0, ModelResourceLocation("literalascension:${stepladder.parent.domainName}/${stepladder.name}_stepladder", "inventory"))
     }
 
     private fun registerCarvingToolModel(itemModelMesher: ItemModelMesher, carvingTool: CarvingTool) {

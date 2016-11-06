@@ -1,7 +1,7 @@
 package com.jamieswhiteshirt.literalascension.common.block
 
 import com.jamieswhiteshirt.literalascension.api.ISpecialLadderBlock
-import com.jamieswhiteshirt.literalascension.common.features.stepladders.Stepladder
+import com.jamieswhiteshirt.literalascension.common.features.stepladderdomains.stepladder.Stepladder
 import net.minecraft.block.Block
 import net.minecraft.block.BlockHorizontal
 import net.minecraft.block.SoundType
@@ -180,7 +180,7 @@ class BlockStepladder(val feature: Stepladder) : Block(feature.modelState.materi
             removeStepladderSafely(world, pos, state)
         }
 
-        feature.parent.playLadderPickupSound(world, pos, player)
+        feature.parent.parent.playLadderPickupSound(world, pos, player)
         return true
     }
 
