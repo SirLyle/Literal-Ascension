@@ -29,7 +29,7 @@ allprojects {
     }
 }
 
-version = "1.10.2-0.0.4.1"
+version = "1.10.2-0.0.5.0"
 group= "com.jamieswhiteshirt.literalascension"
 archivesBaseName = "literalascension"
 
@@ -126,6 +126,8 @@ curseforge {
 			requiredLibrary 'shadowfacts-forgelin'
 			requiredLibrary 'llibrary'
             optionalLibrary 'chisel'
+            optionalLibrary 'environmental-tech'
+            optionalLibrary 'biomes-o-plenty'
 		}
 		mainArtifact(jar) {
 			displayName = "Literal Ascension $project.version"

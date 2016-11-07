@@ -1,3 +1,3 @@
-* Made the stepladder model look sturdier
-* Made it easier to place stepladders
-* Updated mcmod.info
+* Added carvable wood types from Biomes O' Plenty
+* Added Stepladder types from Biomes O' Plenty
+* Added carvable stone types from Environmental Tech
