@@ -1,54 +1,13 @@
 package com.jamieswhiteshirt.literalascension.client
 
-import com.jamieswhiteshirt.literalascension.LiteralAscension
-import com.jamieswhiteshirt.literalascension.client.network.messagehandler.MessageSpawnCarveParticlesHandler
+import com.jamieswhiteshirt.literalascension.Features
 import com.jamieswhiteshirt.literalascension.common.CommonProxy
-import com.jamieswhiteshirt.literalascension.common.features.carving.carvingtools.CarvingTool
-import com.jamieswhiteshirt.literalascension.common.features.stepladderdomains.stepladder.Stepladder
-import com.jamieswhiteshirt.literalascension.common.network.message.MessageSpawnCarveParticles
-import net.minecraft.client.Minecraft
-import net.minecraft.client.renderer.ItemModelMesher
-import net.minecraft.client.renderer.block.model.ModelResourceLocation
-import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper
 
 class ClientProxy : CommonProxy() {
-    override fun registerRenderers() {
-        val itemModelMesher = Minecraft.getMinecraft().renderItem.itemModelMesher
-
-        LiteralAscension.FEATURES.let {
-            it.STEPLADDERS?.let {
-                for (domain in it.subFeatures) {
-                    for (stepladder in domain.subFeatures) {
-                        registerStepladderModel(itemModelMesher, stepladder)
-                    }
-                }
-            }
-            it.CARVING?.CARVING_TOOLS?.let {
-                for (carvingTool in it.subFeatures) {
-                    registerCarvingToolModel(itemModelMesher, carvingTool)
-                }
-            }
-            it.CLIMBING_ROPE?.let {
-                itemModelMesher.register(it.item, 0, ModelResourceLocation("literalascension:climbing_rope", "inventory"))
-            }
-        }
-
-    }
-
-    private fun registerStepladderModel(itemModelMesher: ItemModelMesher, stepladder: Stepladder) {
-        itemModelMesher.register(stepladder.item, 0, ModelResourceLocation("literalascension:${stepladder.parent.domainName}/${stepladder.name}_stepladder", "inventory"))
-    }
-
-    private fun registerCarvingToolModel(itemModelMesher: ItemModelMesher, carvingTool: CarvingTool) {
-        itemModelMesher.register(carvingTool.item, 0, ModelResourceLocation("literalascension:${carvingTool.name}_carving_tool", "inventory"))
-    }
-
-    override fun registerMessages() {
-        super.registerMessages()
-        LiteralAscension.FEATURES.let {
-            it.CARVING?.let {
-                LiteralAscension.packetHandler.registerMessage(MessageSpawnCarveParticlesHandler, MessageSpawnCarveParticles::class.java, MessageSpawnCarveParticles.DISCRIMINATOR, Side.CLIENT)
-            }
-        }
+    override fun preInit(features: Features, messageHandler: SimpleNetworkWrapper) {
+        super.preInit(features, messageHandler)
+        features.registerRenderers()
+        features.registerClientMessages(messageHandler)
     }
 }

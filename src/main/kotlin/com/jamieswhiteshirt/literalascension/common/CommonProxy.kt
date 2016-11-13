@@ -1,27 +1,26 @@
 package com.jamieswhiteshirt.literalascension.common
 
+import com.jamieswhiteshirt.literalascension.Features
 import com.jamieswhiteshirt.literalascension.LiteralAscension
-import com.jamieswhiteshirt.literalascension.common.eventhandler.HarvestCheckEventHandler
 import com.jamieswhiteshirt.literalascension.common.network.message.MessageSpawnCarveParticles
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.fml.common.network.NetworkRegistry
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper
 
 abstract class CommonProxy {
-    abstract fun registerRenderers()
-
-    open fun registerEventHandlers() {
-        LiteralAscension.FEATURES.STEPLADDERS?.let {
-            MinecraftForge.EVENT_BUS.register(HarvestCheckEventHandler)
-        }
+    open fun preInit(features: Features, messageHandler: SimpleNetworkWrapper) {
+        features.register()
     }
 
-    open fun registerMessages() { }
+    open fun init(features: Features) {
+        features.registerRecipes()
+        features.registerEventHandlers()
+    }
 
     fun spawnCarveParticles(world: World, pos: BlockPos, facing: EnumFacing) {
         val targetPoint = NetworkRegistry.TargetPoint(world.provider.dimension, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), 16.0)
-        LiteralAscension.packetHandler.sendToAllAround(MessageSpawnCarveParticles(pos, facing), targetPoint)
+        LiteralAscension.PACKET_HANDLER.sendToAllAround(MessageSpawnCarveParticles(pos, facing), targetPoint)
     }
 }

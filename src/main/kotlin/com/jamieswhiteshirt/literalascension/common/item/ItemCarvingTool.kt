@@ -1,7 +1,7 @@
 package com.jamieswhiteshirt.literalascension.common.item
 
 import com.google.common.collect.Multimap
-import com.jamieswhiteshirt.literalascension.common.features.carving.carvingtools.CarvingTool
+import com.jamieswhiteshirt.literalascension.features.carving.carvingtools.CarvingTool
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.SharedMonsterAttributes
 import net.minecraft.entity.ai.attributes.AttributeModifier

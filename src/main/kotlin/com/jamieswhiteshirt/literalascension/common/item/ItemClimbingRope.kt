@@ -1,7 +1,7 @@
 package com.jamieswhiteshirt.literalascension.common.item
 
 import com.jamieswhiteshirt.literalascension.common.block.BlockClimbingRope
-import com.jamieswhiteshirt.literalascension.common.features.ClimbingRope
+import com.jamieswhiteshirt.literalascension.features.ClimbingRope
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack

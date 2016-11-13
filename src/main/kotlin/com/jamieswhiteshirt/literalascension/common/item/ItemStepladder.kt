@@ -1,7 +1,7 @@
 package com.jamieswhiteshirt.literalascension.common.item
 
 import com.jamieswhiteshirt.literalascension.common.block.BlockStepladder
-import com.jamieswhiteshirt.literalascension.common.features.stepladderdomains.stepladder.Stepladder
+import com.jamieswhiteshirt.literalascension.features.stepladderdomains.stepladder.Stepladder
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack

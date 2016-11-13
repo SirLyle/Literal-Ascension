@@ -1,7 +1,7 @@
 package com.jamieswhiteshirt.literalascension.common.block
 
 import com.jamieswhiteshirt.literalascension.api.ISpecialLadderBlock
-import com.jamieswhiteshirt.literalascension.common.features.stepladderdomains.stepladder.Stepladder
+import com.jamieswhiteshirt.literalascension.features.stepladderdomains.stepladder.Stepladder
 import net.minecraft.block.Block
 import net.minecraft.block.BlockHorizontal
 import net.minecraft.block.SoundType

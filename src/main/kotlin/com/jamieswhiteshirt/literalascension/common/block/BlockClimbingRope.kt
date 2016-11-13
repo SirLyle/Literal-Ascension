@@ -1,7 +1,7 @@
 package com.jamieswhiteshirt.literalascension.common.block
 
 import com.jamieswhiteshirt.literalascension.api.ISpecialLadderBlock
-import com.jamieswhiteshirt.literalascension.common.features.ClimbingRope
+import com.jamieswhiteshirt.literalascension.features.ClimbingRope
 import net.minecraft.block.Block
 import net.minecraft.block.SoundType
 import net.minecraft.block.material.Material
