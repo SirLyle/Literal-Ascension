@@ -40,7 +40,7 @@ class ItemCarvingTool(val feature: CarvingTool, val toolMaterial: ToolMaterial) 
                             if (toolMaterial.harvestLevel < carvingMaterial.suitableCarvingToolLevel) {
                                 stack.damageItem(carvingMaterial.unsuitableToolDamageMultiplier, player)
                             } else {
-                                stack.damageItem(1, player)
+                                stack.damageItem(carvingMaterial.suitableToolDamageMultiplier, player)
                             }
                         }
 
