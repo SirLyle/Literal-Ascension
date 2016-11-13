@@ -29,7 +29,7 @@ allprojects {
     }
 }
 
-version = "1.10.2-0.0.5.0"
+version = "1.10.2-1.0.0.0"
 group= "com.jamieswhiteshirt.literalascension"
 archivesBaseName = "literalascension"
 
@@ -121,7 +121,7 @@ curseforge {
 		id = '253021'
 		changelogType = 'markdown'
 		changelog = file('changelog.md')
-		releaseType = 'alpha'
+		releaseType = 'release'
 		relations {
 			requiredLibrary 'shadowfacts-forgelin'
 			requiredLibrary 'llibrary'
