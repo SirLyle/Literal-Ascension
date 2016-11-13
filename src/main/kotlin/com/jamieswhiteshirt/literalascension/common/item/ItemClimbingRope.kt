@@ -27,14 +27,9 @@ class ItemClimbingRope(val feature: ClimbingRope) : Item() {
         return EnumActionResult.FAIL
     }
 
-    fun isMatchingBlock(world: World, pos: BlockPos, facing: EnumFacing): Boolean {
-        val state = world.getBlockState(pos)
-        return state.block == feature.block && state.getValue(BlockClimbingRope.FACING) == facing
-    }
-
     fun tryPlaceBlock(stack: ItemStack, player: EntityPlayer, world: World, fromPos: BlockPos, facing: EnumFacing) : EnumActionResult {
         val placePos = BlockPos.MutableBlockPos(fromPos)
-        while (isMatchingBlock(world, placePos, facing)) {
+        while (feature.isMatchingBlock(world, placePos, facing)) {
             placePos.y--
         }
 

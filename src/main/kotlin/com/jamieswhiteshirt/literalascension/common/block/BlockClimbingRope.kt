@@ -112,6 +112,16 @@ class BlockClimbingRope(val feature: ClimbingRope) : Block(Material.CARPET), ISp
         return ItemStack(feature.item)
     }
 
+    override fun removedByPlayer(state: IBlockState, world: World, pos: BlockPos, player: EntityPlayer, willHarvest: Boolean): Boolean {
+        onBlockHarvested(world, pos, state, player)
+        val facing = state.getValue(FACING)
+        val breakPos = BlockPos.MutableBlockPos(pos)
+        while (feature.isMatchingBlock(world, breakPos.down(), facing)) {
+            breakPos.y--
+        }
+        return world.setBlockState(breakPos, net.minecraft.init.Blocks.AIR.defaultState, if (world.isRemote) 11 else 3)
+    }
+
     fun checkAndDropBlock(world: World, pos: BlockPos, state: IBlockState) {
         if (!canBlockStay(state, world, pos)) {
             world.destroyBlock(pos, true)
