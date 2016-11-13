@@ -24,6 +24,10 @@ object CreativeTab : CreativeTabs("literalascension.tab") {
                 }
             }
         }
+        val CLIMBING_ROPE = LiteralAscension.FEATURES.CLIMBING_ROPE
+        if (CLIMBING_ROPE != null) {
+            return CLIMBING_ROPE.item
+        }
         return Item.getItemFromBlock(Blocks.LADDER)
     }
 }
