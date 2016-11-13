@@ -18,6 +18,7 @@ import net.minecraft.util.math.Vec3d
 import net.minecraft.world.Explosion
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import net.minecraftforge.common.IPlantable
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.*
@@ -149,5 +150,9 @@ abstract class BlockDelegate(val modelState: IBlockState) : Block(modelState.mat
     override fun getBlockHardness(blockState: IBlockState, world: World, pos: BlockPos): Float {
         @Suppress("DEPRECATION")
         return modelBlock.getBlockHardness(modelState, world, pos)
+    }
+
+    override fun canSustainLeaves(state: IBlockState, world: IBlockAccess, pos: BlockPos): Boolean {
+        return modelBlock.canSustainLeaves(modelState, world, pos)
     }
 }
