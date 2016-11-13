@@ -41,6 +41,8 @@ object LiteralAscension {
 
     @Mod.EventHandler
     fun preInit(@Suppress("UNUSED_PARAMETER") event: FMLPreInitializationEvent) {
+        Interops.initialize()
+
         Configuration(event.suggestedConfigurationFile).let {
             FEATURES = Features(it)
             it.save()

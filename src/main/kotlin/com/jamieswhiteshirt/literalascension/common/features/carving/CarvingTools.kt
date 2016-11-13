@@ -14,4 +14,12 @@ class CarvingTools(config: Configuration, override val parent: Carving) : SubFea
     val IRON    = optionalOn(config, CarvingTool(Items.IRON_INGOT, Item.ToolMaterial.IRON, "iron", this))
     val DIAMOND = optionalOn(config, CarvingTool(Items.DIAMOND, Item.ToolMaterial.DIAMOND, "diamond", this))
     val GOLD    = optionalOn(config, CarvingTool(Items.GOLD_INGOT, Item.ToolMaterial.GOLD, "gold", this))
+
+    val carvingToolByName = mapOf(
+            "wood" to WOOD,
+            "stone" to STONE,
+            "iron" to IRON,
+            "diamond" to DIAMOND,
+            "gold" to GOLD
+    )
 }

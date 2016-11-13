@@ -64,3 +64,5 @@ tile.literalascension.stepladder.miscellaneous.wood.name=Wood Stepladder
 tile.literalascension.climbingRope.name=Climbing Rope
 
 itemGroup.literalascension.tab=Literal Ascension
+
+modifier.literalascension.carving.name=Carving

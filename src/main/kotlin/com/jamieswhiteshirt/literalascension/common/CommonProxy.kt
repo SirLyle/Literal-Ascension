@@ -16,6 +16,9 @@ abstract class CommonProxy {
         LiteralAscension.FEATURES.STEPLADDERS?.let {
             MinecraftForge.EVENT_BUS.register(HarvestCheckEventHandler)
         }
+        LiteralAscension.FEATURES.CARVING?.TCONSTRUCT_CARVING?.let {
+            it.interop.registerEventHandlers(it.parent)
+        }
     }
 
     open fun registerMessages() { }

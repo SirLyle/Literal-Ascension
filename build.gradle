@@ -58,11 +58,17 @@ repositories {
         name 'shadowfacts'
         url 'http://mvn.rx14.co.uk/shadowfacts/'
     }
+    maven {
+        name 'DVS1 Maven FS'
+        url 'http://dvs1.progwml6.com/files/maven'
+    }
 }
 
 dependencies {
     compile "net.ilexiconn:llibrary:1.7.0-1.10.2:dev"
     compile group: "net.shadowfacts", name: "Forgelin", version: '1.0.5'
+    deobfCompile "slimeknights.mantle:Mantle:1.10.2-1.1.0.jenkins178"
+    deobfCompile "slimeknights:TConstruct:1.10.2-2.5.6b.jenkins425"
 }
 
 sourceSets {

@@ -20,6 +20,11 @@ import net.minecraftforge.oredict.OreDictionary
 
 class ItemCarvingTool(val feature: CarvingTool, val toolMaterial: ToolMaterial) : Item() {
     private val speed = toolMaterial.damageVsEntity + 1.0F
+    val carvingInteraction = object : CarvingInteraction(feature.parent.parent) {
+        override fun getHarvestLevel(stack: ItemStack): Int = toolMaterial.harvestLevel
+
+        override fun damageItem(stack: ItemStack, amount: Int, player: EntityPlayer) = stack.damageItem(amount, player)
+    }
 
     init {
         maxStackSize = 1
@@ -27,31 +32,7 @@ class ItemCarvingTool(val feature: CarvingTool, val toolMaterial: ToolMaterial) 
     }
 
     override fun onItemUse(stack: ItemStack, player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
-        if (!player.canPlayerEdit(pos.offset(facing), facing, stack)) {
-            return EnumActionResult.FAIL
-        } else {
-            val state = world.getBlockState(pos)
-            val carvingBehaviour = feature.parent.parent.getCarvingBehaviour(state)
-            if (carvingBehaviour != null) {
-                val carvingMaterial = carvingBehaviour.carvingMaterial
-                if (carvingMaterial.requiredCarvingToolLevel <= toolMaterial.harvestLevel) {
-                    if (carvingBehaviour.tryCarve(state, world, pos, facing, hitX, hitY, hitZ)) {
-                        if (!world.isRemote) {
-                            if (toolMaterial.harvestLevel < carvingMaterial.suitableCarvingToolLevel) {
-                                stack.damageItem(carvingMaterial.unsuitableToolDamageMultiplier, player)
-                            } else {
-                                stack.damageItem(1, player)
-                            }
-                        }
-
-                        feature.parent.parent.playCarveSound(world, pos, player)
-                        return EnumActionResult.SUCCESS
-                    }
-                }
-            }
-
-            return EnumActionResult.PASS
-        }
+        return carvingInteraction(stack, player, world, pos, facing, hitX, hitY, hitZ)
     }
 
     override fun hitEntity(stack: ItemStack, target: EntityLivingBase, attacker: EntityLivingBase): Boolean {
