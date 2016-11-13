@@ -35,7 +35,7 @@ class ItemClimbingRope(val feature: ClimbingRope) : Item() {
 
         if (feature.block.canPlaceBlockAt(world, placePos)) {
             val placeState = feature.block.defaultState.withProperty(BlockClimbingRope.FACING, facing)
-            if (player.canPlayerEdit(placePos, facing, stack) && feature.block.canBlockStay(placeState, world, placePos) && world.setBlockState(placePos, placeState)) {
+            if (player.canPlayerEdit(placePos, facing, stack) && feature.block.isAttached(placeState, world, placePos) && world.setBlockState(placePos, placeState)) {
                 val soundType = feature.block.getSoundType(placeState, world, placePos, player)
                 world.playSound(player, fromPos, soundType.placeSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F)
 
