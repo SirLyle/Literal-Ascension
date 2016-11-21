@@ -74,7 +74,7 @@ abstract class BlockDelegate(val modelState: IBlockState) : Block(modelState.mat
     }
 
     override fun onBlockAdded(world: World, pos: BlockPos, state: IBlockState) {
-        modelState.neighborChanged(world, pos, Blocks.AIR)
+        modelState.neighborChanged(world, pos, Blocks.AIR, pos)
         modelBlock.onBlockAdded(world, pos, modelState)
     }
 
@@ -90,8 +90,8 @@ abstract class BlockDelegate(val modelState: IBlockState) : Block(modelState.mat
         modelBlock.updateTick(world, pos, modelState, rand)
     }
 
-    override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        return modelBlock.onBlockActivated(world, pos, modelState, player, hand, heldItem, EnumFacing.DOWN, 0.0F, 0.0F, 0.0F)
+    override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+        return modelBlock.onBlockActivated(world, pos, modelState, player, hand, EnumFacing.DOWN, 0.0F, 0.0F, 0.0F)
     }
 
     override fun onBlockDestroyedByExplosion(world: World, pos: BlockPos, explosion: Explosion) {

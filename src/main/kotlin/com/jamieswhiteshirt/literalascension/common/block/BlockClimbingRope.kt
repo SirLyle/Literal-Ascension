@@ -68,7 +68,7 @@ class BlockClimbingRope(val feature: ClimbingRope) : Block(Material.CARPET), ISp
     }
 
     @Suppress("OverridingDeprecatedMember")
-    override fun getCollisionBoundingBox(state: IBlockState, worldIn: World, pos: BlockPos): AxisAlignedBB {
+    override fun getCollisionBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos): AxisAlignedBB {
         return collisionBoxes[state.getValue(FACING).index - 1]
     }
 
@@ -107,9 +107,9 @@ class BlockClimbingRope(val feature: ClimbingRope) : Block(Material.CARPET), ISp
     }
 
     @Suppress("OverridingDeprecatedMember")
-    override fun neighborChanged(state: IBlockState, world: World, pos: BlockPos, block: Block) {
+    override fun neighborChanged(state: IBlockState, world: World, pos: BlockPos, block: Block, changePos: BlockPos) {
         @Suppress("DEPRECATION")
-        super.neighborChanged(state, world, pos, block)
+        super.neighborChanged(state, world, pos, block, changePos)
         checkAndDropBlock(world, pos, state)
     }
 

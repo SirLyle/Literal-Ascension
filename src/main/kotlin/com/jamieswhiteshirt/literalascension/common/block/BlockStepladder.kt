@@ -147,9 +147,9 @@ class BlockStepladder(val feature: Stepladder) : Block(feature.modelState.materi
     }
 
     @Suppress("OverridingDeprecatedMember")
-    override fun neighborChanged(state: IBlockState, world: World, pos: BlockPos, block: Block) {
+    override fun neighborChanged(state: IBlockState, world: World, pos: BlockPos, block: Block, changePos: BlockPos) {
         @Suppress("DEPRECATION")
-        super.neighborChanged(state, world, pos, block)
+        super.neighborChanged(state, world, pos, block, changePos)
         if (!world.isRemote) {
             checkAndDropBlock(world, pos, state)
         }
@@ -167,11 +167,11 @@ class BlockStepladder(val feature: Stepladder) : Block(feature.modelState.materi
         return feature.modelState.block.getFireSpreadSpeed(world, pos, face)
     }
 
-    override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+    override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (!world.isRemote) {
             if (!player.isCreative) {
                 for (drop in getDrops(world, pos, state, 0)) {
-                    if (!player.inventory.addItemStackToInventory(drop) && drop.stackSize > 0) {
+                    if (!player.inventory.addItemStackToInventory(drop) && !drop.func_190926_b()) { //Is not empty
                         spawnAsEntity(world, pos, drop)
                     }
                 }

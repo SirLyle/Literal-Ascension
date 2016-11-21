@@ -3,7 +3,7 @@ package com.jamieswhiteshirt.literalascension.core.plugin
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin
 
 @IFMLLoadingPlugin.Name("literalascension")
-@IFMLLoadingPlugin.MCVersion("1.10.2")
+@IFMLLoadingPlugin.MCVersion("1.11")
 @IFMLLoadingPlugin.SortingIndex(1003)
 class LiteralAscensionPlugin : IFMLLoadingPlugin {
     override fun getModContainerClass(): String? = null
