@@ -45,8 +45,12 @@ abstract class BlockDelegate(val modelState: IBlockState) : Block(modelState.mat
         return modelBlock.getPackedLightmapCoords(modelState, source, pos)
     }
 
-    override fun getExplosionResistance(exploder: Entity): Float {
+    override fun getExplosionResistance(exploder: Entity?): Float {
         return modelBlock.getExplosionResistance(exploder)
+    }
+
+    override fun getExplosionResistance(world: World, pos: BlockPos, exploder: Entity?, explosion: Explosion): Float {
+        return modelBlock.getExplosionResistance(world, pos, exploder, explosion)
     }
 
     override fun tickRate(world: World): Int {
