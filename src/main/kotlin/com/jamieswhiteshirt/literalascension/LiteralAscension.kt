@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper
 object LiteralAscension {
     const val MODID = "literalascension"
     const val NAME = "Literal Ascension"
-    const val VERSION = "1.11-1.0.0.0"
+    const val VERSION = "1.11-1.0.0.1"
     const val DEPENDENCIES = "required-after:llibrary@[1.7.0,);after:chisel;after:environmentaltech;after:biomesoplenty"
     const val ACCEPTED_MINECRAFT_VERSIONS = "[1.11]"
 
