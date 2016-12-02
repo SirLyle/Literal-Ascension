@@ -7,6 +7,7 @@ import net.minecraftforge.common.config.Configuration
 
 class CarvableBlockBiomesOPlentyLog(block: Block, name: String, types: Array<String>, config: Configuration, parent: CarvingDomainBiomesOPlenty) : CarvableBlockMeta(block, 0, name, config, parent) {
     override val fromMeta = types.indices.associate {
-        it + 4 to optionalOn(config, CarvableBlockTypeSimple(block.getStateFromMeta(it + 4), types[it], this))
+        @Suppress("DEPRECATION")
+        (it + 4 to optionalOn(config, CarvableBlockTypeSimple(block.getStateFromMeta(it + 4), types[it], this)))
     }
 }
