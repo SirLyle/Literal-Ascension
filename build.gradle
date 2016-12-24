@@ -51,8 +51,8 @@ minecraft {
 
 repositories {
     maven {
-		name 'ilexiconn'
-        url 'http://maven.ilexiconn.net'
+        name 'mcmoddev'
+        url 'http://maven.mcmoddev.com'
     }
     maven {
         name 'shadowfacts'
@@ -61,7 +61,7 @@ repositories {
 }
 
 dependencies {
-    compile "net.ilexiconn:llibrary:1.7.1-1.10.2:dev"
+    compile "net.ilexiconn:llibrary:1.7.2-1.10.2:dev"
     compile group: "net.shadowfacts", name: "Forgelin", version: '1.1.0'
 }
 
