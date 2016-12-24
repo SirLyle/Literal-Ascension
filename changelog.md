@@ -1,3 +1,3 @@
-**Release 1.0.0.1**
+**Release 1.0.0.2**
 
-* Fixed crash caused by notched blocks and chutes in explosions
+* Added oredicted planks and sticks to carving tool recipes

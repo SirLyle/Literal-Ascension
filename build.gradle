@@ -29,7 +29,7 @@ allprojects {
     }
 }
 
-version = "1.11-1.0.0.1"
+version = "1.11-1.0.0.2"
 group= "com.jamieswhiteshirt.literalascension"
 archivesBaseName = "literalascension"
 
@@ -51,7 +51,7 @@ minecraft {
 
 repositories {
     maven {
-		name 'mcmoddev'
+        name 'mcmoddev'
         url 'http://maven.mcmoddev.com'
     }
     maven {
