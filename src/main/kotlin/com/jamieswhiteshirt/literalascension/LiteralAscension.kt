@@ -35,7 +35,7 @@ object LiteralAscension {
     val PACKET_HANDLER: SimpleNetworkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(MODID)
 
     @Mod.EventHandler
-    fun preInit(@Suppress("UNUSED_PARAMETER") event: FMLPreInitializationEvent) {
+    fun preInit(event: FMLPreInitializationEvent) {
         Configuration(event.suggestedConfigurationFile).let {
             FEATURES = Features(it)
             it.save()
