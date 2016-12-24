@@ -5,7 +5,6 @@ import com.jamieswhiteshirt.literalascension.common.CreativeTab
 import com.jamieswhiteshirt.literalascension.common.item.ItemCarvingTool
 import com.jamieswhiteshirt.literalascension.features.carving.CarvingTools
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
-import net.minecraft.init.Items
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager
@@ -13,6 +12,7 @@ import net.minecraftforge.client.model.ModelLoader
 import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
+import net.minecraftforge.oredict.ShapedOreRecipe
 
 class CarvingTool(val ingredient: Any, toolMaterial: Item.ToolMaterial, val name: String, val unlocalizedName: String, override val parent: CarvingTools) : SubFeature(name, parent) {
     val item: ItemCarvingTool = ItemCarvingTool(this, toolMaterial).setUnlocalizedName("literalascension.carvingTool.$unlocalizedName") as ItemCarvingTool
@@ -26,13 +26,13 @@ class CarvingTool(val ingredient: Any, toolMaterial: Item.ToolMaterial, val name
     }
 
     override fun registerRecipes() {
-        CraftingManager.getInstance().addRecipe(
+        CraftingManager.getInstance().addRecipe(ShapedOreRecipe(
                 ItemStack(item),
                 "  M",
                 " M ",
                 "S  ",
-                'M', ingredient, 'S', Items.STICK
-        )
+                'M', ingredient, 'S', "stickWood"
+        ))
     }
 
     @SideOnly(Side.CLIENT)
