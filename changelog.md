@@ -1,3 +1,3 @@
-**Release 1.0.0.2**
+**Release 1.0.0.3**
 
-* Added oredicted planks and sticks to carving tool recipes
+* Made carving tools be held properly in third person view
