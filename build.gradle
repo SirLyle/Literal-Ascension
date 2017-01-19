@@ -29,12 +29,12 @@ allprojects {
     }
 }
 
-version = "1.11-1.0.0.4"
+version = "1.11.2-1.0.0.4"
 group= "com.jamieswhiteshirt.literalascension"
 archivesBaseName = "literalascension"
 
 minecraft {
-    version = "1.11-13.19.1.2189"
+    version = "1.11.2-13.20.0.2222"
     runDir = "run"
 
     clientJvmArgs = ["-Dfml.coreMods.load=$corePlugin"]
@@ -61,7 +61,7 @@ repositories {
 }
 
 dependencies {
-    compile "net.ilexiconn:llibrary:1.7.4-1.11:dev"
+    compile "net.ilexiconn:llibrary:1.7.4-1.11.2:dev"
     compile group: "net.shadowfacts", name: "Forgelin", version: '1.1.0'
 }
 

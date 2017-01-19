@@ -89,7 +89,7 @@ class BlockStepladder(val feature: Stepladder) : Block(feature.modelState.materi
     }
 
     @Suppress("OverridingDeprecatedMember")
-    override fun addCollisionBoxToList(state: IBlockState, world: World, pos: BlockPos, entityBox: AxisAlignedBB, collisionBoxes: MutableList<AxisAlignedBB>, entity: Entity?) {
+    override fun addCollisionBoxToList(state: IBlockState, world: World, pos: BlockPos, entityBox: AxisAlignedBB, collisionBoxes: MutableList<AxisAlignedBB>, entity: Entity?, detached: Boolean) {
         for (box in getCollisionBoxes(state)) {
             Block.addCollisionBoxToList(pos, entityBox, collisionBoxes, box)
         }

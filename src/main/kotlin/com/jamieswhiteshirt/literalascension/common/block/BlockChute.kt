@@ -96,7 +96,7 @@ class BlockChute(feature: CarvableBlockType) : BlockCarvedBase(feature), ICarvin
     }
 
     @Suppress("OverridingDeprecatedMember")
-    override fun addCollisionBoxToList(state: IBlockState, world: World, pos: BlockPos, entityBox: AxisAlignedBB, collisionBoxes: MutableList<AxisAlignedBB>, entity: Entity?) {
+    override fun addCollisionBoxToList(state: IBlockState, world: World, pos: BlockPos, entityBox: AxisAlignedBB, collisionBoxes: MutableList<AxisAlignedBB>, entity: Entity?, detached: Boolean) {
         for (collisionBox in getCollisionBoxList(state, world, pos)) {
             Block.addCollisionBoxToList(pos, entityBox, collisionBoxes, collisionBox)
         }
