@@ -181,7 +181,7 @@ class BlockClimbingRope(val feature: ClimbingRope) : Block(Material.CARPET), ISp
         entityitem.motionY = 0.3
         entityitem.motionZ = facing.frontOffsetZ * 0.1
         entityitem.setDefaultPickupDelay()
-        world.spawnEntityInWorld(entityitem)
+        world.spawnEntity(entityitem)
     }
 
     fun checkAndDropBlock(world: World, pos: BlockPos, state: IBlockState) {

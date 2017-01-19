@@ -15,7 +15,7 @@ import net.minecraft.world.World
 class ItemClimbingRope(val feature: ClimbingRope) : Item() {
     override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         val stack = player.getHeldItem(hand)
-        if (!stack.func_190926_b()) { //Is not empty
+        if (!stack.isEmpty) {
             val state = world.getBlockState(pos)
             if (state.block == feature.block) {
                 return tryPlaceBlock(stack, player, world, pos, state.getValue(BlockClimbingRope.FACING))
@@ -40,7 +40,7 @@ class ItemClimbingRope(val feature: ClimbingRope) : Item() {
                 val soundType = feature.block.getSoundType(placeState, world, placePos, player)
                 world.playSound(player, fromPos, soundType.placeSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F)
 
-                stack.func_190918_g(1) //Decrement by one
+                stack.shrink(1)
                 return EnumActionResult.SUCCESS
             }
         }

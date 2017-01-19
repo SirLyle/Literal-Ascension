@@ -33,7 +33,7 @@ class ItemStepladder(val feature: Stepladder) : Item() {
                 val soundType = feature.block.getSoundType(feature.block.defaultState, world, pos, player)
                 world.playSound(player, placePos, soundType.placeSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F)
 
-                stack.func_190918_g(1) //Decrement by one
+                stack.shrink(1)
 
                 return EnumActionResult.SUCCESS
             }
@@ -44,8 +44,7 @@ class ItemStepladder(val feature: Stepladder) : Item() {
 
     fun canPlaceAt(stack: ItemStack, world: World, placePos: BlockPos, facing: EnumFacing): Boolean {
         for (pos in BlockStepladder.SEGMENTS.map { placePos.up(it) }) {
-            //func_190527_a = canBlockBePlaced
-            if (!pos.isValid || !world.func_190527_a(feature.block, pos, false, facing, null) || !feature.block.canPlaceBlockAt(world, pos)) {
+            if (!pos.isValid || !world.mayPlace(feature.block, pos, false, facing, null) || !feature.block.canPlaceBlockAt(world, pos)) {
                 return false
             }
         }

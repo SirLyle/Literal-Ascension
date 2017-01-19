@@ -171,7 +171,7 @@ class BlockStepladder(val feature: Stepladder) : Block(feature.modelState.materi
         if (!world.isRemote) {
             if (!player.isCreative) {
                 for (drop in getDrops(world, pos, state, 0)) {
-                    if (!player.inventory.addItemStackToInventory(drop) && !drop.func_190926_b()) { //Is not empty
+                    if (!player.inventory.addItemStackToInventory(drop) && !drop.isEmpty) {
                         spawnAsEntity(world, pos, drop)
                     }
                 }

@@ -34,7 +34,7 @@ group= "com.jamieswhiteshirt.literalascension"
 archivesBaseName = "literalascension"
 
 minecraft {
-    version = "1.11-13.19.0.2154"
+    version = "1.11-13.19.1.2189"
     runDir = "run"
 
     clientJvmArgs = ["-Dfml.coreMods.load=$corePlugin"]
@@ -45,7 +45,7 @@ minecraft {
     // stable_#            stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not allways work.
     // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = "snapshot_20161111"
+    mappings = "snapshot_20161220"
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
@@ -61,7 +61,7 @@ repositories {
 }
 
 dependencies {
-    compile "net.ilexiconn:llibrary:1.7.2-1.11:dev"
+    compile "net.ilexiconn:llibrary:1.7.4-1.11:dev"
     compile group: "net.shadowfacts", name: "Forgelin", version: '1.1.0'
 }
 

@@ -19,9 +19,9 @@ fun isIntersectingForgeFullBoundingBox(pos: BlockPos, entity: EntityLivingBase):
  * Equivalent to ordinary ladders with Forge's fullBoundingBoxLadders configuration disabled.
  */
 fun isIntersectingVanilla(pos: BlockPos, entity: EntityLivingBase): Boolean {
-    if (pos.x == MathHelper.floor_double(entity.posX)) {
-        if (pos.y == MathHelper.floor_double(entity.entityBoundingBox.minY)) {
-            if (pos.z == MathHelper.floor_double(entity.posZ)) {
+    if (pos.x == MathHelper.floor(entity.posX)) {
+        if (pos.y == MathHelper.floor(entity.entityBoundingBox.minY)) {
+            if (pos.z == MathHelper.floor(entity.posZ)) {
                 return true
             }
         }

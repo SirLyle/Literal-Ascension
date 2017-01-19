@@ -25,12 +25,12 @@ class LiteralAscensionHooks {
         fun isLivingOnLadder(@Suppress("UNUSED_PARAMETER") insideState: IBlockState, world: World, @Suppress("UNUSED_PARAMETER") pos: BlockPos, entity: EntityLivingBase): Boolean {
             if (entity !is EntityPlayer || !entity.isSpectator) {
                 val bb = entity.entityBoundingBox
-                val minX = MathHelper.floor_double(bb.minX) - 1
-                val maxX = MathHelper.ceiling_double_int(bb.maxX) + 1
-                val minY = MathHelper.floor_double(bb.minY) - 1
-                val maxY = MathHelper.ceiling_double_int(bb.maxY) + 1
-                val minZ = MathHelper.floor_double(bb.minZ) - 1
-                val maxZ = MathHelper.ceiling_double_int(bb.maxZ) + 1
+                val minX = MathHelper.floor(bb.minX) - 1
+                val maxX = MathHelper.ceil(bb.maxX) + 1
+                val minY = MathHelper.floor(bb.minY) - 1
+                val maxY = MathHelper.ceil(bb.maxY) + 1
+                val minZ = MathHelper.floor(bb.minZ) - 1
+                val maxZ = MathHelper.ceil(bb.maxZ) + 1
                 for (x in minX..maxX) {
                     for (y in minY..maxY) {
                         for (z in minZ..maxZ) {
