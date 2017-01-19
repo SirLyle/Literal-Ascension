@@ -1,3 +1,3 @@
-**Release 1.0.0.3**
+**Release 1.0.0.4**
 
-* Made carving tools be held properly in third person view
+* Fix a startup crash that could potentially occur in some modded setups
