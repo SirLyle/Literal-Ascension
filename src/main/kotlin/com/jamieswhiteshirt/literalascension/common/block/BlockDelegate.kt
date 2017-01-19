@@ -116,10 +116,10 @@ abstract class BlockDelegate(val modelState: IBlockState) : Block(modelState.mat
         return modelBlock.damageDropped(modelState)
     }
 
-    override fun getSilkTouchDrop(state: IBlockState): ItemStack? {
+    override fun getSilkTouchDrop(state: IBlockState): ItemStack {
         val item = Item.getItemFromBlock(modelBlock)
         if (item == null) {
-            return null
+            return ItemStack.EMPTY
         } else {
             return ItemStack(item, 1, if (item.hasSubtypes) modelBlock.getMetaFromState(modelState) else 0)
         }
