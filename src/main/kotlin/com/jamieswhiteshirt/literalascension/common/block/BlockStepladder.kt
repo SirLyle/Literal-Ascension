@@ -25,7 +25,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import java.util.*
 
-class BlockStepladder(val feature: Stepladder) : Block(feature.modelState.material), ISpecialLadderBlock {
+class BlockStepladder(val feature: Stepladder) : Block(feature.material), ISpecialLadderBlock {
     companion object {
         val SEGMENTS: IntRange = 0..2
         val FACING: PropertyDirection = BlockHorizontal.FACING
@@ -160,11 +160,11 @@ class BlockStepladder(val feature: Stepladder) : Block(feature.modelState.materi
     }
 
     override fun getFlammability(world: IBlockAccess, pos: BlockPos, face: EnumFacing): Int {
-        return feature.modelState.block.getFlammability(world, pos, face)
+        return feature.flammability
     }
 
     override fun getFireSpreadSpeed(world: IBlockAccess, pos: BlockPos, face: EnumFacing): Int {
-        return feature.modelState.block.getFireSpreadSpeed(world, pos, face)
+        return feature.fireSpreadSpeed
     }
 
     override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {

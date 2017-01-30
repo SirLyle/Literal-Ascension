@@ -6,18 +6,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager
 import net.minecraftforge.oredict.ShapedOreRecipe
 
-class StepladderGenericWood(parent: StepladderDomainMiscellaneous) : Stepladder(
-        Blocks.PLANKS.defaultState,
-        "wood",
-        parent
-) {
-    override fun registerRecipes() {
-        CraftingManager.getInstance().addRecipe(ShapedOreRecipe(
-                ItemStack(item),
-                "F F",
-                "FSF",
-                "F F",
-                'F', "logWood", 'S', "plankWood"
-        ))
-    }
+class StepladderGenericWood(parent: StepladderDomainMiscellaneous) : StepladderWoodBase("wood", parent) {
+    override val feetIngredient: Any = "logWood"
+    override val stepsIngredient: Any = "plankWood"
 }
