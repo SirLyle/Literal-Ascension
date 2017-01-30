@@ -3,8 +3,9 @@ package com.jamieswhiteshirt.literalascension.features.stepladderdomains
 import com.jamieswhiteshirt.literalascension.features.Stepladders
 import com.jamieswhiteshirt.literalascension.features.stepladderdomains.stepladder.StepladderNewWood
 import com.jamieswhiteshirt.literalascension.features.stepladderdomains.stepladder.StepladderOldWood
-import com.jamieswhiteshirt.literalascension.features.stepladderdomains.stepladder.StepladderSimple
+import com.jamieswhiteshirt.literalascension.features.stepladderdomains.stepladder.StepladderMaterial
 import net.minecraft.block.BlockPlanks
+import net.minecraft.block.material.Material
 import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
@@ -17,8 +18,8 @@ class StepladderDomainMinecraft(config: Configuration, parent: Stepladders) : St
     val JUNGLE   = optionalOn(config, StepladderOldWood(BlockPlanks.EnumType.JUNGLE, this))
     val ACACIA   = optionalOn(config, StepladderNewWood(BlockPlanks.EnumType.ACACIA, this))
     val DARK_OAK = optionalOn(config, StepladderNewWood(BlockPlanks.EnumType.DARK_OAK, this))
-    val IRON     = optionalOn(config, StepladderSimple(Blocks.IRON_BLOCK.defaultState, "iron", ItemStack(Items.IRON_INGOT), this))
-    val GOLD     = optionalOff(config, StepladderSimple(Blocks.GOLD_BLOCK.defaultState, "gold", ItemStack(Items.GOLD_INGOT), this))
-    val DIAMOND  = optionalOff(config, StepladderSimple(Blocks.DIAMOND_BLOCK.defaultState, "diamond", ItemStack(Items.DIAMOND), this))
-    val EMERALD  = optionalOff(config, StepladderSimple(Blocks.EMERALD_BLOCK.defaultState, "emerald", ItemStack(Items.EMERALD), this))
+    val IRON     = optionalOn(config, StepladderMaterial(ItemStack(Items.IRON_INGOT), "iron", this))
+    val GOLD     = optionalOff(config, StepladderMaterial(ItemStack(Items.GOLD_INGOT), "gold", this))
+    val DIAMOND  = optionalOff(config, StepladderMaterial(ItemStack(Items.DIAMOND), "diamond", this))
+    val EMERALD  = optionalOff(config, StepladderMaterial(ItemStack(Items.EMERALD), "emerald", this))
 }
