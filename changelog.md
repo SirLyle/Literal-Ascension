@@ -1,3 +1,4 @@
-**Release 1.0.0.4**
+**Release 1.0.1.0**
 
-* Fix a startup crash that could potentially occur in some modded setups
+* Fixed a crash caused by BoP stepladders catching fire
+* Made BoP Hellbark Stepladder not catch fire
