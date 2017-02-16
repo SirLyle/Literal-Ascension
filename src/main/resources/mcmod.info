@@ -11,6 +11,6 @@
     ],
     "credits": "LLibrary, Trentv4, Shadowfacts, Emberwalker, MMD",
     "logoFile": "assets/literalascension/logo.png",
-    "requiredMods": ["llibrary"]
+    "requiredMods": ["forgelin", "llibrary"]
   }
 ]
