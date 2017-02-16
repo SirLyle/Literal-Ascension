@@ -1,4 +1,3 @@
-**Release 1.0.1.0**
+**Release 1.0.1.1**
 
-* Fixed a crash caused by BoP stepladders catching fire
-* Made BoP Hellbark Stepladder not catch fire
+* Added explicit dependency on Forgelin
