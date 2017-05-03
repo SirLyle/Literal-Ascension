@@ -1,0 +1,7 @@
+{
+  "parent": "literalascension:block/stepladder_top",
+  "textures": {
+    "feet": "literalascension:blocks/minecraft/fireworks_stepladder_feet",
+    "steps": "literalascension:blocks/minecraft/fireworks_stepladder_steps"
+  }
+}
