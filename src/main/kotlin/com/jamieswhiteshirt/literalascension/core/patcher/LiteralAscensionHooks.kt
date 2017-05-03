@@ -7,7 +7,6 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.MathHelper
 import net.minecraft.world.IBlockAccess
-import net.minecraft.world.World
 
 class LiteralAscensionHooks {
     companion object {
@@ -22,15 +21,17 @@ class LiteralAscensionHooks {
         }
 
         @JvmStatic
-        fun isLivingOnLadder(@Suppress("UNUSED_PARAMETER") insideState: IBlockState, world: World, @Suppress("UNUSED_PARAMETER") pos: BlockPos, entity: EntityLivingBase): Boolean {
+        fun isLivingOnLadder(entity: EntityLivingBase): Boolean {
+            val world = entity.worldObj
+            world.theProfiler.startSection("isLivingOnLadder")
             if (entity !is EntityPlayer || !entity.isSpectator) {
                 val bb = entity.entityBoundingBox
                 val minX = MathHelper.floor_double(bb.minX) - 1
-                val maxX = MathHelper.ceiling_double_int(bb.maxX) + 1
+                val maxX = MathHelper.ceiling_double_int(bb.maxX)
                 val minY = MathHelper.floor_double(bb.minY) - 1
-                val maxY = MathHelper.ceiling_double_int(bb.maxY) + 1
+                val maxY = MathHelper.ceiling_double_int(bb.maxY)
                 val minZ = MathHelper.floor_double(bb.minZ) - 1
-                val maxZ = MathHelper.ceiling_double_int(bb.maxZ) + 1
+                val maxZ = MathHelper.ceiling_double_int(bb.maxZ)
                 for (x in minX..maxX) {
                     for (y in minY..maxY) {
                         for (z in minZ..maxZ) {
@@ -42,6 +43,7 @@ class LiteralAscensionHooks {
                                 else -> ladderShim
                             }
                             if (ladderImpl.canClimb(state, world, ladderPos, entity)) {
+                                world.theProfiler.endSection()
                                 return true
                             }
                         }
@@ -49,6 +51,7 @@ class LiteralAscensionHooks {
                 }
             }
 
+            world.theProfiler.endSection()
             return false
         }
     }
