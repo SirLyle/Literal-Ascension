@@ -6,7 +6,7 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.CraftingManager
 
-class StepladderMaterial(
+open class StepladderMaterial(
         val ingredient: Any,
         name: String,
         parent: StepladderDomain,

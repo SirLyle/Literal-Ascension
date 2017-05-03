@@ -169,14 +169,7 @@ class BlockStepladder(val feature: Stepladder) : Block(feature.material), ISpeci
 
     override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (!world.isRemote) {
-            if (!player.isCreative) {
-                for (drop in getDrops(world, pos, state, 0)) {
-                    if (!player.inventory.addItemStackToInventory(drop) && drop.stackSize > 0) {
-                        spawnAsEntity(world, pos, drop)
-                    }
-                }
-            }
-
+            feature.onPickUp(world, pos, state, player, getDrops(world, pos, state, 0))
             removeStepladderSafely(world, pos, state)
         }
 
