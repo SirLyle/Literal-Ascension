@@ -1,4 +1,3 @@
-**Release 1.0.2.0**
+**Release 1.0.2.1**
 
-* Added Fireworks Stepladder
-* Improved overall performance
+* Fixed flying stepladder server crash
