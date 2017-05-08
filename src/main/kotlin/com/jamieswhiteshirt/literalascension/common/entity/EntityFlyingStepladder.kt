@@ -1,5 +1,6 @@
 package com.jamieswhiteshirt.literalascension.common.entity
 
+import com.jamieswhiteshirt.literalascension.util.*
 import net.minecraft.entity.Entity
 import net.minecraft.entity.item.EntityFireworkRocket
 import net.minecraft.init.Items
@@ -12,10 +13,8 @@ import net.minecraft.network.datasync.EntityDataManager
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumParticleTypes
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.Vec3d
 import net.minecraft.world.World
-import org.lwjgl.util.vector.Matrix4f
-import org.lwjgl.util.vector.Vector3f
-import org.lwjgl.util.vector.Vector4f
 
 class EntityFlyingStepladder(world: World, pos: BlockPos, facing: EnumFacing) : Entity(world) {
     companion object {
@@ -68,52 +67,35 @@ class EntityFlyingStepladder(world: World, pos: BlockPos, facing: EnumFacing) : 
     override fun onUpdate() {
         setRotation(rotationYaw, rotationPitch + trajectoryFalloff)
 
-        val normalMatrix = Matrix4f()
-                .rotate(-Math.toRadians(rotationYaw.toDouble()).toFloat(), Vector3f(0.0F, 1.0F, 0.0F))
-                .rotate(Math.toRadians(rotationPitch.toDouble()).toFloat(), Vector3f(1.0F, 0.0F, 0.0F))
-                .rotate(Math.toRadians(rotationYaw.toDouble()).toFloat(), Vector3f(0.0F, 1.0F, 0.0F))
+        val normalMatrix =
+                Mat3d.rotate(Math.toRadians(-rotationYaw.toDouble()), Vec3d(0.0, 1.0, 0.0)) *
+                Mat3d.rotate(Math.toRadians(rotationPitch.toDouble()), Vec3d(1.0, 0.0, 0.0)) *
+                Mat3d.rotate(Math.toRadians(rotationYaw.toDouble()), Vec3d(0.0, 1.0, 0.0))
 
-        val acceleration = Vector4f().apply {
-            Matrix4f.transform(normalMatrix, Vector4f(0.0F, 0.08F, 0.0F, 1.0F), this)
-        }
-
-        setVelocity(
-                (motionX + acceleration.x) * 0.98,
-                (motionY + acceleration.y - 0.05) * 0.98,
-                (motionZ + acceleration.z) * 0.98
-        )
+        val acceleration = normalMatrix * Vec3d(0.0, 0.08, 0.0) + Vec3d(0.0, -0.05, 0.0)
+        vel = (vel + acceleration) * 0.98
 
         moveEntity(motionX, motionY, motionZ)
 
         playSound(SoundEvents.ENTITY_FIREWORK_LAUNCH, 0.75F, 0.5F + rand.nextFloat() * 0.1F)
 
         if (worldObj.isRemote) {
-            val matrix = Matrix4f.mul(
-                    Matrix4f.mul(
-                            Matrix4f().translate(Vector3f(0.0F, 1.5F, 0.0F)),
-                            normalMatrix, null
-                    ),
-                    Matrix4f().translate(Vector3f(0.0F, -1.5F, 0.0F)),
-                    null
-            )
+            val matrix =
+                    Mat4d.translate(0.0, 1.5, 0.0) *
+                    Mat4d(normalMatrix) *
+                    Mat4d.translate(0.0, -1.5, 0.0)
             for (x in 0..1) {
                 for (z in 0..1) {
-                    val pos = Vector4f().apply {
-                        Matrix4f.transform(matrix, Vector4f(x - 0.5F, 0.0F, z - 0.5F, 1.0F), this)
-                    }
+                    val pos = matrix * Vec3d(x - 0.5, 0.0, z - 0.5) + pos
                     for (i in 0..1) {
-                        val motion = Vector4f().apply {
-                            Matrix4f.transform(normalMatrix, Vector4f(
-                                    (rand.nextFloat() - rand.nextFloat()) * 0.1F,
-                                    rand.nextFloat() - rand.nextFloat() - 2.0F,
-                                    (rand.nextFloat() - rand.nextFloat()) * 0.1F,
-                                    1.0F
-                            ), this)
-                        }
-
+                        val vel = normalMatrix * Vec3d(
+                                (rand.nextDouble() - rand.nextDouble()) * 0.1,
+                                rand.nextDouble() - rand.nextDouble() - 2.0,
+                                (rand.nextDouble() - rand.nextDouble()) * 0.1
+                        ) + vel
                         worldObj.spawnParticle(EnumParticleTypes.FLAME,
-                                posX + pos.x, posY + pos.y, posZ + pos.z,
-                                motionX + motion.x, motionY + motion.y, motionZ + motion.z)
+                                pos.x, pos.y, pos.z,
+                                vel.x, vel.y, vel.z)
                     }
                 }
             }
