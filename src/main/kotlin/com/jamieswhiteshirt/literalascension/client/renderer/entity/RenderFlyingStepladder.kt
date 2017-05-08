@@ -3,6 +3,7 @@ package com.jamieswhiteshirt.literalascension.client.renderer.entity
 import com.jamieswhiteshirt.literalascension.common.block.BlockStepladder
 import com.jamieswhiteshirt.literalascension.common.entity.EntityFlyingStepladder
 import com.jamieswhiteshirt.literalascension.features.stepladderdomains.stepladder.StepladderFireworks
+import com.jamieswhiteshirt.literalascension.util.getInterpolatedPitch
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.client.renderer.Tessellator
@@ -29,9 +30,8 @@ class RenderFlyingStepladder(val feature: StepladderFireworks, renderManager: Re
         GlStateManager.pushMatrix()
         GlStateManager.disableLighting()
         GlStateManager.translate(x, y + 1.5, z)
-        //GlStateManager.translate(x - basePos.x - 0.5, y - basePos.y, z - basePos.z - 0.5)
         GlStateManager.rotate(-entityYaw, 0.0F, 1.0F, 0.0F)
-        GlStateManager.rotate(entity.rotationPitch * partialTicks + entity.prevRotationPitch * (1.0F - partialTicks), 1.0F, 0.0F, 0.0F)
+        GlStateManager.rotate(entity.getInterpolatedPitch(partialTicks), 1.0F, 0.0F, 0.0F)
         GlStateManager.rotate(entityYaw, 0.0F, 1.0F, 0.0F)
         GlStateManager.translate(-(basePos.x + 0.5), -1.5 - basePos.y.toDouble(), -(basePos.z + 0.5))
         if (renderOutlines) {
