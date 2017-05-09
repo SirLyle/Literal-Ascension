@@ -1,3 +1,3 @@
-**Release 1.0.2.1**
+**Release 1.0.2.2**
 
-* Fixed flying stepladder server crash
+* Fixed flying stepladder server crash - again

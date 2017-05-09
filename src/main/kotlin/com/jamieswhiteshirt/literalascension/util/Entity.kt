@@ -11,7 +11,11 @@ val Entity.prevPos: Vec3d get() = Vec3d(prevPosX, prevPosY, prevPosZ)
 
 var Entity.vel: Vec3d
     get() = Vec3d(motionX, motionY, motionZ)
-    set(value) = setVelocity(value.xCoord, value.yCoord, value.zCoord)
+    set(value) {
+        motionX = value.x
+        motionY = value.y
+        motionZ = value.z
+    }
 
 fun Entity.getInterpolatedPos(partialTicks: Float): Vec3d {
     val forward = partialTicks.toDouble()
