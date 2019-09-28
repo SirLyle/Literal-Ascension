@@ -68,7 +68,7 @@ class BlockClimbingRope(val feature: ClimbingRope) : Block(Material.CARPET), ISp
     }
 
     @Suppress("OverridingDeprecatedMember")
-    override fun getCollisionBoundingBox(state: IBlockState, worldIn: World, pos: BlockPos): AxisAlignedBB {
+    override fun getCollisionBoundingBox(state: IBlockState, worldIn: IBlockAccess, pos: BlockPos): AxisAlignedBB {
         return collisionBoxes[state.getValue(FACING).index - 1]
     }
 
@@ -85,7 +85,7 @@ class BlockClimbingRope(val feature: ClimbingRope) : Block(Material.CARPET), ISp
     }
 
     override fun canClimb(state: IBlockState, world: IBlockAccess, pos: BlockPos, entity: EntityLivingBase): Boolean {
-        return ladderCollisionBoxes[state.getValue(FACING).index - 1].offset(pos).intersectsWith(entity.entityBoundingBox)
+        return ladderCollisionBoxes[state.getValue(FACING).index - 1].offset(pos).intersects(entity.entityBoundingBox)
     }
 
     @Suppress("OverridingDeprecatedMember")
@@ -107,10 +107,9 @@ class BlockClimbingRope(val feature: ClimbingRope) : Block(Material.CARPET), ISp
     }
 
     @Suppress("OverridingDeprecatedMember")
-    override fun neighborChanged(state: IBlockState, world: World, pos: BlockPos, block: Block) {
-        @Suppress("DEPRECATION")
-        super.neighborChanged(state, world, pos, block)
-        checkAndDropBlock(world, pos, state)
+    override fun neighborChanged(state: IBlockState, world: World, pos: BlockPos, block: Block, neighbor: BlockPos) {
+        super.onNeighborChange(world, pos, neighbor)
+        checkAndDropBlock(world, pos, world.getBlockState(pos))
     }
 
     override fun getPickBlock(state: IBlockState, target: RayTraceResult, world: World, pos: BlockPos, player: EntityPlayer): ItemStack {
@@ -181,7 +180,7 @@ class BlockClimbingRope(val feature: ClimbingRope) : Block(Material.CARPET), ISp
         entityitem.motionY = 0.3
         entityitem.motionZ = facing.frontOffsetZ * 0.1
         entityitem.setDefaultPickupDelay()
-        world.spawnEntityInWorld(entityitem)
+        world.spawnEntity(entityitem)
     }
 
     fun checkAndDropBlock(world: World, pos: BlockPos, state: IBlockState) {
@@ -202,5 +201,9 @@ class BlockClimbingRope(val feature: ClimbingRope) : Block(Material.CARPET), ISp
 
     fun isAttached(state: IBlockState, world: World, pos: BlockPos): Boolean {
         return isAttachedToRope(state, world, pos) || isAttachedToBlock(state, world, pos)
+    }
+
+    override fun isLadder(state: IBlockState, world: IBlockAccess, pos: BlockPos, entity: EntityLivingBase): Boolean {
+        return true
     }
 }

@@ -5,11 +5,11 @@ import com.jamieswhiteshirt.literalascension.client.renderer.entity.RenderFlying
 import com.jamieswhiteshirt.literalascension.common.block.BlockStepladder
 import com.jamieswhiteshirt.literalascension.common.entity.EntityFlyingStepladder
 import com.jamieswhiteshirt.literalascension.features.stepladderdomains.StepladderDomain
-import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
+import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.fml.client.registry.RenderingRegistry
@@ -20,7 +20,15 @@ import net.minecraftforge.fml.relauncher.SideOnly
 class StepladderFireworks(name: String, parent: StepladderDomain) : StepladderMaterial(Items.FIREWORKS, name, parent) {
     override fun register() {
         super.register()
-        EntityRegistry.registerModEntity(EntityFlyingStepladder::class.java, "flying_stepladder", 0, LiteralAscension, 64, 10, true)
+        EntityRegistry.registerModEntity(
+                ResourceLocation("literalascension", "flying_stepladder"),
+                EntityFlyingStepladder::class.java,
+                "flying_stepladder",
+                0,
+                LiteralAscension,
+                64,
+                10,
+                true)
     }
 
     @SideOnly(Side.CLIENT)
@@ -32,7 +40,7 @@ class StepladderFireworks(name: String, parent: StepladderDomain) : StepladderMa
     override fun onPickUp(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, drops: List<ItemStack>) {
         if (!world.isRemote) {
             val entity = EntityFlyingStepladder(world, pos.down(state.getValue(BlockStepladder.SEGMENT)), state.getValue(BlockStepladder.FACING))
-            world.spawnEntityInWorld(entity)
+            world.spawnEntity(entity)
             player.startRiding(entity)
         }
     }

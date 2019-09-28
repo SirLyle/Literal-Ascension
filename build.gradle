@@ -1,5 +1,4 @@
 buildscript {
-    ext.kotlin_version = '1.0.6'
     ext.corePlugin = 'com.jamieswhiteshirt.literalascension.core.plugin.LiteralAscensionPlugin'
     repositories {
         jcenter()
@@ -9,13 +8,13 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
 
 plugins {
-	id 'com.matthewprenger.cursegradle' version '1.0.7'
+    id "com.github.ben-manes.versions" version "0.20.0"
+    id "org.jetbrains.kotlin.jvm" version "1.2.51"
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -29,24 +28,18 @@ allprojects {
     }
 }
 
-version = "1.10.2-1.0.2.2"
-group= "com.jamieswhiteshirt.literalascension"
+version = "1.12.2-1.0.2.2\""
+group = "com.jamieswhiteshirt.literalascension" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "literalascension"
 
+sourceCompatibility=1.8
+targetCompatibility=1.8
+
 minecraft {
-    version = "1.10.2-12.18.2.2099"
+    version = "1.12.2-14.23.5.2846"
     runDir = "run"
 
-    clientJvmArgs = ["-Dfml.coreMods.load=$corePlugin"]
-    serverJvmArgs = ["-Dfml.coreMods.load=$corePlugin"]
-    
-    // the mappings can be changed at any time, and must be in the following format.
-    // snapshot_YYYYMMDD   snapshot are built nightly.
-    // stable_#            stables are built at the discretion of the MCP team.
-    // Use non-default mappings at your own risk. they may not allways work.
-    // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = "snapshot_20160518"
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+    mappings = "snapshot_20171003"
 }
 
 repositories {
@@ -56,13 +49,13 @@ repositories {
     }
     maven {
         name 'shadowfacts'
-        url 'http://mvn.rx14.co.uk/shadowfacts/'
+        url "http://maven.shadowfacts.net/"
     }
+    mavenCentral()
 }
 
 dependencies {
-    compile "net.ilexiconn:llibrary:1.7.2-1.10.2:dev"
-    compile group: "net.shadowfacts", name: "Forgelin", version: '1.3.0'
+    compile group: "net.shadowfacts", name: "Forgelin", version: "$forgelin_version"
 }
 
 sourceSets {
@@ -85,14 +78,15 @@ processResources {
 
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-                
+
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
-        
+
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
 }
+
 
 jar {
     manifest {
@@ -114,35 +108,6 @@ task sourcesJar(type: Jar) {
     classifier = 'sources'
     from sourceSets.main.allSource
 }
-
-curseforge {
-	apiKey = project.curseForgeApiKey
-	project {
-		id = '253021'
-		changelogType = 'markdown'
-		changelog = file('changelog.md')
-		releaseType = 'release'
-		relations {
-			requiredLibrary 'shadowfacts-forgelin'
-			requiredLibrary 'llibrary'
-            optionalLibrary 'chisel'
-            optionalLibrary 'environmental-tech'
-            optionalLibrary 'biomes-o-plenty'
-		}
-		mainArtifact(jar) {
-			displayName = "Literal Ascension $project.version"
-		}
-		addArtifact(sourcesJar) {
-			displayName = "Literal Ascension $project.version Sources"
-		}
-		addArtifact(deobfJar) {
-			displayName = "Literal Ascension $project.version Deobfuscated"
-		}
-	}
-}
-
-// AUTOMATIC MODEL GENERATION
-
 ext.args = [:]
 
 ext.requireArgument = {String property, String displayValue ->
@@ -333,5 +298,15 @@ task generateChiselCarvableRaw(type: CopyJsonTemplate) {
     }
     jsonRename { String prevName ->
         return "${args['material']}_raw${prevName}"
+    }
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }

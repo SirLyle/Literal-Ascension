@@ -7,11 +7,16 @@ import com.jamieswhiteshirt.literalascension.features.carving.carvingdomains.car
 import net.minecraft.block.properties.PropertyBool
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
+import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import net.minecraft.util.math.AxisAlignedBB
+import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.util.math.MathHelper.clamp
+
 
 class BlockNotched(feature: CarvableBlockType) : BlockCarvedBase(feature), ICarvingBehaviour, ISpecialLadderBlock {
     companion object {
@@ -25,6 +30,8 @@ class BlockNotched(feature: CarvableBlockType) : BlockCarvedBase(feature), ICarv
         fun propertyOf(facing: EnumFacing): PropertyBool {
             return PROPERTIES[facing.horizontalIndex]
         }
+
+        private val COLLISION_AABB = AxisAlignedBB(0.03125, 0.0, 0.03125, 0.96875, 1.0, 0.96875)
     }
 
     override val carvingMaterial: ICarvingMaterial = feature.material
@@ -88,5 +95,39 @@ class BlockNotched(feature: CarvableBlockType) : BlockCarvedBase(feature), ICarv
             }
         }
         return false
+    }
+
+    override fun getCollisionBoundingBox(state: IBlockState, world: IBlockAccess, pos: BlockPos): AxisAlignedBB? {
+        val minZ = if(state.getValue(NORTH)) 0.03125 else 0.0
+        val maxZ = if(state.getValue(SOUTH)) 0.96875 else 1.0
+        val minX = if(state.getValue(WEST)) 0.03125 else 0.0
+        val maxX = if(state.getValue(EAST)) 0.96875 else 1.0
+        return AxisAlignedBB(minX, 0.0, minZ, maxX, 1.0, maxZ)
+    }
+
+    override fun onEntityCollidedWithBlock(world: World, pos: BlockPos, state: IBlockState, entity: Entity) {
+        if (entity !is EntityLivingBase) {
+            return
+        }
+        entity.fallDistance = 0.0f
+        val limit = 0.15
+        entity.motionX = clamp(entity.motionX, -limit, limit)
+        entity.motionZ = clamp(entity.motionZ, -limit, limit)
+
+        if (entity.isSneaking && entity is EntityPlayer) {
+            if (entity.isInWater()) {
+                entity.motionY = 0.02
+            } else {
+                entity.motionY = 0.08
+            }
+        } else if (entity.collidedHorizontally) {
+            entity.motionY = .2
+        } else {
+            entity.motionY = Math.max(entity.motionY, -0.07)
+        }
+    }
+
+    override fun isLadder(state: IBlockState, world: IBlockAccess, pos: BlockPos, entity: EntityLivingBase): Boolean {
+        return true
     }
 }

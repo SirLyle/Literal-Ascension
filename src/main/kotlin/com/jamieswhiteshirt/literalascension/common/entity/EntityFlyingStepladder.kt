@@ -2,6 +2,7 @@ package com.jamieswhiteshirt.literalascension.common.entity
 
 import com.jamieswhiteshirt.literalascension.util.*
 import net.minecraft.entity.Entity
+import net.minecraft.entity.MoverType
 import net.minecraft.entity.item.EntityFireworkRocket
 import net.minecraft.init.Items
 import net.minecraft.init.SoundEvents
@@ -75,11 +76,11 @@ class EntityFlyingStepladder(world: World, pos: BlockPos, facing: EnumFacing) : 
         val acceleration = normalMatrix * Vec3d(0.0, 0.08, 0.0) + Vec3d(0.0, -0.05, 0.0)
         vel = (vel + acceleration) * 0.98
 
-        moveEntity(motionX, motionY, motionZ)
+        move(MoverType.SELF, motionX, motionY, motionZ)
 
         playSound(SoundEvents.ENTITY_FIREWORK_LAUNCH, 0.75F, 0.5F + rand.nextFloat() * 0.1F)
 
-        if (worldObj.isRemote) {
+        if (world.isRemote) {
             val matrix =
                     Mat4d.translate(0.0, 1.5, 0.0) *
                     Mat4d(normalMatrix) *
@@ -93,7 +94,7 @@ class EntityFlyingStepladder(world: World, pos: BlockPos, facing: EnumFacing) : 
                                 rand.nextDouble() - rand.nextDouble() - 2.0,
                                 (rand.nextDouble() - rand.nextDouble()) * 0.1
                         ) + vel
-                        worldObj.spawnParticle(EnumParticleTypes.FLAME,
+                        world.spawnParticle(EnumParticleTypes.FLAME,
                                 pos.x, pos.y, pos.z,
                                 vel.x, vel.y, vel.z)
                     }
@@ -101,10 +102,10 @@ class EntityFlyingStepladder(world: World, pos: BlockPos, facing: EnumFacing) : 
             }
         }
 
-        if (!worldObj.isRemote) {
-            if (isCollided || ticksExisted > 80) {
+        if (!world.isRemote) {
+            if (collided || ticksExisted > 80) {
                 setDead()
-                worldObj.createExplosion(this, posX, posY + height / 2.0, posZ, 2.0F, true)
+                world.createExplosion(this, posX, posY + height / 2.0, posZ, 2.0F, true)
 
                 val stack = ItemStack(Items.FIREWORKS).apply {
                     tagCompound = NBTTagCompound().apply { setTag("Fireworks", NBTTagCompound().apply {
@@ -119,11 +120,11 @@ class EntityFlyingStepladder(world: World, pos: BlockPos, facing: EnumFacing) : 
                     })}
                 }
                 for (i in 0..6) {
-                    val firework = EntityFireworkRocket(worldObj, posX, posY, posZ, stack)
+                    val firework = EntityFireworkRocket(world, posX, posY, posZ, stack)
                     firework.motionX = (rand.nextDouble() - rand.nextDouble()) * 0.25
                     firework.motionY = (rand.nextDouble() - rand.nextDouble()) * 0.25
                     firework.motionZ = (rand.nextDouble() - rand.nextDouble()) * 0.25
-                    worldObj.spawnEntityInWorld(firework)
+                    world.spawnEntity(firework)
                 }
             }
         }

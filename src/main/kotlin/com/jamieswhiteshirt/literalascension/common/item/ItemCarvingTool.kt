@@ -19,14 +19,15 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import net.minecraftforge.oredict.OreDictionary
 
 class ItemCarvingTool(val feature: CarvingTool, val toolMaterial: ToolMaterial) : Item() {
-    private val speed = toolMaterial.damageVsEntity + 1.0F
+    private val speed = toolMaterial.attackDamage + 1.0F
 
     init {
         maxStackSize = 1
         maxDamage = toolMaterial.maxUses
     }
 
-    override fun onItemUse(stack: ItemStack, player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
+    override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
+        val stack = player.getHeldItem(hand)
         if (!player.canPlayerEdit(pos.offset(facing), facing, stack)) {
             return EnumActionResult.FAIL
         } else {
@@ -64,7 +65,7 @@ class ItemCarvingTool(val feature: CarvingTool, val toolMaterial: ToolMaterial) 
 
     override fun getIsRepairable(toRepair: ItemStack, repair: ItemStack): Boolean {
         val requiredItem = this.toolMaterial.repairItemStack
-        if (requiredItem != null) {
+        if (!requiredItem.isEmpty) {
             return OreDictionary.itemMatches(requiredItem, repair, false)
         } else {
             return super.getIsRepairable(toRepair, repair)
@@ -75,8 +76,8 @@ class ItemCarvingTool(val feature: CarvingTool, val toolMaterial: ToolMaterial) 
         val multimap = super.getAttributeModifiers(slot, stack)
 
         if (slot == EntityEquipmentSlot.MAINHAND) {
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.attributeUnlocalizedName, AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0.0, 0))
-            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.attributeUnlocalizedName, AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", speed - 4.0, 0))
+            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.name, AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0.0, 0))
+            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.name, AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", speed - 4.0, 0))
         }
 
         return multimap

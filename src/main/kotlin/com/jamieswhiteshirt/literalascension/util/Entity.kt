@@ -5,7 +5,7 @@ import net.minecraft.util.math.Vec3d
 
 var Entity.pos: Vec3d
     get() = Vec3d(posX, posY, posZ)
-    set(value) = setPosition(value.xCoord, value.yCoord, value.zCoord)
+    set(value) = setPosition(value.x, value.y, value.z)
 
 val Entity.prevPos: Vec3d get() = Vec3d(prevPosX, prevPosY, prevPosZ)
 

@@ -5,17 +5,17 @@ import com.jamieswhiteshirt.literalascension.SubFeature
 import com.jamieswhiteshirt.literalascension.common.CreativeTab
 import com.jamieswhiteshirt.literalascension.common.block.BlockClimbingRope
 import com.jamieswhiteshirt.literalascension.common.item.ItemClimbingRope
+import com.jamieswhiteshirt.literalascension.util.asStack
 import net.minecraft.client.renderer.block.model.ModelResourceLocation
-import net.minecraft.item.ItemStack
-import net.minecraft.item.crafting.CraftingManager
 import net.minecraft.util.EnumFacing
+import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.client.model.ModelLoader
+import net.minecraftforge.fml.common.registry.ForgeRegistries
 import net.minecraftforge.fml.common.registry.GameRegistry
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
-import net.minecraftforge.oredict.ShapedOreRecipe
 
 class ClimbingRope(override val parent: Features) : SubFeature("climbing_rope", parent) {
     val block = BlockClimbingRope(this).setHardness(0.1F).setUnlocalizedName("literalascension.climbingRope") as BlockClimbingRope
@@ -27,18 +27,18 @@ class ClimbingRope(override val parent: Features) : SubFeature("climbing_rope", 
     }
 
     override fun register() {
-        GameRegistry.register(block.setRegistryName("literalascension", "climbing_rope"))
-        GameRegistry.register(item.setRegistryName("literalascension", "climbing_rope"))
+        ForgeRegistries.BLOCKS.register(block.setRegistryName("literalascension", "climbing_rope"))
+        ForgeRegistries.ITEMS.register(item.setRegistryName("literalascension", "climbing_rope"))
     }
 
     override fun registerRecipes() {
-        CraftingManager.getInstance().addRecipe(ShapedOreRecipe(
-                ItemStack(item, 8),
-                "  S",
-                " S ",
-                "S  ",
-                'S', "string"
-        ))
+        GameRegistry.addShapedRecipe(
+                ResourceLocation("literalascension", "climbing_rope"),
+                ResourceLocation("literalascension", "climbing_rope"),
+                item.asStack(8),
+                "  S"," S ","S  ", 'S', "string"
+
+        )
     }
 
     @SideOnly(Side.CLIENT)

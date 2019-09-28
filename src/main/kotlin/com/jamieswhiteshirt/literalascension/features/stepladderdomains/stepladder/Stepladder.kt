@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import net.minecraftforge.client.model.ModelLoader
-import net.minecraftforge.fml.common.registry.GameRegistry
+import net.minecraftforge.fml.common.registry.ForgeRegistries
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
@@ -28,7 +28,7 @@ abstract class Stepladder(val material: Material, val name: String, override val
     open fun onPickUp(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, drops: List<ItemStack>) {
         if (!player.isCreative) {
             drops
-                    .filter { !player.inventory.addItemStackToInventory(it) && it.stackSize > 0 }
+                    .filter { !player.inventory.addItemStackToInventory(it) && it.count > 0 }
                     .forEach { spawnAsEntity(world, pos, it) }
         }
     }
@@ -36,8 +36,8 @@ abstract class Stepladder(val material: Material, val name: String, override val
     override fun register() {
         item.creativeTab = CreativeTab
 
-        GameRegistry.register(block.setRegistryName("literalascension", "${parent.domainName}/${name}_stepladder"))
-        GameRegistry.register(item.setRegistryName("literalascension", "${parent.domainName}/${name}_stepladder"))
+        ForgeRegistries.BLOCKS.register(block.setRegistryName("literalascension", "${parent.domainName}/${name}_stepladder"))
+        ForgeRegistries.ITEMS.register(item.setRegistryName("literalascension", "${parent.domainName}/${name}_stepladder"))
     }
 
     @SideOnly(Side.CLIENT)

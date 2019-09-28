@@ -18,7 +18,7 @@ class RenderFlyingStepladder(val feature: StepladderFireworks, renderManager: Re
     override fun getEntityTexture(entity: EntityFlyingStepladder): ResourceLocation = TextureMap.LOCATION_BLOCKS_TEXTURE
 
     override fun doRender(entity: EntityFlyingStepladder, x: Double, y: Double, z: Double, entityYaw: Float, partialTicks: Float) {
-        val world = entity.worldObj
+        val world = entity.world
         val basePos = BlockPos(entity.posX, entity.posY, entity.posZ)
         val baseState = feature.block.defaultState.withProperty(BlockStepladder.FACING, entity.facing)
 

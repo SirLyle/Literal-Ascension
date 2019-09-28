@@ -2,9 +2,9 @@ package com.jamieswhiteshirt.literalascension.features.stepladderdomains
 
 import com.jamieswhiteshirt.literalascension.features.Stepladders
 import com.jamieswhiteshirt.literalascension.features.stepladderdomains.stepladder.StepladderFireworks
+import com.jamieswhiteshirt.literalascension.features.stepladderdomains.stepladder.StepladderMaterial
 import com.jamieswhiteshirt.literalascension.features.stepladderdomains.stepladder.StepladderNewWood
 import com.jamieswhiteshirt.literalascension.features.stepladderdomains.stepladder.StepladderOldWood
-import com.jamieswhiteshirt.literalascension.features.stepladderdomains.stepladder.StepladderMaterial
 import net.minecraft.block.BlockPlanks
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack

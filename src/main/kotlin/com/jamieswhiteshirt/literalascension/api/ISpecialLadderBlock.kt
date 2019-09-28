@@ -12,16 +12,16 @@ import net.minecraftforge.common.ForgeModContainer
  * Equivalent to ordinary ladders with Forge's fullBoundingBoxLadders configuration enabled.
  */
 fun isIntersectingForgeFullBoundingBox(pos: BlockPos, entity: EntityLivingBase): Boolean {
-    return AxisAlignedBB(pos, pos.add(1, 1, 1)).intersectsWith(entity.entityBoundingBox)
+    return AxisAlignedBB(pos, pos.add(1, 1, 1)).intersects(entity.entityBoundingBox)
 }
 
 /**
  * Equivalent to ordinary ladders with Forge's fullBoundingBoxLadders configuration disabled.
  */
 fun isIntersectingVanilla(pos: BlockPos, entity: EntityLivingBase): Boolean {
-    if (pos.x == MathHelper.floor_double(entity.posX)) {
-        if (pos.y == MathHelper.floor_double(entity.entityBoundingBox.minY)) {
-            if (pos.z == MathHelper.floor_double(entity.posZ)) {
+    if (pos.x == MathHelper.floor(entity.posX)) {
+        if (pos.y == MathHelper.floor(entity.entityBoundingBox.minY)) {
+            if (pos.z == MathHelper.floor(entity.posZ)) {
                 return true
             }
         }

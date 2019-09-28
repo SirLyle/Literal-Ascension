@@ -13,7 +13,8 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 
 class ItemStepladder(val feature: Stepladder) : Item() {
-    override fun onItemUse(stack: ItemStack, player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
+    override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
+        val stack = player.getHeldItem(hand)
         val blockState = world.getBlockState(pos)
 
         val initialPlacePos = if (!blockState.block.isReplaceable(world, pos)) {
@@ -32,7 +33,7 @@ class ItemStepladder(val feature: Stepladder) : Item() {
                 val soundType = feature.block.getSoundType(feature.block.defaultState, world, pos, player)
                 world.playSound(player, placePos, soundType.placeSound, SoundCategory.BLOCKS, (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F)
 
-                --stack.stackSize
+                --stack.count
 
                 return EnumActionResult.SUCCESS
             }
@@ -43,7 +44,8 @@ class ItemStepladder(val feature: Stepladder) : Item() {
 
     fun canPlaceAt(stack: ItemStack, world: World, placePos: BlockPos, facing: EnumFacing): Boolean {
         for (pos in BlockStepladder.SEGMENTS.map { placePos.up(it) }) {
-            if (!pos.isValid || !world.canBlockBePlaced(feature.block, pos, false, facing, null, stack) || !feature.block.canPlaceBlockAt(world, pos)) {
+            feature.block.canPlaceBlockOnSide(world, pos, facing)
+            if (!pos.isValid || !world.mayPlace(feature.block, pos, false, facing, null) || !feature.block.canPlaceBlockAt(world, pos)) {
                 return false
             }
         }

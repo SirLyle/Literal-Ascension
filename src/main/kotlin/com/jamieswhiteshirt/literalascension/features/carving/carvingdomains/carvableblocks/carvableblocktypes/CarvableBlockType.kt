@@ -8,7 +8,7 @@ import net.minecraft.block.state.IBlockState
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
-import net.minecraftforge.fml.common.registry.GameRegistry
+import net.minecraftforge.fml.common.registry.ForgeRegistries
 
 abstract class CarvableBlockType(val modelState: IBlockState, val typeName: String, override val parent: CarvableBlock) : SubFeature(typeName, parent) {
     val material = parent
@@ -29,7 +29,7 @@ abstract class CarvableBlockType(val modelState: IBlockState, val typeName: Stri
 
     override fun register() {
         val baseRegistryName = "${parent.parent.domainName}/${parent.blockName}/$typeName"
-        GameRegistry.register(chute.setRegistryName("literalascension", "$baseRegistryName/chute"))
-        GameRegistry.register(notched.setRegistryName("literalascension", "$baseRegistryName/notched"))
+        ForgeRegistries.BLOCKS.register(chute.setRegistryName("literalascension", "$baseRegistryName/chute"))
+        ForgeRegistries.BLOCKS.register(notched.setRegistryName("literalascension", "$baseRegistryName/notched"))
     }
 }

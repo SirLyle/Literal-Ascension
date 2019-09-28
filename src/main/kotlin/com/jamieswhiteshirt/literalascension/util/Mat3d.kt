@@ -46,9 +46,9 @@ class Mat3d(
 
     operator fun times(that: Vec3d): Vec3d {
         return Vec3d(
-                this.m00 * that.xCoord + this.m01 * that.yCoord + this.m02 * that.zCoord,
-                this.m10 * that.xCoord + this.m11 * that.yCoord + this.m12 * that.zCoord,
-                this.m20 * that.xCoord + this.m21 * that.yCoord + this.m22 * that.zCoord
+                this.m00 * that.x + this.m01 * that.y + this.m02 * that.z,
+                this.m10 * that.x + this.m11 * that.y + this.m12 * that.z,
+                this.m20 * that.x + this.m21 * that.y + this.m22 * that.z
         )
     }
 }

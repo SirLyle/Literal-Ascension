@@ -89,9 +89,9 @@ class BlockStepladder(val feature: Stepladder) : Block(feature.material), ISpeci
     }
 
     @Suppress("OverridingDeprecatedMember")
-    override fun addCollisionBoxToList(state: IBlockState, world: World, pos: BlockPos, entityBox: AxisAlignedBB, collisionBoxes: MutableList<AxisAlignedBB>, entity: Entity?) {
+    override fun addCollisionBoxToList(state: IBlockState, worldIn: World, pos: BlockPos, entityBox: AxisAlignedBB, collidingBoxes: List<AxisAlignedBB>, entityIn: Entity?, isActualState: Boolean) {
         for (box in getCollisionBoxes(state)) {
-            Block.addCollisionBoxToList(pos, entityBox, collisionBoxes, box)
+            Block.addCollisionBoxToList(pos, entityBox, collidingBoxes, box)
         }
     }
 
@@ -147,9 +147,10 @@ class BlockStepladder(val feature: Stepladder) : Block(feature.material), ISpeci
     }
 
     @Suppress("OverridingDeprecatedMember")
-    override fun neighborChanged(state: IBlockState, world: World, pos: BlockPos, block: Block) {
+    @Deprecated("")
+    override fun neighborChanged(state: IBlockState, world: World, pos: BlockPos, block: Block, fromPos: BlockPos) {
         @Suppress("DEPRECATION")
-        super.neighborChanged(state, world, pos, block)
+        super.neighborChanged(state, world, pos, block, fromPos)
         if (!world.isRemote) {
             checkAndDropBlock(world, pos, state)
         }
@@ -167,7 +168,7 @@ class BlockStepladder(val feature: Stepladder) : Block(feature.material), ISpeci
         return feature.fireSpreadSpeed
     }
 
-    override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+    override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (!world.isRemote) {
             feature.onPickUp(world, pos, state, player, getDrops(world, pos, state, 0))
             removeStepladderSafely(world, pos, state)

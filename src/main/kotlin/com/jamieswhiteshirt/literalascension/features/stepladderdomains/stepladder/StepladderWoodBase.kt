@@ -1,10 +1,10 @@
 package com.jamieswhiteshirt.literalascension.features.stepladderdomains.stepladder
 
 import com.jamieswhiteshirt.literalascension.features.stepladderdomains.StepladderDomain
+import com.jamieswhiteshirt.literalascension.util.asStack
 import net.minecraft.block.material.Material
-import net.minecraft.item.ItemStack
-import net.minecraft.item.crafting.CraftingManager
-import net.minecraftforge.oredict.ShapedOreRecipe
+import net.minecraft.util.ResourceLocation
+import net.minecraftforge.fml.common.registry.GameRegistry
 
 abstract class StepladderWoodBase(name: String, parent: StepladderDomain) : Stepladder(Material.WOOD, name, parent) {
     abstract val feetIngredient: Any
@@ -14,12 +14,15 @@ abstract class StepladderWoodBase(name: String, parent: StepladderDomain) : Step
     override val fireSpreadSpeed: Int get() = 5
 
     override fun registerRecipes() {
-        CraftingManager.getInstance().addRecipe(ShapedOreRecipe(
-                ItemStack(item),
+        GameRegistry.addShapedRecipe(
+                ResourceLocation("literalascension", "${name}_stepladder"),
+                ResourceLocation("literalascension", "stepladder"),
+                item.asStack(),
                 "F F",
                 "FSF",
                 "F F",
                 'F', feetIngredient, 'S', stepsIngredient
-        ))
+
+        )
     }
 }

@@ -6,7 +6,6 @@ import net.minecraft.block.material.MapColor
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.Entity
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.init.Blocks
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.BlockRenderLayer
@@ -78,7 +77,7 @@ abstract class BlockDelegate(val modelState: IBlockState) : Block(modelState.mat
     }
 
     override fun onBlockAdded(world: World, pos: BlockPos, state: IBlockState) {
-        modelState.neighborChanged(world, pos, Blocks.AIR)
+        world.notifyNeighborsOfStateChange(pos, modelBlock, true)
         modelBlock.onBlockAdded(world, pos, modelState)
     }
 
@@ -94,8 +93,8 @@ abstract class BlockDelegate(val modelState: IBlockState) : Block(modelState.mat
         modelBlock.updateTick(world, pos, modelState, rand)
     }
 
-    override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        return modelBlock.onBlockActivated(world, pos, modelState, player, hand, heldItem, EnumFacing.DOWN, 0.0F, 0.0F, 0.0F)
+    override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+        return modelBlock.onBlockActivated(world, pos, modelState, player, hand, EnumFacing.DOWN, 0.0F, 0.0F, 0.0F)
     }
 
     override fun onBlockDestroyedByExplosion(world: World, pos: BlockPos, explosion: Explosion) {
@@ -103,9 +102,9 @@ abstract class BlockDelegate(val modelState: IBlockState) : Block(modelState.mat
     }
 
     @Suppress("OverridingDeprecatedMember")
-    override fun getMapColor(state: IBlockState): MapColor {
+    override fun getMapColor(state: IBlockState, world: IBlockAccess, pos: BlockPos): MapColor {
         @Suppress("DEPRECATION")
-        return modelBlock.getMapColor(modelState)
+        return modelBlock.getMapColor(modelState, world, pos)
     }
 
     override fun getItemDropped(state: IBlockState, rand: Random, fortune: Int): Item? {
@@ -116,13 +115,9 @@ abstract class BlockDelegate(val modelState: IBlockState) : Block(modelState.mat
         return modelBlock.damageDropped(modelState)
     }
 
-    override fun createStackedBlock(state: IBlockState): ItemStack? {
+    override fun getItem(world: World, pos: BlockPos, state: IBlockState): ItemStack? {
         val item = Item.getItemFromBlock(modelBlock)
-        if (item == null) {
-            return null
-        } else {
-            return ItemStack(item, 1, if (item.hasSubtypes) modelBlock.getMetaFromState(modelState) else 0)
-        }
+        return ItemStack(item, 1, if (item.hasSubtypes) modelBlock.getMetaFromState(modelState) else 0)
     }
 
     override fun canSilkHarvest(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer): Boolean {

@@ -3,7 +3,6 @@ package com.jamieswhiteshirt.literalascension.features.stepladderdomains.steplad
 import com.jamieswhiteshirt.literalascension.features.stepladderdomains.StepladderDomain
 import net.minecraft.block.state.IBlockState
 import net.minecraft.item.ItemStack
-import net.minecraft.item.crafting.CraftingManager
 
 open class StepladderWood(logModelState: IBlockState, plankModelState: IBlockState, name: String, parent: StepladderDomain) : StepladderWoodBase(name, parent) {
     override val feetIngredient = ItemStack(logModelState.block, 1, logModelState.block.damageDropped(logModelState))
